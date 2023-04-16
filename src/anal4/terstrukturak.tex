@@ -1,0 +1,1061 @@
+\section{Metrikus terek}
+\subsection{Környezetek, korlátos halmazok}
+
+\begin{de}[Környezet]
+  $(M,\varrho)$ MT, $a\in M,\ r>0$\\
+  $K_r(a) := K_r^\varrho (a) := \{x\in M: \varrho(a,x) < r\}$
+  az \emph{$a$ $r$ sugarú környezete} vagy \emph{$a$ középpontú
+    r-sugarú gömb}.
+\end{de}
+
+Példa:\\
+$M=\R^2,\ a=(0,0)\ r=1$.\\
+$\di K_r^{\varrho_1}(a) :=\{(x,y)\in\R^2 : |x| + |y| < 1\}$\\
+$K_r^{\varrho_2}(a) :=\{(x,y)\in\R^2 : \sqrt{x^2 + y^2} < 1\}$\\
+$K_r^{\varrho_\infty}(a) :=\big\{(x,y)\in\R^2 : \max\{ |x| + |y|\} < 1\big\}$\\
+
+
+\begin{de}
+  $(M, \varrho)$ MT, $A\subset M$: korlátos, ha
+  $\exists a \in M$ és $\exists r > 0: A\subset K_r^\varrho (a)$
+\end{de}
+
+\begin{te}
+  $(M, \varrho)$ MT; $A\subseteq M$ korlátos $\Leftrightarrow
+  \forall b \in M$-hez $\exists R>0\colon A\subseteq K_R^\varrho (b)
+  $
+\end{te}
+\begin{biz}
+  Lásd gyak
+\end{biz}
+
+\subsection{Ekvivalens metrikák}
+\begin{de}[Ekvivalens metrikák]
+  $(M,\varrho_1)$ és $(M,\varrho_2)$ MT.\\
+  A $\varrho_1$ és $\varrho_2$ metrikák ekvivalensek, ha
+  \[\exists c_1,c_2>0\colon
+  c_1\varrho_2(x,y)\leq \varrho_1(x,y)\leq c_2\varrho_2(x,y)\qquad\qquad(x,y\in M)\]
+  $Jel: \varrho_1\sim\varrho_2$\\Ill:
+  \[\dfrac1{c_2}\varrho_1(x,y)\leq\varrho_2(x,y)\leq \dfrac1{c_1}\varrho_1(x,y)\]
+\end{de}
+
+\begin{te}
+  A $\sim$ ekvivalenciareláció
+\end{te}
+\begin{biz}
+  Trivi
+\end{biz}
+
+\begin{te}
+  Ha $(M, \varrho_1),\,(M, \varrho_2)\ MT,\ \varrho_1\sim\varrho_2$
+  AKKOR:  \begin{enumerate}[i)]
+  \item $\forall a \in M\  \forall r_1>0\  \exists r_2>0\colon
+    K_{r_2}^{\varrho_2}\subset K_{r_1}^{\varrho_1}$
+  \item Ugyanez igaz fordítva is
+  \end{enumerate}
+\end{te}
+\begin{biz}
+  Legyen: $r_2:=\dfrac{r_1}{c_1}$
+\end{biz}
+
+\begin{te}
+  Az $\R^n\ \ (n\in\N)$ halmazon értelmezett $\varrho_p\ \ (1\leq
+  p\leq+\infty)$ metrikák ekvivalensek.
+\end{te}
+\begin{biz}
+  Azt kell belátni, hogy $\ro_1\sim\ro_2\colon c_1\ro_1\leq\ro_2\leq c_2\ro_1$.
+  Elég megmutatni, hogy $\ro_p\sim\ro_\infty\quad\forall p\in[1,+\infty)$, mivel $\sim$ tranzitív.
+    \begin{gather*}
+      \ro_p=\left(\sum_{k=1}^n\vert x_k-y_k\vert^p\right)^{\frac1p}\quad p\in[1,+\infty)\\
+	\ro_\infty(x,y)=\max_{1\leq k\leq n}\vert x_k-y_k\vert\\
+	\ro_\infty(x,y)\leq\ro_p(x,y)\text{ trivi, hiszen a legnagyobbat hagyjuk csak meg.}\\
+	\ro_p(x,y)\leq\ro_\infty(x,y)\cdot\left(\sum_{k=1}^n1^p\right)^{\frac1p}=n\ro_\infty(x,y)
+    \end{gather*}
+\end{biz}
+
+\begin{te}
+  A $C[a,b]$-ben a $\varrho_1$ és $\varrho_\infty$ metrikák
+  \emph{nem} ekvivalensek.   
+\end{te}
+
+\begin{biz}
+  Ld gyak, F24.
+\end{biz}
+
+\subsection{Konvergens sorozatok MT-ekben. Teljes MT-ek}
+Eml:  $\R$-beli konvergens sorozat.
+
+\begin{de}[Konvergens sorozat]
+  Az $(M, \varrho)$ MT egy $(a,n)\colon \N\n M$ sorozata konvergens,
+  ha $\exists \alpha \in M\!\colon \forall \epsilon>0$-hoz $\exists
+  n_0\in \N \ \forall n\geq n_0\colon\ a_n \in
+  K_\epsilon^\varrho(\alpha)$\\
+  Egy sorozat \emph{divergens}, ha nem konvegens.
+\end{de}
+
+\begin{Megj}
+\item $(\R,\varrho)$ a szokásos metrikával: a ``régi'' definíciót
+  kapjuk.
+\item A definíció igen általános.
+\item     $\alpha$ az $(a,n)$ \emph{határéréke}. Jel: $\lim (a_n)
+  \eqrho\alpha$; $\underset{(n\n\infty)}{a_n\xrightarrow{\varrho} \alpha}$
+\end{Megj}
+
+\begin{te}
+  Ha $\exists$ ilyen $\alpha\in M$, akkor az egyértelmű.
+\end{te}
+\begin{biz}
+  Mint \R-ben: Indirekt feltevés: nem egyértelmű,
+  $\alpha,\overline{\alpha}\in M$ ilyen.\\
+  Legyen $0<r<\dfrac{\varrho(\alpha,\overline{\alpha})}2$.
+  $K_r(\alpha)\cap K_r(\overline{\alpha})=\ures $ (ok: F15)
+\end{biz}
+
+\begin{te}(A konvergencia átfogalmazása)
+  \MT MT.\\
+  $\alpha \eqrho \lim(a_n)$ ekvivalens a
+  következőkkel (bármelyikkel) :
+  \begin{enumerate}[\ i)]
+  \item $\forall \epsilon >0$-hoz $\exists n_0\in \N,\ \forall
+    n>n_0\colon \varrho(\alpha,a_n)<\epsilon$
+  \item $\forall \epsilon>0$ esetén $\{\,n\in\N\colon a_n\not\in
+    K_\epsilon(\alpha)\,\}$ véges halmaz.
+  \item $\di \lim_{n\n +\infty} \varrho(a_n,\alpha) = 0$
+  \end{enumerate}
+\end{te}
+\begin{biz} Trivi. Hf.
+\end{biz}
+
+\begin{te}(Konvergens sorozatok tulajdonságai) \MT MT\\
+  $(a_n)\colon \N\n M$ konvergens; $\alpha \eqrho \lim(a_n)$. EKKOR
+  \begin{korlista}
+  \item Az $(a_n)$ korlátos sorozat, azaz az $R_{(a_n)}$ halmaz
+    korlátos.
+  \item $\forall (\nu_n)\colon \N\n\N\ \uparrow$ (indexsorozat)
+    esetén az $(a_{\nu_n})$ részsorozat konvergens és $\alpha$ a
+    határértéke.
+  \item Ha $(a_n)$-nek van két különböző $M$-beli értékhez tartozó
+    résszorozata \nn $(a_n)$ divergens.
+  \end{korlista}
+\end{te}
+
+\begin{biz}Mint \R-ben.
+\end{biz}
+\begin{Megj}
+\item MT-ben nincsen rendezés, nincsen művelet, így nincs pl
+  közrefogási elv sem.
+\item A határérték, konvergencia metrikafüggő!
+\end{Megj}
+
+\begin{te}[Ekvivalens metrikák \nn konvergens sorozatok]\MTn1, \MTn2
+  MT, \\$\varrho_1\,\sim\,\varrho_2$. Ekkor\\
+  $\forall\,(a_n): \N\n M$ sorozatra: $\di\lim_{n\n+\infty}(a_n)
+  \stackrel{\varrho_1}{=} \alpha \Leftrightarrow
+  \di\lim_{n\n+\infty}(a_n) \stackrel{\varrho_2}{=} \alpha$\\
+  Azaz ekvivalens metrikákban ugyanazok a konvergens sorozatok   
+\end{te}
+
+\begin{biz}
+  $c_1 \ro_2 \leq \varrho_1\leq c_2\ro_2$ és
+  $\underset{(n\n+\infty)}{a_n\overset{\di\ro_1}{\n}\alpha}$\\
+  \nn\ $\di\lim_{n\n+\infty}\ro_1(a_n,\alpha)=0$ nullasorozat\\
+  \nn\ $\ro_2(a_n,\alpha)\leq \dfrac1{c_1}\ro_1(a_n,\alpha)
+  \nn \underset{(n\n+\infty)}{a_n\overset{\di\ro_2}{\n}\alpha}$ 
+\end{biz}
+
+Példa: Fordítva nem igaz:\\
+Ha \MTn1, \MTn2 MT-ben ugyanazok a konvergens sorozatok $\not\nn\,
+\ro_1\sim\ro_2$.\\
+Pl: $M:=\{\,(a_n):\N\n\N\,\}$; $\ro_1$ diszkrét, $\ro_\infty$ a max.\\
+
+%\underline{Teljesség}\\
+\subsubsection{Teljesség}
+Eml: \R-beli Cauchy-konvergencia-kritérium  
+\begin{de}[Cauchy-sorozat]
+  \MT MT; az $(a_n): \N\n M$ C-sorozat, ha 
+  \[\forall \epsilon >0\, \exists n_0\in \N\, \forall n,m\geq
+  n_0\colon \ro(a_n,a_m)<\epsilon\]
+\end{de}
+\begin{megj}
+  \R-ben mondtuk: a nagy indexű tagok közel vannak egymáshoz.
+\end{megj}
+
+\begin{te}
+  \MT MT, \sorozat
+  \begin{korlista}
+  \item Ha $(a_n)$ konvergens \nn\ $(a_n)$ Cauchy-sorozat
+  \item visszafele \underline{nem} igaz
+  \end{korlista}
+  (azaz  MT-ben a Cauchy-kritérium nem igaz)
+\end{te}
+
+\begin{Biz}
+\item $\lim(a_n)\eqrho\alpha\ \nn \ \forall \epsilon >0 \ \exists
+  N\in\N\ \forall n>N\colon \ro(a_n,\alpha)<\epsilon$\\
+  $\ro(a_n,a_m)\leq\ro(a_n,\alpha) +
+  \ro(\alpha,a_m)<2\epsilon\,\nn\,(a_n)$ Cauchy-sorozat
+\item Igazolni kell: $\exists \MT$ MT, $\exists (a_n)$ Cauchy-sorozat,
+  ami nem konvergens.\\
+  Pl $\MT := (\Q,\ro)$ ahol $\ro$ a szokásos metrika.\\
+  $a_0 := 2;\ a_{n+1}:= \dfrac12(a_n+\dfrac2{a_n})\quad(n\in\N)$
+  Ez egy racionális
+  Cauchy-sorozat, ami nem konvergens.
+\end{Biz}
+\begin{de}[Teljesség]
+  Az \MT MT teljes, ha teljesül  a Cauchy konvergencia-kritérium
+\end{de}
+
+\subsubsection{Konvergencia a ``nevezetes'' MT-ekben.}
+
+1) Diszkrét MT: \MT\\
+\sorozat konv és $\lim(a_n)\eqrho\alpha \Leftrightarrow \exists
+N\in\N \ \forall n\geq N\colon a_n=\alpha $ (``kvázikonstans''
+sorozat)
+
+\begin{biz}
+  $\forall \epsilon \in (0,1)\colon K_\epsilon(\alpha)={\alpha}$
+\end{biz}
+
+\begin{te}
+  A diszkrét metrikus tér teljes.
+\end{te}
+\begin{biz}Hf
+\end{biz}
+
+
+2) $(\R^n,\ro_p)\quad 1\leq p\leq+\infty$
+
+\begin{te}
+  $n\in\N,1\leq p\leq+\infty$. Tekintsük a $(\R^n,\ro_p)$ MT-ben az
+  \sorozatn{k}\ sorozatot, ahol
+  $a_k=(a_k^{(1)},a_k^{(2)},\ldots,a_k^{(n)})$. Ekkor:
+  \[(a_k) \text{ konvergens és}\]
+  \[\di\lim_{k\n+\infty}a_k\stackrel{\ro_p}{=}\alpha =
+  (\alpha^{(1)},\,\alpha^{(2)},\ldots,\,\alpha^{(n)})\in\R^n
+  \Longleftrightarrow\]
+  \[\forall i=1..n\ (a_k^{(i)})_{k\in\N}
+  \text{ valós sorozat (i. koordinátasorozat) konvergens és
+  } \lim_{k\n+\infty}a_k^{(i)}\stackrel{\ro_p}{=}\alpha^{(i)}\]
+\end{te}
+
+\begin{biz}
+  Mivel a $\ro_p$-k ekvivalensek, ezért elegendő pl
+  $\ro_{\infty}$-re $(p=+\infty)$.\\
+  $\underline{\nn:}\ \ i=1..n;\
+  \underset{\underset{0}{\downarrow}}{|a_k^{(i)} - \alpha^{(i)}}|
+  \leq \underset{k\n+\infty}{\ro_\infty
+    (a_k,}\underset{\underset0\downarrow}{\alpha)} \quad(\forall k\in\N)$\\
+  $\underline{\Leftarrow:}\ $ Ha $\forall i=1..n\
+  \lim(a_k^{(i)})=\alpha^{(i)} \nn \forall \epsilon >0\ \exists k_i\in
+  \N\colon \ |a_k^{(i)}-\alpha^{(i)}|<\epsilon \quad \forall k\geq k_i$\\
+  Ekkor $\di\max_{1\leq i \leq n} |a_k^{(i)} - \alpha^{(i)}| =
+  \ro_\infty(a_k,\alpha) < \epsilon $. Ha $k\geq k_0:= max\{k_1,\ldots
+  k_n\} \nn$ az állítás.
+\end{biz}
+
+\begin{te}
+  $n\in\N;\ 1\leq p\leq +\infty$ esetén $(\R^n,\ro_p)$ MT teljes.
+\end{te}
+\begin{biz}
+  Ld. gyak
+\end{biz}
+
+\subsubsection[Konvergens függvénysorozatok]{$(C[a,b],\ro_p)$ MT
+  konvergens  sorozatai\\ (Függvénysorozatok I.)}
+Megj: várható, hogy különböző metrikákban különböznek a konvergens
+sorozatok.
+\begin{de}\ 
+  \begin{enumerate}[\quad(a)]
+  \item Az $(f_n)\colon \N\n C[a,b]$ függvénysorozat konvergens a
+    $(C[a,b],\ro_p)\\(1\leq p\leq\infty)$ MT-ben, ha  $\exists f\in
+    \di C[a,b]\colon \lim_{n\n+\infty}\ro_p(f_n,f)=0$
+  \item $p=+\infty$ esetén azt mondjuk, hogy az $(f_n)$ a
+    \underline{maximum-metrikában} (v. \underline{egyenletesen az }
+    \underline{$[a,b]$-n tart} az $f\in C[a,b]$ fv-hez, azaz:\\
+    \[f_n \xrightarrow[n\n\infty]{\ro_p} f \ekv \forall\epsilon>0\
+    \exists n_0\in\N\colon \forall n>n_0\  \forall  x\in[a,b]\colon
+    |f_n(x)-f(x)| < \epsilon\]
+  \item $p=1$ esetén azt mondjuk, hogy az $(f_n)$ az (egyes)
+    \emph{integrál-metrikában} tart az $f$-hez, azaz:
+    \[f_n \xrightarrow[n\n\infty]{\ro_1} f \ekv \forall\epsilon>0\
+    \exists n_0\in\N\colon \forall n>n_0\ \colon \di\int\limits_a^b
+    |f_n-f| < \eps\]
+
+  \end{enumerate} 
+\end{de}
+
+\begin{megj}
+  Sejthető , hogy  a kettő különböző.
+\end{megj}
+\begin{te}
+  Ha  $(f_n)$ egyenletesen tart $f$-hez $[a,b]$-n, akkor $f_n$
+  pontonként is tart az \\$\fcab$ folytonos függvényhez.
+\end{te}
+\begin{biz}
+  Trivi.
+\end{biz}
+\begin{pl}
+  $f_n(x) := x^n\quad x\in[0,1]\ n\in \N$
+  pontonként tart a konstans nulla fv-hez. $f\not\in C[0,1] \nn f$
+  nem egyenletesen konvergens azaz nem konvergens a
+  $(C[a,b],\ro_\infty)$-ben, DE! $(C[0,1],\ro_1)$-ben tart a 0-hoz.
+\end{pl}
+
+\begin{te}
+  Adott $(f_n)\colon \N\n C[a,b]$ sorozat:\\
+  $f_n\xrightarrow[n\n\infty]{\ro_\infty} f\nn\ f_n
+  \xrightarrow[n\n\infty]{\ro_1} f$\\
+  DE fordítva NEM igaz.
+\end{te}
+\begin{biz}
+  $\di\int_a^b|f_n-f| \leq (\max|f_n-f|)\int_a^b1 =
+  (b-a)\max|f_n-f|$\\
+  Az ellekező irányra ellenpélda lásd fenn, vagy:\\\\
+  \unitlength 1mm
+  \begin{picture}(30,30)(-5,-5)
+    \thinlines
+    \put(-2,0){\vector(1,0){30}}
+    \put(0,-2){\vector(0,1){30}}
+    \thicklines
+    \put(10,0){\line(-2,5){10}}
+    \put(10,0){\line(1,0){15}}
+    \put(-5,24){$n$}
+    \put(8,-4){$\frac1{n^2}$}
+    \put(23,-3){$1$}
+  \end{picture}
+\end{biz}
+
+\begin{te}\ \\
+  (a) $C([a,b],\ro_\infty)$ teljes MT\\
+  (a) $C([a,b],\ro_1)$ nem teljes MT
+\end{te}
+\begin{biz}
+  Ld. gyak.
+\end{biz}
+\begin{te}[Bolzano-Weiserstrass-féle kiválasztási tétel] (azaz
+  $\forall$ korlátos sorozatnak $\exists$ konvergens részsorozata)
+  \begin{enumerate}[\quad(a)]
+  \item $(\R^n,\ro_p)\ (n\in\N,\,1\leq p \leq +\infty)$ igaz
+  \item \MT tetszőleges MT-ben azonban nem igaz
+  \end{enumerate}
+\end{te}
+\begin{biz}
+  (a) (vázlat) koordinátasorozatokkal\\
+  (b) $\MT := (\N,\ro_d)$ diszkrét MT, $a_n := n\ (n\in\N)$ korlátos
+  sorozat, de nincs konvergens részsorozata.
+\end{biz}
+
+\subsection{Topológiai fogalmak MT-ekben}
+\begin{de}[Torlódási pont]
+  \MT MT; $A\subset M$; az $a\in M$ az A torlódási pontja, ha
+  $\forall \epsilon >0\  \forall K(a)$-ra$\colon (K(a)\setminus\{a\})
+  \cap A \neq \ures$\\
+  Jel: $A'\colon$ torlódási pontok halmaza
+\end{de}
+
+\begin{te}
+  \MT MT, $A\subset M$,\\
+  $a\in A' \ekviv \forall K(a)$-ra: $K(a)\cap A$ végtelen
+  halmaz\\
+  $a\in A' \ekviv \exists (a_n)\colon \N\n A$ injektív sorozat, hogy
+  $\lim(a_n)=a$
+\end{te}
+\begin{de} \MT MT, $A\subset M$
+  \begin{enumerate}
+  \item $a\in A$ az $A$ \emph{belső pont}ja, ha $\exists K(a)\colon
+    K(a)\in A$
+  \item $a\in A$ az $A$ \emph{izolált pont}ja, ha $\exists
+    K(a)\colon  (K(A)\setminus\{a\}) \cap A = \ures$
+  \item $a\in M$ az $A$ \emph{határpont}ja, ha $\forall K(a)$
+    esetén $K(a)\cap A \neq \ures$ és $K(a)\cap (M\setminus
+    A) \neq \ures$
+  \end{enumerate}
+\end{de}
+
+\begin{de} \MT MT, az $A\subset M$ halmaz
+  \begin{enumerate}
+  \item \emph{nyílt halmaz} az \MT-ban,ha $\forall$ pontja
+    belső pont.
+  \item \emph{zárt halmaz} az \MT-ban,ha $M\setminus A$ nyílt
+  \item $\overline{\!A}=A\cap A'$ az \emph{$A$ lezárása}
+  \end{enumerate}
+\end{de}
+\newpage%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Például:
+\begin{itemize}
+\item $M,\ \ures$ nyílt és zárt
+\item $K(a)$ nyílt halmaz
+\item Véges sok pontból álló halmaz zárt
+\item \MT-ban $\exists A$: sem nem nyílt, sem nem zárt
+\end{itemize}
+
+\begin{te}[Zárt halmazok jellemzése]\MT MT; $A\subset M$\\
+  A következő állítások ekvivalensek:%
+  \begin{enumerate}
+  \item Az $A$ zárt \MT MT-ben
+  \item $A'\subset A$
+  \item $\forall (a_n):\N\n A$ konvergens sorozat esetén
+    $\lim(a_n)\in A$  
+  \end{enumerate}
+\end{te}
+\begin{biz} Mint \R-ben
+\end{biz}
+
+\begin{megj}
+  Zártság-nyíltság relatív fogalmak: függnek az \emph{altér}től
+  (részhalmaz\ldots), Pl\
+  $A := (0,1) \in \R$ nyílt halmaz\\
+  $A := (0,1) \in \R^2$ nem nyílt halmaz\\
+\end{megj}
+
+\begin{te}
+  \MT MT; $A_i\subset M\quad (i\in\Gamma)$ nyílt halmazok
+  \begin{enumerate}
+  \item $\di\bigcup_{i\in\Gamma} A_i$ nyílt halmaz
+  \item Ha $\Gamma_0$ véges $\nn \di\bigcap_{i\in\Gamma_0} A_i$ nyílt.
+  \end{enumerate}
+\end{te}
+
+\begin{te}
+  \MT MT; $A_i\subset M\quad (i\in\Gamma)$ zárt halmazok
+  \begin{enumerate}
+  \item $\di\bigcap_{i\in\Gamma} A_i$ zárt halmaz
+  \item Ha $\Gamma_0$ véges $\nn \di\bigcup_{i\in\Gamma_0} A_i$ is
+    zárt.
+  \end{enumerate}
+\end{te}
+
+\begin{megj}A végesség lényeges.
+\end{megj}
+
+\subsubsection{Kompakt halmazok}
+
+\begin{de}\MT MT. Az $A\subset M$ kompakt, ha $\forall (a_n)\colon
+  \N\n A$ sorozathoz\\ $\exists (\nu_n)\colon \N\n\N\ \uparrow$
+  indexsorozat, hogy: $a_{\nu_n}$ részsorozat konvergens és
+  $\lim(a_{\nu_n})\in A$
+\end{de}
+
+\begin{megj}
+  vö zártsággal $\nn$ (trivi) $\forall$ kompakt halmaz zárt
+\end{megj}
+
+\begin{de}\MT MT. Az $A\subset M$ halmaz \emph{nyílt lefedése}:\\
+  $\{G_i\subset M \mid  i\in \Gamma ($tetsz. indexhalmaz$,\ \ G_i
+  \neq \ures\ G_i$ nyílt \}\\
+  amire: $\di A\subset \bigcap_{i\in\Gamma}G_i$
+\end{de}
+
+\newpage %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{te}[A kompaktság ekvivalens jellemzései]\MT MT-ben a
+  következő állítások ekvivalensek:
+  \begin{enumerate}
+  \item $A\subset M$ kompakt
+  \item BOREL-féle lefedési tétel:\\
+    Az $A$ \underline{minden} nyílt lefedéséből kiválasztható
+    egy véges lefedőrendszer, azaz: $\forall{G_i : i\in \Gamma}$
+    nyílt lefedése esetén $\exists \Gamma_0\subset\Gamma$ véges:
+    $\di A\subset\bigcup_{i\in\Gamma_0}G_i$
+  \item Az $A$ minden  végtelen részhalmazának van torlódási pontja
+  \end{enumerate}
+\end{te}
+
+\begin{megj}
+  A kompaktság abszolút fogalom, nem függ az altértől. \MT MT,
+  $\hullam{M}\subset M$,
+  $(\hullam{M},\ro_{|\hullam{M}\times\hullam{M}})$ az \MT egy
+  \underline{altere}. $A\subset \hullam{M}$.\\
+  $A$ kompakt \MT-ban $\ekviv\ A$ kompakt
+  $(\hullam{M},\ro_{|\hullam{M}\times\hullam{M}})$-ban.
+\end{megj}
+
+\begin{te}[Kompakt halmazok tulajdonságai] \MT MT, az $A\subset M$
+  kompakt. Ekkor:
+  \begin{enumerate}
+  \item az $A$ zárt \MT-ban
+  \item az $A$ korlátos \MT-ban
+  \item Ha $A$ korlátos és zárt  $\not\nn$ $A$ kompakt
+  \end{enumerate}    
+\end{te}
+\begin{biz}
+  1) trivi; 2) indirekt.\\
+  3) Pl $\MT := (l_2,\,\ro_2)\quad A := \{ e^{(k)} \in l_2\, |\, e^{(k)} :=
+  (0,\,\ldots\,,\,0,\, \overset{k}{\check{1}},\,0,\,\ldots\,,0),\
+  k\in \N\,\}\\\nn\ \ro_2(e^{(k)},\, e^{(l)}) = \sqrt2$\quad Ekkor $A$
+  korlátos és zárt, de nem kompakt - a definíció alapján
+\end{biz}
+
+\subsubsection{$\R^n$ kompakt részhalmazai}
+$\R^n$-ben zártság és korlátosság a kompaktságnak nem csak
+szükséges, de elégséges feltétele is.
+
+\begin{te}
+  $n\in\N,\ 1\leq p\leq +\infty$. Ekkor\\
+  $A\in\R^n$ kompakt $\ekviv\ A$ korlátos és zárt
+\end{te}
+
+\begin{biz}
+  \underline{\nn:} általában is igaz;\\
+  \underline{$\Leftarrow$:} Bolzano-Weierstrass-kiválasztási tétel
+  használható
+\end{biz}
+
+\subsection{Folytonosság (Metrikus terek közötti függvények)}
+\begin{de}
+  $(M_1,\ro_1),\,(M_2,\ro_2)$ MT-ek; $f\in M_1\n M_2$; $a\in D_f$.\\
+  Az $f$ folytonos az $a\in D_f$ pontban (jel: $f\in C\{a\}$), ha
+  \[\forall \epsilon>0\ \exists\delta>0\ \forall x\in D_f:\
+  \ro_1(a,x)<\delta:\ \ro_2(f(x),f(a))<\epsilon\]
+  másképp: $\ldots x\in K_\delta^{\ro_1}(a)\cap D_f:\ f(x)\in
+  K_\epsilon^{\ro_2}(f(a))$
+\end{de}
+
+\begin{megj} $\R\n\R;\ f\in C\{a\}, a\in D_f$\\
+  Megmarad az $\R\n\R$-beli lényeg: az ``$a$-hoz közeli pontokban a
+  fv-értékek $f(a)$-hoz vannak közel'' (``közelség'' a megfelelő
+  metrikában)
+\end{megj}
+
+\begin{te}[Átviteli elv]
+  $(M_1,\ro_1),\,(M_2,\ro_2)$ MT-ek; $f\in M_1\n M_2$; 
+  $a\in D_f$\\
+  $f\in C\{a\} \ekviv \forall (x_n)\colon  \N\n D_f,\ \lim(x_n)
+  \eqrhon1 a$ esetén $\lim( f(x_n))\eqrhon2 f(a)$.\\
+  
+\end{te}
+\begin{biz} Mint $\R\n\R$ esetén.
+\end{biz}
+
+\begin{de}[Határérték]
+  $(M_1,\ro_1),\,(M_2,\ro_2)$ MT-ek; $f\in M_1\n M_2$; $a\in
+  D_f'$.\\
+  Az $f$ fv-nek az $a\in D_f'$ pontban van határértéke, ha
+  $\exists  A \in M_2$ melyre\\
+  $\tilde{f}(x) = \Big\{\begin{array}{cc}
+  f(x) & x\in D_f\setminus\{a\}\\
+  A & x=a\end{array}$ folytonos $a\in M_1$-ben\\
+  Jel: $\di\lim_{x\xrightarrow{\ro_1}a}f(x) \stackrel{\ro_2}{=} A$
+  vagy $\di\lim_af=A$    
+\end{de}
+
+
+\begin{te} $(M_1,\ro_1),\,(M_2,\ro_2)$ MT-ek; $f\in M_1\n M_2$; $a\in
+  D_f'$.\\Ha $\exists (x_n^{(1)}),\,(x_n^{(2)})\colon \N\n
+  D_f\setminus\{a\}:  \lim(x_n^{(1)})=\lim(x_n^{(2)}) = a$,\\ de
+  $\lim(f(x_n^{(1)}))=\lim(f(x_n^{(2)})) \nn \nexists \di\lim_af$
+\end{te}
+\begin{biz}
+  Átviteli elv + indirekt.
+\end{biz}
+
+\begin{te}[Folytonosság, ekvivalens metrikák]
+  $(M_1,\ro_1),(M_1,\tilde{\ro}_1)$ MT-ek, $\ro_1\sim\tilde{\ro}_1$ és
+  $(M_2,\ro_2),(M_2,\tilde{\ro}_2)$ MT-ek,
+  $\ro_2\sim\tilde{\ro}_2$. Ekkor
+  $f\in (M_1,\ro_1)\n)(M_2,\ro_2)$ folytonos $a\in D_f$-ben $\ekviv
+  f\in (M_1,\ro_1)\n)(M_2,\ro_2)$ folytonos $a\in D_f$-ben
+\end{te}
+\begin{biz}
+  trivi
+\end{biz}
+
+\begin{te}[Kompozíció folytonos] $(M_i,\ro_i)\ i=1..3$ MT-ek,
+  $f\in M_1\n M_2,\\g\in M_3\n M_2 \ (\,f\circ g\in M_3\n M_2\,)$,
+  $g\in C\{a\}$ és $f\in C\{g(a)\}\nn f\circ g\in C\{a\}$    
+\end{te}
+
+\subsubsection{$\R^n\n \R^n$ függvények folytonossága}
+\begin{de}
+  $f\in \R^n\n \R^m$ fv folytonos az $a\in D_f$ pontban, ha\\ $f\in
+  (\R^n,\ro^{(1)})\n(\R^m,\ro^{(2)}) $ MT-ek közötti leképezés
+  folytonos az $a\in D_f$ pontban és $\ro^{(1)}$ tetszőleges $\ro_p$
+  metrika $\R^n$-ben, ill $\ro^{(2)}$ $\R^m$-ben.
+\end{de}
+\begin{te}
+  $f\in \R^n\n \R^m$, $f = \left(
+  \begin{array}{c}
+    f_1\\\vdots\\f_n\end{array}\right)$  ahol $f_i\in
+    \R^n\n\R^1\quad (i=1..m)$ koordinátafüggvények.\\
+    $f\in C\{a\} \ekviv \forall i=1..m$ $f_i\in C\{a\}$\\
+    azaz elég a koordinátafüggvények folytonossága
+\end{te}
+\begin{te}[Műveletek]
+  \begin{enumerate}
+  \item Kompozíció
+  \item $f,g\in \R^n\n\R^n,\ a\in D_f\cap D_g$. Ha $f,g\in C\{a\}$,
+    akkor $f+g,\, \lambda f\in C\{a\}$
+  \item Ha $f,g\in \R^n\n\R^1,\ a\in D_f\cap D_g,\ f,g\in
+    C\{a\}\nn f+g,\,\lambda f,\, fg,\, \frac f g\in C\{a\}$ -- hányados
+    esetén ha $g(a) \neq 0$
+  \end{enumerate}
+\end{te}
+
+
+\subsubsection{Halmazon vett folytonosság}
+\begin{de}
+  $(M_1,\ro_1),\,(M_2,\ro_2)$ MT-ek, $f\in M_1\n M_2$, $A\subset
+  D_f$.\\
+  Az $f$ fv folytonosaz $A\subset D_f$ halmazon, ha $\forall a\in
+  A\colon f\in C\{a\}$\\
+  Jel: $f\in C(A)$. (globálos folytonosság)
+\end{de}
+
+\begin{te}[Globális folytonosság jellemzése nyílt halmazokkal]
+  $(M_1,\ro_1),\,(M_2,\ro_2)$ MT-ek és $f\in M_1 \underline{=D_f}\n
+  M_2$.\\
+  $f$ folytonos $M_1$-en $\ekviv$ $\forall B\subset M_2$ nyílt
+  halmaz esetén $f^{-1}[B]\subset M_1$ is nyílt halmaz\\
+  (a $B$ halmaz $f$ által létesített ősképe)
+\end{te}
+\begin{biz}
+  \underline{\nn:} Tfh. $f$ folytonos $M_1\,(=D_f)$-en; $B\subset
+  M_2$ nyílt halmaz. Legyen  $a\in f^{-1}[B]$ (ha $f^{-1}[B]=\ures$
+  akkor kész)
+  \nn $f(a) \in B$; $B$ nyílt $\nn \exists \epsilon>0\
+  K_\epsilon^{\ro_2} \left(f(a)\right)\subset B$\\
+  DE! $f\in C\{a\}\nn \epsilon>0$-hoz $\exists\delta>0\colon x\in
+  K_\delta^{\ro_1}(a): f(x) \in K_\epsilon^{\ro_2}
+  \left(f(a)\right)$\\
+  azaz $K_\delta^{\ro_1}(a)\subset f^{-1}[B]\nn
+  f^{-1}[B]$ nyílt.\\
+  $\underline{\Leftarrow:}$ Igazolni kell: $\forall a \in M_1$
+  folytonos: $\forall \epsilon > 0\ \exists \delta > 0\colon\
+  \forall x\in  K_\delta^{\ro_1}(a)\cap M_1$ esetén\\
+  $f(x)\in K_\epsilon^{\ro_2}\left(f\left(a\right)\right)$.\\
+  Legyen: $a\in M_1$ rögzített; $\epsilon > 0$; tekintsük:
+  $K_\epsilon^{\ro_2}(f(a))\subset M_2$ nyílt halmaz, 
+  $\stackrel{\text{feltétel}}{\nn}\\f^{-1}[K_\epsilon^{\ro_2}(f(a))]
+  \subset M_1$ nyílt halmaz $\nn \exists K_\delta^{\ro_1}(a)\colon
+  K_\delta^{\ro_1}(a)\subset f^{-1}[K_\epsilon^{\ro_2}(f(a))] \nn\\
+  f[K_\delta^{\ro_1}(a)]\subset K_\epsilon^{\ro_2}(f(a)) $
+\end{biz}
+
+\begin{megj}
+  Nem elég: $B\subset R_f$ nyílt halmazokat venni, ui: $f\in\R\n\R; 
+  \ f := sgn;\ R_f = \{-1,\, 0,\, 1 \};\ B\subset R_f$ nyílt $\nn
+  B=\ures$ (csak ez lehet). $f^{-1}[\ures] =\ures $ nyílt, de $f$
+  nem folytonos
+\end{megj}
+
+\begin{te}[Általánosítás]
+  $(M_1,\ro_1),\,(M_2,\ro_2)$ MT-ek és $f\in A\n M_2$, $A\subsetneqq
+  M_1$.\\ 
+  $f$ folytonos $A$-n $\ekviv$ $\forall B\subset M_2$ nyílt
+  halmaz esetén $\exists G\subset M_1$ nyílt: $f^{-1}[B]= A\cap G$ 
+\end{te}
+
+\begin{megj}
+  $F$ nyílt halmaz az $(A, \ro_{|A\times A}$ altéren $\ekviv \exists
+  G\subset M_1$ nyílt halmaz az $(M_1,\ro_1)$ MT-ben: $F = A \cap G$ 
+\end{megj}
+\subsubsection{Kompakt halmazon folytonos függvények}
+
+\begin{te}
+  $(M_1,\ro_1),\,(M_2,\ro_2)$ MT-ek, tfh.
+  \begin{enumerate}
+  \item $A\subset M_1 kompakt$
+  \item $f\colon A\n M_2$ folytonos A-n
+  \end{enumerate}
+  Ekkor
+  \begin{enumerate}
+  \item $R_f$ kompakt
+  \item Ha $M_2=\R$ (valós értékű), akkor f felveszi a minimumát és a
+    maximumát (Weiserstrass)
+  \item Ha $f$ injektív, akkor $f^{-1}$ is folytonos
+  \end{enumerate}
+\end{te}
+\begin{biz}
+  mint $\R\n\R$-ben
+\end{biz}
+
+\begin{de}
+  $(M_1,\ro_1),\,(M_2,\ro_2)$ MT-ek, $f\in M_1\n M_2$;
+  $f$ egyenletesen folytonos az $A\subset D_f$ halmazon, ha $\forall
+  \epsilon >0\ \exists \delta >0\ \forall x,y\in A \ro_1(x,y) < \delta
+  \colon \ro_2(f(x), f(y)) < \epsilon$ 
+\end{de}
+
+\begin{te}
+  $(M_1, \ro_1)\,(M_2,\ro_2)$ MT-ek, $f\in M_1\n M_2$
+  \begin{enumerate}
+  \item Ha $f$ egyenletesen folytonos $A\subset D_f$-en \nn $f$
+    folytonos $A$-n.			
+  \item Ha $A\subset D_f$ kompakt és $f$ folytonos $D_f$-en \nn $f$
+    egyenletesen folytonos (Heine)					
+  \end{enumerate}
+\end{te}
+
+\begin{de}
+  $(M,\ro)$ MT,\begin{enumerate}
+  \item  Az $A\subset M$ halmaz nem összefüggő, ha $\exists G_1,
+    G_2\subset M$ nyílt halmaz, hogy\\
+    $G_1\cap G_2=\ures;\
+    G_1,G_2\neq\ures;\ (A\cap G_1) \cap (A\cap G_2) = \ures$ és
+    $(A\cap G_1) \cup (A\cap G_2) = A$\\
+    és $A\cap G_i \neq \ures\quad i=1,2$
+  \item Az $A\subset M$ \emph{összefüggő}, ha az előbbi nem teljesül
+  \end{enumerate}
+\end{de}
+\begin{pl}
+  \begin{enumerate}[\quad(1)]
+  \item $\R$-ben minden intervallum összefüggő
+  \item (ábra)
+  \item $(M,\ro)$-ban $K(a)$ összefüggő
+  \item (ábra)
+  \end{enumerate}
+\end{pl}
+
+\begin{te} 
+  $\mr1,\,\mr2$ MT-ek, $\fmm$ folytonos $D_f$-en; $A\subset D_f$
+  összefüggő.
+  Ekkor $f[A]\subset M_2$ is összefüggő.\quad
+  (öf halmaz folytonos képe is öf)
+\end{te}
+
+\begin{te}[spec: Bolzano-tétel]\MT MT, $f\in A\n\R$, $A\subset M$\\
+  $\begin{array}{rl}
+    (i) & A\subset M\ \text{öf}\\
+    (ii) & f\ \text{folytonos}\ A\text{-n}
+  \end{array} \Big\} \nn \forall c \in (f(a), f(b))(
+  $ha $f(a) < f(b))\ \exists \xi\in A\colon f(\xi) = c$   
+\end{te}
+
+\begin{te}[Banach-féle fixpont-tétel]
+  tfh. $\MT$ \underline{teljes} MT; $f\in M\n M$ kontrakció, azaz
+  $\exists \alpha \in [0,1)\colon \ro( f(x),\, f(y)) \leq \alpha
+    \ro(x,y) \quad (\forall x,y\in M)$.\\
+    EKKOR \begin{enumerate}
+    \item$\exists!\, x^*\in M\colon f(x^*) = x^*$ az $f$ fixpontja
+    \item $x_0\in M\colon x_{n+1} = f(x_n)\ n\in \N$ iterációs
+      sorozat konvergens és $\lim(x_n) = x^*$
+    \item Hibabecslés: $\ro(x^*,x_n) \leq
+      \dfrac{\alpha^n}{1-\alpha}\ro(x_0,x_1)\quad n\in \N$
+    \end{enumerate}
+\end{te}
+\begin{megj}
+  Fontos a teljesség és az, hogy $0\leqq \alpha < 1$
+\end{megj}
+\begin{biz}
+  \begin{enumerate}
+    \item $f$ kontrakció, ezért $f$ folytonos is, ugyanis
+      \[\lim_{y\to x}f(y)=f(x),\text{ mivel }\ro( f(x),\, f(y)) \leq \alpha \ro(x,y),\ y\to x\]
+    \item Igazoljuk, hogy $(x_n)$ Cauchy-sorozat:
+      \begin{gather*}
+	\ro(x_{n+1}-x_n)=\ro(f(x_n)-f(x_{n-1}))\leq\alpha\ro(x_n-x_{n-1})=\\
+	\hspace*{2em}=\alpha \ro(f(x_{n-1})-f(x_{n-2})) \leq \alpha^2
+	\ro(x_{n-1}-x_{n-2})\leq\dotsb\leq\alpha^n\ro(x_1-x_0)
+	\intertext{Ebből}
+	\ro(x_{n+m}-x_n)\leq \ro(x_{n+m}-x_{n+m-1})+ \ro(x_{n+m-1}-x_{n+m-2})+ \dotsb\\
+	\hspace*{2em}\dotsb+\ro(x_{n+1}-x_n+)\leq\alpha^n\left(\alpha^{m-1}+\alpha^{m-2}+\ldots+\alpha^0\right)
+	\ro (x_1-x_0)\leq\\\hspace*{2em}\underset{\alpha<1}{\leq} \dfrac{\alpha^n}{1-\alpha}\ro(x_0-x_1)
+	\intertext{Ebből már következik, hogy $(x_n)$ Cauchy-sorozat, ui}
+	\alpha^n\to0\quad(n\to+\infty)
+      \end{gather*}
+    \item $(x_n)$ Cauchy sorozat, ezért $(x_n)$ konvergens
+      \begin{gather*}
+	x^*=\lim(x_n)\\
+	\begin{array}{c@{ }c@{ }c}x_{n+1}& =&f(x_n)\\\downarrow&&\downarrow\\
+	  x^*&= &f(x^*)\end{array}
+      \end{gather*}
+      ui $f$ folytonos + átviteli elv (ezért $x^* = f(x^*)$) $\nn x^*$  fixpont.
+    \item Egyértelműség: $x^*,x^{**}$ legyenek fixpontok.
+      \[\ro(x^*-x^{**})=\ro(f(x^*)-f(x^{**}))\overset{f \text{ kontrakció}}{\leq}\alpha\ro(x^*-x^{**})
+      \overset{\alpha<1}{<}\ro(x^*-x^{**})\]
+      Tehát $x^*=x^{**}$.
+    \item Hibabecslés: a 2. pontban ha $n=1,2,\dotsc\quad n\to+\infty$ határértéket vesszük
+  \end{enumerate}
+
+\end{biz}
+
+
+
+
+\newpage
+\section{Normált-, Banach-, Euklideszi-, Hilbert-terek}
+\subsection{Lineáris terek (LT)}
+1) Lineáris terek vagy vektorterek, ld. linalg.\\
+$(\X, +, \lambda\cdot,\R)$ valós  LT, ezek lesznek csak\\
+$(\X, +, \lambda\cdot,\C)$ komplex LT ($\C$ számtest)\\
+2) Lineáris függőség, lineáris függetlenség, altér.
+
+\begin{de}[Lineáris burok]
+  $H \subset \X$ halmaz \emph{lineáris burka} (altér, legszűkebb H-t
+  tartalmazó halmaz):
+  $\di L(H) := \bigcap_{\underset{H\subset X_0}{X_0 < \X \text{altér}}} X_0$
+\end{de}
+3) Dimenzió, bázis
+
+\begin{de}
+  \begin{enumerate}[\quad(a)]
+  \item Az $\X$ LT véges dimenziós, ha $\exists  e_1,\ldots,e_n\in \X$
+    linárisan független és $L(\{e_1,\ldots,e_n\})=\X$; $\dim(\X) = n$, tehát
+    $\{e_1,\ldots,e_n\}$ bázis $\X$-en
+  \item Az $\X$ LT végtelen dimenziós, ha nem véges dimenziós: $\dim\X
+    = +\infty$
+  \end{enumerate}
+\end{de}
+
+\begin{Megj}
+\item $\dim\X=+\infty \ekviv \forall n\in\N\ \exists
+  e_1,\ldots,e_n$ lineárisan független elem \X-ben.
+\item Linalg: $\dim \X < +\infty$
+\end{Megj}
+
+\begin{pl}
+  \begin{enumerate}
+  \item $\R^n$ a ``szokásos'' műveletekkel LT, $\dim \R^n=n$
+  \item $C[a,b]$ pontonkénti műveletekkel LT, $\dim C[a,b] = +
+    \infty$  ugyanis $\forall n\in \N\colon 1,x,x^2,\ldots,x^n,
+    \ldots$ függvények lineárisan függetlenek.
+  \item $l_p;\ (x_n),(y_n)\in l_p\colon (x_n)+(y_n) = (x_n+y_n);\
+    \lambda(x_n)=(\lambda x_n)$ LT, $\dim l_p=+\infty$ ui:
+    $e_n=(0,\ldots,\overset{n-1}{\breve{0}},\overset{n}{\breve{1}},
+    \overset{n+1}{\breve{0}},\ldots)$   
+  \end{enumerate}
+\end{pl}
+
+\subsection{Normált terek}
+\begin{de}
+  Az $\NT$ normált tér (NT, ha)
+  \begin{enumerate}
+  \item $\X$ LT $\R$ felett
+  \item $\Vert.\Vert\colon \X\n\R$ olyan fv, melyre
+    \begin{enumerate}
+    \item $\Vert x \Vert \geq 0\quad \forall x\in\X$\\
+      $\Vert x \Vert = 0 \ekviv x = 0$ ($\X$ nulleleme)
+    \item $\Vert\lambda x\Vert = \vert\lambda\vert\cdot \Vert
+      x\Vert\quad \forall x\in \X,\,\forall \lambda\in\R$
+    \item $\Vert x+y\Vert\leq\Vert x\Vert+\Vert y\Vert \quad
+      \forall x,y\in \X$ (3szög-egyenlőtlenség)
+    \end{enumerate}
+  \end{enumerate}
+\end{de}
+\begin{te}
+  legyen $\NT$ NT. Ekkor a 
+  \[\ro(x,y) := \Vert x - y \Vert\qquad (x,y\in \X)\]
+  fv metrika az \X-en, ez a $\Vert.\Vert$ norma által indulkált
+  metrika,
+  azaz $\forall$NT egyúttal MT is
+\end{te}
+\newpage                                 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{Biz}
+\item $\ro(x,y) \geq 0$ és $\ro(x,y)=0 \ekviv x = y$
+\item $\ro(x,y) = \ro(y,x)$
+\item 3szög-egyenlőség: $\Vert x-y\Vert = \Vert( x-z ) + ( z-y)\Vert
+  \leq \Vert x-z \Vert + \Vert z-y\Vert$
+\end{Biz}
+
+\begin{megj} NT $\subsetneqq$ MT, azaz $\exists$ MT, melyben nincs
+  olyan norma, ami a metrikát indukálná
+\end{megj}
+
+\begin{Pl}
+\item $(\R^n,\Vert.\Vert_p)\qquad n\in \N,\, 1\leq p \leq
+  +\infty$
+  \[\di\begin{array}{clc}
+  1\leq p < +\infty\colon & \Vert x \Vert_p := \left(\sum\limits_{i=1}^n
+  |x_k|^p\right)^\frac1{p} & x=(x_1,\ldots,x_n)\in \R^n\\
+  p=+\infty\colon &\Vert x \Vert_\infty := \max\limits_{1\leq
+    k\leq n} |x_k|& \text{maximum-norma}\end{array}\]
+  NT és $\Vert.\Vert_p$ a $\ro_p$ metrikát indukálja.
+
+\item  $(C[a,b],\, \Vert.\Vert_p)\qquad 1\leq p\leq+\infty$
+  \[\di\begin{array}{clc}
+  1\leq p < +\infty\colon & \Vert f \Vert_p := \left(\di\int\limits_a^b
+  \vert f\vert^p\right)^\frac1{p} & f \in C[a,b]\\
+  p=+\infty\colon &\Vert x \Vert_\infty := \max\limits_{x\in
+    [a,b]} \vert f(x)\vert & \end{array}\]
+  NT; $\Vert.\Vert_p$ a $\ro_p$ metrikát indukálja.
+
+\item $(l_p,\Vert.\Vert_p)\qquad 1\leq p \leq
+  +\infty$
+  \[\di\begin{array}{clc}
+  1\leq p < +\infty\colon & \Vert x \Vert_p := \left(\sum\limits_{i=1}^\infty
+  |x_k|^p\right)^\frac1{p} & x=(x_n)\in l_p\\
+  p=+\infty\colon &\Vert x \Vert_\infty := \sup\limits_{k\in\N} 
+  |x_k|& \end{array}\]
+  NT és $\Vert.\Vert_p$ a $\ro_p$ metrikát indukálja.
+\item Mátrixok: $\R^{n\times m}$ LT, különböző normák
+  értelmezhetőek, ld mátrixnormák (numanal)
+\end{Pl}
+
+\subsubsection{Konvergencia és teljesség NT-ekben}
+\begin{de}\NT\ NT, $(x_n)\colon \N\n\X$ konvergens, ha  
+  \[\exists \xi  \in \X\colon \lim_{n\n\infty} \Vert \xi-x \Vert=0\]
+  Jel: $\lim(x_n)\stackrel{\Vert.\Vert}=\xi$; \quad $x_n  \xrightarrow[n\n\infty]{\Vert.\Vert} \xi$      
+\end{de}
+
+\begin{megj}
+  Műveletek konvergens sorozatokkal: összeg, számszoros
+\end{megj}
+
+
+\begin{de}[Banach-tér]
+  Az $\NT$ NT Banach-tér (BT), ha ha norma által indukált metrikával nyert MT teljes.
+\end{de}
+\begin{Pl}
+\item $(\R^n,\,\Norma_p)$ BT $\quad(n\in\N; 1\leq p\leq \infty)$
+\item $(l_p,\,\Norma_p)$ BT $\quad(n\in\N; 1\leq p\leq \infty)$
+\item $(C[a_b],\,\Norma_\infty)$ BT 
+\item $(C[a_b],\,\Norma_p)$ NEM BT $\quad(n\in\N; 1\leq p< \infty)$
+\end{Pl}
+
+\subsubsection{Ekvivalens normák}
+\begin{de}
+  $(\X,\Norman1),\ (\X,\Norman2)$ NT. A két norma ekvivalens 
+  \[ \text{(jel:) } \Norman1\sim\Norman2\text{, ha }\exists m,M>0:m\Norman2\leq \Norman1\leq M\Norman2\]    
+\end{de}
+\begin{megj}
+  Az ekvivalens normák szerepe: lásd ekvivalens metrikák
+\end{megj}
+
+
+\begin{te}Az $\R^n$ téren bármely két norma ekvivalens.\end{te}
+\begin{biz}  Elég belátni, hogy $\Norma$ tetszőleges norma $\R^n$-en ekvivalens $\Norma_\infty$-nel, ui $\sim$
+  ekvivalenciareláció, azaz $\exists m,M>0$, hogy
+  \begin{gather}
+    \norma x\leq M\cdot \norma x_\infty\label{eqg:1}\\
+    m\norma x_\infty\leq \norma x\label{eqg:2}
+  \end{gather}\begin{gather*}
+  \intertext{(\underline{\ref{eqg:1}) bizonyítása}}%%%%%%%%%%%%%%%%%%%%%
+  e_1,\dotsc,e_n\in\R^n\text{ szokásos bázis: } e_1=(0,\dotsc,0,\overset{i}{\breve{1}},0,\dotsc,0)\\
+  x\in\R^n,\ x=\sum_{k=1}^n x_k e_k\\
+  \norma x=\Vert{\sum_{k=1}^nx_ke_k}\Vert \leq \sum_{k=1}^n\norma{x_ke_k}=\sum_{k=1}^n \vert x\vert \norma{e_k} \leq
+  \left(\sum_{k=1}^n\norma{e_k}\right) \cdot \underbrace{\max_{1\leq k\leq n}\vert x_k\vert}_{\norma{x}_\infty}=
+  M\cdot\norma{x}_\infty  
+  \intertext{\underline{(\ref{eqg:2}) bizonyítása} indirekt módon.}%%%%%%%%%%%%%%%%%%%%%%%%
+  \text{tfh:}\forall k\in\N\ \exists x_k\in\R^n\colon \norma{x_k}_\infty>k\norma{x_k}\\
+  y_k:=\dfrac{x_k}{\norma{x_k}_\infty}\quad(k\in\N)\ \nn\ \norma{y_k}=\norma{\dfrac{x_k}{\norma{x_k}_\infty}}=
+  \dfrac{\norma{x_k}}{\norma{x_k}_\infty}<  \dfrac{\norma{x_k}}{k\norma{x_k}}=\dfrac1k\\
+  \nn \lim_{k\to+\infty}\norma{y_k}=0\text{ így:}\\
+  y_k\xrightarrow[k\to+\infty]{\Norma}\nullelem\in\R^n\tag{3}\label{eqg:3}\\
+  \norma{y_k}_\infty= \norma{\dfrac{x_k}{\norma{x_k}_\infty}}_\infty= \dfrac{\norma{x_k}_\infty}{\norma{x_k}_\infty} = 1
+  \quad \forall k\in\N\nn (y_k)\text{ korlátos } (\R^n,\,\Norma_\infty)\text{ NT-ben}
+  \intertext{A Bolzano-Weierstrass-féle kiválasztási tétel alapján $\exists (y_{k_i})$ konvergens részsorozata}
+  y_{k_i}\xrightarrow[k_i\to+\infty]{\Norma_\infty}y\\
+  (\ref{eqg:3})\ \nn\ y_{k_i}\xrightarrow[k\to+\infty]{\Norma}\nullelem\tag{4}\label{eqg:4}\\
+  \intertext{De}
+  \norma{y_{k_i}-y}\overset{(\ref{eqg:1})}{\leq} M\norma{y_{k_i}-y}_\infty\to0\ \nn\ %
+  y_{k_i}\xrightarrow[k_i\to+\infty]{\Norma}y \ \overset{(\ref{eqg:4})}{\nn}\ y=\nullelem\text{ ui a határérték}\\
+   \hspace*{1em}\text{ egyértelmű } \nn\   y_{k_i}\xrightarrow[k\to+\infty]{\Norma_\infty}\nullelem \nn
+  \lim_{k_i\to+\infty}\norma{y_{k_i}}_\infty=0
+  \end{gather*}
+  Ez pedig ellentmondás $\norma{y_{k_i}}_\infty=1$ miatt.
+\end{biz}
+
+
+\subsection{Euklideszi terek}
+\begin{de}
+  Az $\ET$ rendezett párt (valós) euklideszi térnek (ET) nevezzük, ha
+  \begin{enumerate}
+  \item $\X$ LT $\R$ felett
+  \item $\Skalar\colon\X\times\X\n\R$ olyan fv, melyre
+    \begin{enumerate}
+    \item $\skalar x y \,=\,\skalar y x\qquad \forall x,y\in\X$
+    \item $\skalar{\lambda x} y \,=\,\lambda\skalar x y\qquad \forall x\in\X,\ \forall\lambda\in\R$
+    \item $\skalar{x_1+x_2} y \,=\,\skalar{x_1} x + \skalar {x_2} y \qquad (x_1,x_2,y\in\X)$
+    \item $\forall x\in\X\ \skalar x x \geqq0 \text{ és } =0\ekviv x=0$
+    \end{enumerate}
+  \end{enumerate}
+\end{de}
+
+\begin{te}
+  $\ET$ ET, ekkor
+  \[ \Vert x\Vert := \sqrt{\skalar x x}\qquad(x\in\X)\]
+  norma az \X-en, ez a \Skalar\ skaláris szorzat által indukált norma. $\NT$ NT, azaz minden ET egyúttal NT is.
+\end{te}
+
+\begin{biz}
+  \begin{lemma}[Cauchy-Bunyakovszkij-egyenlőtlenség]\ \\
+    $\ET$ ET, \Norma\ indukált norma. Ekkor
+    \[\left|\skalar{x}{y}\right| \leq \norma{x}\cdot\norma{y}\qquad \forall x,y\in\X\] 
+  \end{lemma}
+  \textbf{Lemma bizonyítása}:\\
+  $x,y\in\X$ rögzített, $\lambda \in R$
+  \[
+  \begin{split}
+    0 \leq \skalar{\lambda x+y}{\lambda x+y} &\overset{\text{3. tul}}=
+    \skalar{\lambda x}{\lambda x +y} + \skalar{y}{\lambda x +y} = \dotsb ={}\\
+    &=  \lambda^2 \underbrace{\skalar{x}{ x}}_{\ \norma{x}^2} + 2\lambda\skalar{x}{y} +
+    \underbrace{\skalar y y}_{\ \norma{y}^2}
+  \end{split}
+  \]
+  Ha $\norma{x} = 0$ akkor kész\\
+  Ha $\norma{x} \ne 0$ akkor a $\lambda$-val másodfokú egyenlet diszkriminánsa 0. \hfill$\blacktriangle$\\
+
+  \textbf{A tétel bizonyítása}
+  \begin{enumerate}[\qquad(i)]
+  \item $\norma x \geq 0$ és $\norma x =0 \ekviv x = \nullelem$ - teljesül
+  \item $\norma{\lambda x} = |\lambda| \cdot \norma{x}\qquad(\forall x \in N, \forall \lambda\in \R$ - teljesül
+  \item Háromszög-egyenlőtlenség:\\
+    \[ \begin{split}
+      \norma{x+y}^2 &= \skalar{x+y}{x+y} = \underbrace{\skalar{x}{x}}_{\norma{x}^2} + 2\skalar{x}{y} + \underbrace{
+	\skalar{y}{y}}_{\norma{y}^2} \overset{C-B}{\leqq} {}\\
+      & \leqq \norma{x}^2 + 2\norma{x}\,\norma{y} + \norma{y}^2 = (\norma{x}+\norma{y})^2 \text { teljesül}
+    \end{split} \]
+  \end{enumerate}     
+\end{biz}
+
+\begin{megj}
+  ET $\subsetneqq$ NT $\subsetneqq$ MT
+\end{megj}
+\newpage
+\begin{de}[Elemek szöge] $\ET$ ET;  $\forall x,y\in \X\setminus\left\{\nullelem\right\}$-hoz
+  \begin{enumerate}
+  \item $\exists!\varphi\in[0,\pi]\quad \cos\varphi=\dfrac{\skalar{x}{y}}{\norma{x}\,\norma{y}}$\\
+    $\varphi$ az $x$ és $y$ által bezárt szög
+  \item $x$ és $y$ merőlegesek vagy ortogonálisak, ha $\skalar x y =0$       
+  \end{enumerate}
+\end{de}
+
+\begin{Pl}
+\item $(\R^n,\Skalar)\quad n\in \N\qquad x=(x_1,\dotsc,x_n)\in \R^n$
+  \[ \skalar x y = \sum_{i=1}^n x_i y_i\qquad(x,y \in \R^n) \] 
+  skaláris szorzat $\R^n$-n. Ez a skaláris szorzat a $\Norma_2$-t indukálja.
+\item $(C[a,b],\,\Skalar)$ ET; $\di\skalar f g := \int_a^b fg \quad (f,g\in C[a,b])$\\
+  Ez a skaláris szorzat a $\Norma_2$-t indukálja: $\di\sqrt{\skalar f g} = \sqrt{\int^b_a|f|^2} = \norma{f}_2$
+\item $(l_2,\Skalar)\quad x=(x_n)\in l_2$
+  \[\skalar x y := \sum_{n=1}^\infty x_n y_n \text{ skaláris szorzat}\]
+  Ez a skaláris szorzat a $\Norma_2$-t indukálja.
+\end{Pl}
+
+\begin{te}
+  Adott egy $\NT$ NT. Ekkor:
+  \begin{align*}
+    \exists \Skalar \text{ skaláris szorzat, ami a }\Norma \text{ normát induklálja}
+    \intertext{\quad akkor és csak akkor, ha a normára az alábbi feltétel teljesül:}
+    \norma{x+y}^2 + \norma{x-y}^2 = 2 (\norma{x}^2 + \norma{y}^2)\quad \forall x,y\in \X
+  \end{align*}
+\end{te}
+\begin{megj}
+  Ez a paralelogramma-szabály: $e^2 + f^2 = 2(a^2 + b^2)$
+\end{megj}
+
+\begin{biz} Ld gyak, kell
+\end{biz}
+
+\begin{te}
+  $\R^n,\ C[a,b],\ l_p$-beli $p$-normák közül csak $p=2$ teljesíti a paralelogramma-szabályt, azaz csak a $p=2$ norma
+  származtatható skaláris szorzatból.
+\end{te}
+
+\begin{biz} Ld gyak, kell
+\end{biz}
+
+\begin{de}[Hilbert-tér]
+  Az $\ET$ ET Hilbert-tér (HT), ha a skaláris szorzat által indukált normával kapott NT teljes.     
+\end{de}
+
+
+\begin{Pl}
+\item $(\R^n,\,\Skalar)$ HT
+\item $(l_2,\,\Skalar)$ HT
+\item $(C[a,b],\,\Skalar)$ NEM Hilbert-tér
+\end{Pl}
+
+
+
+% Local Variables:
+% fill-column: 120
+% TeX-master: t
+% End:

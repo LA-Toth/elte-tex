@@ -1,0 +1,46 @@
+\section{Kombinatorikus (Klasszikus) valószínűségi mező}
+
+
+\begin{tabular}{ll}
+  $|\Omega| < \infty$             & eseménytér, biztos esemény \\
+  $\omega\in\Omega$               & elemi esemény              \\
+  $A\subset\Omega$                & esemény                    \\
+  $P(A) := \dfrac{|A|}{|\Omega|}$ & $A$ esemény valószínűsége  \\
+\end{tabular}
+
+Példák:
+
+\begin{enumerate}
+\item
+  Kockadobás\\
+  $\Omega = \{1, 2, 3, 4, 5, 6\}$ \\
+  $\{\text{párosat dobunk}\} = \{2, 4, 6\}$   valószínűség: $\frac12$
+
+\item
+  2 érme feldobása
+  \begin{enumerate}
+  \item $\Omega = \{ \mbox{FF}, \mbox{FI}, \mbox{IF}, \mbox{II} \}$ \\
+    $P(\mbox{2 fejet dobunk}) = \dfrac{\{\mbox{FF}\}}{|\Omega|}=\dfrac14$ $\leftarrow$ szabályos érme $\to$ \parbox{40mm}{valóságot jobban leírja.}
+
+  \item $\Omega' = \{\mbox{2F}, \mbox{2I}, \mbox{1I 1F}\}$ \\
+    $P(...) = \dfrac{|\mbox{2F}|}{|\Omega'|}=\dfrac13$  Melyik az igaz?
+
+  \end{enumerate}
+\item
+  Két kockadobás
+  \begin{align*}
+    & \Omega = \{(i_1, i_2) | 1 \le i_j \le 6 : j\in \{1, 2\}\} \\
+    & P(\mbox{összeg 9}) = \dfrac{4}{36} = \dfrac19 \\
+    & 9 = 6+3=3+6 = 5+4 = 4+5 \\
+    & 10 = 4+6=5+5= 6+4\\
+    & P(\mbox{összeg 10})=\dfrac3{36}
+  \end{align*}
+
+ \item Pénzmegosztás\\
+  $5 - 3$  nyerések száma \\
+  Következő $3$ játék eredménye?
+  \begin{align*}
+    & \Omega = \{()\} \\
+    & |\Omega| = 8
+  \end{align*}
+\end{enumerate}

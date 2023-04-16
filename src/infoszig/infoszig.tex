@@ -1,0 +1,2397 @@
+\documentclass[fleqn,10pt,a4paper]{article}
+
+%
+% ---------- CODES --------------------------
+%
+\makeatletter
+\gdef\th@magyar{\normalfont\slshape
+  \def\@begintheorem##1##2{%
+  \item[\hskip\labelsep \theorem@headerfont ##2.\ ##1.]}%
+  \def\@opargbegintheorem##1##2##3{%
+  \item[\hskip\labelsep \theorem@headerfont ##2. ##1.\ (##3)]}}
+\makeatother
+
+%
+% - ---- -- PACKAGES--------------------------
+%
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{t1enc}
+\usepackage[utf8]{inputenc}
+\usepackage[magyar]{babel}
+%\usepackage{amsthm}
+\usepackage{theorem}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{paralist}
+\usepackage{booktabs}
+\usepackage{paralist}
+\usepackage{latexsym}
+
+%
+% ------------  N E W  C O M M A N D S --------
+%
+%\newcommand{\ob}{\begin{flushright} \leavevmode\hbox to.77778em{\hfil\vrule
+%    \vbox to.675em{\hrule width.6em\vfil\hrule}\vrule}\hfil\end{flushright}}
+\newcommand{\ob}{\hfill$\square$}
+\newcommand{\ff}{f\in\mathbb{R}\rightarrow\mathbb{R}}
+\newcommand{\fab}{f\colon (a,b)\rightarrow\mathbb{R}}
+\newcommand{\fabk}{f\colon \left[a,b\right]\rightarrow\mathbb{R}}
+\newcommand{\fir}{f\colon I\rightarrow\mathbb{R}}%\usepackage[pdfborder(0 0 0)]{hyperref}
+
+\newcommand{\fdab}{f\in D(a,b)}
+\newcommand{\exist}{\exists}
+\newcommand{\ek}{\Longleftrightarrow}
+\newcommand{\la}{\lambda}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\n}{\rightarrow}
+\newcommand{\nn}{\Rightarrow}
+\newcommand{\Omage}{\Omega}
+\newcommand{\nb}{\Leftarrow}
+\newcommand{\di}{\displaystyle}
+\newcommand{\sarrow}{\downarrow}
+\newcommand{\narrow}{\uparrow}
+\newcommand{\lt}{<}
+\newcommand{\gt}{>}
+%\newcommand{\ut}[1]{\texttt{#1}}
+%\newcommand{\utt}[1]{\\\ut{#1}}
+
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\vfi}{\varphi}
+\renewcommand{\epsilon}{\varepsilon}
+
+\newcommand{\listazjbetu}{
+  \renewcommand{\theenumi}{\alph{enumi}}
+  \renewcommand{\labelenumi}{(\theenumi)}
+}
+\newcommand{\listazjromai}{
+  \renewcommand{\theenumi}{\roman{enumi}}
+  \renewcommand{\labelenumi}{(\theenumi)}
+}
+\newcommand{\listabetu}{
+  \renewcommand{\theenumi}{\alph{enumi}}
+  \renewcommand{\labelenumi}{\theenumi}
+}
+\newcommand{\listaszamkor}{
+  \renewcommand{\theenumi}{\alph{enumi}}
+  \renewcommand{\labelenumi}{\theenumi$^\circ$}
+}
+\newenvironment{enumzjromai}{\listazjromai\begin{enumerate}}{\end{enumerate}}
+\newenvironment{enumzjbetu}{\listazjbetu\begin{enumerate}}{\end{enumerate}}
+
+\newenvironment{enumzjr}{\begin{enumzjromai}}{\end{enumzjromai}}
+\newenvironment{enumzjb}{\begin{enumzjbetu}}{\end{enumzjbetu}}
+\newenvironment{enumAr}{\renewcommand{\labelenumi}{\emph{{\small (\emph{AR\theenumi})}}}\begin{enumerate}}{\end{enumerate}}
+
+
+
+
+\newcommand{\ut}[1]{\vspace{5mm}\fbox{\parbox{130mm}{\texttt{\noindent{#1}}}}\vspace{5mm}}
+
+%
+% ------------  NEW PART DEFS -----------------
+%
+\newcounter{Szaml}
+
+
+\theoremstyle{magyar}
+\newtheorem{de}{definíció}[section]
+\newtheorem{te}{tétel}[section]
+\newtheorem{bi}{bizonyítás}[section]
+\newtheorem{ko}{következmények}[section]
+\newtheorem{me}{megjegyzés}[section]
+\newtheorem{al}{állítás}[section]
+
+\newenvironment{biz}{\begin{trivlist}\item\relax\mbox{\textbf{Bizonyítás.\enskip}}\ignorespaces}{\ob\end{trivlist}}
+\newenvironment{kov}{\begin{trivlist}\item\relax\mbox{\textbf{Következmény.\enskip}}\ignorespaces}{\end{trivlist}}
+\newenvironment{megj}{\begin{trivlist}\item\relax\mbox{\textbf{Megjegyzés.\enskip}}\ignorespaces}{\end{trivlist}}
+\DeclareMathOperator{\D}{D}
+\DeclareMathOperator{\RR}{R}
+\DeclareMathOperator{\dom}{DOM}
+\DeclareMathOperator{\sat}{SAT}
+\DeclareMathOperator{\pre}{Pre}
+\DeclareMathOperator{\post}{Post}
+\DeclareMathOperator{\front}{front}
+\newenvironment{bizlist}{\setcounter{Szaml}{1}
+  \begin{list}{\alph{Szaml})\hfill}
+    {\usecounter{Szaml}\setlength{\itemsep}{0pt}
+      \setlength{\itemindent}{-\labelsep}
+      \setlength{\listparindent}{0pt}}}{\end{list}}
+
+
+%
+% - - - -- - - S E T T I N G S ----------------
+%
+
+\hyphenation{le-gyen %ki-ér-té-ke-lé-si
+  %meg-ha-tá-ro-zott
+}
+%\setlength{\parindent}{0pt}
+%\setlength{\parskip}{\baselineskip}
+\addtolength{\voffset}{-1cm}
+\addtolength{\textheight}{2cm}
+%\addtolength{\marginparwidth}{-1cm}
+\addtolength{\hoffset}{-1cm}
+\addtolength{\textwidth}{2cm}
+\setlength{\headheight}{23pt}
+%
+\pagestyle{fancy}
+\renewcommand{\sectionmark}[1]{\markboth{\Roman{section}. tétel\\#1}{}}
+\lhead{\textbf{\thepage}/\pageref{LastPage}}
+
+\title {Informatika szigorlat tételsor}
+
+\newcommand{\Lang}{\mathcal{L}}
+\newcommand{\Nytan}{\mathcal{G}}
+\newcommand{\szabalyok}{\mathcal{P}}
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\VDA}{\A}
+\newcommand{\VNDA}{\A}
+\newcommand{\LangReg}{\Lang_{\text{Reg}}}
+\newcommand{\LangAltReg}{\Lang_{\text{ÁltReg}}}
+\newcommand{\Verem}{\mathcal{V}}
+
+
+%\setcounter{tocdepth}{4}
+\newcommand{\mktoc}{
+  \pagenumbering{roman}
+  \setcounter{page}{1}
+  \lhead{\textbf{\thepage}}
+  \tableofcontents
+  \newpage
+  \lhead{\textbf{\thepage}}%/\pageref{LastPage}} 
+  \pagenumbering{arabic}
+  \setcounter{page}{1}
+}
+
+
+%\hyphenation{ki-ér-té-ke-lé-si}
+%
+% T H E    D O C U M E N T
+%
+\begin{document}
+  \mktoc
+  \setcounter{section}{3}
+  \section{Formális nyelvek}
+  A múlt századra megjelent az igény a természetes nyelvek formális leírására. Ehhez a matematikai logikát próbálták
+  alkalmazni. A legjelentősebb próbálkozás \emph{Noam Chomsky}é volt az angol nyelv struktúrájának leírására. Ez
+  sikertelen volt. A természetes nyelvek nem írhatók le formálisan (bár vannak rá ma is kisérletek).
+  
+  \subsection{Nyelvek leírásának módszerei}
+  A leírások legfontosabb követelménye a leírás végessége.
+  \begin{enumerate}
+  \item véges nyelv esetén az elemek fizikai felsorolása, pl:\\
+    $L=\{ab,\,ba\}\quad X = \{a,b\}$
+  \item algoritmussal történő megadás
+    \begin{enumzjb}
+    \item[felsoroló algoritmus] Olyan $\mathcal A$ algoritmust adonk meg, amely a nyelv elemeit felsorolja. Ekkor a
+      leírás: $\mathcal A$ szövege. A rekurzívan felsorolhat nyelvek: $\mathcal{LF} = \Lang_{\text{RekFel}}$
+    \item[eldöntő algoritmus] Olyan $\mathcal A$  algoritmust adunk meg, amely minden szóra (mint inputra) eldönti,
+      hogy a nyelv része-e. Terminál és ``igennel'' áll le, ha nyelvbeli szó, különben ``nemmel''.\\
+      Rekurzív nyelvek: $\mathcal{LR} = \Lang_{\text{Rek}}$
+    \item[parciálisan eldöntő algoritmus] Olyan $\mathcal A$ algoritmus, mely $u\in L$ szó esetén igen válasszal
+      terminál, $u\not\in L$ esetén pedig vagy nem terminál, vagy nem válasszal megáll.\\
+      Parciálisan rekurzív nyelvek: $\mathcal{LP} = \Lang_{\text{ParcRek}}$
+    \end{enumzjb}
+    Ekkor $\mathcal {LR} \subset \mathcal{LP} = \mathcal{LF} \subset \Lang$.
+  \item Matematikai gépekkel: Turing-gép, veremautomata
+  \item Logikai formulákkal: $L=\{ u : \vfi(u)\}$, ahol $\vfi$ elsőrendű logikai formula, $u$ a $\vfi$ egy szabad
+    változója
+  \item Struktúrális rekurzióval.
+    \begin{enumzjr}
+    \item Elemi nyelvek: pl. $\emptyset$, $\{\epsilon\}$, $\{t\}$
+    \item $U$ univerzális ábécé, $|U| < \infty$, $t\in U$
+    \end{enumzjr}
+    Megengedett nyelvműveletek: pl { unió, konkatenáció, lezárás }\\
+    Vizsgáljuk: elemi nyelvekből a megengedett műveletek véges sokszori alkalmazásával kapható műveleteket:
+    $\LangReg$ (reguláris nyelvek)\\
+    $L_1,L_2\nn L_1 L_2$ (konkatenáció)\\
+    $L_1 L_2 := \{ uv \mid u \in L_1 \land v\in L_2\}$\\
+    $L^i := L L L\ldots L$\\
+    $L^0 := \{ \epsilon \}$\\
+    Lezárás: $L^* := \di\bigcup_{i=0}^\infty L^i$
+  \item Produkciós rendszerek: BNF általánosítása. Jel:
+    $\Pi = \left< X, \mathcal P, Ax \right>$\\
+    Itt $X$ az ábécé, $ \mathcal P\subseteq X^*\times X^*$ véges reláció a szabályrendszer, és $Ax\subseteq X^*$ véges
+    nyelv.
+    $(p,\, q)\in \mathcal P \iff p\to q$ szabály; következtetési szabály (helyettesítés)
+  \end{enumerate}
+  \paragraph{Levezetés a produkciós rendszerekben}
+  \begin{enumzjb}
+  \item \emph{1 lépéses (közvetlen) levezetés} $\alpha$-ból egy lépésben levezethető $\beta$ $\iff$\\ $\exists
+    \alpha_1,\alpha_2\in X^*,\,\exists p\to q\in \mathcal P: \alpha = \alpha_1 p\alpha_2,\ \beta = \alpha_1 q \alpha_2$\\
+    Jel: $\alpha \xrightarrow[\Pi]{} \beta$
+  \item \emph{több lépésben történő levezetés} (közvetett)\\
+    $\alpha$-ból $\Pi$-ben több lépsében levezethető $\beta \iff$\\
+    $\exists k\geq0$ egész, $\exists \alpha_0,\ldots,\alpha_k\in X^*$, melyre $\alpha_0=\alpha$ és $\alpha_k = \beta$ és
+    $\forall i=1..k: \alpha_{i-1}\xrightarrow[\Pi]{}\alpha_i$\\
+    Jel: $\alpha\xrightarrow[\Pi]{k}\beta$ ahol $k$ a levezetés hossza,\\
+    \hspace{1cm}$\alpha \xrightarrow[\Pi]{*} \beta$ ha nem számít a hossz\\\\
+    $k=0$: esetben $\alpha=\alpha_0=\alpha_k=\beta$ reflexív lezárás\\
+    $k=1$: visszaadja a közvetlen levezetést
+  \end{enumzjb}
+  $\xrightarrow[\Pi]{+}$\quad a $0$ nincs benne, ld. reguláris kifejezések\\
+  Levezetés = közvetett, több lépéses levezetés
+  $\xrightarrow[\Pi]{+}$
+  
+  \paragraph{Levezetés, elfogadás} $\Pi$ generálja, felsorolja az $\alpha\in X^*$-ot $\iff$ vmilyen axiómából $\alpha$
+  levezethető, illetve $\Pi$ elfogadja az $\alpha\in X^*$-ot $\iff$  $\alpha$-ból vmelyik axióma levezethető. 
+  
+  \subsection{Formális nyelvtanok}
+  A formális nyelvtanok a produkciós rendszerek finomításai. Itt a produkciós ábécé két részre osztható, azaz $X  = T
+  \cup N$, ahol $T$ jelöli a terminális szimbólumokat (ábécé), $N$ pedig a nyelvtani jeleket (fogalmakat). A $T$ feletti
+  szavak generálása a megengedett.
+
+  \paragraph{A $G$ formális nyelvtan megadása} A $G$ a következő négyes: $G = \left< T,N,\mathcal P,S\right>$ , ahol:\\
+  $T$ a terminális ábécé\\
+  $N$ nyelvtani jelek ábécé\\
+  $\szabalyok$ véges szabályrendszer, minden szabály bal oldalán van nyelvtani jel\\
+  $L(G)$ a $G$ nyelvtan által generált nyelv\\
+  $L(G) :=\{\,u\vert u\in T^* \land S \xrightarrow[G]{*} u\,\}$
+  
+  \subsection{Nyelvtanok osztályozása}
+  A nyelvtanok bonyolultságuk alapján osztályozhatóak. 4 osztály: 0, 1, 2 és 3. Mindegyiknek 3 változata van: alap,
+  kiterjesztett és normálforma. Több esetben is megjelenik a $S\to \epsilon$ ``korlátozott $\epsilon$ szabály''
+  (\emph{kes}). Ez azt jelenti, hogy $S$ a kezdőszimbólum, és ha létezik ilyen szabály, akkor $S$ nem fordulhat szabály
+  jobb oldalán.
+  \subsubsection{Alap típusok}
+  0. típus
+  \begin{gather*}
+    S\to\epsilon \text{  kes}\\
+    p\to q \quad p,q\in(T\cup N)^*,\, q\neq \epsilon
+    \intertext{1. típus - környezetfüggő nyelvtan}
+    S\to\epsilon \text{  kes}\\
+    \alpha_1 A \alpha_2\to \alpha_1 q \alpha_2\quad \alpha_1,\alpha_2\in (T\cup N)^* \text{ tetsz}.\ \  A\in N,\ q\in (T \cup
+    N)^*, \, q\neq \epsilon\\
+    \alpha_1,\, \alpha_2\text{: környezetek}
+    \intertext{2. típus - környezetfüggetlen}
+    S\to\epsilon \text{  kes}\\
+    A \to q \quad  A\in N,\ q\in (T \cup N)^*, \, q\neq \epsilon
+    \intertext{3. típus - reguláris nyelvtan}
+    S\to\epsilon \text{  kes}\\
+    A \to tB \quad  A,\,B\in N,\ t\in T\\
+    A \to t\\
+  \end{gather*}
+  $\Nytan_i$ az i. típusú nyelvtanok összessége; \emph{i. típusú Chomsky-nyelvtanok}\\
+  $\Lang_i$ az . típusú nyelvtanok összessége; \emph{i. típusú Chomsky-nyelvek}\\
+  $\Lang_i = \{ L \mid \exists G\in\Nytan_i: L(G)=L\}$\\
+  $\Nytan_3\subseteq \Nytan_2\subseteq \Nytan_1\subseteq \Nytan_0\  \nn\  \Lang_3\subseteq \Lang_2\subseteq \Lang_1\subseteq
+  \Lang_0$ a \emph{Chomsky-féle gyenge hierarchia}
+  
+  A kiterjesztett és különösen normálforma nyelvtanok esetén könnyebb az elméleti felhasználás, egyszerűbbek a
+  bizonyítások
+
+  \subsubsection{Kiterjesztett nyelvtanok}
+  0. típus - Nincs megkötés.
+  \begin{gather*}
+    p\to q
+    \intertext{1. típus}
+    S\to\epsilon \text{  kes}\\
+    p\to q \quad l(p) \leqq l(q) \quad\text{hosszúság nem csökkentő nyelvtan}
+    \intertext{2. típus}
+    A \to q \quad  A\in N,\ q\in (T \cup N)^*
+    \intertext{3. típus - reguláris nyelvtan}
+    A \to uZ \quad  A\in N,\ u\in T^*,\ Z\in N\cup \{\epsilon\}\\
+  \end{gather*}
+  
+  \subsubsection{Normálforma nyelvtanok}
+  0. típus
+  \begin{gather*}
+    S\to\epsilon \text{  kes}\\
+    A\to t\quad (A\in N; t \in T)\\
+    A\to BC\quad (A,B,C \in N)\\
+    AB\to AC\quad (A,B,C \in N)\\
+    BA\to CA\quad (A,B,C \in N)\\
+    AB\to A\quad (A,B \in N)\\
+    BA\to A\quad (A,B \in N)
+    \intertext{1. típus - Kuruda-féle normálalak}
+    S\to\epsilon \text{  kes}\\
+    A\to t\quad (A\in N; t \in T)\\
+    A\to BC\quad (A,B,C \in N)\\
+    AB\to AC\quad (A,B,C \in N)\\
+    BA\to CA\quad (A,B,C \in N)
+    \intertext{2. típus - Chomsky-féle normálalak}
+    S\to\epsilon \text{  kes}\\
+    A\to t\quad (A\in N; t \in T)\\
+    A\to BC\quad (A,B,C \in N)
+    \intertext{3. típus}
+    A\to tB\\
+    A\to \epsilon\\
+  \end{gather*}
+  
+
+  \noindent  Jel: $\Nytan_{kit\,i}$, $\Nytan_{nf\,i}$\\
+  $\Nytan_i\subseteq \Nytan_{kit\,i}\quad i=0..3$\\
+  $\Nytan_{nf\,i}\subseteq \Nytan_i\quad i=0..2$\\
+  $\Nytan_{nf\,3}\subseteq \Nytan_{kit\,3}$\\
+  A nyelvekre hasonlóan.
+
+  \begin{te}[Kiterjesztési tétel] $\Lang_{kit\,i}=\Lang_i\quad i=0..3$
+  \end{te}
+
+  \begin{biz} (Részletek.)\\
+    A kiterjesztési tétel esetén a $\supseteq$ irány trivi. Elegendő azt belátni, hogy $\forall  G\in\Nytan_{kit\,i}$
+    esetén $\exists G'\in\Nytan_i\colon L(G') = L(G)$. Ekkor a $G=\left< T,N,\szabalyok,S\right>$ nyelvtan esetén a
+    rossz szabályokat kell helyettesíteni mással. Ha $G'\in \Nytan_i$ akkor kész, mivel $G'=G$ megfelelő.
+    
+    \paragraph{i=0} $p\to \epsilon$ rossz szabály, ezért \emph{0. típusú $\epsilon$-mentesítés} szükséges. Ezt két
+    szabállyal helyettesítve és esetleg új kezdőszimbólumot bevezetve megfelelő nyelvet kapunk. Az új szabályok:
+    \begin{gather*}
+      Zp\to Z\\
+      pZ\to Z\\
+      \intertext{$\epsilon\in L(G)$ esetén $S'$ új nyelvtani jel}
+      S'\to\epsilon\quad\text{kes}\\
+      S'\to S 
+    \end{gather*}
+
+    
+    Ugyanakkor minden kiterjesztett 0 típusú nyelvnél felthetető, hogy terminális jel csak\\ $A\to t$ alakú szabályokban
+    fordul elő, ellenkező esetben ezt lehet szimulálni a következőképpen. Elsőként bevezetünk minden $t\in T$ esetén
+    $X_t$ új nyelvtani jelet (álterminálist). Minden szabályban lecseréljük a terminálisokat a neki megfelelő
+    álterminálisra. Új szabályok:\\ $X_t\to t\qquad (\forall t\in T)$
+
+    \paragraph{i=1} a $p\to q$ szabály nem környezetfüggő, de az $l(p)\leq l(q)$ teljesül. Az előző bekezdés módszere miatt csak
+    nyelvtani jelet tartalmazhat. : $X_1 X_2\ldots X_n\to Y_1 Y_2\to Y_n$. Új nyelvtani jelek bevezetésével már egyszerű
+    ($Z_1,\ldots,Z_{n-1}$).
+    
+    \begin{gather*}
+      X_1 X_2\ldots X_n \to Z_1 X_2\ldots X_n\\
+      \vdots\\
+      Z_1 Z_2\ldots X_{n-1} X_n \to Z_1 Z_2 \ldots Z_{n-1} X_n\\
+      Z_1 Z_2 \ldots Z_{n-1} X_n \to Z_1 Z_2 \ldots Z_{n-1} Y_n \ldots Y_m\\
+      Z_1 Z_2 \ldots Z_{n-1} Y_n\ldots Y_m \to Y_1 Z_2 \ldots Z_{n-1} Y_n \ldots Y_m\\
+      \vdots\\
+      Y_1 Y_2 \ldots Y_{n-2} Z_{n-1} Y_n\ldots Y_m \to Y_1 Z_2 \ldots Y_{n-2} Y_{n-1}Y_n \ldots Y_m     
+    \end{gather*}
+
+    \paragraph{i=2} \emph{2. típusú $\epsilon$-mentesítés} használható csak:\\
+    $S\xrightarrow[G]{*}\alpha_1 B\alpha_2\xrightarrow[G]{}\alpha_1\beta_1 A  \beta_2\alpha_2
+    \xrightarrow[G]{*} \gamma_1 A \gamma_2 \xrightarrow{A\to \epsilon \text{ rossz}} \gamma_1\gamma_2
+    \xrightarrow[G]{*} u\in T^*$\\
+    A cél az $B \to \beta_1 A  \beta_2$ szabály kikerülése, azaz hogy $A$ egyáltalán ne jelenjen meg.\\
+    $H := \{ A : A \xrightarrow[G]{*} \epsilon \}$.
+    
+    A fenti rossz szabály helyett egy másikat vezetünk be:\\
+    $B \to \beta_1 \beta_2$. \\\\
+
+    \noindent $G' = \left< T, N, \szabalyok, S\right>$\\
+    $A\to q' \in \szabalyok' \iff q' \neq \epsilon \land \exists A\to q\in \szabalyok$, hogy $q'$-t $q$-ból néhány
+    $H$-beli szimbólum elhagyásával kapjuk. Ekkor $L(G') = L(G)\setminus \{\epsilon\}$
+    
+    A $H$ rekurzív módon kiszámolható (a rekurzió megáll egy $i_0$ indexnél). A rekurzív függvény a következő:\\
+    $\Phi(Q) := \{ A \mid \exist A\to q \in \szabalyok : q \in Q^* \cup Q\}$, kezdőlépés: $\Phi^0(\emptyset)$
+
+    Ha a 2. típusú $\epsilon$-mentesítést kiterjesztett 3. típusú nyelvtanra alkalmazzuk, az eredmény is kit. 3. típusú
+    lesz.\\
+
+    A \emph{2. típusú láncmentesítés}. $G,G'\in\Nytan_2$. G-hez keressük G'-t, amelyben nincsennek benne láncszabályok
+    ($A\to B$ alakúak, $\quad A,B\in N$). Tehát  az\
+    \[A=A_0\to A_1\to A_2\to \ldots \to A_k\to q \not\in N\] láncszabály
+    hatását az $A\to q$ szabállyal helyettesíthetjük.\\
+    $H(A) := \{ B : A\xrightarrow{*} B\}$, mely láncszabályok segítségével vezethető le ($A \in N$).\\
+    
+    $A\to q\in \szabalyok' \iff \exists B\in H(A)\land B\to q \in \szabalyok \land q\not\in N$
+    
+    $H(A)$-t is rekurzívan kaphatjuk. Kezdőközelítés: $\{ A \}$. Rekurzió:\\
+    $\Phi(Q) := Q \cup \{ B : \exists C \in Q : C \to B \in \szabalyok \}$
+    
+    \paragraph{i=3} esetén 2. típusú $\epsilon$-mentesítés majd láncmentesítés után csak a szóhosz a problémás, mivel
+    most egy $\epsilon$-mentes láncmentes kiterjesztett 3. típusú nyelvet kaptunk.
+
+    \newpage
+    \noindent Az
+    \[A\to uZ, \ k=l(u) \geq2\]
+    szabályt az alábbi (alap 3. típusú) szabálysorozattal szimuláljuk.\\
+    Új nyelvtani jelek: $X_1, \ldots X_{k-1}$. Valamint $u=t_1\ldots  t_k$.
+    \begin{gather*}
+      A\to t_1 X_1\\
+      X_1\to t_2 X_2\\
+      \vdots\\
+      X_{k-1}\to t_k Z
+    \end{gather*}
+  \end{biz}
+
+  \begin{te}[Normálforma tétel] $\Lang_{nf\,i}=\Lang_i\quad i=0..3$
+  \end{te}
+
+  \begin{te} $\Lang_{0}\subsetneqq \Lang$ azaz nem minden nyelv írható le 0. típusú nyelvtannal sem
+  \end{te}
+  
+  \begin{te} A Chomsky-féle nyelvosztályok zártak a reguláris műveletekre (unió, konkatenáció, lezárás)
+  \end{te}
+
+  \begin{te}[Chuch-tézis] Minden konstruktív eszközzel leírható nyelv leírható nyelvtannal.
+  \end{te}
+  
+  \begin{te} $\Lang_0 \subseteq \Lang_P$ és $\Lang_1\subseteq \Lang_R$
+  \end{te}
+  
+  \newpage
+  \section{Matematikai gépek}
+  Amikor egy $L\in \Lang_3$-hoz keresünk lineáris idejű algoritmust a szóprobléma eldöntésére, akkor egy matematikai
+  gép lesz az algoritmus, egy determinisztikus automata.
+
+  \begin{de}[Véges determinisztikus automata] $\mathcal A = \left< T,\,Q,\,\delta,\,q_0,\,F\right>$ ötös egy VDA, ha:\\
+    $T$ az input abc\\
+    $Q$ véges halmaz, belső állapotok halmaza\\
+    $q_0\in Q$ kezdőállapot\\
+    $F\subseteq Q$ végállapotok halmaza\\
+    $\delta\colon Q\times T\to Q$ átmeneti függvény
+  \end{de}
+
+  Működése: egy ütem működését írja le a $\delta$ függvény $\delta(q,t) = q'$ azt jelenti, hogy ha az ütem elején
+  $\VDA$ a $q$ állapotban van és ha a $t\in T$ jelet olvassa, akkor az ütem végére átmegy a $q'$ új állapotba. Minden
+  ütem végén eggyel jobbra lép az olvasó fej (amely szalagról olvas); a központi egység (CPU) tárolja az állapotot.
+  
+  Több ütem is leírható a $\delta$ függvény kiterjesztésével. Az új függvény: $\hat{\delta}$. Tulajdonságai:
+  \begin{gather*}
+    \hat{\delta}\colon Q\times T^* \to Q\\
+    \hat{\delta}(q,\epsilon) = q\\
+    \hat{\delta}(q, ut) = \delta(\hat{\delta}(q,u),t)\qquad u\in T^*,\, t\in T\\
+    \hat{\delta}(q,t) = \hat{\delta}(q,\epsilon t) = \delta(\hat{\delta}(q,\epsilon),t) = \delta(q,t)
+  \end{gather*}
+  Továbbiakban a $\hat{\delta}$ függvényt is $\delta$-val jelöljük. A $\delta$ megadható
+  \begin{inparaenum}[\itshape a)]
+  \item képlettel vagy
+  \item átmenet-mátrixszal
+  \end{inparaenum}
+  
+  Az $u\in T^*$ szót $\VDA$ elfogadja $\iff \delta(q_0,u) \in F$. Ellenkező esetben elutasítja. Tehát:
+  \[ L(\VDA) = \{ u : u\in T^* \land \delta(q_0, u) \in F \}\]
+  
+  Az $\VDA$ vda egy $L(\VDA)$ nyelvet eldöntő algoritmust valósít meg.
+  $L$ nyelv felismerhető véges determinisztikus automatával $\iff \exists \VDA$ VDA, melyre $L(\VDA) = L$
+  \[ \Lang_{DA} := \{ L : \exists \VDA \text{ véges determinisztikus automata, melyre } L(\VDA) = L \}\]
+  
+  
+  
+  \begin{te} $\Lang_{DA} = \Lang_3$
+  \end{te}
+  
+  Ezért használat: fordítóprogramok (alapszimbólumok felismerése), és mintafelismerés (reguláris minták felismerése).
+  
+  \begin{biz} Tetszőleges $\VDA$ vda esetén $\exists G\in \Nytan_{kit\,3}\colon L(G)= L(\VDA)$ ui: az $\VDA$ áltaál
+    olvasott jelet G generálja, a $\delta(q,u) = q'$ pedig ekvivalens a következővel ($G$-t így spec):\\
+    $A_q\xrightarrow[G]{*} uA_{q'} \quad (u\in T^*)$  
+    
+    A másik irány ennek a bizonyításnak a megfordításával látható be.
+  \end{biz}
+  
+  Probléma, hogy nem mindig egyértelmű a $\delta$, így lesznek nem determinisztikus szabályok: $A\to tB_1$, \ldots,
+  $A\to  tB_k$. Ekkor egy \emph{véges, nem determinisztikus automatát} kapunk.
+
+  \begin{de}[Véges nem determinisztikus automata] A következő ötös:
+    \begin{gather*}
+      \VNDA = \left<Q,\,T,\,\delta,\,q_0,\,F\right>\\
+      \delta\colon Q\times T\to 2^Q
+    \end{gather*}
+  \end{de}
+
+  \noindent Több lépéses működés:
+  \begin{gather*}
+    \hat{\delta}(q,\epsilon) = \{q\}\\
+    \hat{\delta}(q,ut)=\bigcup_{\overline{q}\in\hat{\delta}(q,u)}\delta(\overline{q},t)\quad(u\in T^*,\,t\in T)
+    \qquad\text{valódi kiterjesztés}\\
+    \intertext{A kiterjesztést is $\delta$-val jelöljük.}
+    L(A) := \{ u : u\in T^* \land \delta(q_0,u) \cap F \neq \emptyset\}\\
+    \Lang_{NDA} \text{ a nem determinisztikus automaták által generált nyelvek halmaza}
+  \end{gather*}
+  
+  
+  \begin{te} $\Lang_{DA} \subseteq \Lang_3 \subseteq \Lang_{NDA}$.
+  \end{te}
+  \begin{biz}
+    A fenti VNDA-hoz keresünk egy $\VDA = \left< 2^Q,T,\delta',{q_0},F'\right>$ VDA-t.
+    \begin{gather*}
+      \delta(\{q_1,\ldots,q_l\},t) := \mathop{\cup}_{j=1}^l\delta(q_j,t)\\
+      A\in 2^Q,\ A\in F' \Leftrightarrow A\cap F \neq \emptyset      
+    \end{gather*}
+    A kiterjesztett $\delta$ esetén teljes indukcióval bizonyítható.
+  \end{biz}
+  
+  \subsection{Alkalmazások}
+  \subsubsection{Knuth-Morris-Pratt automata}
+  $T$ ábécé\\
+  $m\in T^*$ minta\\
+  $L_m := \{ u \in T^* : m \subseteq u \}$ azaz azok a szavak, melykenek $m$ egy résszava\\
+  $u\in L_m \iff m$ előfordul $u$-ban.\\
+  
+  Az $L_m$-hez konsturált VDA a KMP automata.
+  
+  \emph{Invariáns}: Egy $A$ állapotban megjegyezzük, hogy az eddig elovasott szó vége maximálisan hány jelre egyezik meg
+  a minta elejével. Tehát:\\
+  $Q := \{ q_0, q_1, \ldots, q_{l(m)}\}$\\
+  $\delta(q_0,u) = q_j \iff j = \max\{ v : v\in \pre(m), v \in \post(u)\}$
+  
+  Tehát:
+  \begin{gather*}
+    \mathcal A = \left<T, \{q_0,\ldots,q_{l(m)}\},\delta,q_0,\{q_{l(m)}\}\right>\\
+    \delta(q_i,t) = q_{f(i,t)}\\
+    f(i,t) = max\{ v : v\in \pre(m),\,v\in \post(t_1t_2\cdots t_i t)\} \qquad (0\leq i \leq l(m))
+  \end{gather*}
+  Nyilván:
+  $\delta(q_{l(m)},t) = q_{l(m)}$
+
+
+  \subsubsection{Szótárak reprezentációja (nyelvi elemző)}
+  $T$ abc\\
+  $L\subset T^*$ véges nyelv, \emph{szótár}\\\\
+  $L$-et elfogadó VDA készítése:
+  \begin{gather*}
+    \VDA = \left< \{q_u\}_{u\in \pre(L)} \cup \{ q_{\text{hiba}}\},\, T,\delta,q_{\epsilon},\{q_u : u\in L\}\right>\\
+    \delta(q_u,t) = \begin{cases}
+      q_{\text{hiba}} & ut\not\in \pre(L)\\
+      q_{ut} & ut \in \pre(L)
+    \end{cases}\qquad u\in T^*\\
+    \delta(q_{\text{hiba}},t) = q_{\text{hiba}}
+  \end{gather*}
+  \begin{te} $L\in \Lang_3\iff \left\vert\{L_p : p \in T^*\} \right\vert < \infty$ véges
+  \end{te}
+
+  %  \subsubsection{Veremautomaták}
+  %  Ez a következő tételben lesz tárgyalva.
+
+  \newpage
+  \section{Reguláris és környezet-független nyelvtanok tulajdonságai}
+  $\LangReg$ azoknak a nyelveknek az összessége, melyek az elemei nyelvekből ( $\{\}$, $\{\epsilon\}$, $\{t\}$ ) az
+  unió, konkatenáció és $*$ (lezárás) véges sokszori alkalmazásával kaphatók.
+  
+  $\LangAltReg$ ugyanez, csak további műveletek: metszet, komplementer. Tehát:\\
+  $\LangReg\subseteq\LangAltReg$\\
+  Ugyanaz az $L\in\LangReg$ vagy $L\in \LangAltReg$ nyelv többbféle módon is előálllítható  az elemi nyelvekből.
+
+  \emph{Reguláris kifejezés}: hogyan épül föl egy nyelv az elemiekből unió, konkatenáció és $*$ segítségével.\\
+  \emph{Általánosított reguláris kifejezés}re példa - ilyet használnak a keresőprogramok is:\\
+  $\{ a\}^* = a^*\qquad \{a\}=0$, $a^* = \epsilon \cup aa^*$\\
+  azaz egyazon nyelvre több reguláris kifejezés adható meg.
+  
+  
+  \begin{te}[Kleene-tétel] $\LangReg = \LangAltReg = \Lang_{DA}$
+  \end{te}
+  \begin{te}[Kis Bar-Hillel-lemma]
+    \begin{gather*}
+      \forall L\in\Lang_3\ \exists n > 0\qquad(n := n(L))\\
+      u,u'\subseteq L\ (\text{részszó}),\ l(u')\geq n
+      \intertext{Ekkor $u$ felírható a következő alaban}
+      u = \alpha_1 u' \alpha_2 = \alpha_1 \beta_1 v \beta_2 \alpha_2 \qquad \text{melyre még teljesül:}\\
+      0 < l(v) \leq n\text{ és}\\ 
+      \forall i\geq 0 \alpha_1 \beta_1 v^i \beta_2 \alpha_2\in L\qquad \text{ (megismételhető)}
+    \end{gather*}
+  \end{te}
+
+  \noindent Ezt pl. a helyes zárójelezések nyelvéhez alkalmazhatjuk. Ez nem egy 3. típusú nyelv.\\\\
+  
+  
+  \noindent Keressük az $L\in\Lang_3$ nyelvhez a minimális állapotszámú automatát.
+  
+  \begin{de}[Maradéknyelv]
+    $L\subseteq T^*,\ p\in T^*$. $L_p$ az $L$ $p$-re vonatkozó maradéknyelve.
+    \begin{gather*}
+      L_p := \{ v \mid pv \in L \}
+      \intertext{Tulajdonságok}
+      L_\epsilon = L\\
+      (L_p)_q = L_{pq}\\
+      \epsilon \in L_p \iff p \in L\\
+    \end{gather*}
+  \end{de}
+  
+  
+  \noindent $L\subseteq T^*$ tetszőleges nyelv, $\mathcal{A}_*^L$ automata (nem feltétlenül véges); állapotai:
+  maradéknyelvek.
+  
+  \begin{gather*}
+    \mathcal{A}_*^L := \left<\{L_p\}_{p\in T^*},\,T,\,\delta,\,L_\epsilon,\,F\right>\\
+    \delta(L_p,t) = L_{pt}\\
+    F := \{ L_p \mid \epsilon \in L_p\}
+    \intertext{$\delta$ jól definiált}
+    L_p = L_q \nn\quad \delta(L_p, t) = L_{pt} = (L_p)_t = (L_q)_t = \delta(L_q, t)\\
+    u \in L(\A_*^L) \iff \delta(L_\epsilon,u)\in F \iff L_u\in F \iff \epsilon \in L_u \iff u \in L
+    \intertext{Tehát}
+    L_(\A_*^L) = L
+  \end{gather*}
+  
+  Ha $\{L_p\}_{p\in T^*}$ véges, akkor $L(\A_*^L)$ VDA, $L\in \Lang_{DA} = \Lang_3$
+  
+
+  \begin{te}Ha $L\in\Lang_3$, akkor $\A_*^L$ VDA, mely minden $L$-et elfogadó VDA állapotszámánál nem nagyobb
+    állapotszámú. Sőt, több is igaz: $\A_*^L$ az $L$-hez készíthető minimális állapotszámú automata.
+  \end{te}
+  
+  \subsection{$\A_*^L$ előállítása $L$ egy VDA-jából}
+  
+  Legyen $\A = \left<Q,T,\delta,q_0,F\right>$ egy VDA
+  \begin{de}[összefüggő]
+    $\A$ összefüggő $\iff Q_{\text{össz}}=Q$ (minden állapot elérhető)
+  \end{de}
+
+  Ha nem összefüggő, akkor összefüggővé kell alakítani:\\
+  $\A_{\text{össz}} = \left<Q_{\text{össz}},T\delta_{|Q_{\text{össz}}},q_0,F\cap Q_{\text{össz}}\right>$\\
+  $\A_{\text{össz}}$ összefüggő és $L(\A_{\text{össz}}) = L(\A)$\\
+  $Q_{\text{össz}}$ előállítása fokozatos közelítéssel történik
+  
+  \begin{de}[redukált]
+    $\A$ redukált $\iff L(\A,q) = L(\A, q') \Leftrightarrow q=q'$.\\
+    Itt $L(\A,q)$ a $q$ állapotra vonatkozó maradék.
+  \end{de}
+
+  
+  Ha $\A = \left<Q,T,\delta,q_0,F\right>$ egy VDA, akkor ($\sim$ az ekvivalenciát jelenti)
+  \[q\sim q'\iff L(\A,q) = L(A,q') \iff \forall u\in T^* \left(\delta(q,u) \in F \Leftrightarrow \delta(q',u) \in F\right)\]
+  $\A$ redukált $\iff (q\sim q' \Leftrightarrow q=q')$\\
+  $\sim$ ekvivalenciareláció (reflexív, szimmetrikus, tranzitív)\\
+  $\sim$ jobb kongruencia: $q\sim q' \nn \forall t\in T\colon \delta(q,t) \sim \delta(q',t)$. Szavakra hasonlóan.\\
+
+  \noindent $\A_{\text{red}} = \left<\{C_q\}_{q\in Q}, T, \delta', C_{q_0}, F'\right>$\\
+  $C_q$ egy osztály\\
+  $\delta'(C_q,t) = C_{\delta(q,t)}$\quad reprezentánsokkal definiált\\
+  $F'=\{C_q \mid C_q\cap F \neq \emptyset\}$
+  
+  $\delta'$ jól definiált, ugyanis:\\
+  $C_q = C_q' \nn \delta'(C_q,t) = C_{\delta(q,t)}=C_{\delta(q',t)}=\delta(C_{q'},t)$
+
+  (Áll:) $\A_{\text{red}}$ redukált és $L(\A_{\text{red}}) = L(A)$
+  
+  \begin{te}[Unicitás]Legyenek $A_1,\,A_2$ öf, redukált, ugyanazt a nyelvet elfogadó VDA-k. EKKOR $A_1\cong A_2$.
+    \begin{gather*}
+      A_1 = \left<Q_1,T,\delta_1,q_0^1,F_1\right>\\
+      A_2 = \left<Q_2,T,\delta_2,q_0^2,F_2\right>\\
+      A_1 \cong A_2 \iff \exists \vfi\colon Q_1\to Q_2 \text{ izomorfizmus (művelettartó bijekció): }\\
+      \vfi(q_0^1) = q_0^2, \ \vfi(F_1) = F_2\\
+      t\in T ,\ q\in Q_1 \quad \vfi(\delta_1(q,t)) = \delta(\vfi(q),t)	
+    \end{gather*}
+  \end{te}
+
+  \begin{kov}
+    $\A_*^L$ minimális számú automata $L$-hez, amely összefüggő és redukált is. Egy tetszőleges $L$-hez készített $A$
+    VDA-ból kiindulva redukálttá és összefüggővé alakítva az unicitás tétel alapján kapjuk, hogy $\A_*^L\cong A$.
+  \end{kov}
+  \begin{megj}Összefüggővé alakítás rekurzívan: $\{ q_0\}$ kezdetben;\\$\Phi(A) := A\cup \{ q' \}$, ha $\exists q\in A, 
+    t\in T\colon q' = \delta(q,t)$
+
+    Ekvivalencia kezdeti közelítése: $q \thicksim q' \iff (q\in F \Leftrightarrow q'\in F)$. Finomítás:\\
+    $q\, \Phi(\varrho)\, q' \iff \forall t \in T\cup \{\epsilon \}: \delta(q,t)\varrho \delta(q',t)$.  Az $i$ hosszú szavakra a
+    következő vonatkozik: $\Phi^i(  \thicksim)$
+    
+    Mindkét közelítés egy idő után már nem változik.
+  \end{megj}
+  
+  
+  \subsection{Algoritmikusan eldönthető problémák harmadik típusú nyelveken}
+  \begin{te} Legyenek $L,L_1,L_2\ (\subseteq T^*)\in \Lang_3$ tetszőleges nyelvek, $u\in T^*$ tetszőleges szó. Ekkor a
+    következő problémák algoritmikusan eldönthetőek.
+    \begin{enumerate}
+    \item $u\in L$
+    \item  $L\neq \emptyset$
+    \item $|L| = w_0$
+    \item  $L_1\subseteq L_2$
+    \item $L_1=L_2$
+    \end{enumerate}
+  \end{te}
+  
+  \subsection{2. típusú nyelvek}
+  $G= \left< T, N, \szabalyok, S \right>\in \Nytan_{\text{kit}\,i}$ tetszőleges nyelv
+  \begin{de}[szintaxisfa] A $t$  $G$ feletti szintaxisfa olyan nemüres fa, mely:
+    \begin{enumzjb}
+    \item végpontjai (levelek) $T\cup N \cup \{\epsilon\}$ elemeivel, belső csúcsai $N$ elemeivel vannak címkézve, ahol
+      az $\epsilon$ cimkéjű leveleknek nincsen testvérük.
+    \item Ha 1 pont címkéje $A$, a gyerekeit balról jobbra összeolvasva kapott szó $q$, akkor\\ $A\to q \in \szabalyok$
+    \end{enumzjb}
+  \end{de}
+  Vagyis a $G$ nyelvtanbeli levezetés szerekezetét tükrözi
+  
+  \begin{al}
+    $Z\in T\cup N\cup \{\epsilon\},\ \alpha\in (T\cup N)^*$ tetszőleges jel ill. szó.\\
+    $Z\xrightarrow[G]{*}\alpha\iff \exists t\ G$ feletti szintaxisfa, melynél $\front(t) = \alpha$ (leveleit összeolvasva)
+  \end{al}
+
+  \begin{de}[Legbal/legjobb levezetés] A legbal levezetés azt jelenti, hogyha a $j$. pozición történik helyettesítés,
+    akkor az $1\ldots j-1$ poziciókon lévők már kész vannak. Legjobb: hasonlóan
+  \end{de}
+
+  \begin{ko}
+    $Z\in T\cup N\cup \{\epsilon\},\ \alpha\in (T\cup N)^*$ \\
+    $Z\xrightarrow[G]{*}\alpha\ \nn\  Z\xrightarrow[G,lb]{*}\alpha \land Z\xrightarrow[G,lj]{*}\alpha$
+  \end{ko}
+
+  \begin{te}[Nagy Bar-Hillel lemma]
+    Tetszőleges $L\in \Lang_2\ \exists p:= p(L) > 0,\ q:=q(L)>0$ egész konstansok, hogyha $u\in L$ és $l(u)>p$, EKKOR
+    $\exists u = xyzvw$ felbontása a következő tulajdonságokkal
+    \begin{enumzjr}
+    \item $yw\neq \epsilon$
+    \item $l(yzv) \leq q$
+    \item $\forall i\colon xy^izv^iw\in L$
+    \end{enumzjr}
+  \end{te}
+  
+  \subsection{Veremautomaták}
+  
+  $\mathcal {V} = \left< Q, T , \Sigma_1,\ldots,\Sigma_r, \delta, q_0, \sigma_0^1,\ldots, \sigma_0^r, F\right>$ egy
+  veremautomata,\\
+  $Q$ az állapothalmaz,\\
+  $\Sigma_i$ a veremábécé (több is lehet)
+  $q_0$ a kezdőállapot\\
+  $\delta_0^i$ a veremkezdő szimbólum\\
+  $\delta\colon Q\times (T\cup \{\epsilon \} \times \Sigma_1\times\dotsb\times \Sigma_r\to 2^{Q\times\Sigma_1
+    \times\dotsb\times \Sigma_r}$\\
+  $\forall (q,t,\sigma_1,\ldots, \sigma_r) \in D_\delta\colon |\delta(q,t,\sigma_1,\ldots, \sigma_r)| < \omega_0$
+  
+
+  Egy konfiguráció, ahol $\alpha_i$ jelzi az $i$. verembeli szót:\\
+  $[ q, u, \alpha_1,\ldots,\alpha_3]$.\\
+  Egy átmenet (igazából a nyíl vége egy függőleges szakasz...):
+  \begin{gather*}
+    [q,v, \alpha_1,\dotsc,\alpha_r] \xrightarrow[\mathcal V]{} [q',w, \beta_1,\dotsc,\beta_r]\\
+    \exists t\in T\cup \{\epsilon\}\ \text{ olvasott jel},\  \exists (\sigma_1,\dotsc,\sigma_r)\in
+    \Sigma_1\times\dotsb\times\Sigma_r \text{ (veremtetők)}\\
+    \exists  (\gamma_1,\dotsc,\gamma_r),\,(\tau_1,\dotsc,\tau_r)\in \Sigma_1^*\times\dotsb\times\Sigma_r^*\\
+    v= tw,\ \forall i\in [1..r]\colon \alpha_i = \delta_i\gamma_i,\ \beta_i = \tau_i\gamma_i,~
+    \delta(q,t,\sigma_1,\dotsc,\sigma_r)\owns (q',\tau_1,\dotsc,\tau_r)\\
+    u\in T^*\quad k_0(w) = [q_0,u,\sigma_0^1,\dotsc,\sigma_0^r]\qquad\text{(kezdeti konfiguráció)}\\
+    [ f,\epsilon,\alpha_1,\dotsc,\alpha_r]\ f\in F\quad\text{ végállapot, elfogadó konfiguráció}\\
+    [ q,\epsilon,\epsilon,\alpha_2,\dotsc,\alpha_r]\ f\in F\quad\text{ üres veremmel elfogadó állapot}
+    \intertext{ $\xrightarrow[v]{*}$ a $\xrightarrow[v]{}$ reflexív, tranzitív lezártja}
+    L^\epsilon(v) = \{ u\mid u\in T^* \land \exists k_0(u)\xrightarrow[v]{*} k\colon k \text{ üres veremmel elfogadó
+      konfiguráció} \}\\
+    L^f(v) = \{ u\mid u\in T^* \land \exists k_0(u)\xrightarrow[v]{*} k\colon k \text{ végállapot-elfogadó
+      konfiguráció}\}\\
+    \Lang_{rV}^\epsilon = \{ L \mid \exists v_r \text{ verem}\colon L^\epsilon(v) = L\} \quad r\geq 1\\
+    \Lang_{rV}^f = \{ L \mid \exists v_r \text{ verem}\colon L^f = L\}  \quad r\geq 1    
+  \end{gather*}
+  
+  \begin{te} $\Lang_{rV}^\epsilon = \Lang_{rV}^f$
+  \end{te}
+  
+  \begin{te}
+    \begin{gather*}
+      \Lang_{0V} = \Lang_3\\
+      \Lang_{1V} = \Lang_2\\
+      \Lang_{2V} = \Lang_3
+    \end{gather*}
+  \end{te}
+  
+  \subsection{A 2.típusú nyelvek zártsági tulajdonságai}
+  Zártak az unió, konkatenáció és lezárás műveletére.
+  
+  \begin{al}
+    $\Lang_2$ nem zárt a $\cap$ és a komplementer műveleteire.
+  \end{al}
+  
+  \begin{biz}
+    \begin{gather*}
+      L_1 := \{ a^nb^nc^m \mid n,m\geq 0\}\in \Lang_2\\
+      L_2 := \{ a^mb^nc^n \mid n,m\geq 0\}\in \Lang_2\\
+      L_1\cap L_2= \{ a^nb^nc^n \mid n \geq 1\} \not\in \Lang_2\quad \text{Nagy BH lemma miatt}
+      \intertext{Tegyük fel, hogy zárt a komplementerre}
+      L_1\cap\L_2 = \overline{\overline{L_1}\cup \overline{L_1}} \nn \text{ zárt a metszetre is, ez pedig ellentmondás}
+    \end{gather*}
+  \end{biz}
+
+  \begin{de}[Determinisztikus] A $\Verem$ $r$-verem determinisztikus, ha minden konfigurációjának legfeljebb egy
+    rákövetkezője van. Az általa felismert nyelv $\Lang_{r\,\text{DV}}$.
+  \end{de}
+  
+  Egy $v$ 1-verem esetén ez a következőt jelenti:
+  \begin{enumzjr}
+  \item $|\delta(t,q,\sigma)|\leq 1\qquad \forall t \in T\cup\{\epsilon\},\ q\in Q,\ \sigma \in \Sigma$
+  \item $\delta(t,q,\sigma) \neq\emptyset \nn\ \forall t\in T\colon \delta(q,t,\sigma)=\emptyset$
+  \end{enumzjr}
+  
+  \begin{te} $\Lang_{1\,\text{DV}} \subsetneqq \Lang_{1\,V}$
+  \end{te}
+  \begin{biz} Belátható, hogy a determinisztikus 1-vermekben elfogadott nyelvek osztálya zárt a komplementerképzésre
+    nézve. Ebből következik az állítás.
+  \end{biz}
+  
+  \subsection{A szóprobléma eldöntése $\Lang_2$-n}
+  $L\subseteq T^*,\,L\in \Lang_2, u\in T^*$\\
+  Eldönthető: $u\in L$. Ezt $L$ valamely $G$ 2-es típusú nyelvtanjára döntjük el: $u\in L(G)$
+  
+  Tfh. $G$  Chomsky-normálforma nyelvtan adott. Ha nem ilyen, akkor erre az alakra hozható a hosszához képes konstans idő
+  alatt.
+  
+  \subsubsection{Cocke-Younger-Kasam algoritmus}
+  Hatékonysága: $O(l(u)^3)$ idő alatt eldönti $u\in L(G)$-t.
+  
+  \begin{gather*}
+    u\in L(G) \iff S\xrightarrow[G]{*}u\\
+    u = t_1 t_2 \ldots t_n\quad n := l(u)\\
+    H_{ij} := \{ A \mid A\in N \land A \xrightarrow[G]{*} t_i \ldots t_j,\ 1\leq i \leq j \leq n\}
+    %
+    \intertext{Ekkor}
+    u\in L(G) \iff S \in H_1n \text{ konstans algoritmus}    
+  \end{gather*}
+  
+  Ami időigényes, az a $H_{ij}$-k megkonstruálása
+  
+  Szabályok alkalmazása:
+  \begin{enumerate}
+  \item kes
+  \item $A\to BC\quad A,B,C\in N$
+  \item $A\to t\quad t\in T$
+  \end{enumerate}
+  \begin{gather*}
+    H_{ii} = \{A \mid A \to t_i \in \szabalyok\}
+    \intertext{$i<j$, $A\in H_{ij}$}
+    A \xrightarrow[G]{*} t_i\ldots t_j\\
+    A  \to B|C \xrightarrow[G]{}t_i\ldots t_k|t_{k+1}\ldots t_j \iff \exists A\to BC\in \szabalyok \land \exists B
+    \xrightarrow[G]{*} t_1\ldots t_jk \land\\
+    k\in [1,\ldots,j-1]\ C\xrightarrow[G]{*} t_{k+1}\ldots t_j
+    \intertext{Azaz  $i<j$ esetén}
+    A \in H_{ij} \iff \exists A\to BC\land \exists k\in[i..j-1]\colon B\in H_{ik} \land C\in H_{k+1\,j}
+  \end{gather*}
+
+  \newpage
+  \section{Az adatbázis-kezelő rendszerek fogalmai}
+  \subsection{Adatbázis, adatbázis-kezelés}
+  Az \emph{adatbázis} hosszú ideig (pl évekig) tárolt információk
+  összessége. Ezt egy \emph{adatbázis-kezelő rendszer} (DBMS, Database Management System, \emph{adatbázisrendszer}) kezeli.
+  
+  A következőket várjuk el egy adatbázis-kezelő rendszertől:
+  \begin{itemize}
+  \item új adatbázis létrehozása a \emph{séma} (az adatok logikai struktúrájának) \emph{DDL} nyelven történő megadása
+    által
+  \item adatok lekérdezése és módosítása \emph{DML} nyelven
+  \item nagy mennyiségű adat  hosszú ideig történő tárolása, valamint az adatok biztonságának garantálása (akár
+    biztonsági mentésekkel)
+  \item jogosultságkezelés (ki milyen adathoz férhet hozzá, és mit tehet vele: pl SELECT, vagy SELECT + INSERT, stb).
+    hatékonyság (lekérdezés és módosítás esetén)
+  \item egyidejű hozzáférés biztosítása
+  \end{itemize}
+  
+  A fentebb említett nyelvek:
+  \begin{itemize}
+  \item[\emph{DDL}] Data Definition Language: adatbázis szerkezetét határozza meg
+  \item[\emph{DML}] Data Manipulation Language (elsősorban insert, delete, update)
+  \item[\emph{QL}] Query Language
+  \item[\emph{SQL}] Structured Query Language
+  \end{itemize} 
+  
+  \subsection{Alapfogalmak}
+  \paragraph{Sémák, előfordulások}
+  A séma a egyrészt  adatbázis logikai szerkezetetét határozza meg. Relációs adatbázis esetén ez egy-egy tábla sorszerkezetét
+  jelenti (relációs séma). A táblák oszlopainak fejlécei az \emph{attribútumok}, ezek az oszlop nevét, és az abban
+  szereplő értékek típusát (jellegét) határozzák meg.
+  
+  Másrészt az \emph{adatbázissémát} jelenti, amik táblák, nézettáblák (\emph{view}), megszorítások
+  (\emph{constraint}-ek), tartományok, eljárások, csomagok összessége. Lényegében ez is egy adatbázis, de egy kicsit
+  kevesebb annál.
+
+  Egy-egy sémához \emph{előfordulások} tartoznak, ezek a konkrét értékek.
+
+  \paragraph{Katalógusok} Sémák csoportjai, az egységes terminológia biztosítása a céljuk. Egy további sémát tartalmaz a
+  katalógus, ami információkat tárol a többi katalógusbeli sémáról (\texttt{INFORMATION\_SHEMA} a neve). Ezáltal egy-egy
+  tábla teljes neve a következőhöz hasonló alakú: \texttt{FilmKatalógus.FilmSéma.Film}.
+  
+  
+  \subsection{Adatmodell szintjei}
+  \emph{Adatmodell}: az adatok formátumát és jelentését leíró fogalomrendszer. Ennek három szintje:
+  \begin{itemize}
+  \item[\emph{fizikai szint}] az adatfájlok tárolási és fizikai megvalósítási módját adja meg
+  \item[\emph{fogalmi szint}] adatbázis logikai felépítésének leírása: milyen adatok találhatóak az adatbázisban, és
+    hogy az adatok között milyen kapcsolatok vannak.
+  \item[\emph{alkalmazói szint}] (részsémák szintje) megmondja, hogy kívülről hogyan lehet elérni az adatbázist. Ezt
+    látják az adatbázishoz kapcsolódó programok.
+  \end{itemize}
+
+
+  \begin{tabular}{@{}lll@{}} \toprule
+    \multicolumn{1}{c}{szint} & \multicolumn{1}{c}{séma} & \multicolumn{1}{c}{előfordulás}\\
+    \midrule
+    alkalmazások & főátló összege & $1+5=6$\\
+    fogalmi & $A$ $2\times 2$-es mátrix & $\begin{pmatrix}1 & 2\\ 3 & 5\end{pmatrix}$\\
+      fizikai & sorfolytonos tárolás & $1\ 2\ 3\ 4\ 5$\\
+      \bottomrule
+  \end{tabular}\\
+  
+  A \emph{fizikai adatfüggetlenség} akkor teljesül, ha a fizikai szint módosítható a többi szint változtatása
+  nélkül. Például mátrix sorfolytonos tárolása helyett oszlopfolytonos.
+  Ugyanakkor a \emph{logikai adatfüggetlenség} szerint a fogalmi szint bővítése esetén az alkalmazások szintje
+  változatlan (pl újabb tábla hozzáadása).
+  
+  \subsection{Jogosultságok}
+  Az SQL2 megköveteli a jogosultságkezelést, ez lényegében felhasználóneveket és a hozzájuk tartozó jogokat jelenti. Van
+  egy speciális engedélyazonosító, amivel mindenki rendelkezik, a \texttt{PUBLIC}, pontosabban bárki
+  használhatja. Alapvetően hatféle jog van: \texttt{SELECT}, \texttt{INSERT}, \texttt{DELETE}, \texttt{UPDATE},
+  \texttt{REFERENCES}, \texttt{USAGE}. Az első négy relációkra (alaptáblák, nézettáblák) vonatkozik, az ötödik egy adott
+  relációra történő hivatkozást tesz lehetővé egy megszorításban. Az utolsó pedig azt jelzi, hogy a vele felruházott
+  személy az adott sémaelemet használhatja saját adatbáziselemeinek definiálásakor.
+  
+  Ezeket a jogosultságokat meg lehet adni, de vissza is lehet vonni.
+
+
+  \subsection{Az adatbázis-kezelő részei}
+  Egy adatbázis-kezelő a következő (hierarchikus) részekből áll:
+  \begin{compactitem}
+  \item Lekérdezés-feldolgozó (ez adja a felületet a külvilág felé)
+  \item Tárkezelő (fájl- és puffer/gyorsítótár-kezelő)
+  \item Adatok, metaadatok fizikai tárolója
+  \item Tranzakciókezelő - külön rész, az első kettővel kommunikál
+  \end{compactitem}
+  
+  \begin{picture}(220,225)(-5,-5)
+    \thicklines
+    \put(0,0){\line(1,0){210}}
+    \put(0,0){\line(0,1){170}}
+    \put(0,170){\line(1,0){210}}
+    \put(210,0){\line(0,1){170}}
+    \thinlines
+
+    \put(30,185){\framebox(80,30){}}
+    \put(30,200){\makebox(80,10)[tc]{Felhasználók és}}
+    \put(30,188){\makebox(80,10)[tc]{programok}}
+
+
+    \put(10,130){\framebox(80,30){}}
+    \put(10,145){\makebox(80,10)[tc]{Lekérdezés-}}
+    \put(10,133){\makebox(80,10)[tc]{feldolgozó}}
+
+    \put(10,70){\framebox(80,30){Tárkezelő}}
+
+    \put(10,10){\framebox(80,30){}}
+    \put(10,25){\makebox(80,10)[tc]{Fizikai}}
+    \put(10,13){\makebox(80,10)[tc]{adattároló}}
+
+
+    \put(120,100){\framebox(80,30){}}
+    \put(120,115){\makebox(80,10)[tc]{tranzakció-}}
+    \put(120,103){\makebox(80,10)[tc]{kezelő}}
+
+    \thicklines
+    \put(60,173){\vector(1,2){6}}
+    \put(60,173){\vector(-1,-2){6}}
+
+
+    \put(50,115){\vector(0,1){12}}
+    \put(50,115){\vector(0,-1){12}}
+
+    \put(50,55){\vector(0,1){12}}
+    \put(50,55){\vector(0,-1){12}}
+
+    \put(105,95){\vector(3,1){12}}
+    \put(105,95){\vector(-3,-1){12}}
+
+    \put(105,135){\vector(3,-1){12}}
+    \put(105,135){\vector(-3,1){12}}
+  \end{picture}
+
+
+  Valójában bonyolultabb a szerkezet, mert például az indexkezelő, naplózó, konkurenciakezelő részek nem lettek
+  megemlítve.
+  
+  A lekérdezés-feldolgozó fordítja le a lekérdezést, a végeredmény egyszerű fájlműveletek sorozata, adminisztrációs
+  részekkel. Sok lekérdezés optimalizálható, ennek elvégzése is a feldolgozó feladata.  A tranzakció-kezelő feladata a
+  zárolások kezelése, a tranzakciók ACID tulajdonságának, valamint a holtpontmentesség biztosítása (holtpont
+  feloldása). Ez utóbbi pl. egy tranzakció törlésével megoldható, így a többi tranzakció már folytatható.
+  
+  Az \emph{ACID} tulajdonság jelentése (ezek feltételek!):
+  \begin{compactitem}
+  \item \emph{oszthatatlanság} (\emph{A}tomicity), vagyis egy tranzakció vagy teljesen  lefut, vagy egyáltalán nincsen
+    hatása az adatokra.
+  \item \emph{elkülönítís} (\emph{I}solisation), vagyis a tranzakciók interferenciamentesek
+  \item \emph{tartósság} (\emph{D}urability), vagyis ha egy tranzakció befejeződött, akkor nem veszhet el az adatbázisra
+    kifejtett hatása
+  \item \emph{konzisztencia} (\emph{C}onsistency), vagyis az adatok ellentmondásmentesek.
+  \end{compactitem}
+  
+  \subsection{Fizikai fájlszervezés}
+  Alapvetően három szempontnak kell megfelelnie a fizikai tárolásnak, amely három egyszerre nem teljesülhet, csak
+  kettő. Ezek a következők:  gyors lekérdezés, gyors módosítás, és kis helyigényű tárolás.
+
+  Egy-egy adatbázist más szempont szerint is vizsgálhatunk, hogy dinamikus vagy statikus-e. Ha statikus, akkor kevés
+  módosítás történik, míg nagyon sok lekérdezés, ezért adódik, hogy a lekérdezésre és a kis tárigényre optimalizált
+  lehet az adatok tárolása. Dinamikus adatbázis esetén sokkal gyakoribb a módosítás, és akár ritka is lehet a
+  lekérdezés, ekkor a módosíthatóság kap elsődleges szerepet.
+
+  
+  \subsubsection{Fizikai adatbázis}  A merevlemez, mint háttértároló blokkos eszköz, azaz csak blokkonként lehet olvasni
+  belőle. Ezért az adatbázis  elérésének gyorsaságát a kiolvasott-, illetve módosított blokkok számával lehet
+  megadni. Maga az adatbázis fájlokból áll, amik rekordokból állnak. Mivel egy rekordot nem érdemes úgy tárolni, hogy
+  átlóg két blokk között, ezért lesznek hézagok a fájlokban. Ha a blokkméret $B$, a rekodméret pedig $R$, akkor egy
+  blokkban legfeljebb $\lfloor \frac{B}{R} \rfloor =: bf$ rekord tárolható, ahol $bf$ a blokkolási faktort jelenti. A
+  továbbiakban a blokkok száma legyen $b$, a rekordok száma pedig $r$.
+
+  Ekkor megvizsgálhatunk többféle tárolási módot.
+  
+  \paragraph{Kupac (heap)} - rendezetlen. A végére szúrunk be, így az \texttt{INSERT} műveletigénye egy olvasás, mivel a
+  \emph{blokkmutató}-ra szükség van, vagyis hogy hol van a vége az adatbázisnak, valamint a rekord kiírása. A
+  \texttt{DELETE} egy keresést és egy írást jelent (itt a \emph{törölt} állapot jelzése történik). A módosítás is egy
+  keresés és egy írás műveletből áll. Egy $A=a$ feltételnek megfelelő keresés a legrosszabb esetben $\lceil
+  \frac{r}{bf}\rceil$, átlagos esetben pedig $b/2$ a kiolvasott rekordok száma. 
+  
+  \paragraph{Rendezett fájl} Ha valamelyik mező szerint rendezett az adatbázis adott fájlja, akkor a benne történő
+  keresés logaritmikus, azaz átlagosan $\log_2b$ blokk kiolvasását igénylik. A módosítás ugyanez, és még egy írás,
+  viszont a törlés és a beszúrás minden esetben a rekordok fizikai mozgatásával jár, ami átlagos esetben $\frac b2$
+  írást jelent. Ebben az esetben is javítható a törlés egy törölt állapotot jelző bit módosításával, viszont ezzel most
+  is nagyobb lesz az adatbázis mérete.
+
+  Amennyiben a fájl végére, rendezetlen területre történik a beszúrás, és csak később kerül a helyére a rekord (azaz a
+  beszúrások naplózottak), akkor konstans időt besz igénybe a művelet elvégzése. Ellenben a keresés kicsit megnő, mivel
+  most $\log_2b + 1$  (ha csak egy rendezetlen blokk van). Az adatok helyrevitelének műveletigénye átlagosan $b\log_2b$,
+  vagyis újra kell rendezni.
+
+  \paragraph{Szabad helyet tartalmazó blokkok} Ha nem feltétel, hogy a blokkok telítettek legyenek, akkor egy bizonyos
+  rekordszám felett szétvágható a blokk, így több szabad hely lesz. Alapvetően kétféleképpen lehet tárolni az adatokat:
+  blokkon belül rendezetlenül, ez esetben indexeléssel önnyíthető meg a keresés, vagy pedig az egész fájl rendezett
+  rekordokat tartalmaz, csak vannak szabad helyek a blokkok végén. Ez utóbbi esetben a keresés még mindig $\log_2b$
+  nagyságú, csak most a korábbihoz képest átlagosan kétszer annyi blokk van (amennyiben félig telített blokkok tárolása
+  a célszerű). A beszúrás, módosítás, törlés is egy keresést és egy írást igényel.
+
+  \paragraph{Hasító (hash) fv használata} Ebben az esetben $M$ blokkláncra felfűzött blokkokban tárolódnak az adatok,
+  egyenletes eloszlás$\mod(M)$ vett értékkel biztosítható. $h(a)$ a hasítófv, ekkor $h(a)\in\{\,1..M\,\}$ Átlagosan
+  $\frac{b}{M} +k$ olvasást igényel, ahol $k$ az adott blokkláncra felfűzött blokkok száma. Ezáltal $M$-szeresére
+  gyorsítható a keresés. A beszúrás a lánc utolsó blokkjának végére történik.
+
+  \subsubsection{Indexelés} Indexelt adatbázis(tábla) esetén az egyes rekordokat könnyebb megtalálni, hiszen az adott
+  rendezés szerinti értéket kell csak tárolni, és a rekord fizikai helyét a fájlban (háttértáron). Hátránya viszont a
+  megnövekedett tárigény.
+
+  Az indexelés csak akkor hatékony, ha $bf_I >> bf$, vagyis sokkal több index-rekord fér el egy blokkban, mint normál
+  rekord. Itt a rekordok száma a főfájl blokkjainak száma, azaz $r_I = b$. A keresés most $\log_2{bf_I} + 1$ blokk
+  kiolvasását igényli (átlagos esetben). Mivel beszúrás esetén az indexnek konzisztensnek kell maradnia, ezért
+  ellenőrizni kell ezt is. Ebben az esetben az a megfelelő, ha mind az indexblokkokban, mind a főfájl blokkjaiban van
+  valamennyi szabad hely.
+
+  \paragraph{Elsődleges index} Ha a főfájl rendezett, akkor érdemes csak azt megjegyezni, hogy melyik érték szerepel a
+  blokk első rekordjában. Ez különösen hasznos akkor, ha nagyok a rekordok, mert könnyebben megtalálható egy-egy adott
+  rekord. Ezáltal egy \emph{ritka index}et kapunk: nincs minden érték benne.
+  
+  \paragraph{Másodlagos index} Indexelésre szükség lehet akkor is, ha a főfájl az \emph{elsődleges kulcs} szerint
+  rendezett, de gyakori a keresés egy másik mező szerint is (ez \emph{másodlagos kulcs}). Egyszerre kétféle mező szerint
+  rendezetten  nem tárolható az adatbázis, ezért a megoldás az indexfájl bevezetése, ahol az adott mező értéke és a
+  hozzá tartozó elsődleges kulcs tárolható. Ez által a másik index segítségével gyorsan megtalálható a keresett rekord.
+  
+  Mivel minden érték megtalálható ebben az indexben, \emph{sűrű index}ről beszélünk. A helyigény $b_I = \lceil
+  \frac{r}{bf_I} \rceil$ blokk.
+  
+  \paragraph{Többszintű index} Amennyiben az elsődleges vagy másodlagos index már túl sok blokkból áll, javítható a
+  keresés további indexek bevezetésével, amik az eredetit indexelik. Ez esetben faszerekezetű az index, legfelső szinten
+  egyetlen blokk található.
+
+  \paragraph{B-fa} A B-fa is többszintű index. Több nevezetes változata van. Ha $p$ jelzi azt, hogy minden blokknak
+  legalább $p$-ed része telített, akkor $p=\frac12$ esetén B$^+$-fáról, $p=\frac23$ esetén pedig B$^*$-fáról beszélünk.
+
+  \newpage
+  \section{Adatmodellezés}
+  \subsection{Relációs adatmodell}
+  
+  Alapvetően ezen a modellen alapulnak a mai adatbázisrendszerek. A \emph{reláció} az adatok kétdimenziós táblában
+  történő elrendezését jelenti.
+  \paragraph{Attribútumok, sémák} Az \emph{attribútumok} a relációk fejlécében találhatóak. Az attribútum határozza meg az adott
+  oszlop jelentését. Bár általában nem fontos a típus, az is az attribútum tulajdonsága, akárcsak a neve.
+  
+  A \emph{relációs séma} a reláció nevéből és az attribútumokból áll. Hasonló elnevezése a \emph{relációséma}. Általános
+  alakban ez $R(A_1\,\ldots,A_n)$. Itt $R$ a séma neve, $A_i$-k az attribútumok. Ha nem fontos az attribútum neve, akkor
+  az $i.$ attribútum: $\$i$.  Ennek lehetséges értékeit $\dom (A_i)$-vel jelölhetjük.
+  
+  Példa: \texttt{Szeret(név, mit)} a séma. Ekkor ennek egy  előfordulása a következő:
+
+  \texttt{
+    \begin{tabular}{@{}cc@{}}
+      név & mit \\ \midrule
+      Micimackó & méz\\
+      Füles & fű
+  \end{tabular}}
+  
+  A relációsémát nagybetűvel (pl $R$), az előfordulást kisbetűvel  (pl $r$) jelöljük. Ekkor nyilvánvalóan teljesül a következő:
+  $r\subseteq \di \mathop{\times}_{i=1}^n \dom (A_i)$
+
+  Az \emph{adatbázisséma} vagy relációs adatbázisséma egy vagy több  relációsémából áll. Ennek jelölése:
+  $D(R_1(\ldots),\ldots,R_n(\ldots))$, előfordulása pedig $d=(r_1,\ldots,r_n)$
+
+  \paragraph{Sorok} A reláció első sora mindig az attribútumokat tartalmazza. Mégsem ezt szokás \emph{sor}nak nevezni
+  (\emph{tuple}, magyarul sajnos ugyanaz a szó) hanem azokat a sorokat, amikben értékek jelennek meg. Minden sor
+  komponensekből áll, például a fenti reláció első sorának első komponense ``Micimackó''.
+
+  Ha külön írjuk le a sorokat, akkor veszzővel és zárójelezéssel írjuk le, például így:\\
+  \texttt{(Micimackó, méz)}
+  
+  Mivel a relációk sorokból álló halmazok, ezért minden sor csak egyszer szerepelhet. Ha egy relációban (név, cím)
+  párokat tárolunk, előfordulhat, hogy több személynek is azonos a neve és a címe. Ilyenkor még egy attribútumot érdemes
+  bevezetni, amivel már egyedivé lehet tenni a sorokat (ez lesz a reláció \emph{kulcsa}).
+  
+  \paragraph{Értéktartományok} Minden sor minden komponense atomi típusú. Emiatt néha az összetartozó attribútumokat is
+  szét kell szedni, ilyen egy ember neve, mivel keresztnév és vezetéknév is tartozik hozzá. Ez két string típusú
+  attribútum, elemiek, egyben pedig már nem lennének azok. Az értéktartomány $\dom(A_i)$, és egy $A_i$ attribútum csak
+  ebben az értéktartományban szereplő értéket vehet fel.
+
+  Bizonyos esetekben nem lehet tudni egy komponens értékét, itt megengedett a null éréték (extremális érték, $\bot$).
+
+  \subsection{Funkcionális függőség}
+  Informálisan: egyes attribútumok értékéből meghatározható más attribútumok értéke. Az elnevezés eredete: olyan, mint
+  egy függvény, de nincsen megadva, hogy hogyan kell kiszámolni az új attribútumokat mások ismeretében.
+
+  \begin{de}[Funkcionális függőség] Ha egy reláció két sora megegyezik az $A_1,\ldots,A_k$ attribútumokon, akkor meg
+    kell egyezniük egy másik attribútumon, $B$-n is. Ezt $A_1,\ldots,A_n\rightarrow B$-vel jelöljük. Jelentése:
+    $A_1,\ldots,A_n$ funkcionálisan meghatározza $B$-t.
+  \end{de}
+  
+  Ezek több attribútumot is meghatározhatnak, így általánosan is megfogalmazható, formális jelöléssel így:
+  \begin{gather*}
+    X,Y\subset \{ A_1,\ldots,A_n\}\\
+    X\n Y \text{ funkcionális függőség}\\
+    r \text{ kielégíti } X\rightarrow Y\text{-t, ha } \forall t_1, t_2\in r: (t_1[X] = t_2[X] \nn t_1[Y] =
+    t_2[Y])
+    \intertext{Azaz}
+    r \models X \to Y\\
+    r \in \sat(X \rightarrow Y)\\
+    \intertext{Ahol}
+    \sat(X \rightarrow Y) \text{ az $X\to Y$ funkcionális függőséget kielégítő előfordulások halmaza}
+    \intertext{Tehát $A_1\ldots A_n \to B_1\ldots B_m$ jelentése a következőkkel egyezik meg:}
+    A_1\ldots A_n \to B_1\ldots B_1\\
+    \vdots\\
+    A_1\ldots A_n \to B_1\ldots B_m
+  \end{gather*}
+
+  \noindent Ha $\mathcal F$ funkcionális függőségből áll, akkor még értelmezett: $\sat(\mathcal F)$. Ez a következőt
+  jelenti:\\
+  $\sat(\mathcal F) := \di\bigcap\limits_{F\in\mathcal F}\sat(F)$\\
+
+  \begin{de}[Armstrong axiómák]\ \\
+    \begin{enumAr}
+    \item Triviálisi függőség - mindig teljesül: $Y \subseteq X \text{ esetén } X\to Y$
+    \item Tranzitivitás: $X \to Y,\  Y\to Z \nn X \to Z$
+    \item $X\to Y \nn XZ \to YZ$
+    \end{enumAr}
+  \end{de}
+  
+  
+  A funkcionális függőségek az adatbázisséma részei, megszorítások (constraintek), és nem pedig a reláció részei.
+  
+  \paragraph{Reláció kulcsa} Egy vagy több attribútumból álló halmaz (jelöljük $\{A_1,\ldots,A_n\}$-nel) kulcs, ha
+  \begin{inparaenum}[\itshape a)]
+  \item ezek az attribútumok meghatározzák az összes többi attribútumot, aza nincs $R$-ben két olyan különböző sor,
+    ami minden $A_i$ attribútumon azonos értéket venne fel,
+  \item az  $\{A_1,\ldots,A_n\}$ semelyik valódi részhalmaza sem határozza meg a többi attribútumot (a kulcs
+    \emph{minimális}).
+  \end{inparaenum}
+
+  \emph{Szuperkulcsnak} nevezünk minden olyan attribútumhalmazt, mely tartalmaz kulcsot. Tehát minden kulcs egyben
+  szuperkulcs is.
+  
+  \emph{Elsődleges attribútum} az $A$ az $R$-en $\F$-re nézve, ha $A$ eleme az $R$ egy kulcsának.
+  
+  \subsubsection{Függőségi szabályok}
+  A definícióban megadott módon össze lehet vonni, szét lehet vágni szabályokat, hiszen ugyanarra (a szétvágott formára)
+  vonatkozik mindkét jelölés. Az axiómák is elhangzottak.
+  
+  
+  \begin{de}[Logikai következtetés] Az $\mathcal F$ függőségi halmazból \emph{következik} az $X\to Y$ függőség, ha
+    teljesül a következő: $\sat(\F) \subseteq \sat(X\to Y)$. Ennek jelölése: \\
+    $\mathcal F \models X\to Y$
+  \end{de}
+  
+  \begin{te}Az Armstrong-axiómák helyesek, azaz
+    \begin{enumerate}
+    \item $\forall r\colon r\in \sat(XY\to Y)$ 
+    \item $\sat(X\to Y)\subseteq\sat(XW\to YW)$
+    \item $\sat(X\to Y)\cap\sat(Y\to Z) \subseteq \sat(X\to Z)$
+    \end{enumerate}
+  \end{te}
+
+  \paragraph{Attribútumok lezártja} Legyen $A:=\{A_1,\ldots,A_n\}$ egy attribútumhalmaz, $\F$ pedig egy funkcionális
+  függőségeket tartalmazó halmaz. Az $A$ halmaz $\F$-beli funkcionális függősége szerinti lezártja egy olyan $A^+$-szal
+  jelölt attribútumhalmaz, amelyre teljesül, hogyha egy reláció eleget tesz minden $\F$-beli függőségnek, akkor eleget
+  tesz $A\to A^+$-nak is.
+  Ennek kiszámítása: legyen $X$ az eredményül kapott lezárt halmaz. Kezdetben $X=A$. Következő lépésben keresünk egy
+  olyan $B_1,\ldots,B_k\to C\in \F$ funkcionális függőséget, amelynél $C\not\in X$ és $\forall i: B_i\in X$. Ha nem
+  találunk ilyet, akkor kész. Ha van ilyen, akkor $C$-t hozzávesszük $X$-hez: $X := X \cup \{C\}$. Ezután megint a
+  2. lépés következik.
+
+  Az algoritmus véges sok lépés után leáll, mivel végessok funkcionális függőség van, és végessok attribútum.
+
+  \begin{de}[Levezetés] Az $\F$ függőséghalmaz feletti levezetésnek nevezzük\\ az $X_1\to Y_1,\ldots,X_n\to Y_n$
+    funkcionális függőségekből álló véges sorozatot, ha\\ minden $X_i\to Y_i$-re a következők egyike teljesül:
+    \begin{enumzjr}
+    \item $X_i\to Y_i \in \F$
+    \item $Y_i\subseteq X_i$ \emph{\small{(AR1)}}
+    \item az $i$. szabály a $j$. ($j<i$) szabály bővításe \emph{\small{(AR2)}} szerint, azaz $X_i=X_jW$, $Y_i=Y_jW$
+    \item valamely $k<l <i$ szabályokra \emph{\small{(AR3)}} tranzitivitási szabálya teljesül:
+      $X_i=X_k,\,Y_k=X_l,\,Y_l=Y_i$
+
+    \end{enumzjr}
+    Jele: $F\vdash X\to Y$
+  \end{de}
+
+
+  \paragraph{Függőségi halmaz lezártja} Egy-egy relációra nézve vannak \emph{adott} függőségek, amelyek kezdetben
+  megadottak, és vannak \emph{levezetett} függőségek, melyeket valamelyik szabály alkalmazásával, vagy az
+  attribútumhalmaz lezárásának alkalmazásával követlkeznek. E szabályok összessége egy funkcionális függőségi ahalmaz lezárása.\\
+
+
+  \noindent $\F^+ = \{\,X\to Y : \F \models X\to Y\,\}$\\
+  $\F^* = \{\,X\to Y : \F \vdash X\to Y\,\}$
+
+  \begin{te} $+$, $*$ lezárási operátor
+    \begin{enumzjr}
+    \item $\F^+\supseteq \F$
+    \item $\F\subseteq G\ \nn \ F^+ \subseteq G^+$
+    \item $(\F^+)^+ = \F^+$
+    \end{enumzjr}
+  \end{te}
+  
+
+  \begin{de} $X \subset U$ (Attribútumhalmaz)\\
+    $ X^{*(\F)} = \{ A \mid \F \vdash X\to A \}$
+  \end{de}
+  
+  \noindent $\F \vdash X\to Y\iff Y\subseteq X^{*(\F)}$\\
+  $\F\vdash X\to Y\iff \F\models X\to Y$
+
+
+  \begin{de}[Minimális fedés]
+    $\mathcal G$ az $\F$ minimális fedése, ha
+    \begin{itemize}
+    \item $\mathcal{G}^+ = \F^+$
+    \item $X\to Y \in \mathcal{G}$ esetén $|Y| = 1$
+    \item $X\to A \in \mathcal{G}$: $\{\mathcal{G}-\{X\to A\}\}^+ \neq \F^+$
+    \item $X\to A \in \mathcal{G}$, $Z\subsetneqq X$: $\{(\mathcal{G}-\{X\to A\})\cup \{Z\to A\}\}^+ \neq \F^+$
+    \end{itemize}
+  \end{de}
+
+  \noindent Algoritmus (MinFedés(F)):\\
+  \texttt{
+    \hspace*{0.3cm} INPUT: $\F$\\
+    \hspace*{0.3cm} $G:= \F$\\
+    \hspace*{0.3cm} ; Jobboldalak szétszedése és a felesleges szabályok elhagyása\\
+    \hspace*{0.3cm} foreach ($X\to Y\in G $ ahol $Y$ több attribútumból áll) do\\
+    \hspace*{0.7cm} $G  := G - \{X\to Y\}$\\
+    \hspace*{0.7cm} foreach ($A\in Y\land A\not\in X$) do\\
+    \hspace*{1.1cm} $G := G \cup \{ X\to A\}$\\
+    \hspace*{0.7cm} done\\
+    \hspace*{0.3cm} done\\    
+    \hspace*{0.3cm} ; Felesleges szabályok elhagyása (2): függőségi halmazra vonatk. lezárt\\
+    \hspace*{0.3cm} foreach ($X\to A\in G $) do\\
+    \hspace*{0.7cm} if ($A\in X^+$ az $G-\{X\to A\}$-ra vonatkozóan) then\\
+    \hspace*{1.1cm} $G := G - \{ X\to A\}$\\
+    \hspace*{0.7cm} end if\\
+    \hspace*{0.3cm} done\\
+    \hspace*{0.3cm} ; Felesleges szabályok elhagyása (3)\\
+    \hspace*{0.3cm} foreach ($X\to A\in G$) do\\
+    \hspace*{0.7cm} foreach ($B\in X$) do\\
+    \hspace*{1.1cm} if ($A\in X^+$ az $G-\{X\to A\} + \{(X-B)\to A\}$-ra vonatkozóan) then\\
+    \hspace*{1.5cm} $G := G-\{X\to A\} + \{(X-B)\to A\}$\\
+    \hspace*{1.1cm} end if\\
+    \hspace*{0.7cm} done\\
+    \hspace*{0.3cm} done\\
+    \hspace*{0.3cm} OUTPUT: $G$}
+  
+  \subsection{Relációs adatbázissémák tervezése}
+  Ahhoz, hogy jó sémát tervezhessünk, a felmerülő problémákat ismerni kell. Ezek az anomáliák:
+
+  \begin {enumerate}
+  \item \emph{Redundancia}.  Az információk fölöslegesen ismétlődnek több sorban. Pl. csak egy oszlopban különböznek: a
+    séma \texttt{\{ cím, év, hossz, stúdióNév, színészNév \}} és egy filmben több színész van. Akkor az utolsó
+    kivételével minden attribútumhoz tartozó érték fölöslegesen szerepel több sorban.
+  \item \emph{Módosítási problémák}. Ha redundáns a tábla, akkor előfordulhat, hogy nem minden sorban módosítunk egy
+    adott értéket, pl. \texttt{év}et az előző példában
+  \item \emph{Törlési problémák}. A fenti példában ha egy filmhez csak egy színész van, és azt törölni akarjuk,akkor
+    azzal elvesznek a film információi is.  
+  \end{enumerate}
+
+  \subsubsection{Dekompozició}
+  A relációkat érdemes felbonatni, hogy a fenti anomáliák ne következhessenek be. Ekkor az $R$ reláció attirbútumait
+  szétosztjuk úgy, hogy két reláció sémáját alakítjuk ki belőlük. A felbontás másik része az, hogy hogyan vetítjük
+  $R$-et a két új relációra.
+  
+  Legyen adott $R$ reláció $\{A_1,\ldots,A_n\}$ sémával, $R$-et felbontjuk $S$ és $T$ relációkra. Ezek $\{B_1,\ldots,B_m\}$ és
+  $\{C_1,\ldots,C_k\}$ sémájúak. Ekkor 
+  \begin{enumzjb}
+  \item $\{A_1,\ldots,A_n\} = \{B_1,\ldots,B_m\} \cup \{C_1,\ldots,C_k\}$,
+  \item az $S$ reláció sorai az $R$-ben szereplő összes sornak $\{B_1,\ldots,B_m\}$ attribútumokra vett vetületei. Azaz
+    $R$ minden előfordulásának minden sorából az ezeknek az attribútumoknak megfelelő komponensekből álló új sor kerül
+    be $S$-be.
+  \item Teljesen hasonlóan kapjuk $T$ sorait is.
+  \end{enumzjb}
+  
+  \subsubsection{Boyce-Codd normálforma} Ez a normálforma (röviden BCNF) garantálja, hogy az anomáliák ne fordulhassanak
+  elő
+  
+  \begin{de}[Boyce-Codd normálforma]Az $R$ reláció BCNF-ben van $\iff$ minden esetben, amikor teljesül a
+    $\{A_1,\ldots,A_n\}\to B$ nem triviális függőség, akkor $\{A_1,\ldots,A_n\}$ az $R$ szuperkulcsa. Más szavakkal: nem
+    triviális függőség bal oldalán legalább egy kulcs attribútumnak kell szerepelnie. Vagyis:\\
+    $\forall X\to A\colon \F\vdash X\to A$ esetén $X$ szuperkulcs, azaz: $\mathcal F \vdash X\to R$
+  \end{de}
+  
+  Az $R$ reláció BCNF-ben van $\iff$ ha teljesül $R$-ben  $\{A_1,\ldots,A_n\}\to B_1 B_2 \dots B_m$ nem triviális
+  függőség, akkor $\{A_1,\ldots,A_n\}$ az $R$ szuperkulcsa kell hogy legyen.
+
+  \paragraph{Boyce-Codd normálformára hozás}
+  Bármilyen relációsémát (aminek legyen most része a függőségi rendszer is) fel tudunk bontani attribútumaiból álló
+  részhalmazok összességére, melyre teljesülnek az alábbiak:
+  \begin{enumzjb}
+  \item A részhalmazok BCNF-ben lévő relációsémák
+  \item Adatai megfelelnek az eredeti relációnak. Nem mindig lehet visszaállítani az eredeti relációt, bár ez a cél. Az
+    új relációkban lévő függőségek nem mindig felelnek meg az eredetinek.
+  \end{enumzjb}
+  
+  \paragraph{Algoritmus}: Kiválasztunk egy $A_1A_2\ldots A_n\to B_1\ldots B_m$ nem triviális függőséget, amely megsérti
+  a BCNF-et, azaz $\{A_1,\ldots,A_n\}$ nem szuperkulcs. Így két részre lehet bontani a sémát. Az egyik a baloldal,
+  valamint az általa funkcionálisan meghatározott attribútumok, vagyis a következő sémát kapjuk: $\{ A_1, \ldots, A_n,
+  B_1, \ldots B_m\}$. A másik sémát úgy kapjuk, hogy kitöröljük azokat azt attribútumokat, amelyeket a funkcionális
+  függőség meghatároz.
+  
+  Pl: \texttt{\{ cím, év, színészNév,  hossz, szalagFajta,  stúdióNév \}} a séma. A függőség:\\
+  \texttt{cím év $\to$ hossz szalagFajta stúdióNév}.
+
+  A két séma:\\
+  \texttt{\{ cím, év, hossz, szalagFajta, stúdióNév \}} és\\
+  \texttt{\{ cím, év, színészNév \}}\\
+
+  Tranzitív függőségek is előfordulhatnak, pl:\\
+  \texttt{\{ cím, év, stúdióNév, elnök, elnökCím \}}\\
+  \texttt{cím év $\to$ stúdióNév}\\
+  \texttt{stúdióNév $\to$ elnök}\\
+  \texttt{elnök $\to$ elnökCím}\\
+  A 2. függőségből kiindulva felbontjuk:
+  \texttt{stúdióNév $\to$ elnökCím}\quad (tranzitivitás miatt)\\
+  így kapjuk:\\
+  \texttt{stúdióNév $\to$ elnök elnökCím}\\
+
+  Az eredményül kapott séma:\\
+  \texttt{\{ cím, év, stúdióNév \}}\\
+  \texttt{\{ stúdióNév, elnök, elnökCím \}}\\
+  az első BCNF-ben van, de a második nincs. Az egyetlen kulcs a \texttt{stúdióNév}, és fennáll:\\
+  \texttt{\{elnök $\to$ elnökCím} \quad de ez megsérti a BCNF-et.\\
+  A függőség két oldalát összevonva kapott új séma és a régiből a jobb oldalt kitörölve kapott régiek:\\
+  \texttt{\{ cím, év, stúdióNév \}}\\
+  \texttt{\{ stúdióNév, elnök \}}\\
+  \texttt{\{ elnök, elnökCím \}}\\
+  Ezek már BCNF-ben vannak.
+
+  A felbontási szabályt addig kell alkalmazni, amíg minden reláció BCNF-ben nem lesz.\\
+
+  Miért lesz kisebb a kapott séma? Az $A_1A_2\ldots A_n\to B_1\ldots B_m$ függőség megsérti az BCNF-et. A jobb oldalon
+  szerepel minden $A_i$-k által funkcionálisan meghatározott attribútum, amelyekből elvettük az $A_i$-ket. Ekkor
+  legalább egy $B$ áll a jobb oldalon.
+
+  Az egyik sémában nem szerepelnek a $B$-k, csak az $R$ reláció összes többi attribútuma. Ezáltal kisebb lesz, mint az
+  eredeti.
+  
+  A másik séma az összes $A$-kból és $B$-kből áll. Itt megint csak nem szerepelhet az összes attribútum, ugyanis ha így
+  lenne, akkor $\{A_1,\ldots,A_n\}$ szuperkulcs lenne $R$-ben, vagyis funkcionálisan meghatározná $R$ minden
+  attribútumát.
+
+  Tehát $R$-et kisebb sémákra bontottuk fel. Mivel az attribútumok száma is véges, amely felbontási lépésenként csökken,
+  ezért az algoritmus is véges sok lépés után megáll.
+
+
+  \paragraph{Funkcionális függőségek vetítése} A felbontás után ellenőrizni kell, hogy az eredmény BCNF-ben van-e. Ehhez
+  vetíteni kell a függőségeket az új relációra.
+
+  Tegyük fel, hogy $R$-et felbontottuk $S$-re és egy másik relációra. Legyen $\F$ az $R$-ben érvényes függőségek
+  halmaza. Számoljuk ki az $S$-beli funkcionális függőségeket a következőképpen:
+  
+  Vegyük az $S$ attribútumhalmaz által tartalmazott minden egyes $X$ attribútumhalmazt. Számoljuk ki az $X^+$-t. Ekkor
+  minden olyan $X$ attribútumra, amelyre fennáll:
+  \begin{enumerate}
+  \item $B$ az $S$ egy attribútuma
+  \item $B \in X^+$
+  \item $B \not\in X$      
+  \end{enumerate}
+  az $X\to B$ funkcionális függőség is fennáll $S$-ben.
+  
+  \begin{de} Ha adott az $R$ reláció, $d=(R_1,\ldots,R_n)$ és $R = \di\mathop{\cup}_{i=1}^n R_i$ az $\F$ függőségi
+    halmazzal, akkor a $d$ az $R$-nek függőségőrző dekompozíciója $\F$-re nézve, ha:
+    \[ \left(\bigcup_{i=1}^n \pi_{R_i}(\F)\right)^+ = \F^+\]    
+  \end{de}
+
+  \noindent Azonban nincs mindig veszteségmentes felbontás (BCNF-ben).
+
+  
+  \begin{al} Ha $R$ nincs BCNF-ben, akkor $\exists A,B\in R$, melyre: \\
+    $\F \vdash (R-AB)\to A \iff (A\in (R-AB)^{+(\F)}$     
+  \end{al}
+
+  Ez alapján már lehet rá algoritmust írni:\\
+  \texttt{
+    \hspace*{0.3cm} INPUT: $R$, $\F$\\
+    \hspace*{0.3cm} $Z:= R$\\
+    \hspace*{0.3cm} $d := ()$\\
+    \hspace*{0.3cm} repeat\\
+    \hspace*{0.7cm} if $\exists A,B\in Z \land A \in (Z-AB)^+$ then\\
+    \hspace*{1.4cm} $Y := Z -B$\\
+    \hspace*{1.4cm} while $\exists A,B\in Z \land A \in (Y-AB)^+$ do\\
+    \hspace*{2cm} $Y := Y - B$\\
+    \hspace*{1.4cm} done\\
+    \hspace*{1.4cm} $d := d + (Y)$\\
+    \hspace*{1.4cm} $Z := Z - A$\\
+    \hspace*{0.7cm} else\\
+    \hspace*{1.4cm} $Z$ már BCNF\\
+    \hspace*{0.7cm} end if;\\
+    \hspace*{0.3cm} until ($Z$ BCNF);} \qquad {\small (azaz adddig megy, amíg $Z$ BCNF nem lesz)}\\
+  \texttt{\hspace*{0.3cm} $d := d + (Z)$\\
+    \hspace*{0.3cm} OUTPUT: $d$}
+  
+  \subsubsection{Harmadik normálforma}
+  Ha a reláció a \texttt{Foglalkozások} a \texttt{cím} (fimcím), \texttt{mozi} (ahol vetítik), \texttt{város} (itt van a
+  mozi) attribútumokkal és a következő függőségekkel:\\
+  \texttt{mozi $\to$ város}\\
+  \texttt{cím város $\to$ mozi}\quad (feltesszük: egy filmet egy városban csak egy moziban játszanak)\\
+  akkor nincsen veszteségmentes felbontása, ugyanis a következő felbontást kapjuk:\\
+  \texttt{\{ mozi, város \}}\\
+  \texttt{\{ mozi, cím \}}\\
+  Ez önmagában BCNF, viszont az eredeti reláció minden függősége már nem állítható helyre, ugyanis a 2. függőséget nem
+  teljesíti.
+  
+  \begin{de}Az $R$ reláció 3NF-ben van $\iff$ minden esetben, amikor teljesül a\\ $\{A_1,\ldots,A_n\}\to B$ nem triviális függőség,
+    akkor $\{A_1,\ldots,A_n\}$ az $R$ szuperkulcsa, vagy pedig $B$ kitüntetett attribútum: egy kulcs eleme
+  \end{de}
+
+  \noindent Algoritmus:\\
+  \texttt{
+    \hspace*{0.3cm} INPUT: $R$, $\F$\\
+    \hspace*{0.3cm} $\mathcal{G}:= $ MinFedés($\F$)\\
+    \hspace*{0.3cm} $\mathcal{S} := R - $attr$(\F)$\\
+    \hspace*{0.3cm} $d := (\mathcal{S})$\\
+    \hspace*{0.3cm} while $\exists X\to A \in \mathcal{G}$ do\\
+    \hspace*{0.7cm} $Y := \{A\}$\\
+    \hspace*{0.7cm} $\mathcal{G} := \mathcal{G} - \{X\to A\}$
+    \hspace*{0.7cm} while $\exists X\to B\in \mathcal{G}$ do\\
+    \hspace*{1.4cm} $Y := Y + B$\\
+    \hspace*{1.4cm} $\mathcal{G} := \mathcal{G} - \{X\to B\}$\\
+    \hspace*{0.7cm} done\\
+    \hspace*{0.7cm} $d := d + (XY)$\\
+    \hspace*{0.3cm} done}\\
+  \hspace*{0.3cm} {\small ($d:=d+K$ kulcs hozzávétele, ha máshogy nem veszteségmentes)}\\
+  \hspace*{0.3cm} \texttt{OUTPUT: $d$}
+  
+  
+
+  \subsection{Többértékű függőség}
+  Ekkor attribútumhalmazok nem függetlenek egymástól.
+  
+  \begin{de}[Többértékű függőség] Adott egy $R$ relációra a következő többértékű függőség:
+    \[A_1 A_2\ldots A_n \to \to B_1 B_2 \ldots B_m\]
+    Ekkor az  $R$ minden $t$ és $u$ sorjára, melyek az $A$-kon megegyeznek, $\exists v\in R$, mely megyegyezik
+    \begin{enumerate}
+    \item mind $t$-vel, mind $u$-val az $A$-kon
+    \item $t$-vel a $B$-ken
+    \item $u$-val az $R$ minden olyan attribútumán, mely nincsen $A$-kban vagy $B$-ben.
+    \end{enumerate}
+  \end{de}
+
+  \begin{de}[Kibővített Armstrong-axiómák]\ \\
+    \begin{enumAr}
+    \item Triviálisi függőség - mindig teljesül: $Y \subseteq X \text{ esetén } X\to Y$
+    \item Tranzitivitás: $X \to Y,\  Y\to Z\, \nn\, X \to Z$
+    \item $X\to Y \nn XZ \to YZ$
+    \item Komplementer: $X\to\to Y \nn \ X\to\to R-XY$
+    \item Bővítés: $X\to\to Y$, $V\subseteq W$ esetén $WX\to\to VY$
+    \item Tranzitivitás: $X\to\to Y$, $Y\to\to Z$ esetén $X\to\to Z-Y$
+    \item Gyengítés: $X\to Y$ esetén $X\to\to Y$
+    \item Erősítés: $X\to\to Y$, $W\to S$ , $S\subseteq Y$, $W\cap Y = \emptyset$ esetén $Y\to S$
+    \end{enumAr}
+  \end{de}
+
+  \begin{al} \
+    \begin{enumzjr}
+    \item $X\to\to Y$, $X\to\to S$ esetén $X\to\to YS$. A jobboldalak összevonhatók.
+    \item $X\to\to Y$, $WY\to\to S$ esetén $WX\to\to S-WY$. Pszeudotranzitivitás.
+    \item $X\to\to Y$, $XY\to\to S$ esetén $X\to S- Y$
+    \item $X\to\to Y$, $Y\to\to S$ esetén $X\to\to Y\cap S$, $X\to\to Y- S$, $X\to\to S-Y$
+    \end{enumzjr}
+  \end{al}
+
+  \subsubsection{Negyedik normálforma}
+  \begin{de}Nem triviális függőség a következő
+    \[A_1 A_2\ldots A_n\to\to B_1 B_2\ldots B_m,\]
+    ha egyik $B$ sincs az $A$-k között, valamint az $A$-k és $B$-k együttesen sem tartalmazzák $R$ összes attribútumát.
+  \end{de}
+  \begin{de}[Negyedik normálforma] EGy $R$ reláció negyedik nromálformában (4NF) van, ha valahányszor az
+    \[ A_1 A_2\ldots A_n\to\to B_1 B_2\ldots B_m\]
+    nem triviális függőség fent áll, akkor $\{ A_1, A_2,\dotsc,A_n\}$ szuperkulcs.    
+  \end{de}
+
+  A felbontás hasonló a BCNF-hez. Az egyik relációséma az $A$-kat és a $B$-ket tartalmazza, a másik pedig az $A$-kat és
+  azokat az $R$-beli attribútumokat, melyek nincsenek az $A$-k és a $B$-k között.
+
+  \subsubsection{Normálformák - összefoglalás}
+  4NF $\nn$ BCNF $\nn$ 3NF, vagyis a 4NF a legszigorúbb feltétel.
+  
+  A 3NF gyakran, a többi mindig megszünteti  a függőségekből eredő redundanciát, de csak a 4NF a többértékű függőségből
+  eredő redundanciát. Csak a 3NF őrzi meg a funkcionális függőségeket. A többi is megőrizheti, de nem garantált, a
+  többértékű függőségeket pedig egyik sem őrzi meg garantáltan.
+  
+  \subsection{Egyed-kapcsolat modell}
+  Ez a hagyományosa modell, rétékorientált. E/K diagrammal ábrázoljuk. Alapelemei
+  \begin{itemize}
+  \item Egyedhalmazok:ODL-beli osztályok megfelelői, aztonos tulajdonságú egyedek alkotják
+  \item Attribútumok - értékei egy egyed tulajdonságait írják le.
+  \item Kapcsolatok: két vagy több egyedhalmazt kapcsol össze. A kapcsolat kétirányú.
+  \end{itemize}
+  
+  példa:
+  Filmek(cím, év, hossz) és Színészek(név, lakcím). Ekkor az ábra így nézne ki: Filmek, Színészek egy téglalapban,
+  attribútumaik hozzá kapcsolva elipszisben, a kapcsolat köztük (``Szereplők'') pedig rombuszban (a kapcsolat felirata
+  helyett)
+  
+  Egyedosztály: $E(A_1,\ldots,A_n)$ a tulajdonságaival.
+  
+  
+
+  Néha jó, ha a kapcsolatoknak is vannak attribútumaik, pl (színész, film, stúdió) soroból álló Szerződések kapcsolatnak
+  a fizetés attribútum. Jelölése a szokásos (elipszisben). Esetleg ezt külön, új egyedhalmazban is ábrázolhatjuk.
+
+  \paragraph{Kulcsok}
+  \emph{Szuperkulcs}: azonosítónak használható. \emph{Kulcs}: minimális szuperkulcs. Egy darab elsődleges kucsl,
+  valamint akár több másodlagos kulcs is lehet egy-egy egyedhalmazhoz.
+
+  \paragraph{Kapcsolat}: véges sok egyedosztálybóül alkotott lista: $K(E_1,\ldots,E_n)$ ahol $K$ a kapcsolat neve. Előfordulása
+  pedig: $(e_1,\dotsc,e_m)$
+  
+  Bináris kapcsolat: $K(E_1,E_2)$, előfordulása $(e_1,e_2)$ párok
+
+  A kapcsolatokat gyakran relációként, táblázatban ábrázoljuk, pl a Szereplők relációt a (film, színész) sorokból álló
+  relációval.
+  
+  
+  \paragraph{kapcsolat típusai}
+  A kapcsolatok lehetnek sok-egy típusúak, pl az $E$ és $F$ egyedhalmaz között. Ekkor egy nyíl mutat $F$-be, ami azt
+  jelenti, hogy minden $E$-beli egsyedhez pontosan egy $F$-beli egyed kapcsolódik. Az $F$-beliekhez pedig sok egyed.
+  Ha egy-egy kapcsolat áll fenn, akkor pedig mindkét egyedhalmazba mutat nyíl (a rombusz felől).
+
+
+  Lehet, hogy a kapcsolat több egyedhalmazt kapcsol össze, illetve az is, hogy egyetlen egyedhalmaz van. Pl Filmek és a
+  Folytatás kapcsolat (egy-egy kapcsolat). Ekkor a nyíl felirataként megadhatjuk, hogy az adott egyedhalmaznak mi a
+  szerepe a kapcsolatban.
+
+  \begin{itemize}
+  \item sok-egy kapcsolat $(n:1)$: $K(E_1,E_2)$, $\forall e_1\in E_1$ legfeljebb egy db $e_2\in E_2$ tartozhat. Ekkor $E_2$-be
+    mutat nyíl.
+  \item egy-sok  $(1:m)$
+  \item egy-egy $(1:1)$ ekkor mindkét egyedhalmazba mutat nyíl
+  \item az-egy, öröklődés, is-a. A főnök ``az egy'' dolgozó. Ekkor a Dolgozók egyedhalmazba mutat nyíl, csak az új
+    tulajdonságokat kell feltüntetni a főnönél.
+  \item általánosított sok-egy kapcsolat: $K(E_1,\ldots,E_n,E_{n+1})$. Ekkor $\forall (e_1,\ldots,e_n)$-hez legfeljebb
+    egy $e_{n+1}$ tartozik.
+  \item sok-sok kapcsolat $(n:m)$
+
+  \end{itemize}
+
+  \subsubsection{E/K diagram átírása}
+  \begin{tabular}{@{}l@{\hspace{0,5cm}$\leftrightarrow$\hspace{0,5cm}}l@{}}\toprule
+    \textbf{E/K modell} & \textbf{Relációs modell}\\
+    \midrule
+    $E(A_1,\dotsc,A_n)$ &     $E(A_1,\dotsc,A_n)$\\
+    egyedosztály & relációs séma\\
+    előfordulás & előfordulás (reláció)\\
+    egyed & sor\\
+    kulcs & kulcs\\
+    $K(E_1,E_2)$ \small{(sok-egy)} & $K(K_1,K_2)$ ahol $K_1$ (szuper)kulcs\\
+    sok-sok & nincs\\
+    egy-egy & $K_1$ és $K_2$ is (szuper)kulcs\\
+    \bottomrule
+  \end{tabular}
+  
+  \paragraph{Összevonások} Idegen kulcsok alapján.
+  Pl \emph{Dolgozók}, \emph{Osztály} egyedhalmazok között \emph{Dolgozik} kapcsolat. Ekkor a kapcsolatot be lehet
+  építeni a \emph{Dolgozó} táblába, ahol megjelenik egy újabb attribútum, ami az \emph{Osztály} kulcsa
+  
+  
+  
+  \newpage
+  \section{Lekérdező nyelvek}
+  Fajtái: \emph{deklaratív} - relációs halmazok (sorkalkulus, stb), valamint \emph{procedurális} - megmondjuk, hogyan
+  kell kiszámolni az eredményt (pl relációs algebra). Így a relációs algebra $\subset$ teljes lekérdező nyelv.
+  
+  \subsection{Műveletek}
+  \subsubsection{A relációs algebra 6 alapművelete}
+  \paragraph{Egyesítés, unió} Ugyanahhoz a sémához tartozó adatok egyesítése:
+  \begin{gather*}
+    \begin{split}
+      r,\, s  & \hspace{0.5cm} R(A_1, \ldots, A_n)\\   
+      r \cup s & \hspace{0.5cm} R(A_1, \ldots, A_n)
+    \end{split}\\
+    r \cup s := \{\, t : t\in r \lor t\in s \,\}
+  \end{gather*}
+  
+  \paragraph{Direktszorzat, Descartes-szorzat} Felteszzük: különböző sémájú a két tábla.
+  \begin{gather*}
+    \begin{split}
+      r  & \hspace{0.5cm} R(A_1, \ldots, A_n)\\
+      s  & \hspace{0.5cm} S(B_1, \ldots, B_n)\\
+      r \times s & \hspace{0.5cm} RS(A_1, \ldots, A_n, B_1, \ldots, B_n))
+    \end{split}\\
+    r \times s := \{\, t : t[A_1, \ldots, A_n] \in r \land t[B_1, \ldots, B_n] \in s \,\}
+  \end{gather*}
+  
+  A sorok számát jelzi az $|r|$, az $R(A_1, \ldots, A_n)$ röviden $R(A)$
+
+  
+  \paragraph{Kivonás} Ugyanahhoz a sémához tartozó adatok különbsége.
+  \begin{gather*}
+    \begin{split}
+      r,\, s  & \hspace{0.5cm} R(A_1, \ldots, A_n)\\   
+      r - s & \hspace{0.5cm} R(A_1, \ldots, A_n)
+    \end{split}\\
+    r -  s := \{\, t : t\in r \land t\not\in s \,\}
+  \end{gather*}
+  
+  \paragraph{Vetítés} Részsémára.
+  \begin{gather*}
+    \begin{split}
+      r  & \hspace{0.5cm} R(A_1, \ldots, A_n)\\   
+    \end{split}\\
+    x \subset \{\,A_1, \ldots, A_n\,\}\\
+    \pi_X(r) := \{\, t[X] : t\in r \,\}    
+  \end{gather*}
+  
+  \paragraph{Kiválasztás} Valamilyen logikai feltételnek eleget tevő sorok kiválasztása.
+  \begin{gather*}
+    \intertext{Kifejezések (itt $c$ konstans)}
+    \theta \in \{\, <, >, \leq, \geq, =, \neq \,\}\\
+    \begin{alignedat}{3}
+      A_i\  & \theta & A_j\\
+      A_i\  & \theta & c\\
+      c\  & \theta & A_j
+    \end{alignedat}
+    \intertext{Ezekből logikai kifejezések $\land$, $\lor$, $\lnot (\ldots)$, ahol a $\lnot$ csak egy jelölés.}
+    \begin{split}
+      r  & \hspace{0.5cm} R(A)\\   
+      \sigma_F(r) & \hspace{0.5cm} R(A)
+    \end{split}\\
+    \sigma_F(r) := \{ t : t \in r \land F(t) = \uparrow \}
+  \end{gather*}
+
+  \paragraph{Átnevezés} A sémában nem lehetnek azonos nevű oszlopok, ezért szükséges az átnevezés (vagy épp azért, hogy
+  azonos legyen a két részkifejezés sémája, pl. unió esetén). Pl. $A$ átnevezése $B$-re:
+  \begin{gather*}
+    \varrho_{A\leftarrow B}
+  \end{gather*}
+
+  \subsubsection{Származtatott műveletek}
+  \paragraph{Természetes összekapcsolás}
+  Ha két relációból csak az összeillő sorokat kapcsoljuk össze, az egyszerűbb módot választva, akkor a természetes
+  összekapcsolást kapjuk. Ennek jele $R\Join S$. Az eredménybe azok a sorok kerülnek bele, amelyek értékei azonosak $R$
+  és $S$ sémák közös attribútumain. Azaz ha $A_1,\ldots ,A_n$ a közös attribútumok halmaza, akkor egy $r$ és egy $s$
+  sornak összekapcsolása akkor és csak akkor sikeres, ha $r$ és $s$ értékei megegyeznek az $A_1,\ldots ,A_n$
+  attribútumokon. Az eredményben  (\emph{összekapcsolt sor}) ezek az attribútumok csak egyszer szerepelnek
+  \begin{gather*}
+    \begin{split}
+      r  & \hspace{0.5cm} R(\underline{A},\,\underline{B\!})\\   
+      s  & \hspace{0.5cm} S(\underline{B\!},\,\underline{C\!})\\   
+    \end{split}\\
+    r \Join s = \pi_{\underline{A},\,R.\underline{B\!},\,\underline{C\!}}\,(\sigma_{\forall i\colon R.B_i =
+      S.B_i}(r\times s))
+  \end{gather*}
+  \subsubsection{Theta-összekapcsolás, join}
+  Leggyakrabban a közös attribútumok egyenlősége szerint szokás összekapcsolni, néha azonban szükséges bizonyos
+  szempontok szerinti párosítására is. Theta, mivel tetszőleges feltétel szerepelhet az összekapcsolás
+  feltételeként. Az $R$ és $S$ relációk $\theta$ feltétel szerinti összekapcsolásának a jelölése: $R\Join_{\theta}
+  S$. Például: $U \Join_{A<D} S$. A theta-összekapcsolás jelentése képletben:
+  \[R\Join_{\theta} S := \sigma_{\theta}(R\times S)\]
+  
+  \paragraph{Félig összekapcsolás, semi join}
+  Azon $R$-beli sorokat adja meg, melyekhez kapcsolható sor $S$-ből:
+  \begin{gather*}
+    r \ltimes s = \pi_R(r\Join s)
+    \intertext{Így:}
+    (r\ltimes s)\Join s = r \Join s
+  \end{gather*}
+
+  \paragraph{Osztás} A legnagyobb olyan táblát adja meg az osztás (jel: $r\div s$), amire teljesül:
+  \begin{gather*}
+    (r \div s) \times s \subset r
+    \intertext{ahol}
+    \begin{split}
+      r & \hspace{0.5cm} R(A, B)\\   
+      s & \hspace{0.5cm} S(B)\\
+      r \div s & \hspace{0.5cm} A    
+    \end{split}    
+  \end{gather*}
+
+  \paragraph{Metszet} $r\cap s = r - (r-s)$, a sémák azonosak.
+  
+  \subsubsection{Műveleti tulajdonságok}
+  A műveletekre a következők igazak:
+  \begin{itemize}
+  \item A metszet, unió, összekapcsolások asszociatívak.
+  \item Több vetítés összekapcsolható (a bővebb halmazra vetítés előbb van): $A \subset B$ ekkor
+    $\pi_A(\pi_B(r))=\pi_A(r)$
+  \item Unió,  vetítés, direktszorzat, kiválasztás, átnevezés monotonok:  (montoton relációs algebra).
+  \end{itemize}
+
+  \subsection{Relációs kalkulusok}
+  Kétféle relációs kalkulus van, a \emph{tartománykalkulus} (\emph{DRC}) és a \emph{sorkalkulus} (\emph{TRC}).
+  
+  \subsubsection{Tartománykalkulus, DRC}
+  A lekérdezések alakja: $\{\,x_1\ldots, x_n \mid F[x_1, \ldots, x_n]\}$. Ennek jelentése: keressük az $F$-et kielégítő
+  $(x_1,\ldots,x_n)$ $n$-eseket (\emph{tuples}). A kalkulusok elsőrendű logikai nyelvek, a szabad változók egy
+  kiértékelése meghatároz egy sort, ha egy kiértékelés kielégíti a formulát, akkor a sor belekerül a lekérdezés
+  eredményébe. Szintaxisa:
+
+  \paragraph{Formulák} A DRC jelkészlete: relációszimbólumok (nagybetűk), komponensváltozók (kisbetűk), konstansok,
+  összehasonlító operátorok ($=$, $>$, $<$), elsőrendű logikai jelek.
+
+  \underline{Atomi formula:} $X \theta Y$, $X \theta c$, ahol $\theta\in\{ =,\neq, <, \leq, \geq, >\}$, valamint
+  $p(T_1,\ldots,T_n)$ alakú predikátumok. A formulákban $X$ és $Y$ szabad előfordulású változó, $T_i$ vagy változó, vagy
+  konstans, de a predikátum változói is szabad előfordulásúak.
+
+  Ezek jól definiált formulák. Ha $F_1$, $F_2$ jól definiált formulák, akkor $\lnot F_1$, $F_1\land F_2$, $F_1\lor F_2$
+  is az. Ha az $x$-nek van az $F_i$-ben szabad előfordulása, akkor $x$ a kifejezés egy  szabad változója.
+
+  Ha $x$ egy változó és $F$ formula, akkor $\forall x F$, $\exists x F$ is formula. Ezekben viszont X-nek nincsen szabad
+  előfordulása.
+  
+  Mivel $x$ akkor szabad, ha van sszabad elődordulása, ezért például a következő kifejezésben is szabad változó lesz:
+  $\left(\forall x\left(p\left(x,y\right)\right)\right)\land\left(x>8\right)$
+
+  \paragraph{Lekérdezések} A DRC lekérdezések $\{\,x_1,\ldots,x_n : F(x_1,\ldots,x_n)\,\}$ alakúak. Az $F$ szabad
+  változói a következők: $x_1,\ldots,x_n$.
+
+  \begin{te}Relációs algebra $\subset$ DRC
+  \end{te}
+  
+  \begin{bi}
+    \underline{Konstans tábla esetén:}
+    \begin{gather*}
+      \begin{matrix}
+	C_{11} & \ldots & C_{1n}\\
+	\vdots & \ddots & \vdots\\
+	C_{k1} & \ldots & C_{kn}
+      \end{matrix}
+      \intertext{Az ennek megfelelő DRC a következő:}
+      \{\,x_1,\ldots, x_n \mid (x_1=C_{11} \land \ldots \land x_n = C_{1n}) \lor \ldots\lor (x_1 = C_{k1} \land \ldots
+      \land x_n =  C_{kn}\,\}
+    \end{gather*}
+    
+    \underline{Kifejezések esetén:}\\
+    Egy $P$ reláció DRC-ben: $\{x_1,\ldots,x_n \mid p (x_1,\ldots,x_n)\}$\\
+    \[\begin{split}
+    E_1 \cup E_2 & \ \ \{x_1,\ldots,x_n \mid F_1 (x_1,\ldots,x_n)\lor F_2 (x_1,\ldots,x_n)\}\\
+    E_1 - E_2 & \ \ \{x_1,\ldots,x_n \mid F_1 (x_1,\ldots,x_n)\land \lnot F_2 (x_1,\ldots,x_n)\}\\
+    E_1 \times E_2 & \ \ \{x_1,\ldots,x_n,y_1\ldots,y_m \mid F_1 (x_1,\ldots,x_n)\lor F_2 (y_1,\ldots,y_m)\}\\
+    \pi_{\$1,\ldots,\$k} & \ \ \{x_1,\ldots,x_k \mid (\exists x_1)\ldots(\exists x_n)(F_1 (x_1,\ldots,x_n))\}\\
+    \sigma_{\$i \theta_c \$j}(E_1) & \ \ \{x_1,\ldots,x_n \mid F_1(x_1,\ldots,x_n) \land (x_i \sigma x_j))\}      
+    \end{split}\]
+
+    
+  \end{bi}
+  
+  \paragraph{A DRC kifejezőerejéről}
+  \begin{itemize}
+  \item a DRC-ben megfogalmazható a minimum, maximum
+  \item nem fejezhető ki a számlálás, összegzés
+  \item nem fejezhető a tranzitív lezárás (vagyis nem adható olyan $F$ DRC lekérdezés, amelyik egy gráf éleit tartalmazó
+    táblához hozzárendelné azt, hogy melyik csúcsból melyikbe vezet út)    
+  \end{itemize}
+  
+
+  \subsubsection{Sorkalkulus, TRC}
+  A TRC jelkészlete: relációszimbólumok (nagy betűk), sorváltozók pl: $t^{(n)}$ (kis betűk, $n$ a komponensek száma),
+  konstansok, összehasonlító jelek, elsőrendű logikai műveleti jelek. $t(i)$ az $i$. komponens.
+  A TRC szintaktikája a DRC-hez hasonló.\\  
+  $\{ t^{(n)} : F(t^{(n)})\}$ $F$-nek $t$ az egyetlen szabad változója.\\
+  $\{ t : \lnot p(t) \}$ lehet végtelen is (DRC-ben is).
+  
+  \paragraph{Relációs algebra $\subset$ TRC} Ez a DRC-nél megismert módon belátható. Az ott szereplő konstans táblának
+  az első kifejezés felel meg: 
+  \begin{gather*}
+    \{t^{(n)} \mid (t(1) = c_{11} \land \ldots \land t(n) = c_{1n}) \lor \ldots \lor (t(1)  =
+    c_{k1} \land\ldots\land t(n)=c_{kn}) \}\\
+    E_1 \cup E_2 \iff \{ t \mid F_1(t) \lor F_2(t) \}\\
+    E_1 - E_2 \iff \{ t \mid F_1(t) \land \lnot F_2(t) \}\\
+    \pi_{\$1,\ldots,\$n}(E_1) \iff \{ t^{(n)} \mid \exists u^{(m)} (F_1(u) \land t(1) = u(1) \land \ldots \land t(n) = u(n)) \}\\
+    E_1\times E_2 \iff \{ t^{(n+m)} \mid (\exists u^{(n)})(\exists v^{(m)}(F_1(u)\land F_2(v) \land t(1) = u(1)\land
+    \ldots \\\hspace*{0.8cm}\ldots\land t(n) = u(n) \land t(n+1) = v(1) \land \ldots \land t(n+m) = v(m)) \}\\
+    \sigma_{\$i \theta \$j}(E_1) \iff \{ t^{(n)} \mid F_1(t) \land (t(i) \theta t(j))\}
+  \end{gather*}
+
+  \subsection{Tartományfüggetlenség és biztonságosság}
+  \begin{de}[Tartomány]
+    Legyen $\dom(F)$ \emph{tartomány} az $F$ formula predikátumainak megfelelő relációkban szereplő értékek, valamint az $F$-ben szereplő
+    konstansok uniója. Például az $F(x,y) = p(x,y) \land (x>9)$ esetén ez a következőképpen néz ki ($p$-nek a $P$ reláció
+    feleltethető meg):\\
+    \hspace*{0.5cm}$\dom(F) = \pi_{\$1}(P) \cup \pi_{\$2}(P)\cup\{9\}$
+  \end{de}
+  \begin{de}[Kifejezés értéke tartományon] Legyen $F$  egy formulával képzett kifejezés, a $D$ pedig egy tartomány,
+    amelyből az $F$ változóinak értéke származik. Ekkor az $F$ lekérdezés eredményének jele: $\RR(F,D)$.\\
+    \hspace*{0.5cm}$\RR(F,D) := \{ x_1,\ldots,x_n\in D : F(x_1,\ldots x_n)\}$
+  \end{de}
+  
+  \begin{de}[Tartományfüggetlen formula] Ha $F$ a  $\dom(F)$-nél bővebb tartományon kiértékelve nem ad bővebb eredményt,
+    akkor tartományfüggetlen. Tehát:\\
+    \hspace*{0.5cm}$\forall D\colon \dom(F)\subset D$ esetén $\RR(F,D) = \RR(F,\dom(F))$
+  \end{de}
+  
+  \begin{te} Nem létezik olyan algoritmus, amely tetszőleges $F$ formuláról eldönti, hogy tarto-mányfüggetlen-e.
+  \end{te}
+  
+  Ezek a fogalmak hasonlóan értelmezhetőek sorkalkulusra is.
+  
+  A relációs algebra tartományfüggetlen.
+
+  \paragraph{Biztonságosság} Ez tartományfüggetlen, eldönthető, és tartalmazza a relációs algebrát.
+  \begin{de}[Biztonságos formula] A következők teljesülése esetén biztonságos egy formula:
+    \begin{enumerate}
+    \item Nincs benne $\forall$ kvantor. A $\forall x F$ kifejezhető $\lnot\exists x\lnot F$ segítségével.
+    \item Ha egy formulában szerepel diszjunkció: $F_1 \lor F_2$, akkor a két részformula szabad változói egyezzenek meg,
+      azaz a kifejezés legyen $F_1(x_1,\ldots,x_n)\lor F_2(x_1,\ldots,x_n)$ alakú.
+    \item Minden \emph{maximális konjunkciós lánc} (leghosszabb konjunkció) minden szabad változója legyen
+      korlátozott. Azaz ha $x$ az $F_1\land\ldots\land F_k$ maximális konjunkciós lánc szabad változója, akkor a következő
+      esetekben lesz korlátozott:
+      \begin{itemize}
+      \item $x=c$ vagy $c=x$ összehasonlításban szerepel egy $F_i$ formulában, ahol $c$ konstans.
+      \item $x=y$ vagy $y=x$ és $y$ korlátozott
+      \item $x$ az $F_i$ szabad változója és $F_i$ nem negált nem aritmedikai összehasonlítás.
+      \end{itemize}
+    \item Negáció önmagában nem szerepelhet. $\lnot G$ esetén van olyan $F_1\land\ldots\land\lnot G\land\ldots\land F_n$
+      maximális konjunkciós lánc, melyben valamelyik $F_i$ nem negált.
+    \end{enumerate}
+  \end{de}
+
+  A relációs algebebra $\equiv$ biztonságos DRC.
+  
+  Ugyanezek érvényesek a TRC-re is. Így azt kapjuk, hogy:\\
+  Relációs algebra $\equiv$ biztonságos DRC $\equiv$ biztonságos TRC $\equiv$ tartományfüggetlen DRC $\equiv$
+  tartományfüggetlen TRC.
+  
+  \subsection{SQL}
+  Az SQL a Structured Query Language, struktúrált lekérdező nyelv rövidítése. Többféle szabvány van belőle: SQL92,
+  SQL99. Általában az SQL92 a támogatottabb.
+
+  A nyelv részei:
+  \begin{itemize}
+  \item QL:  lekérdező nyelv
+  \item DDL: objektumok kialakítása (definíciója)
+  \item DML: törlési, módosítási utasítások
+  \item jogok
+  \item tranzakciókezelés
+  \end{itemize}
+  
+  Mivel szerepelhetnek logikai kifejezések, háromállapotú logikát használ
+  (\texttt{TRUE}, \texttt{FALSE}, \texttt{UNKNOWN})
+  
+  \paragraph{DDL} pl. \texttt{create table szeret(ivo char(20), ital char(20));}
+  \paragraph{QDL} pl. \texttt{insert into szeret values('Mici', 'Málna');}
+  \subsubsection{Lekérdezések} A nyelv elnevezése ellenére egyetlen lekérdező utasítást definiál, ez pedig a
+  \texttt{SELECT} utasítás. Általában \texttt{SELECT \ldots FROM \ldots}, illetve\\ \texttt{SELECT oszlopnevek FROM
+    táblanevek WHERE feltételek} alakú, ahol a táblanevek egy vagy több (vesszővel elválasztott) tábla neve. Esetleg
+  \texttt{táblanév tn} formájú, ahol a \texttt{tn} egy rövidített alak. Ezzel illetve a tábla nevével lehet minősíteni
+  az oszlopneveket, ha névütközés állna fenn a táblák attribútumainak (oszlopainak) nevei közt. A where klózban
+  logikai kifejezés áll, tehát \texttt{AND}, \texttt{OR}, \texttt{NOT} és zárójelezes segítésgével bonyolultabb
+  kifejezés is  adható. Az SQL-nek vannak beépített függvényei is, pl. sorok számát a \texttt{count(*)} ``oszlopnév''
+  kiválasztásával kérhetjük le. A where feltétel megadható adatok módosítása esetén is.
+
+  Alapesetben a lekérdezés eredménye multihalmaz, vagyis akár többször is szerepelhet benne egy-egy sor. Ha csak egyszer
+  szerepelhet, akkor a lekérdezés \texttt{SELECT DISTINCT} kezdetű.
+
+  Az oszlopok csoportosíthatók (pl számláláshoz) egy vagy több oszlop szerint a \texttt{GROUP BY oszlopnév [HAVING
+      feltétel]} záradékkal. A \texttt{HAVING} egy olyan feltételt ad meg, amelyet összesítés után ellenőrzi.
+
+  Összesítő, stb függvények (például): min, max, count, sum avg.
+  
+  Összetett lekérdezések: \texttt{UNION} (két lekérdezés uniója), \texttt{EXCEPT} (ez PostgreSQL specifikus :)), ami
+  valójában \texttt{MINUS} (különbség).
+  
+  Végül megadható adott oszlop(ok) szerinti rendezés is, az \texttt{ORDER BY [ASC | DESC] név} szerint, ahol a
+  \texttt{ASC} jelzi a növekvően rendezett (alapértelmezés), \texttt{DESC} pedig a csökkenő sorokat.
+  
+  \paragraph{Egy kevésbé bonyolult lekérdezés} Pl keressük, hogy hány legalább 4-es átlaguk van a beadandókból, akik a
+  7-es csoportban vannak (eaf), minden beadandójuk megvan:\\
+  \texttt{SELECT COUNT(*) FROM eaf e WHERE e.csoport=7 AND e.pont1<>0 AND e.pont2<>0 AND\\
+    e.pont3<>0 AND e.pont4<>0 AND (e.pont1 +e.pont2 +e.pont3 +e.pont4)/4 >= 4}
+  
+  
+  \subsection{SQL alkalmazások készítése programozási környezetben}
+  Nem lehet minden lekérdezést megvalósítani SQL segítségével, néha szükség van más nyelvek támogatására is. Ez
+  kétirányú: egy normál programból lehet SQL lekérzdezéseket kezdeményezni, valamint bővíthető (?) is a nyelv (Oracle
+  esetén bővíthető: tárolt eljárások, stb).
+
+  C nyelvű kódban el lehet helyezni SQL utasításokat is, amiket egy előfeldolgozó alakít át hagyományos C nyelvre. Ezért
+  az eredeti fájl kiterjesztése \texttt{.pc} a \texttt{.c} helyett.
+
+  Az SQL utasításokat az előfeldolgozó az \texttt{EXEC SQL} prefixről ismeri fe, amely a következő pontosvesszőig tart.
+  
+  Közös változók használata:\\
+  \texttt{EXEC SQL BEGIN DECLARE SECTION;\\
+    \hspace*{0.3cm} /* Itt közötte a szokásos C szintaxisszal definiálhatjuk a változóinkat */\\
+    \hspace*{0.3cm} char SQLSTATE[6];\\
+    EXEC SQL END DECLARE SECTION;}\\
+  
+  Kapcsolódás és a kapcsolat megszakítása:\\
+  \texttt{CONNECT :felhasználónév IDENTIFIED BY :jelszó;\\
+    DISCONNECT;}
+  
+  További pl:\\
+  \texttt{EXEC SQL EXECUTE IMMEDIATE S;} S nem select from where alakú!\\
+  \texttt{EXEC SQL PREPARE név FROM S1;} előkészítő végrehajtás; S1 nem sfw!
+  
+  A lekérdezés a sikerességét az SQLSTATE változóban jelzi. Sikeres lefutás esetén ``00000'' áll benne (string!!).
+  
+
+  
+
+  \newpage
+  \section{Hálózati réteg architektúrák}
+  
+  Amikor két különböző gépen található program kommunikál egymással, a kommunikáció létrejöttét, fenntartását biztosító
+  rendszer több rétegre osztható. Például az alkalmazási rétegbe tartozik maga a program, fizikai réteg (OSI modellben)
+  felelős az adatok továbbításáért. Ez utóbbi réteg csak annyit tud, hogy valamilyen adatot el kell juttatni egy adott
+  géphez.
+
+  Az OSI hivatkozási modell a következő rétegeket tartalmazza (felülről lefelé)
+  \begin{itemize}
+  \item alkalmazási réteg
+  \item megjelenítési réteg
+  \item viszonyréteg: kapcsolat kezelése (session)
+  \item szállítási réteg: pl csomagok tördelése
+  \item hálózati réteg: hálózati címek kezelése, alhálózat típusát, topológiáját elrejti
+  \item adatkapcsolati réteg: keretek kezelése (pl a továbbítandó adat keretekre tördelése)
+  \item fizikai réteg: bitsorozatok továbbítása
+  \end{itemize}
+  
+  Azonban nem ez az elterjedt, hanem a TCP/IP hivatkozási modell (ugyanis TCP ill IP protokoll felett történik a legtöbb
+  kommunikáció). A felső réteg van benne, és az alsó 4, de az alsó kettő egybevonva.
+  tartalmazza. Ezek:
+  \begin{itemize}
+  \item alkalmazási réteg: HTTP, FTP, SMTP, DNS, stb.
+  \item szállítási réteg: TCP/UDP protokollú csomagok (bájtos formában).
+  \item internet réteg: IP protokollt használ elsősorban. Feladata a csomagok eljuttatása arendeltetési helyére. ICMP
+    és útválasztási protokollok rétege is. 
+  \item hoszt és hálózat közötti réteg: ez a réteg képes IP csomagokat továbbítani, nincs más feltéve róla. Igazából nem is
+    része a modellnek.
+  \end{itemize}
+  
+  Mindegyik réteg csak az alatta/felette lévő réteggel tud kommunikálni.
+
+  \subsection{A TCP/IP modell}
+  \subsubsection{Hoszt és hálózat közötti réteg}
+  Ez nem része a TCP/IP modellnek. Az OSI modell fizikai és adatkapcsolati rétegét vonja össze. Az adatok szállítása a
+  feladata, aminek az irányítása már a hálózati réteghez tartozik.
+
+  \subsubsection{Internetréteg}
+  Az OSI modellbeli  hálózati réteg megfelelője. A feladatata annak biztosítása, hogy egy gép bármely hálüzatba tudjon
+  csomagokat küldeni, illetve a csomagokat a céllállomástól függetlenüol képes legyen továbbítani. Nem fontos a csomagok
+  érkezési sorrendje, mert a magasabb rétegek visszarendezhetik az eredeti sorrendbe.
+  
+  Az internetréteg egy hivatalos csomagformátumot határoz meg, vagyis egy protokollt (IP, \emph{Internet Protocol}). A
+  feladat a csomagok kézbesítése. Ezért a csomagok útvonalának meghatározása és a torlódások elkerülése a
+  lefgfontosabb.
+
+  \subsubsection{A szállítási réteg}
+  Célja a forrás- és célállomás közti párbeszéd lehetővé tétele. Kétféle szállítási protokollt használ. az egyik az
+  \emph{átvitelvezérlő protokoll (Transmission Control Protocol, TCP)}, amely megbízható összeköttetést
+  biztosít. Hibamentes bájtos átvitelt biztosít, ehhez kisebb méretűre osztja a továbbítandó adatot, és egyesével
+  továbbítja az internetrétegnek. A célállomáson a TCP folyamat összegyűjti és egyetlen adatfolyamként továbbadja az
+  adatokat. Forgalomszabályozást is végez, hogy ne torlódjanak fel a csomagok út közben. Garantáltan olyan sorrendben
+  jönnek meg a csomagok az alkalmazási réteg szemszögéből, ahogy az a forrásgépről elindult. Ha valamelyik csomag
+  elveszik (egy időzítő számlálója lejár), akkor újra kéri a csomagot.
+
+  A másik a \emph{felhasználói datagram protokoll (User Datagram Protokol)}, amely nem megbízható, nem biztosít
+  összeköttetést. Nem garantált sem a csomag megérkezése, sem az érkezési sorrend, sem az, hogy csak egy példányban
+  érkezik meg. Olyan esetben használják, ahol a gyors válasz a fontosabb, illetve nem baj, ha az adatok egy része
+  elveszik. Ilyen például a video vagy hangátvitel. Kevésbé zavaró a recsegő hang, mintha szaggatott lenne (mert lassan
+  jön meg az adat).
+
+  \subsubsection{Az alkalmazási réteg}
+  Az OSI modell viszony- és megjelenítési rétegére nem volt szükség, így a következő rétég az alkalmazási réteg. Ez
+  tartalmazza az összes magasabb szintű protokollt. Eredetileg csak a TELNET, FTP és SMTP tartozott hozzá.
+
+  \subsubsection{A TCP/IP modell hibái}
+  A host-to-network réteg igazából csak egy interfész (hálózati és adatkapcsolati réteg között). A fizikai és
+  adatkapcsolati réteg különböző, ez azonban nem derül ki a modellből.
+
+  \subsubsection{Miért nem terjedt el az OSI modell?}
+  Egyrész mert rosszkor szabványosították: a versenytárs TCP/IP modell már eléggé elterjedt. Továbbá rosszul átgondolt
+  modell volt, mivel inkább politikai oka volt a rétegek számának: műszakilag értelmetlen volt. A viszony- és
+  megjelenítési réteg szinte üres, az alsó kettő (adatkapcsolati és hálózati) pedig túlterhelt. Feleslegesen szerepel
+  több rétegben is a hibajavítás, ami a magasabb rétegek feladata lenne. Végül még egy hiba: a rendkívül bonyolt modell
+  kezdeti megvalósítása terjedelmes és lassú volt.
+  
+
+  \subsection{A hálózati réteg}
+  Az adatok továbbítására kétféle szemlélet alakult ki. Az egyik datagram alapú, vagyis a hálózat megbízhatatlan, ezért
+  minden csomagnak tartalmaznia kell a célcímet, hogy szükség esetén másik útvonalon tudjon továbbhaladni, vagyis az
+  egyes csomagok útvonala független egymástól. A forgalom szabályozására és a csomagok sorrendjének kezelésére nincs
+  szükség.
+  
+  A másik elgondolás a telefontársaságoktól származott, mely szerint az alhálózatnak megbízható, összeköttetés alapú
+  szolgáltatást kell nyújtania. Erre példa az ATM hálózat.
+  
+  \subsubsection{Az összeköttetés nélküli szolgáltatás megvalósítása}
+  Összeköttetés nélküli szolgáltatás esetén a csomagokat gyakran \emph{datagramoknak} (datagrams, DG) nevezik, az
+  alhálózatot pedig \emph{datagram alhálózatnak (datagram subnet)}. Ha az összeköttetés alapú a szolgáltatás, akkor pedig
+  ki kell építeni egy útvonalat a forrés és cél router között, mielőtt bármilyen adatcsomag elhagyná a forrásgépet. Ez a
+  kapcsolat \emph{virtuális áramkör (virtual circuit, VC)}, az alhálózat pedig a \emph{virtuális áramkör alhálózat
+    (virtual circuit subnet)}. Most az előbbit tekintjük.
+
+  Amikor egy folyamat egy másik gépen lévő folyamattal szeretne kommunikálni, akkor elküld valamilyen adatot. Ezt a
+  szállítási réteg kapja meg, amely elérak egy szállítási fejlécet, majd továbbítja a hálózati rétegnek. Ha túl hosszú a
+  továbbítandó adat, akkor a szállítási réteg kisebb egységekre bontja, és úgy adja tovább.
+
+  Bármelyik csomag esetén dönthet úgy a router, hogy másfelé küldi tovább, mint az eddigieket, még akkor is, hogyha más
+  volt a címzett, például azért, mert feltorlódtak a csomagok az eredeti irányban. Ezt a \emph{forgalomirányító algoritmus
+    (routing algorithm)} vezérli.
+
+  \subsubsection{Az összeköttetés alapú szolgáltatás megvalósítása}
+  Elkerülhető a fentebb említett útvonalváltoztatás, ha virtuális áramkör alhálózat van. Ekkor nem kell minden csomagnál
+  eldönteni, merre menjen tovább, hanem elég egyszer, amikor felépül a kapcsolat. Ez esetben minden csomag tartalmaz
+  egy azonosítót, amely megmondja, hogy mely virtuális áramkörhöz tarotozik.
+
+  Mivel minden csomag forrása mindig az egyes azonosítót adja meg (amennyiben nem épített még ki virtuális áramkört),
+  ezért ez ütközéshez vezet valamelyik router mögött. Emiatt kettő bejegyzést tartalmaz minden router áramkörönként: az
+  egyik az, hogy honnan milyen sorszámú áramkör jön (bejövő áramkör), és a másik a kimenő, itt nem biztos, hogy ugyanaz
+  az áramkör azonosítója, hogy az ütközést elkerülje. Tehát a routereknek képesnek kell lenniük az
+  összeköttetés-azonosítók megváltozatására a kimenő csomagokban. Ezért néha címkekapcsolásnak (label switching) is nevezik.
+
+  Az azonosítók mérete kisebb, mint a célcímeké, ezért ez kisebb sávszélesség-igényű. Viszont több memóriát igényel a routolási
+  táblázat a routerekben. Az összeköttetés-felépítés, címfeldolgozás időbe telik, viszont csak egyszer kell feldoglozni,
+  utána könnyű eldönteni, mi legyen a csomagokkal. Például tranzakciófeldolgozó rendszereknél (amilyenen a hitelkártyás
+  vásárlás adatai mennek) a kapcsolat felépítésének költsége kisebb, mint az áramkör valódi haszna. Másfelől ha egy
+  router rövid időre kiesik, meg kell szakítani az összes áramkört, ami a datagram alapú hálózatoknál nem okozna
+  gondot. Sőt, a hálózat egyenletes terhelése is biztosítható datagramok esetén.
+  
+  \subsection{Az IP - Internet Protocol}
+  A TCP vagy UDP fejléccel ellátott adat az IP csomag adatrészében utazik a hálózaton. Az IP fejléc sokféle információt
+  tartalmaz. Mivel binárisan tárolt számokat tartalmaznak a mezők, ezért fontos, hogy az alsó vagy a felső vége szerepel
+  előbb. A PC-k ``little-endian'' típusúak, azaz a legkisebb helyiértékű bit szerepel elől, az interneten viszont
+  fordítva van, ugyanis az ``big-endian''.
+  
+  A fejléc részei: IP verzió, a fejléc végi maximum 60 bájt hosszú opciók tényleges hossza, majd a szolgáltatástípus
+  (type of service, TOS). Ez az alhálózat számára hordozott információkat. Ilyen a csomag prioritása (8 különböző
+  szint), valamint az, hogy gyorsan vagy biztonságosan érjen célba. Média adatfolyamok esetén a gyorsaság fontosabb,
+  viszont egy SSH kapcsolat esetén a biztonságosság kerül előtérbe. Azonban a legtöbb router nem törődik ezzel az
+  értékkel. A következő mező a teljes csomagméret, mely legfeljebb 65535 bájtos lehet. A csomagot egyedileg kell
+  azonosítani, erre szolgál egy 16 bites mező.
+
+  Az útválasztók feldarabolhatják a csomagokat, ezzel kapcsolatos a következő pár mező: DF = Don't Fragment, ne darabold
+  és MF = More Fragments flagek. Ha tiltott a darabolás, esetleg csak kerülőúton érhet célba a csomag. Ha viszont
+  darabolt, akkor meg kell mondani, hogy az eredeti csoamgban hol kezdődik az adott darab (fragment offset). Mindig
+  8-cal osztható a fragment méret utolsó darabot leszámítva, mivel ez az elemi darabméret (tehát a tényleges offset is
+  8-cal szorozva kapható meg).
+  
+  Egy legfeljebb 255 értékű TTL mező követlkezik, mely ugrásonként csökken, nullát elérve a csomag eldobható. Viszont
+  ezt jelezni kell egy másik csomag küldésével az eredeti feladónak. A protokoll mező jelzi, hogy TCP, UDP, vagy más
+  típusú csomag.
+
+  Ezután egy 16 bites ellenőrző összeg szerepel, majd a forrás és célcímek 32 biten, végül az opciók. Ezután az adat
+  következik.
+
+  \subsection{IP címek}
+  Összesen öt címosztály van, ezek
+  \begin{itemize}
+  \item A: első bit 0, az első bájt jelzi a hálózatot: 1.0.0.0-127.255.255.255
+  \item B: első 2 bit 10, az első 2 bájt jelzi a hálózatot: 128.0.0.0-191.255.255.255
+  \item C: első 3 bit 110, az első 3 bájt jelzi a hálózatot: 192.0.0.0-223.255.255.255
+  \item D: első 4 bit 1110; 224.0.0.0-239.255.255.255: Többesküldési (multicast) címek
+  \item E: első 4 bit 1111; 240.0.0.0-255.255.255.255: jövőbeni felhasználásra fenntartva
+  \end{itemize}
+
+  \noindent A multicast több gépet címez meg egyetlen címmel, de ehhez a routereket be kell állítani.\\
+  
+  \noindent Van pár különleges IP cím is:
+  \begin{itemize}
+  \item 0.0.0.0: ez a host (gép) vagy ez a hálózat
+  \item 00000|host: az első pár bit 0-s (amely a hálózatot jelzi), a host az adott hálózaton
+  \item 255.255.255.255: csupa egyes (vagy másképp: az értéke -1): adatszórás (broadcast) a helyi hálón
+  \item hálózat|111\ldots111: adatszórás egy távoli hálón
+  \item 127.x.y.z: loopback, gépen belül, tesztelésre (elvileg)
+  \end{itemize}
+  
+
+  
+  \newpage
+  \section{Transzport réteg feletti alkalmazói interfészek}
+  \subsection{Kliens-szerver modell}
+  Sok esetben szükséges, hogy olyan adatokat érhessünk el, amik nincsenek helyben tárolva, csak egy másik, esetleg
+  földrajzilag nagyon távol lévő gépen találhatóak meg. Ennek ellenére úgy kell ezekhez hozzáférni, mintha helyben
+  tároltak lennének. Például egy cég esetén az adatokat nagykapacitású gépeken tárolják (kiszolgálók, szerverek), melyek
+  gyakran egyetlen épületben találhatóak. Az alkalmazottak gépei viszont kisebb teljesítményűek, és a világon bárhol
+  lehetnek (ügyfél, kliens). A kétféle géptípust hálózat köti össze. A hálózat belső felépítése, működése nem
+  fontos. Ezt a három részt együttesen nevezzük kliens-szerver modellnek.
+
+  \subsection{Socket API}
+  A TCP/IP modellben (implementációban) a kommunikáció foglalatokon (socketeken) keresztül történik. Bár az IP feletti
+  kommunikáció TCP és UDP protokollt használ, még további változata is van, a raw socket, ami esetén bármilyen formátumú lehet
+  a továbbítandó adat. Ez a programra van bízva.. Illetve ICMP protokollú csomagokat is lehet küldeni (ez internet
+  szintű protokoll, akárcsak az IP). A továbbiakban csak a  TCP/UDP változatról lesz szó.
+
+  A socket lényegében egy speciális fájl, a UNIX-szerű rendszereken van is ilyen, a UNIX socket fájl, amilyet pl. a
+  mysql, vagy az X használ. Csak a megnyitásban tér el a hagyományos fájloktól, mivel egy \texttt{socket} függvényt kell
+  meghívni, nem pedig az \texttt{open}-t. Meg kell adni a foglalat típusát, hogy internetes (IPv4: \texttt{PF\_INET},
+  IPv6: \texttt{PF\_INET6}, esetleg UNIX speciális fájl: \texttt{PF\_UNIX}). A PF a protocol family rövidítése. Viszont
+  \texttt{AF\_} kezdetű is szokott lenni, mint address family (ez egy \texttt{\#define} a \texttt{PF\_} változatra). Amit
+  még meg kell adni, hogy TCP vagy UDP alapú (\texttt{SOCK\_STREAM}, \texttt{SOCK\_DGRAM}). A visszatérési érték egy
+  egész szám (\texttt{int}), a fájlleíró (file descriptor).
+  
+  Amit meg lehet adni, hogy milyen kapuhoz (porthoz) kötődjön a foglalat (szerver esetén itt vár arra, hogy
+  kapcsolódjanak, kliens esetén innen kapcsolódik szerverhez). Ezt a \texttt{bind} paranccsal lehet megtenni, de az 1024
+  alatti portokat csak a root adhatja meg. Egy ip címet is vár.
+
+  Egy szerver program az \texttt{accept} függvénnyel vár arra, hogy kapcsolódjanak hozzá. A visszatérési érték egy
+  megnyitott foglalat, amin keresztül a klienssel tud kommunikálni.
+  
+  Az olvasás és az írás azonos a fájlokéval: \texttt{read}, \texttt{write}.
+  
+  Le lehet zárni a foglalatot fogadási illetve adási irányból is a \texttt{shutdown} függvénnyel. Viszont a teljes
+  lezárásra a \texttt{close} függvény szolgál, akárcsak a fájloknál.
+
+  A socketek lehetek blokkolóak (addig nem fejeződik be az olvasás, amíg nem érkezik adat), vagy nem blokkolóak. Utóbbi
+  esetben a \texttt{select} függvénnyel lehet ellenőrizni, hogy egy vagy több foglalaton lehet-e olvasni, vagy épp írni
+  rá, vagy valamilyen hiba történt.
+  
+  \subsection{A TLI felület}
+  A TLI a Transport Level Interface rövidítése. Nem nagyon használják. Eseményvezérelt (a \texttt{select} segítségével a
+  socketek is azzá tehetők).
+
+  
+  \newpage  
+  \section{A DNS adatbázis és implementációja}
+  \subsection{A domain name system kialakulása}
+  Amint több gépből álltak a korai hálózatok, szükségessé vált, hogy könnyen megjegyezhetően lehessen rájuk
+  hivatkozni. Ezért elnevezték a gépeket. Kezdetben elegendő volt egy fájlban tárolni a név-gép megfeleltetéseket, a
+  hálózatban történő változásokat minden gépen bejegyezni (vagy a fájlt másolni a többi gépre).
+  
+  Amint a gépek száma túllépte azt a határt, amit még így kezelni lehetett, módosítani kellett a megfeleltetés
+  tárolásának módját. Már nem működik az, hogy mindenki ismer mindenkit, csak az, hogy bizonyos gépek ismernek
+  bizonyos gépeket, és azokat, ahonnan információt kaphatnak az ismeretlen gépekről.
+
+  \subsection{A DNS működése}
+  A számítógépeket egyedileg azonosítja az IP címük. Ma már többféle van, az IPv4 az, ami elterjedt, általánosan
+  használt, viszont van ennek újabb változata is, ez pedig az IPv6 (vannak további protokollok is, pl az IPX, ami egy
+  helyi hálón belül azonosítja a gépeket). Az IPv6-ot még csak bizonyos helyeken használják, lassan terjed. Az IPv4
+  címek 32, az IPv6 pedig 128 bitesek.
+  
+  Ezeket a számokat nehéz fejben tartani, ezért beszédes neveket adnak nekik a legtöbb esetben. Ezen nevek több részből
+  állnak, minden részt egy-egy pont választ el a mellette állótól, és a végén is van egy pont, amit el szoktak
+  hagyni. Ha az elválasztó karakter mentén szétdaraboljuk a nevet, akkor egy hierachiát kapunk, a legelső rész a gépnek
+  a neve, a mögötte álló pedig az a tartomány (domain), amiben a gép van. Viszont ez is lehet egy másik tartomány része,
+  (szokták aldomain-nek is mondani), ezáltal egy hierarchikus szerkezet jön létre. A tartomány másik elnevezése a zóna.
+
+  Mindegyik rész esetén adott (köztudott), hogy mely gépek (ún. névkiszolgálók) tárolják az IP cím - DNS-név
+  megfeleltetéseket. Mindegyik ismeri a maga tartományát, és azt, hogy az altartományok névszervereinek mi az IP
+  címe. Ezáltal az egész rendszer felülről lefelé bejárható, és megtudható bármely, névvel rendelkező gép IP
+  címe.
+  
+  Pontosabban csak azoké, amelyeknek a névszervere publikálja ezt az információt. Vannak nem egyedi, az Interneten nem
+  érvényes IP címek, ezek a 10.0.0.0/8, 192.168.0.0/16, 172.16.0.0/12 címtartományok, amikhez lehet külön névszerver. A
+  perjel előtti rész jelöli a hálózatot, az azutáni pedig a hálózati maszkot, vagyis azt, hogy pontosan hány darab egyes
+  bit van a maszk elején. Pl. a 24 jelentése 255.255.255.0, az 1-é 128.0.0.0.
+  
+  A gyökérzónát nem egy, hanem több gép szolgálja ki. Ezeket a gépeket mindenki ismeri, és adott az is, hogy melyik
+  kiszolgálóról lehet letölteni a zóna legfrissebb névszerver-listáját (a zónafájlt). Csak a gyökérzóna kérdezhető le
+  teljesen (más szerverek megtilthatják a zónatranszfert). Az ismertség oka az, hogy ha egy névkiszolgáló nem ismeri az
+  adott gépet, aminek az IP címét keresik, akkor csak úgy tudja megtalálni, hogyha a gyökértől indul el, a legfelső
+  szinttől, így nagyon sok kérést kell ezen szinten kiszolgálni.
+
+  
+  \subsection{A DNS kiszolgálók}
+  A DNS kiszolgálók tárolják az egyes zónák fájljait. Egy adott zónára nézve kétféle kiszolgáló van, master és slave. Az
+  előbbi tárolja a zónát. Az utóbbi a mastertől rendszeres időközönként letölti a zónafájlt. Mindkettő névszervere az
+  adott zónának. Minden zónában legalább kettő kiszolgáló van, különböző hálózatban, így elkerülhető, hogy akár a
+  számítógép, akár a szerver hálózatának hibája miatt az adott zónára vonatkozó kéréseket senki se tudja
+  kiszolgálni. Azonban nem mindenki tartja be ezt a ``szabályt''.
+
+  A legelterjettebb névszerver a BIND (a legújabb a 9-es verzió). Amit meg lehet adni, alapvetően az, hogy milyen
+  IPv4-es és IPv6-os foglalaton hallgatózzon, milyen névszervernek küldje tovább a kérést, ha nem tudja
+  kiszolgálni. Valamint globálisan és zónákra külön-külön is megadható, hogy mely IP címeknek engedélyezzen zóna
+  transzfert, a zóna bejegyzéseinek módosítását (dinamikus DNS), valamint bármilyen lekérdezést.
+
+  \subsection{Egy adott zónafájl szerkezete}
+  A legelső sorában gyakran áll egy \texttt{\$TTL kifejezés} sor (direktíva), ami az adott zónára jelemző alapértelmezett
+  időtartamot jezi, amennyi ideig egy bejegyzés él (\emph{time to live}). Ezt minden bejegyzésnál meg lehet adni.
+  
+  \subsubsection{SOA}
+  A következő bejegyzés a SOA rekord (Start of Authority Record). Csak egy ilyen lehet egy zónában (domainben), a zónára
+  globális beállításokat jelzi.\\
+  \ut{;name   ttl class rr    name-server email-addr  (sn ref ret ex min)\\
+    example.com.\hspace{0.5cm}IN\hspace{0.5cm}SOA \hspace{0.5cm}ns.example.com. hostmaster.example.com. (
+    \hspace*{5cm} 2003080800 ; se = serial number\\
+    \hspace*{5cm} 172800     ; ref = refresh = 2d\\
+    \hspace*{5cm} 900        ; ret = update retry = 15m\\
+    \hspace*{5cm} 1209600    ; ex = expiry = 2w\\
+    \hspace*{5cm} 3600       ; min = minimum = 1h\\
+    \hspace*{5cm} )\\
+    ;
+  }
+
+  Ezek jelentése rendre a következő:
+  \begin{enumerate}
+  \item[ {\it name}] A zóna teljes neve, amely ponttal végződik. Gyakran ``@'' karakterrel helyettesítik. Esetleg
+    előtte áll egy \texttt{\$ORIGIN example.com.} direktíva, ami ugyanezt mondja (és akkor a name helyett ``@'' áll).
+  \item[ {\it ttl}] Ez egy standard TTL érték, a slave szervernek szól (0..2147483647 az RFC 2181 szerint). Nem mindig
+    szerepel, a fenti példában nincsen.
+  \item[ {\it class}]  A bejegyzés típusát mondja meg, ez általában \texttt{IN} (INternet). A többi lehetséges érték ma
+    már őskövület.
+  \item[ {\it name-server}] Primary master server. Csak dinamikus DNS esetén van jelentősége. Minden más esetben bármely
+    névszerver megadható itt. Megadható zónán kívüli névszerver is, de ekkor FQDN (teljes név ponttal a végén) kell. 
+  \item[ {\it email-addr}]  A zónáért felelős személy email címe. Mivel a ``@'' szerepe más, ezért azt pont
+    helyettesíti. Tipikusan ``hostmaster'' az email cím, ami egy foglalt fiók.
+  \item[ {\it serial number}] Sorozatszám, egy előjel nélküli 32 bites egész (0..4294967295, maximális növelése 2147483647).
+    Ebből lehet megállapítani, hogy a zóna megváltozott-e. A BIND megvalósításban ez egy 10 karakter hosszú mező,
+    yyyymmddss alakban, ahol yyyy jelöli az évet (2003), mm a hónapot (08), dd a napot (08), és ss azt, hogy aznap
+    hányadszor frissült (00: először). Viszont ez megegyezés, nem kötelező, tehát a BIND nem is ellenőrzi az értéket.   
+  \item[ {\it refresh}] Előjeles 32 bites egész, másodpercekben. A slave szerver ilyen gyakran tölti le a zónafájlt. A
+    javasolt érték 1200 és 43200 között van: 1200, ha gyakran változik a zóna, és 43200 (12 óra), ha ritkán. A BIND
+    megengedi a nem numerikus értékeket is, pl 12h, 30m.
+  \item[ {\it retry}] Előjeles 32 bites egész, másodpercekben. A slave server ilyen gyakran próbál újra kapcsolódni a
+    masterhez, ha az valamiért nem válaszolna. Értéke: 180 (3m) és 900 (15m) között, esetleg magasabb is lehet.
+  \item[ {\it expiry}] Előjeles 32 bites egész, másodpercekben. Ezen érték után már nem hiteles a zónaadat. Csak a szolga
+    és másodlagos névszerverek számára jelent információt. A BIND9 nem válaszol olyan kérésekre, amik olyan zónára
+    vonatkoznak, amely adata lejárt, és a mester kiszolgálóhoz nem lehet csatlakozni. A slave a \emph{ref} érték lejárta
+    után lekéri a SOA rekordot, és ha megváltozott a sorozatszám, akkor kér egy zóna transzfert (AXFR/IXFR). Sikeres
+    csatlakozás utána a \emph{refresh} és \emph{expiry} számlálókat nullára állítja, és kezdi az egészet
+    elölről. Sikertelen esetben \emph{retry} időközönként csatlakozni próbál, viszont továbbra is kiszolgálja a
+    kéréseket, amíg a \emph{expiry} mezőben megadott érték le nem jár. Ezért ajánlott a nagyobb érték: 2-4 hét (RFC 1912).
+  \item[ {\it min}] Előjeles 32 bites egész, másodpercekben. Minimális cache-elési idő. BIND9-ben (RFC 2308) negatív
+    értéket is megenged, ekkor NAME ERROR = NXDOMAIN rekord lesz eltárolva. A BIND9-ben legfeljebb 3 óra lehet ez az érték.
+  \end{enumerate}
+
+  \begin{megj}
+  \item A BIND megengedi, hogy ne csak számok (mp) szerepeljenek, hanem beszédesebb formájú értékek is. Ezekből több
+    is szerepelhet egyszerre, pl 1W2d. 
+    \begin{itemize}
+    \item \#s = seconds = \# x 1 seconds
+    \item \#m = minutes = \# x 60 seconds
+    \item \#h = hours = \# x 3600 seconds
+    \item \#d = day = \# x 86400 seconds
+    \item \#w = week = \# x 604800 seconds
+    \end{itemize}
+    
+  \item RFC 1035 megköveteli, hogy a SOA rekorddal egy sorban szerepeljen a nyitó zárójel, akárcsak a BIND. A csukó
+    párja bárhol szerepelhet
+  \item A SOA-beli névszervernek mindig lesz egy NS bejegyzése.
+  \end{megj}
+
+  \subsubsection{A zóna további rekordjai}
+  Egy általános bejegyzés formája a következő:\\
+  \texttt{name\hspace{0.5cm} ttl \hspace{0.5cm}class\hspace{0.5cm} type\hspace{0.5cm} type-specific-data}
+  \begin{itemize}
+  \item[ {\it name}] A zónafájl adott részének neve (The name of the node in the zone file to which this record
+    belongs).
+  \item[ {\it ttl}] 32 bites egész, a \$TTL értékét bírálja felül. A $0$ érték azt jelzi, hogy nem gyorstárazható az
+    adott bejegyzés.
+  \item[ \textit{class}] 16 bites szám, a normál értéke IN.
+  \item[ \textit{type}] A rekord típusa. Ez eldönti, hogy a \textit{type-specific-data} mezőben mi áll.
+  \item[ \textit{type-specific-data}] A \emph{type} és \emph{class} által meghatározott bejegyzéshez tartozó érték.
+  \end{itemize}
+  
+  A fontosabb rekordtípusok a következők (egyszerű zóna esetén ezek szerepelnek)
+  
+  \begin{itemize}
+  \item[ \textit{A}] Egy IPv4 bejegyzés, adott névhez tartozó ip címet adja meg.
+  \item[ \textit{AAAA}] Egy IPv6 bejegyzés, adott névhez tartozó ip címet adja meg.
+  \item[ \textit{CNAME}] Canonical Name. Egy host álneve.
+  \item[ \textit{MX}] Mail Exchanger, levelezőkiszolgáló. Egy preferenciaérték és egy gép neve.
+  \item[ \textit{NS}] A zóna egy névszerverének bejegyzése.
+  \item[ \textit{PTR}] Egy fordított zóna fájlban szerepel, ip címet kell névre feloldani.
+  \item[ \textit{TXT}] Szöveges információ. A Sender Policy Framework is ezt használja (ezzel lehet megadni, hogy egy
+    adott tartományból érkező levelek mely gépekről feladva érvényesek, spam ellen hatásos\ldots)
+  \end{itemize}
+  
+  \subsection{Példák}
+  \ut{
+    \begin{tabular}{@{}lll@{}}
+      @ & IN NS &     srv ; a névszerver a zónán belül van\\
+      zeratul        & IN AAAA &         3ffe:bc0:8b1::101\\
+      zeratul        & IN A &           10.0.1.101\\
+      g             & IN CNAME &        gentoo ; zónán belül!\\
+      gentoo & IN CNAME & gentoo.inf.elte.hu.
+    \end{tabular} 
+  }
+
+
+  IPv4-es reverse zóna fájl:\\
+  \ut{\begin{tabular}{@{}lll@{}}
+      \$ORIGIN & & 10.in-addr.arpa.\\
+      101.1.0  & IN PTR &   zeratul.panthernet.; mindig teljes név van\\
+    \end{tabular} 
+  }
+
+  \newpage
+  \section{Az Internet protokoll forgalomirányítási modellje}
+  A \emph{forgalomirányító algoritmus (routing algorithm)} a hálózati réteg szoftverének része, mely  eldönti, hogy a
+  bejövő csomagok melyik kimeneti vonalon haladjanak tovább. Datagram alapú hálózat esetén ezt minden adatcsomagra meg
+  kell hozni, alhálózaton belüli virtuális áramkörök esetén pedig csak az áramkör felépülésekor. A csomagok ezt az
+  útvonalat követik, nincs szükség forgalomirányító döntésekre. Ezért viszony-forgalomirányításnak (\emph{session
+    routing}) is nevezik.
+
+  Nem egyezik meg a forgalomirányítás a \emph{továbbítással (forwarding)}, ugyanis az előbbi az útvonalat módosíthatja,
+  azaz a forgalomirányító tábla kezelését végzi, az utóbbi viszont csak a routing table-t olvassa.
+
+  Minden forgalomirányító algoritmus esetén elvártak a következő tulajdonságok: helyesség, egyszerűség, robosztusság,
+  stabilitás, igazságosság, optimalitás. Az első kettő triviális. A robosztusság azt jelenti, hogy az algoritmus a
+  hálózati topológia változása esetén is működik. Az optimalitás viszont nem egyértelmű, mert több szempont szerint
+  optimalizálhatunk. Lehet a csomagok késleltetésének minimalizálása, vagy épp a hálózat áteresztőképességének
+  maximalizálása.
+  
+  Kétféle algoritmusosztály van, adaptív és nem adaptív. A \emph{nem adaptív algoritmusok (nonadaptive algorithms)}
+  esetén az útvonalakat előre, off-line módon számolják ki, és a hálózat indításakor töltik be a routerekbe. Ezért ezt
+  satikus forgalomirányításnak (\emph{static routing}) is nevezik. A másik osztály: \emph{adaptív algoritmusok}
+  (adaptive algorithms), melyek alkalmazkodnak a hálózat módosulásaihoz. Ez elsősorban a topologikus változást jelenti,
+  viszont rendszerint a hálózati forgalom változásait is figyelembe veszik. Szempontok pl. távolság, ugrások (hop) száma,
+  becsült áthaladási idő.
+
+  \subsection{Legrövidebb útvonal alapú forgalomirányítás}
+  A legrövidebb út fogalma nem egyértelmű, mert lehet az ugrások száma, földrajzi távolság, vagy más érték. Általában az
+  élsúlyokat a távolság, sávszélesség, átlagos forgalom, kommunikációs költség, átlagos sorhosszúság, mért késleltetés
+  és egyéb értékek alapján számolják ki. Többféle algoritmus van erre, legismertebb a Dijkstra-algoritmus (1959),
+  nemnegatív élsúlyokkal
+  
+  \subsection{Elárasztásos algoritmusok}
+  Az egyik algoritmus az, hogy a routerek minden kimenő vonalon kiküldik a csomagot, kivéve a bejövőn
+  (\emph{elárasztás, flooding}). Ez azt jelentené, hogy idővel egyre több példányban kerinegene egy kört tartalmazó
+  hálózaton ez a csomag, amit ki kell küszöbölni. Ezért egy ugrászámlálót (hop counter) helyeznek el a csomagban. Ezt
+  minden router eggyel csökkenti. Amikor a számláló eléri a nullát, a csomagot eldobják. A másik módszer a már
+  elárasztással kiküldött csomag megjegyzése, vagyis a csomag sorszámának nyilvántartása a csomag forrásával együtt. Ha
+  egy router már találkozott ezzel a számpárral, a csomagot eldobja. Ennek javítása az, hogy egy számlálót tart fenn,
+  aminek $k$ értéke azt jelzi, hogy $k$-ig minden szám már előfordult.
+
+  Az algoritmus javítása a \emph{szelektív elárasztás (selective flooding)}. Csak a megközelítőleg jó irányba küldik
+  tovább a routerek a csomagokat.
+  Ez a módszer általában nem kívánatos, de ha bármikor kieshet akár egy teljes alhálózat, kifejezetten hasznos (katonai
+  alkalmazások). A másik, amikor adatokat nagyon sok helyen kell egyszerre frissíteni, például adatbázist. Még egy
+  fontos alkalmazása van. A vezeték nélküli hálózatok néha nagyobb kiterjedésűek, mint hogy egy hozzáférési pont (access
+  point) ki tudja szolgálni, ezért szükségesek ismétlők (repeaterek), amelyek felerősítve továbbítják a jelet. Bár ez
+  nem igazi elárasztás, mégis annak lehet tekinteni.
+  
+  \subsection{Távolságvektor alapú forgalomirányítás}
+  A távolságalapú forgalomirányítás (distance vector routing) esetén minden router egy táblázatot (vektort) tart karban,
+  melynél minden célhoz tartalmazza az áltála ismer legrövidebb utat. Ezek folyton frissülnek, méghozzá a szomszédokkal
+  történő információcsere útján. Az algoritmus másik neve \emph{elosztott Bellman-Ford forgalomirányítási algoritmus},
+  vagy \emph{Ford-Fulkerson} algoritmus. Utóbbiak fejlesztették ki. Ez az algoritmus az ARPANET eredeti
+  forgalomirányítása, amely ma RIP néven használatos.
+  
+  A routerek táblázatában szerepel az alhálózat minden útválasztója, mely a táblázat indexét jelenti, és minden
+  bejegyzéshez két érték tartozik: az adott célhoz előnyben részesített kimenet vonalból és a becsült időből vagy
+  távolságből.A mértékegység többek között az ugrások száma, milliszekundumban mért késleltetés, az út mentén sorban álló
+  csomagok száma lehet. Minden router tudja, mekkora távolságra van a szomszdaitól (feltehetjük!).
+  
+  Ha épp most érkezett egy táblázat az $X$ szomszédtól, melyben az áll, hogy az $i$ routert $X_i$ idő alatt lehet
+  elérni, és $X$-et $m$ idő alatt, akkor $X$-en keresztül az $i$-t $X_i + m$ idő alatt lehet elérni. Ezt minden
+  szomszédra elvégzi, így meg tudja állapítani, hogy melyik becslés tűnik a legjobbnak. Ezek után ezt a becslést és
+  vonalat fogja tárolni az új forgalomirányító táblázatban. A régi értéket nem használja fel.
+
+  Az algoritmusnak van egy hibája, hogy lassan konvergál a helyes válaszhoz (valódi távolsághoz, szállítási időhöz). A
+  jó hírre gyorsan, rosszra ráérősen reagál, ezt személteti a következő példa. Tegyük fel, hogy $A\ldots\, E$  routerek
+  egy lineáris hálózaton találhatóak, és kezdetben $A$ nem elérhető. Így mindenkinél a ``végtelen'' késleltetés tartozik
+  $A$-hoz. Ezek után megjavul az $A$. Ha bizonyos időközönként cserélnek táblázatot, akkor az első csere után csak $B$
+  látja ezt, $C$ a második csere után, és így tovább. Ez azt jelenti, hogy 4 csere után látja csak mindenki elérhetőnek
+  $A$-t. Egészen pontosan $B$ azt tudja meg, hogy a tőle balra lévő router késleltetése $A$-ig nulla.
+  
+  Tegyük fel, hogy $A$ és $B$ közötti kapcsolat megszakad. Ekkor kezdetben az 1, 2, 3, 4 késleltetések tartoznk $A$-hoz
+  $B\ldots E$ táblázatában. Az első csere esetén $B$ már nem látja $A$-t, de azt megtudja, hogy $C$-n keresztül létezik
+  egy 2 hosszúságú út, tehát $A$ elérhető $C$-n keresztül. $B$ természetesen nem tudhatja, hogy $C$ csak rajta keresztül
+  éri el, mert nincsen másik hálózatban (a $C$). Ezért most csak $B$ frissít: 3, 2, 3, 4. A következő csere után $C$
+  rájön, hogy mindkét szomszédjától legalább 3 hosszú útra van $A$. Ezért ő firssíti a bejegyzését: 3, 4, 3, 4. És így
+  tovább. 
+
+  A gondot az okozza, hogy minden routerben tárolt érték legfeljebb eggyel magasabb, mint a szomszédjában
+  lévő. Fokozatosan közelítik a végtelent (pontosabban az akként ábrázolt számot). Emiatt érdemes a végtelent a
+  leghosszabb út + 1-re állítani. Ez a probléma a \emph{végtelenig számolás (count-to infinity) problémája} néven
+  ismert. Bár történtek próbálkozások ennek kiküszöbölésére, nem nagyon működött általános esetben. a probléma lényege
+  az, hogy ha $X$ elmondja $Y$-nak, hogy egy valahová vezető útja, akkor $Y$ nem tudhatja, hogy ő rajta van-e ezen az
+  úton.
+  
+\end{document}
+
+% Local Variables:
+% fill-column: 120
+% TeX-master: t
+% End:

@@ -1,0 +1,128 @@
+\documentclass[fleqn,10pt,a4paper,titlepage]{article}
+\includeonly{common,terstrukturak,diffszamitas,intszamitas}
+
+\include{common}
+
+\newcommand{\eqrho}{\stackrel{\varrho}{=}}
+\newcommand{\eqrhon}[1]{\stackrel{\varrho_{#1}}{=}}
+\newcommand{\MT}{\ensuremath{(M,\varrho)}\,}
+\newcommand{\MTn}[1]{\ensuremath{(M,\varrho_{#1})}\,}
+\newcommand{\sorozat}{\ensuremath{(a_n)\colon \N\n M}\,}
+\newcommand{\sorozatn}[1]{\ensuremath{(a_{#1})\colon \N\n M}}
+
+\renewcommand{\sectionmark}[1]{\markboth{\Roman{section}. fejezet\\#1}{}}
+\newcommand{\hullam}{\widetilde}
+\newcommand{\mr}[1]{(M_{#1},\,\ro_{#1})}
+\newcommand{\fmm}{f\in M_1\n M_2}
+\newcommand{\X}{\ensuremath{\mathcal{X}}}
+\newcommand{\lp}{\ensuremath{l_p}}
+\newcommand{\norma}[1]{\ensuremath{\left\Vert #1\right\Vert}}
+\newcommand{\norman}[2]{\ensuremath{\norma{#1}^{(#2)}}}
+\newcommand{\Norma}{\norma{\cdot}}
+\newcommand{\Norman}[1]{\ensuremath{\Norma^{(#1)}}}
+\newcommand{\opnorma}[1]{\ensuremath{|||#1|||}}
+\newcommand{\NT}{\ensuremath{(\X,\,\Norma)}}
+\newcommand{\skalar}[2]{\ensuremath{\langle#1,\,#2\rangle}}
+\newcommand{\Skalar}{\skalar{.}{.}}
+\newcommand{\skalarsz}{\Skalar}
+\newcommand{\ET}{\ensuremath{(\X,\,\skalarsz)}}
+\newcommand{\nullelem}{\mathsf{0}}
+%\renewcommand{\square}{\blacksquare}
+\newcommand{\RnRm}{\R^n\n\R^m}
+\newcommand{\RnRn}{\R^n\n\R^n}
+\newcommand{\RnR}{\R^n\n\R}
+\newcommand{\RRm}{\R\n\R^m}
+\newcommand{\Rnrm}{\RnRm}
+\newcommand{\Rnrn}{\RnRn}
+\newcommand{\Linearis}{\ensuremath{\mathcal{L}(\R^n,\,\R^m)}}
+\DeclareMathOperator{\intD}{int\,D}
+\DeclareMathOperator{\Folyt}{C}
+\newcommand{\folyt}[1]{\Folyt\{#1\}}
+\newcommand{\derivp}[1]{\D\{#1\}}
+\newcommand{\dern}[2]{\D^{#1}\{#2\}}
+\newcommand{\der}[1]{\derivp{#1}}
+\newcommand{\vekt}[1]{\mathbf{#1}}
+\newcommand{\Rmn}{\ensuremath{\R^{m\times n}}}
+\DeclareMathOperator{\grad}{grad}
+\newcommand{\vfi}{\varphi}
+\newenvironment{spec}{\begin{trivlist}\item\relax\mbox{\textbf{Spec. esetek.\enskip}}\ignorespaces}{\end{trivlist}}
+\newtheorem{lemma}{lemma}[section]
+\newtheorem{PlSS}{PÉLDA}[subsubsection]
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\arctg}{arctg}
+\newcommand{\Der}{\D}
+\newcommand{\Oint}{\oint\limits}
+\DeclareMathOperator{\Rint}{R}
+\newcommand{\listazjbetu}{
+  \renewcommand{\theenumi}{\alph{enumi}}
+  \renewcommand{\labelenumi}{(\theenumi)}
+}
+\newcommand{\listazjromai}{
+  \renewcommand{\theenumi}{\alph{enumi}}
+  \renewcommand{\labelenumi}{(\theenumi)}
+}
+\newcommand{\listabetu}{
+  \renewcommand{\theenumi}{\alph{enumi}}
+  \renewcommand{\labelenumi}{\theenumi}
+}
+\newcommand{\listaszamkor}{
+  \renewcommand{\theenumi}{\alph{enumi}}
+  \renewcommand{\labelenumi}{\theenumi$^\circ$}
+}
+\newenvironment{enumzjromai}{\listazjromai\begin{enumerate}}{\end{enumerate}}
+\newenvironment{enumzjbetu}{\listazjbetu\begin{enumerate}}{\end{enumerate}}
+
+\newenvironment{enumzjr}{\begin{enumzjromai}}{\end{enumzjromai}}
+\newenvironment{enumzjb}{\begin{enumzjbetu}}{\end{enumzjbetu}}
+
+
+\DeclareRobustCommand{\tmspace}[3]{%
+  \ifmmode\mskip#1#2\else\kern#1#3\fi\relax}
+\providecommand*{\negmedspace}{\tmspace-\medmuskip{.2222em}}
+%
+% written by Claudio Beccari
+% published in TUGboat, Volume 18 (1997), No. 1, 39--48
+%
+% slightly modified by FW
+\makeatletter
+\providecommand*{\diff}%
+  {\@ifnextchar^{\DIfF}{\DIfF^{}}}
+\def\DIfF^#1{%
+  \mathop{\mathrm{d{}}}%%% original version: {\mathstrut d}}%
+    \nolimits^{#1}\gobblespace}
+\def\gobblespace{%
+  \futurelet\diffarg\opspace}
+\def\opspace{%
+  \let\DiffSpace\negmedspace%%% original version: \,
+  \ifx\diffarg(%
+    \let\DiffSpace\relax
+  \else
+    \ifx\diffarg[%
+      \let\DiffSpace\relax
+    \else
+      \ifx\diffarg\{%
+        \let\DiffSpace\relax
+      \fi\fi\fi\DiffSpace}
+\makeatother
+
+\providecommand*{\deriv}[3][]{%
+    \frac{\diff^{#1}#2}{\diff #3^{#1}}}
+
+
+\title{Analízis 4 előadás jegyzet (2004/2005)\\(Többváltozós analízis)}
+\author{Tóth László Attila (panther@elte.hu)}
+\date{}
+\begin{document}
+  \maketitle
+  \mktoc
+  \include{terstrukturak}
+  \newpage
+  \include{diffszamitas}
+  \newpage
+  \include{intszamitas}
+\end{document}
+
+% Local Variables:
+% fill-column: 120
+% TeX-master: t
+% End:

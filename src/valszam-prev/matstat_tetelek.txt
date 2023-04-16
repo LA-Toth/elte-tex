@@ -1,0 +1,37 @@
+1.      Statisztikai mező, minta, mintatér. Statisztikák.
+
+2.      Statisztika alaptétele.
+
+3.      Indikátor minta paraméterének becslése.
+
+4.      Becslések tulajdonságai.
+
+5.      Fisher-féle információmennyiség.
+
+6.      Cramér-Rao egyenlőtlenség.
+
+7.      Maximum-likelihood becslések.
+
+8.      Momentumok módszere.
+
+9.      Elégséges statisztikák.
+
+10.  Rao-Blackwell-Kolmogorov tétel.
+
+11.  Konfidenciaintervallumok.
+
+12.  Hipotézisvizsgálati alapfogalmak.
+
+13.  Neyman-Pearson alaplemma.
+
+14.  U- és t-próba.
+
+15.  F-próba.
+
+16.  chi^2-próbák.
+
+17.  Kolmogorov-Szmirnov próba
+
+18.  Idősorok elemei
+
+19.  A szórásanalízis elemei

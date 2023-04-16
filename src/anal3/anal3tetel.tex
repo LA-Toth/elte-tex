@@ -1,0 +1,1252 @@
+\documentclass{article}
+
+
+%
+% - ---- -- PACKAGES--------------------------
+%
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[magyar]{babel}
+%\usepackage{amsthm}
+\usepackage{theorem}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{paralist}
+
+%
+% ---------- CODES --------------------------
+%
+\makeatletter
+\gdef\th@magyar{\normalfont\slshape
+  \def\@begintheorem##1##2{%
+  \item[\hskip\labelsep \theorem@headerfont ##2.\ ##1.]}%
+  \def\@opargbegintheorem##1##2##3{%
+  \item[\hskip\labelsep \theorem@headerfont ##2. ##1.\ (##3)]}}
+\makeatother
+
+
+%
+% ------------  N E W  C O M M A N D S --------
+%
+%\newcommand{\ob}{\begin{flushright} \leavevmode\hbox to.77778em{\hfil\vrule
+%    \vbox to.675em{\hrule width.6em\vfil\hrule}\vrule}\hfil\end{flushright}}
+\newcommand{\ob}{\hfill$\square$}
+\newcommand{\ff}{f\in\mathbb{R}\rightarrow\mathbb{R}}
+\newcommand{\fab}{f\colon (a,b)\rightarrow\mathbb{R}}
+\newcommand{\fabk}{f\colon \left[a,b\right]\rightarrow\mathbb{R}}
+\newcommand{\fir}{f\colon I\rightarrow\mathbb{R}}
+\newcommand{\fdab}{f\in D(a,b)}
+\newcommand{\exist}{\exists}
+\newcommand{\ek}{\Longleftrightarrow}
+\newcommand{\la}{\lambda}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\n}{\rightarrow}
+\newcommand{\nn}{\Rightarrow}
+\newcommand{\Omage}{\Omega}
+\newcommand{\nb}{\Leftarrow}
+\newcommand{\di}{\displaystyle}
+\newcommand{\sarrow}{\downarrow}
+\newcommand{\narrow}{\uparrow}
+\newcommand{\lt}{<}
+\newcommand{\gt}{>}
+
+
+%
+% ------------  NEW PART DEFS -----------------
+%
+\newcounter{Szaml}
+
+
+\theoremstyle{magyar}
+\theoremheaderfont{\itshape\bfseries}
+\newtheorem{de}{definíció}[section]
+\newtheorem{te}{tétel}[section]
+\newtheorem{bi}{bizonyítás}[section]
+\newtheorem{ko}{következmények}[section]
+\newtheorem{me}{megjegyzés}[section]
+\newtheorem{al}{állítás}[section]
+
+
+\newenvironment{biz}{\begin{trivlist}\item\relax\mbox{\textbf{Bizonyítás.\enskip}}\ignorespaces}{\ob\end{trivlist}}
+\newenvironment{kov}{\begin{trivlist}\item\relax\mbox{\textbf{Következmény.\enskip}}\ignorespaces}{\end{trivlist}}
+\newenvironment{megj}{\begin{trivlist}\item\relax\mbox{\textbf{Megjegyzés.\enskip}}\ignorespaces}{\end{trivlist}}
+\DeclareMathOperator{\D}{D}
+\newenvironment{bizlist}{\setcounter{Szaml}{1}
+    \begin{list}{\alph{Szaml})\hfill}
+    {\usecounter{Szaml}\setlength{\itemsep}{0pt}
+    \setlength{\itemindent}{-\labelsep}
+    \setlength{\listparindent}{0pt}}}{\end{list}}
+
+
+%
+% - - - -- - - S E T T I N G S ----------------
+%
+%\setlength{\parindent}{0pt}
+%\setlength{\parskip}{\baselineskip}
+\addtolength{\voffset}{-1cm}
+\addtolength{\textheight}{2cm}
+%\addtolength{\marginparwidth}{-1cm}
+\addtolength{\hoffset}{-1cm}
+\addtolength{\textwidth}{2cm}
+\setlength{\headheight}{23pt}
+%
+\pagestyle{fancy}
+
+  \renewcommand{\sectionmark}[1]{\markboth{\Roman{section}. tétel\\#1}{}}
+
+\newcommand{\mktoc}{
+  \pagenumbering{roman}
+  \setcounter{page}{1}
+  \lhead{\textbf{\thepage}}
+  \cfoot{}
+  \tableofcontents
+  \newpage
+  \lhead{\textbf{\thepage}}%/\pageref{LastPage}}
+  \pagenumbering{arabic}
+  \setcounter{page}{1}
+}
+
+
+%
+% T H E    D O C U M E N T
+%
+
+\title {Analízis 3}
+\author{Tóth László Attila (panther@elte.hu)}
+\begin{document}
+  \maketitle
+  \mktoc
+
+  \newpage
+  \setcounter{page}{1}
+
+  \section{A differenciálszámítás középértéktételei}
+  \begin{te}[Rolle-tétel]
+	 {\rm  \(-\infty < a < b < \infty\), $\fabk$, vagyis $[a,b]$ kompakt,
+	  $f\in C$, $\fdab$, $f(a)=f(b)$. Ekkor $\exist \xi \in (a,b): f'(\xi) = 0$
+	  }
+  \end{te}
+  \begin{biz}
+    A Weierstrass-tétel alapján $f$-nek van maximuma és minimuma. Legyen
+    $M:=\max R_f,\ m:=\min R_f$. Ha $M=m$, akkor $f(a)=f(b)$ és a függvény 
+    konstans függvény, következésképpen $\forall x\in(a,b): f'(x)=0$. Ha 
+    $m\neq M$, akkor viszont vagy $m$, vagy $M$ értékét a függvény $\xi\in(a,b)$ 
+    helyen veszi fel, és ez lokális szélsőérték $\Longrightarrow f'(\xi)=0$
+  \end{biz}
+  \begin{kov}
+    Ha $f\in C[a,b], f\in D(a,b)$ és $\nexists x\in(a,b)\colon f'(x)=0$, akkor 
+    $f(a)\not=f(b)$.
+  \end{kov}
+  \begin{te}[Cauchy-tétel]
+    	 {\rm  \(-\infty < a < b < \infty\), $f,b\in\left[a,b\right]\rightarrow\R$,
+	  $f,g\in C[a,b]$, $f,g\in D(a,b)$.\\
+	  Ekkor $\exist \xi \in (a,b): f'(\xi)(g(b)-g(a)) = g'(\xi)(f(b)-f(a))$
+	  }
+  \end{te}
+  \begin{megj}
+    Ha még $\forall x \in [a,b]\colon g'(x) \neq 0$,
+    akkor \(\dfrac{f(b)-f(a)}{g(b)-g(a)} = \dfrac{f(\xi)}{g(\xi)}\).    
+  \end{megj}
+  \begin{biz}
+    A Rolle-tétel miatt $g(a)\neq g(b)$\\
+    Legyen $F(x):=f(x)-\la{g(x)}$, ahol $\la$ számot úgy válasszuk, hogy 
+    kielégítse  Rolle-tétel feltételeit. Nyílvánvaló, hogy $F\in C[a,b]$ és $F\in
+    D(a,b)$ és az $F(a)=F(b)$ feltétel a következővel ekvivalens:\\
+    $f(a)-\la{g(a)}=f(b)-\la{g(b)}$, vagyis 
+    $\di\la=\frac{f(b)-f(a)}{g(b)-g(a)}$
+    A Rolle-tétel miatt azt kapjuk, hogy:\\
+    $\exists \xi\in(a,b):0=F'(\xi)=f'(\xi)-\la{g'(\xi)}$. Innen adódik, hogy:\\
+    $\di\frac{f'(\xi)}{g'(\xi)}=\la=\frac{f(b)-f(a)}{g(b)-g(a)}$
+  \end{biz}
+  \begin{te}[Lagrange]
+    Ha az $\ff$ folytonos az $[a,b]$ zárt intervallumon és differenciálható az 
+    $(a,b)$ nyílt intervallumon, akkor van olyen $\xi\in(a,b)$ hely, amelyre\\
+    $\di\frac{f(b)-f(a)}{b-a}=f'(\xi)$
+  \end{te}
+  \begin{biz}
+    A Cauchy-tétel speciális esete. $g(x):=x$
+  \end{biz}
+  \begin{megj}
+   	$f(a)=f(b)$ esetben a Rolle-tétel.
+  \end{megj}
+  \newpage
+
+  \section{A középérték-tételek alkalmazásai}
+  \begin{te}[A deriváltak egyenlősége]\ 
+    \begin{enumerate}
+    \item Ha $f\in \D(a,b)$ és $f' \equiv 0 (a,b)$ -n 
+      $\nn f \equiv $ állandó
+      \item Ha $f,\,g \in \D(a,b)$ és $f' \equiv g'\ (a,b)$-n,$\nn 
+	\exists c \in\R: f(x) = g(x) +c\qquad \big(x\in(a,b)\big)$
+    \end{enumerate}
+    
+  \end{te}
+
+  \begin{biz}
+    1: Lagrange alkalmazása $f$-re. $\forall [x_1,x_2]\subset(a,b)$
+    intervallum\\ $\nn f\in \C[x_1,x_2]: f\in \D(x_1,x_2) \nn \exists \xi
+    \in (a,b): f(x_1)-f(x_2) = \underbrace{f'(\xi)}_{=0}(x_1-x_2) = 0\\
+    \nn
+    \forall x_1,x_2\in(a,b): f(x_1)=f(x_2)$
+
+    2: $ F := f-g$ és alk. 1-et.
+  \end{biz}
+
+  \begin{te}[monotonitásra vonatkozó elégséges feltétel]
+    $\fab\ \fdab:$
+    \begin{bizlist}
+    \item $f'(x)\ge0\ [f'(x)>0]\ \forall x\in(a,b)$ akkor $f$~függvény [szigoruan]
+      monoton növekvő.
+    \item $f'(x)\le0\ [f'(x)<0]\ \forall x\in(a,b)$ akkor $f$~függvény [szigoruan]
+      monoton csökkenő.
+    \item $f'(x)=0\ \ \forall x\in(a,b)$ akkor $f$ függvény állandó.
+    \end{bizlist}
+  \end{te}
+   \begin{biz} Legyen $a<x_1<x_2<b$, erre alkalmazzuk a Cauchy-tételt:\\
+     $f(x_2)-f(x_1)=f'(\xi)(x_2-x_1)$
+     \begin{bizlist}
+     \item{Ha $\forall x\in(a,b) f'(x)\ge 0\ [f'(x)>0]$ akkor $f(x_2)\ge{f(x_1)}
+       [f(x_2)>f(x_1)$ vagyis $f$~[szigorúan] monoton növekvő.}%
+     \item Ha $\forall x\in(a,b) f'(x)\le 0\ [f'(x)>0]$ akkor $f(x_2)\le{f(x_1)}
+       [f(x_2)<f(x_1)$ vagyis $f$~[szigorúan] monoton csökkenő.
+       \item Ha $\forall x\in(a,b) f'(x)=0$ akkor $f(x_2)=f(x_1)$ vagyis 
+	$f$ állandó.
+     \end{bizlist}
+   \end{biz}
+   
+  \begin{te}[monotonitásra vonatkozó szükséges és elégséges feltétel]
+    \ \\$\fab,\ f\in \D$\\
+    \begin{bizlist}
+    \item $f$ mononot növekvő [csökkenő] $\ek$ $f'\ge 0 [f'\le 0]$
+    \item $f'>0$ $\Rightarrow f$ szigorúan monoton növekvő.
+    \item $f$ konstans $\ek f'=0$
+    \end{bizlist}
+  \end{te}
+  \begin{biz}
+    \begin{bizlist}
+    \item $\Leftarrow$ az előző tétel.\\
+      $\Rightarrow$ $f$ monoton növekvő$\Rightarrow$ $\forall x\in(a,b): f$
+      logkálisan növ.$\Rightarrow$ $f'(x)\le 0$
+    \item $\Leftarrow$ nem igaz. pl.: $f(x)=x^3$\\
+      $\Rightarrow$ elöző tétel.
+    \item $\Leftarrow$ $f(x)=c\n f'(x)=0$\\
+      $\Rightarrow$ elöző tétel.
+    \end{bizlist}
+  \end{biz}
+  \begin{te}[lokális szélsőértékre vonatkozó elsőrendű elégséges
+      feltétel]\ \\
+      $\fab,\ fdab,\ c\in(a,b)$-ben lokális szélsőértéke van $\nn f'(c)=0$
+  \end{te}
+  \begin{biz}
+    Indirekt: ha $f'(c) > 0 ( <0) \nn f$ lokálisan szigorúan monoton
+    növő (fogyó)
+  \end{biz}
+
+  \begin{te}[elsőrendű elégséges feltétel]
+    $\fab;\ \fdab;\ x\leq c \leq y: f'(x)
+    \begin{array}{c}\leq\\(\geq)\end{array} f'(c) = 0
+    \begin{array}{c}\leq\\(\geq)\end{array} f'(y)  $\\
+    Ha $c\in (a,b): f'(c) = 0$ és $f'$ $c$-ben előjelet vált, akkor c
+    lokális minimum (maximum) hely.
+  \end{te}
+  \begin{biz}
+    trivi: pl. $\exists\varrho>0\ f'(x) <0:
+    x\in(c-\varrho,c)\nn\searrow$, illetve $x\in(c,c+\varrho)\nn\nearrow$
+  \end{biz}
+  
+
+  \newpage
+  \section{A deriváltfüggvény Darboux-tulajdonságú}
+  \begin{de}
+    $\fab$. Az $f$ fv. Darboux-tulajdonságú, ha 
+    $\forall [x_1,x_2]\subset(a,b)$ esetén $f$ minden $f(x_1)$ és $f(x_2)$ közéeső $y$ számhoz
+    $\exists\xi\in(x_1,x_2): f(\xi)=y$
+  \end{de}
+  \begin{te}
+    $\fab\ \fdab\nn f'$ Darboux-tulajdonságú
+  \end{te}
+  \begin{biz}
+    $F(x) :=  f(x) -cx\quad(c\in(a,b))$.\\
+    $F'(x_1) = f'(x_1) -c < 0\nn F$ lokálisan szig. mon. csökken $x_1$-ben\\
+    $F'(x_2) = f'(x_2) -c > 0\nn F$ lokálisan szig. mon. nő $x_2$-ben\\
+    $\nn F\in\C[x_1,x_2]\overset{\mathrm{Weiserstass}}{\nn} \exists
+    \di\min_{[x_1,x_2]} R_f$ és a  minimumhely: $\xi\in(x_1,x_2)\nn\xi$
+    lokális szélsőérték is $\nn F'(\xi) = f'(\xi) -c =0 \nn f'(\xi)=0$
+  \end{biz}
+  \begin{megj}
+    $f\in \C\nn\ f$ Darboux tulajdonságú
+  \end{megj}
+  \begin{megj}
+    $f$ Darboux tulajdonságú $\ek R_f|_{[x,y]} \forall a<x<y<b$
+  \end{megj}
+  \begin{megj}
+    $f(x):=\Bigg\{$ \begin{tabular}{ll}
+      $sin\frac1{x}$ & $x\not=0$\\
+  $0$ & $x=0$
+    \end{tabular}$\Bigg\}\nn$ Darboux-tulajdonságú, de nem folytonos
+  \end{megj}
+
+  \newpage
+
+  \section{A $\pi$ bevezetése. Periodicitás}
+  \begin{te}
+    $\exists!\alpha\in[0,2]:\cos\alpha = 0$ és $\pi := 2\alpha$
+  \end{te}
+  \begin{biz}
+    $\cos x := 1 - \dfrac{x^2}{2!} + \dfrac{x^4}{4!}\cdots\qquad\qquad
+    x\in\R$\\
+    $\sin x := x - \dfrac{x^3}{3!} + \dfrac{x^5}{5!}\cdots\qquad\qquad
+    x\in\R$\\
+    $\underline{\exists:}$ hatványsorból. $\cos0 = 1 >0$\\
+    $\cos2 = 1- \dfrac{2^2}{2!}(1-\dfrac{2^2}{3\cdot4})-
+    \dfrac{2^6}{6!}(1-\dfrac{2^2}{7\cdot8})-\ldots \le   1-
+    \dfrac{2^2}{2!}(1-\dfrac{2^2}{3\cdot4}) = -\dfrac13 < 0
+    \\\overset{\mathrm{Bolzano}}{\nn} \exists \alpha\in[0,2]:
+    \cos\alpha = 0$\\
+    $\underline{!:}\cos_{|_{[0,2]}}$ szig mon fogyó\\
+    $\cos'x=-\sin x$\\
+    csoportosítás: $\sin  = x (1-\dfrac{x^2}6) +
+    \dfrac{x^5}{5!}(1-\dfrac{x^2}{6\cdot7}) >0$\\
+    $|x|<\sqrt{6} $\\
+    $\nn \cos'x>0\ [0,2]$-n $\nn\cos_{|_{[0,2]}}\downarrow$
+  \end{biz}
+  \begin{te}\ 
+    \begin{enumerate}[I.]
+    \item 
+      $
+      \begin{array}{cccc}
+	\cos\frac{\pi}2=0 & \cos\pi=-1 & \cos\frac32\pi=0 & \cos 2\pi=1\\
+	\sin\frac{\pi}2=1 & \cos\pi=0 & \cos\frac32\pi=-1 & \cos 2\pi=0
+      \end{array}
+      $      
+    \item 
+      $\cos x > 0 \downarrow \quad (0,\frac{\pi}2)$-n\\
+      $\sin x < 0 \uparrow \quad (0,\frac{\pi}2)$-n
+    \end{enumerate}
+  \end{te}
+  \begin{biz}
+    $\sin^2 x + \cos^2 x = 1$\\
+    $\sin 2x = 2\sin x \cdot \cos x$\\
+    $\cos  2x = \cos^2 x - \sin^2 x$\\ 
+    és lásd előző tétel
+  \end{biz}
+  \begin{te}
+    \begin{enumerate}[I.]
+    \item
+      $\sin(x) =  \sin(\pi-x) \qquad x\in [0,\frac{\pi}2]$\\
+      $\cos(x) =  -\cos(\pi-x) \qquad x\in [0,\frac{\pi}2]$
+    \item
+      $\sin(x) =  -\sin(2\pi-x) \qquad x\in [0,\pi]$\\
+      $\cos(x) =  \cos(2\pi-x) \qquad x\in [0,\pi]$
+    \end{enumerate}
+  \end{te}
+  \begin{biz}Addíciós tételekkel:\\
+    $\sin(x\pm y) = \sin x\cdot\cos y \pm \cos x\cdot\sin y$\\
+    $\cos(x\pm y) = \cos x\cdot\cos y \mp \sin x\cdot\sin y$
+   \end{biz}
+  \begin{de}
+    $f\in\R\n\R$ \emph{periodikus}, ha $\exists p\in\R,\ p\neq 0\colon
+    \forall x \in D_f\colon\ x+p\in D_f$ és $f(x) = f(x+p)$\\
+    $p$ az $f$ függvény egy periódusa.
+  \end{de}
+  \begin{megj}
+    Ha $p$ periódus, akkor $\forall k\in \N\colon k\cdot p$ is az.
+  \end{megj}
+  \newpage
+  \section{A L'Hospital-szabály.}
+  \begin{te}
+    Legyen $-\infty\le a<b<\infty$ és $f,g\in D(a,b)$, $g'(x)\not=0\ x\in(a,b)$, 
+    és ha $\di\lim_{a+0}f=\lim_{a+0}g=0$ és ha $\di\exists\lim_{a+0}\frac{f'}
+    {g'}$ akkor az $\di\frac{f}{g}$ függvénynek is van $a$-ban jobboldali 
+    határértéke és $\di\lim_{a+0}\frac{f}{g}=\lim_{a+0}\frac{f'}{g'}$
+\end{te}
+  \begin{bi}
+    Vizsgáljuk a $-\infty<a$ esetet. Kiterjesztjük mindkét függvényt $a$ pontban: $f(a):=g(a):=0$ $f,g\in C\{a\}$ és legyen 
+    $A=\di\lim_{a+0}\frac{f'}{g'}$. Ekkor :
+    \[\forall\epsilon>0 \exists x_0\in(a,b) \forall y\in(a,x_0) : 
+    \frac{f'(y)}{g'(y)}\in K_\epsilon(A) \]
+    Minthogy $f,g\in C[a,x_0]$ ezért tetszőleges $[a,x]\ (a<x<x_0)$ 
+    intervallumban teljesülnek a Cauchy-tétel feltételei. Ezt alkalmazva kapjuk, 
+    hogy:
+    \[\exists \xi\in(a,x_0): \frac{f(x)}{g(x)}=\frac{f(x)-f(a)}{g(x)-g(a)}=
+    \frac{f'(\xi)}{g'(\xi)} \]
+    Mivel $\di\xi\in(a,x_0)\nn x\in(a,x_0):\frac{f(x)}{g(x)}=\frac{f'(\xi)}
+    {g'(\xi)}\in K_\epsilon(A)$, azaz $\di\lim_{a+0}\frac{f}{g}=a$ \\
+    Most legyen $a=-\infty$ melyet visszavezetünk az elözőre. Ekkor feltehető, hogy
+    $b<0$. \\ 
+    $F: (0,-\frac{1}{b})\rightarrow\R$  $F(y):=f(y-
+    \frac1{y}),G(y):=g(y-\frac1{y})\ (0<y<c)$, ahol $c$ számot úgy választjuk, 
+    hogy $y_0-\frac1{c}<b$ teljesüljön. Ekkor $\forall y\in(0,c)$ pontban:
+    \[F'(y)=\frac1{y^2}f'(y_0-\frac1{y}), G'(y)=\frac1{y^2}g'(y_0-\frac1{y})\not=0\] \\
+    Minthogy $\di\lim_{0+0}F=\lim_{-\infty}f=0,\lim_{+0}G=\lim_{-\infty}g=0$ és 
+    \[\exists\lim_{0+0}\frac{F'}{G'}=\lim_{0+0}\frac{f'(y_0-\frac1{y})}{g'(y_0-\frac1{y})}=
+    \lim_{-\infty}\frac{f'}{g'}\]
+    Ezért az $F$ és $G$ függvényekre a $(a,c)$  intervallumban teljesülnek az
+    előbb 
+    igazolt tétel feltételei, vagyis:$\di\lim_{0+0}\frac{F'}{G'}=\lim_{0+0}\frac{F}
+    {G}$, melyből a $\di\lim_{0+0}\frac{F}{G}=\lim_{-\infty}\frac{f}{g}$ már 
+    következik.\ob
+  \end{bi}
+  \begin{te}
+    Legyen $-\infty\le a<b$ és tegyük fel, hogy $f,g\in D(a,b)$ és $g'(x)\not=0$,
+    ha $x\in(a,b)$. Ha $\di\lim_{a+0}f=\lim_{a+0}g=+\infty$ és $\di\exists
+    \lim_{a+0}\frac{f'}{g'}$ határértéke akkor az $\di\frac{f}{g}$ függvénynek 
+    is van jobb oldali határértéke, és a kettő értéke megegyezik.
+  \end{te}
+  \begin{bi}
+    Legyen $A:=\di\lim_{a+0}\frac{f'}{g'}$ és tegyük fel, hogy $A<+\infty$ és 
+    $a>-\infty$. Ekkor
+    \[\forall\epsilon>0\exists x_0\in(a,b)\forall y\in(a,x_0):\frac{f'(y)}{g'(y)}\in K_\epsilon(A) \]
+    Mivel $\di lim_{a+0}f=lim_{a+0}g=+\infty$ ezért $x_0$ szám megválasztható úgy, 
+    hogy $f(x),g(x)>0$ $(x\in(a,x_0))$ teljesüljön. Rögzítsük ezt az $x$ számot és
+    az $(x,x_0)$ intervallumban alkalmazzuk a Cauchy-féle középértéktételt. Ekkor:
+    \[\exists{\xi\in(x,x_0)}: \frac{f(x)-f(x_0)}{g(x)-g(x_0)}=\frac{f'(\xi)}{g'(\xi)}.\]
+    Tehát  \[\frac{f'(\xi)}{g'(\xi)}=\frac{f(x)-f(x_0)}{g(x)-g(x_0)}=\frac{f(x)}{g(x)}\frac{1-  \frac{f(x_0)}{f(x)}}{1-\frac{g(x_0)}{g(x)}}\ (x\in(a,x_0))\]
+    Bevezetve a $\di T_{x_0}(x):=\frac{1-\frac{f(x_0)}{f(x)}}{1-\frac{g(x_0)}{g(x)}}\ 
+    (x\in(a,x_0))$ jelölést, az \[\di\frac{f(x)}{g(x)}=\frac{f'(\xi)}{g'(\xi)}T_{x_0}(x)=
+    \frac{f'(\xi)}{g'(\xi)}+\frac{f'(\xi)}{g'(\xi)}(T(x)-1).\] Mivel $\di\lim_{a+0}
+    f=\lim_{a+0}g=+\infty$, ezért $\di\lim_{a+0}T_{x_0}=1$. Következésképpen 
+    \[\forall\epsilon>0,\exists{a<x_0<b},\forall x\in(a,x_0) \exists\xi\in(x,x_0):|\frac{f'(\xi)}{g'(\xi)}(T_{x_0}(x)-1)|<\frac{\epsilon}{2}\]
+    \[|\frac{f(x)}{g(x)}-A|\le|\frac{f'(\xi)}{g'(\xi)}-A|+\frac{\epsilon}{2}<\epsilon\]
+    Ezel beláttuk, hogy $A<+\infty$ esetén valóban $\di\lim_{a+0}\frac{f}{g}=A$. \\
+    Ha  $A=+\infty$ akkor $lim_{a+0}T_{x_0}=1$ alapján:\\
+    $\di\forall \epsilon>0\exists a<x_0<b,\xi\in(a,x_0):\frac{f'(\xi)}{g'(\xi)}>\epsilon$;\\
+    $\exists x_1\in(a,x_0)\forall x\in(a,x_1): |T_{x_0}(x)|>\frac{1}{2}$, melyből a $\di|\frac{f(x)}{g(x)}>\frac1{2}\epsilon$\ob
+  \end{bi}
+  A bal oldali határértékre és a kétoldali határértékre hasonló tételek érvényesek!\\
+  \newpage
+  \section{A Taylor-formula.}
+  \begin{de}
+    Ha $f\in D(H,\K)$ és az $f'$ függvény az $x_0\in H$ pontban diffe-renciálható, akkor azt mondjuk, hogy az $f$ függvény az $x_0$ pontban kétszer differenciálható és az $(f')'(x_0)$ számot az $f$ függvény $x_0$ pontbeli második deriváltjának nevezzük és az $f''(x_0)$ szimbolummal jelöljük.\\
+    Ha az $f$ függvény $H$ halmaz minden pontjában kétszer differenciálható, akkor a $H\ni x\n f''(x)$ utasítással egy függvényt, az úgynevezett második deriváltat értelmezzük.\\
+    A fentiekhez hasonlóan az $f$ függvény $f^{(n)}$ $n$-edik deriváltját az $f^{(n+1)}=(f^{(n)})'$ rekurzióval értelmzzük. Ezt gyakran a $\di\frac{d^nf}{dx^n}$ szimbolummal is jelöljük.\\
+    Ha az $f$ függvény $\forall n\in\N$ szám esetén létezik az $n$-edik derivált, akkor az $f$ függvény akárhányszor (vagy végtelenszer) differenciálható.\\
+    Az $f$ függvény $0$-ik derivált maga az $f$ függvény.
+  \end{de}
+  \begin{te}
+    Ha $f,g\in D^n(H)$ akkor $fg\in D^n(H)$ és $(fg)^{(n)}=\di\sum_{k=0}^n\binom{n}{k}f^{(k)}g^{(n-k)}$
+  \end{te}
+  \begin{bi}
+    $n=0$ nál $fg=df$\\
+    $n=1$ esetén ez a szorzat deriváltja.\\
+    Tfh.: (n)-re igaz.
+    \[ (fg)^{(n+1)}=((fg)^{(n)})'=(\sum_{k=0}^n\binom{n}{k}f^{(k)}g^{(k-n)})'=\sum_{k=0}^n\binom{n}{k}f^{(k)}g^{(n+1-k)}\sum_{k=0}^n\binom{n}{k}f^{(k+1)}g^{(n-k)}\]
+    Az első esetben legyen $k:=i$ míg a másodikban $k+1:=i$ így:
+    \[ (fg)^{(n+1)}=\binom{n}{0} fg^{(n+1)}+\sum_{i=0}^n(\binom{n}{i}+\binom{n}{i-1})f^{(i)}g^{(b+1-i)}+\binom{n}{0} f^{(n+1)g}\]
+    $\binom{n}{i}+\binom{b}{i-1}=\binom{n+1}{i}, \binom{n}{0}=\binom{n+1}{0}, \binom{n}{n}=\binom{n+1}{n+1}$ innen jön ki a bizonyítandó.
+  \end{bi}
+  \begin{te}
+    Legyen $f(x):=\di\sum_{k=0}^\infty a_k(x-a)^k (x\in K_R(a), R=\frac1{\limsup{\sqrt[n]{|a_n|}}}>0$.
+    Ekkor $f\in D^{\infty}(K_R(a))$ és $f^{(n)}(x)=\di\sum_{k=n}^\infty k(k-1)\ldots k(-n+1)a_k(x-a)^{k-n}  (x\in K_R(a), n=0,1,2,\ldots)$
+  \end{te}
+  \begin{bi}
+    Az $f'(x)=\di\sum_{k=1}^\infty ka_k(x-a)^{k-1} (x\in K_R(a))$ már korábban beláttuk. Melyből belaáthatjuk a tételt.
+  \end{bi}
+  \begin{ko}
+    A $\di\sum_{k=0}^{\infty}a_k(x-a)^k$ hatványsor együtthatói és $f$ összegfügvénye között az alábbi kapcsolat áll fen: $a_n=\di\frac{f^{(n)}(a)}{n!}\ (n=0,1,2,\ldots)$. Ehez kapcsolódik az alábbi definíció:
+  \end{ko}
+  \begin{de}
+    Tegyük fel, hogy az $f\in\K_1\n\K_2$ függvény az $a\in\K_1$ pont valamely környezetében akárhányszor differenciálható. Ekkor a $\di\sum_{k=0}^\infty\frac{f^{(n)}(a)}{k!}(x-a)^k$ hatványsort az $f$ függvény (a-helyhez tartozó) Taylor-sorának; a Taylor-sor $n$-edik részletösszegét, a $T_n(f,a,x)=\di\sum_{k=0}^n\frac{f^{(k)}(a)}{k!}(x-a)^k\ (x\in\K_1; n=0,1,2,\ldots)$ polinomot pedig az $f$ függvény (a helyhez tartozó) $n$-edik Taylor-polinomjának nevezzük. Az $f$ függvény $a=0$ helyhez tartozó Taylor-sorát az $f$ MacLaurin sorának is nevezik.
+  \end{de}
+  \begin{te}
+    Tegyük fel, hogy az $f\in\R\n\R$ függvény az $a$ pont valamely $K_r(a)$ környezetében $(n+1)$-szer differenciálható. Ekkor minden $x\in\K_r(a)$ számhoz létezik olyan ($a$ és $x$ közé eső) $\xi$ szám, amellyel az $\di f(x)-T_n(f,a,x)=f(x)-\sum_{k=0}^n\frac{k^{(k)}(a)}{k!}(x-a)^k=\frac{f^{(n+1)}(\xi)}{(n+1)!}(x-a)^{n+1}$
+  \end{te}
+  \begin{bi}
+    Vezessük be a $T_n(x)=T_n(f,a,x), R_n(x)=f(x)-T_n(x) (x\in K_r(a))$ jelöléseket. A $a_n=\di\frac{f^{(n)}(a)}{n!}$ összefüggéseket a $T_n$ polinomra felirva azt kapjuk, hogy $T_N^{(k)}(a)=f^{(k)}(a)\ (k=0,1,..,n)$ következésképpen $R_n^{(k)}(a)=0\ (k=1,2,\ldots,n)$. Az $F=R_n$, $G(t)=(t-a)^{n+1}\ (t\in K_r(a))$ függvényre az $[a,x]$ intervallumon alkalmazható a Cauchy-féle középértéktétel, következésképpen
+    \[\exists \xi_1\in(a,x)\frac{R_n(x)}{(x-a)^{n+1}}=\frac{F(x)-F(a)}{G(x)-G(a)}=\frac{F'(\xi_1)}{G'(\xi_1)}\]
+    Ha a Cauchy-féle középértéktétel az $F'$ és $G'$ függvényekre az $[a,\xi_1]$ intervallumban alkalmazzuk, azt kapjuk, hogy
+    \[\exists \xi_2\in(a,\xi_1)\frac{F'(\xi_1)}{G'(\xi_1)}=\frac{F'(\xi_1)-F'(a)}{G'(\xi_1)-G'(a)}=\frac{F''(\xi_1)}{G''(\xi_1)}\]
+    Minthogy $G^{(k)}(a)=0 (k=0,1,\ldots,n)$ és $G^{(n+1)}(a)=(n+1)!$ ezért a fenti gondolatmenetet $n$-szer megismételve azt kapjuk, hogy:
+    \[\exists \xi_{n+1}\in(a,\xi_n)\frac{F^{(n)}(\xi_n)}{G^{(n)}(\xi_n)}=\frac{F^{(n)}(\xi_n)-F^{(n)}(a)}{G^{(n)}(\xi_n)-G^{(n)}(a)}=\frac{F^{(n+1)}(\xi_{n+1})}{G^{(n)}(\xi_{n+1})}\]
+    A bizonyítás során kapott egyenlőségeket egybebébe kapjuk, hogy
+    \[\frac{R_n(x)}{(x+a)^{n+1}}=\frac{F'(\xi_1)}{G'(\xi_1)}=\frac{F''(\xi_2)}{G''(\xi_2)}=\ldots=\frac{F^{(n+1)}(\xi_{n+1})}{G^{(n)}(\xi_{n+1})} \]
+    Ahonnan a $F^{(n+1)}=f^{(n+1)}-T_N^{(n+1)}=f^{(n+1)}$, $G^{(n+1)}=(n+1)!$ figyelembevételével a $\frac{R_n(x)}{(x-a)^{n+1}}=\frac{f^{(n+1)}(\xi_{n+1})}{(n+1)!}$, melyből az állítás már nyílvánvaló.
+  \end{bi}
+  \begin{ko}
+    Ha $f\in D^\infty(K_r(a))$ és ha $\exists M>0 \forall  x\in K_r(a) \forall n\in\N |f^{(n)}(x)|\le M$ akkor $\forall x\in K_r(a)$ pontban $\di\lim_{n\n\infty}R_n(x)=0$ azaz $f(x)=\di\sum_{k=0}^\infty\frac{f^{(n)}(a)}{k!}(x-a)^k\ (x\in K_r(a))$
+  \end{ko}
+  \newpage
+  \section{A konvexitás fogalma. Inflexió. A konvexitás ás a derivált kapcsolata.}
+  \begin{de}
+    $I$ intervallumon $\fir$. f konvex, ha $\forall a,b\in I(a<b) \forall \la\in[0,1], \mu:=1-\la: f(\la{a}+\mu{b})\le \la f(a)+\mu f(b)$
+  \end{de}
+  \begin{me}
+    Legyen $a<x<b:0<\la:=\di\frac{b-x}{b-a},0<\mu:=\frac{x-a}{b-a}$ ekkor $\la+\mu=1\\ \la a+\mu b=\di\frac{b-x}{b-a}a+\frac{x-a}{b-a}b=\frac{ba-xa+xb-ab}{b-a}=x\frac{b-a}{b-a}=x$. $\la f(a)+\mu f(b)=\di\frac{b-x}{b-a}f(a)+\frac{x-a}{b-a}f(b)=\frac{f(b)-f(a)}{b-a}(x-a)+f(a)=\frac{f(b)-f(a)}{b-a}(x-b)+f(b)$\\
+    Tehát: $f(x)\le\frac{f(b)-f(a)}{b-a}(x-a)+f(a)$ és $f(x)\le\frac{f(b)-f(a)}{b-a}(x-a)+f(a)$
+  \end{me}
+  \begin{te}
+    $I$ intervallum, $\fir$: $f$ konvex$\ek\forall a\in I:\Delta_af\nearrow$
+  \end{te}
+  \begin{me}
+    $\Delta_af:(I\setminus\{a\}\n\R)=\frac{f(x)-f(a)}{x-a}$, amely $f$ függvény $a$ potjához tartozó különbségi hányados függvény.
+  \end{me}
+  \begin{bi}
+    \textbf{1.változat}\\
+    $\nn\di\Delta_af(x_1)=\frac{f(x_1)-f(a)}{x_1-a}\le\frac{\frac{f(x_2)-f(a)}{x_2-a}(x_1-x_2)+f(x_2)-f(a)}{x_1-a}=\\=\frac{f(x_2)-f(a)(x_1-x_2+x_2-a)}{(x_2-a)(x_1-a)}=\frac{f(x_2)-f(a)(x_1-a)}{(x_2-a)(x_1-a)}=\frac{f(x_2)-f(a)}{x_2-a}=\Delta_af(x_2)$\\
+    $\di\nb f(x)=\frac{f(x)-f(a)}{x-a}(x-a)+f(a)\le\Delta_af(b)(x-a)+f(a)=\frac{f(b)-f(a)}{b-a}(x-a)+f(a)$\\
+    $\di\frac{x-a}{b-a}f(b)+\frac{a-x}{b-a}f(b)$\\
+    \textbf{2. változat}\\
+    $\nn: f$ konvex. $x\in D_f$; $x,y\in D_f\setminus\lbrace a\rbrace x<y.\\$ 1. eset: $x<y<a$. Ekkor \\
+    \[\exists\la\in(0,1): y=\la x+(1-\la)a \nn f(x)\le\la f(x)+(1-\la)f(a)\] $\nn f(y)-f(a)\le\la(f(x)-f(a))$, ahol $\la=\frac{y-a}{x-a}$,\\azaz $f(y)-f(a) \le \frac{y-a}{x-a}(f(x)-f(a))$, innen $\Delta_af(y) \ge\Delta_af(x)$\\
+    2. eset: $x<a<y$ és 3. eset $a<x<y$ ugyanígy.\\
+    $\nb\forall a \in D_f: \Delta_af\nearrow; x,y\in D_f, x<y, \la\in (0,1); a:= \la x+(1-\la)y\nn$\[\Delta_f(x)=\frac{f(x)-f(a)}{x-a}\le\Delta_af(y)\le\frac{f(y)-f(a)}{y-a}\] és $a-x = (1-\la)(y-x)$ ill $a-y=-\la f(x)+(1-\la)f(y)\\\nn f(a)\le\la f(x)+(1-la)f(y)$.
+  \end{bi}
+  \begin{te}
+    $I$ nyílt intervallum, $\fir,f\in D\nn\ f$ konvex$\ek f'\nearrow$
+  \end{te}
+  \begin{bi}
+    $\nn:f$ konvex $\di\nn\Delta_af\nearrow (\forall a\in I)\\ x_1<x_2;x_1,x_2\in If'(x_1)\le f'(x_2) $
+    ui:  \[\Delta_{x_1}f\le\Delta_{x_2}f\nn f'(x_1)=\lim_{x\n x_1}\Delta_{x_1}f(x)\le\]
+    \[\le\Delta_{x_1}f(x_2)=\Delta_{x_2}f(x_1)\le\lim_{x\n x_2}\Delta_{x_2}f(x)=f'(x_2)\]
+    
+    $\nb:a<b;a,b\in I: a\le x\le b$,\\
+    $r(x):=f(x)-\di\frac{f(b)-f(a)}{b-a}(x-a)+f(a)$\\
+    Belátjuk: $r(x)\le0, r\in[a,b]$.\\
+    $r(a)=r(b)=0\ r\in D(a,b)$;  $r'(x)=f'(x)+\di\frac{f(b)-f(a)}{b-a}\\$
+    Rolle-tétel $\nn\exists \xi\in(a,b): r'(\xi)=0$; $r'(x)<0(a\le x<\xi)$, $r'(x)>0 (\xi<y\le b)\nn$
+    $\begin{array}{ccccc}
+      r'\searrow~(a,\xi)&\nn&r\le 0& ~&(a,\xi)\\
+      r\nearrow~(\xi,b) &\nn&r\ge 0& ~&(\xi,b)\\
+      r(a)=r(b)=0&~&~&~&~\\
+    \end{array}$
+    Tehát: $r\le 0 ~(a,b)-n\\\nn f(x)\le\frac{f(b)-f(a)}{b-a}(x-a)+f(a)$, azaz f konvex.
+  \end{bi}
+  \begin{ko}
+    $I$ nyílt intervallum, $\fir, f\in D^2\n f$ konvex$\ek f''\ge 0\ I$-n.
+  \end{ko}
+  \begin{de}
+    $f:\R\n\R,a\in intD_f, f(a)=0: f$ az $a$-ban jelet vált, ha $\exists\delta>0: f(x)<0:a-\delta<x<a, f(x)>0:a<x<a+\delta$ vagy $f(x)>0:a-\delta<x<a, f(x)<0:a<x<a+\delta$
+  \end{de}
+  \begin{de}
+    $f:\R\n\R,f\in D\{a\}: f$-nek $a$-ban inflexiója van, ha $f(x)-f'(a)(x-a)-f(b)\ (x\in D_f)$ jelet vált $a$-ban.
+  \end{de}
+  \newpage
+  \section{A szélsőértékre vonatkozó első- és másodrendű feltételek.}
+  \begin{me}
+    $f:\R\n\R, f\in D\{a\}, f$-nek $a$-ban lokális szélsőértéke van$\nn f'(a)=0$. Elsőrendű szükséges, de nem elégséges felvével, ugyanis visszafele nem biztos, hogy igaz:$f(x):=x^3$ ekkor $f'(x)=3x^2, f'(0)=0$, és a $0$ pont nem lokális szálsőérték.
+  \end{me}
+  \begin{te}
+    $f:\R\n\R,~a\in D_f,\exists K(a): f\in D(K(a)), f'$ a-ban jelet vált$\nn$ $f$-nek $a$-ban (szigorú) lokális szálsőértéke van. $+\n-\nn$ maximum, $-\n+\nn$ minimum.
+  \end{te}
+  \begin{bi}
+    $-\n+:\exists\delta>0:$ \\
+  \begin{tabular}{l}
+    $f'(x)<0\ (a-\delta<x<a)\nn f\sarrow(a-\delta,a)$\\
+    $f'(x)>0\ (a<x<a+\delta)\nn f\narrow(a,a+\delta)$\\
+    $f'(a)=0$\end{tabular}$\bigg\}\nn f(a)=minR_g|_{(a-\delta,a+\delta)}\nn f(a)<f(x)\ (\forall x\in(a-\delta,a+\delta))$
+  $+\n-:$Teljesen hasonlóan.
+  \end{bi}
+  \begin{te}
+    $f:\R\n\R,f\in D^2\{a\}, f'(a)=0, f''(a)\not=0\nn f$-nek $a$-ban (szigorú) lokális szálsőértéke van.($f''(a)>0\n$ minimum, $f''(a)<0\n$ maximum).
+  \end{te}
+  \begin{bi}
+    $f\in D''\{a\}\nn\exists K(a), f'\in D(K(a)), 0<f''(a)=(f')'(a)\n f'\ a$-ban jelet vált $(-\n+)\n f$-nek $a$-ban szig. lok. minimuma van. $f''(a)<0$ hasonlóan.
+  \end{bi}
+  \begin{te}
+    $I$ nyílt intervallum, $f\in D^2(i):$\\
+    $f$ konvex$\ek f''\ge0$\\
+    $f$ szigorúan konvex$\nb f''>0$
+  \end{te}
+  \begin{bi}
+  \end{bi}
+  \begin{te}
+    $I$ nyílt intervallum, $f\in D^2(I)$, $f''$ jelet vált $a$-ban$\nn f$-nek $a$-ban infexiója van.
+  \end{te}
+  \begin{bi}
+  $\exist\delta>0: f''(x)<0<f''(y)\ (a-delta<x<a<y<a+\delta). R_a(x):=f'(a)(x-a)-f(a). (f-R_a)'x=f'(x)-f'(a), (f-R_a)'(a)=0, (f-R_a)''(a)=f''(a)=0. (f-R_a)'$ deriváltja $a$-ban jelet vált. $(f-R_a)'$-nak $a$-ban szigoru szálsőértéke van(min). $\exists\delta>0\ (f-R_a)(x)>0 (x\in K_\delta(a)\setminus\{a\}\nn(f-R_a)\narrow(a-\delta,a), (f-R_a)\narrow(a,a+\delta), (f-R_a)$ folytonos $a$-ban $(f-R_a)(a)=0, (f-R_a)<0 (a-\delta',a),(f-R_a)>0(a,a+\delta')\nn f-R_a$ jelet vált.
+  \end{bi}
+  \newpage
+  \section{A határozatlan integrál fogalma. Alaptulajdonságok. Parciális integrálás.}
+  \begin{de}
+    $I$ nyílt intervallum, $f,F:I\n\R$. $F$ az $f$ primitívfüggvénye, ha $F'=f$.
+  \end{de}
+  \begin{me}
+    Ha $F$ az $f$ függvény primitívfüggvénye, akkor $\forall c\in\R:F+c$ is primitívfüggvénye $f$-nek és minden primitívfüggvény ilyen alakú. Ugyanis $(F+c)'=F'+c'=f+0=f$
+  \end{me}
+  \begin{de}
+    $\fir$ függvény primitívfüggvényeiből álló függvényosztály az f határozatlan integrálja. Jel.:$\di\int{f}:=\{F+c| F$ primitív $\land\ c\in\R\}$
+  \end{de}
+  \begin{de}
+    $F$ primitívfv. az $\int$ $x_0\in D_f$-ben eltünő primitív függvényének
+    nevezzük, ha $F(x_0)=0. $Jel.:$\di\int_{x_0}f$
+  \end{de}
+  \begin{te}
+    $I$ nyílt intervallum, $f,g:I\n\R, \la,\mu\in\R:\exists f,g$-nek primitív függvénye$\nn \exists\int{(\la f+\mu g)}$ primitív fv. és \\
+    $\di 1.~\int{(\la f+\mu g)}=\la\int{f}+\mu\int{g}\\2.~\int_{x_0}{(\la f+\mu g)}=\la\int_{x_0}{f}+\mu\int_{x_0}{g}\\$
+  \end{te}
+  \begin{bi}
+    $\di\int{f}=F+c,~\int{g}=G+c\nn(\la{F}+\mu{G})'=\la{f}+\mu{g}\nn\int{(\la f+\mu g)}=\la\int{f}+\mu\int{g}$ és mivel $\la\int_{x_0}{f}=0$ és $\\\mu\int_{x_0}{g}=0\nn\di\int_{x_0}{(\la f+\mu g)}=\la0+\mu0=0$
+  \end{bi}
+  \begin{te}[Parciális integrálás]
+    $f,g\in D(I),\exists\int{f'g}\nn\int{fg'}=fg-\int{f'g}$ és $\di\int_{x_0}{fg'}=fg-f(x_0)g(x_0)-\int_{x_0}{f'g}$
+  \end{te}
+  \begin{bi}
+    $fg-\di\int{f'g}\in D(I);\ \ (fg-\int{f'g})'=f'g+fg'-f'g=fg'$.
+    $F:=fg-f(x_0)g(x_0)-\di\int_{x_0}{f'g}(F\in D(I)\ F'=fg'$, mivel$\\ F(x_0)=fx(x_0)-f(x_0)g(x_0)-0=0$
+    
+  \end{bi}
+  \newpage
+  \section{Helyettesítéses integrálás.}
+  \begin{te}[Helyettesítéses integrál]
+    $I,J$ nyílt intervallum, $f:J\n\R,g:I\n{J}, g\in D(I), \exists\di\int{f}\nn\int{f\circ{g}}*g'=(\int{f})\circ{g}$ és $\di\int_{x_0}{f\circ{g}}*g'=(\int_{g(x_0)}{f})\circ{g}$
+  \end{te}
+  \begin{bi}
+    $F:=\di\int{f(x_0)}, F\in D(J)\nn F\circ{g}\in D(I), (F\circ{g})'=(F'\circ{g})g'=(f\circ{g})g'$, eebből látszik,hogy $F$ primitív fv-e $f$-nek.Mivel $(F\circ{g})=F(g(x_0))$ ezért a fv. eltünik $x_0$ helyen.
+    
+  \end{bi}
+  Jelölések:\\
+  1. $F(g(t))=F(x)|_{x=g(t)}$\\
+  2. $\di\int{f(x)dx}|_{x=g(t)}=\int{f(g(t))g'(t)dt}$\\
+  3. $g$ invertálható$\nn\int{f}=(\int{f\circ{g}g'})\circ{g^{-1}}\ \int{f(x)dx}=\int{f(g(t))g'(t)dt\{t=g^{-1}(x)}$
+  \newpage
+  \section{A határozott integrál fogalma. Alsó, felső közelítő összegek. Oszcillációs összeg.}
+  \begin{de}
+    A $\tau\subset[a,b]$ halmaz az $[a,b]$ egy felosztása, ha $\tau$ véges halmaz és $a,b\in\tau$\\
+    Jel.: $\tau=\{x_0,x_1,\ldots,x_n\}$, ahol $a=x_0<x_1<x_2<\ldots<x_n=b$, $F([a,b])$ az $[a,b]$ felosztásainak halmaza.
+  \end{de}
+  \begin{de}
+    $I$ korlátos, zárt, $\tau_1,\tau_2\in{F(i)}$, $\tau_2$ finomabb $\tau_1$-nél, ha $\tau_1\subset\tau_2$\\
+  \end{de}
+  \begin{de}
+  $\fir,\tau\in{F(I)}$\\
+  $1.$ Az $f$ fv. $\tau(\in{F(I)})$-hoz tartozó alsó közelítő összege: \[(f,\tau):=\di\sum_{k=0}^{n-1}{\inf{\{f(x)|x_k\le{x}\le{x_{x+1}}\}}(x_{k+1}-x_k)}\]
+  $2.$ Az $f$ fv. $\tau(\in{F(I)})$-hoz tartozó felső közelítő összege: \[S(f,\tau):=\di\sum_{k=0}^{n-1}{\sup{\{f(x)|x_k\le{x}\le{x_{x+1}}\}}(x_{k+1}-x_k)}\]
+  \end{de}
+  \begin{me}
+    $s(f,\tau)\le S(f,\tau)$
+  \end{me}
+  \begin{te}
+    $\fir$ korlátos, zárt fv, $\tau_1,\tau_2\in F(I)$, ekkor\\
+    $1.$ Ha $\tau_1\subseteq\tau_2\nn{s(f,\tau_1)}\le{s(f,\tau_2)},{S(f,\tau_1)}\ge{S(f,\tau_2)}$\\
+    $2. s(f,\tau_1)\le{S(f,\tau_2)}$
+  \end{te}
+  \begin{bi}
+    $1.$ Ha $\tau_1=\tau_2$ akkor triviális, tehát $\tau_1\subset\tau_2$. Bizonyítjuk, hogy ha 1 elem a különbség, akkor igaz az állítás. $\tau_1=\{x_0,x_1,\ldots,x_k,x_{k+1},\ldots,x_n\}$, $x_k<x'<x_{k+1}$, $\tau_2=\tau_1\cup{\{x'\}}$. 
+    Ekkor $\\s(f,\tau_2)-s(f,\tau_1)=\inf{\{f(x)|x_k\le{x}\le{x'}\}}(x'-x_k)+\inf{\{f(x)|x'\le{x}\le{x_{k+1}}\}}(x_{k+1}-x')-\inf{\{f(x)|x_k\le{x}\le{x_{k+1}}\}}(x_{k+1}-x_k)=(I_1-I)(x'-x_k)+(I_2-I)(x_{k+1}-x')\ge0$,\\ ugyanis $I_1\subset{I},I_2\subset{I}$, vagyis $\inf{I_1}\ge\inf{I},\inf{I_2}\ge\inf{I}$\\
+    $2.\ \tau=\tau_1\cup\tau_2: s(f,\tau_1)\le{s(f,\tau)}\le{S(f,\tau)}\le{s(f,\tau_2)}$
+  \end{bi}
+  \begin{de}
+    Darboux-féle alsó integrál:$I_*:=sup{S(f,\tau)|\tau\in{F(I)}}$.\\
+    Darboux-féle felső integrál:$I^*:=inf{S(f,\tau)|\tau\in{F(I)}}$.
+  \end{de}
+  \begin{de}
+    $\fir$ integrálható, ha $I_*f=I^*f$. Jel.:$\di\int_I{f}, \int_a^b{f}, \int_a^b{f(x)},\int_a^b{f(x)dx}$
+    Jel.:$R(I):$az $I$ intervallumon integrálható fv.-ek halmaza
+  \end{de}
+  \begin{de}
+    $\fir$ korlátos fv, $\tau\in{F(I)}\ f\ \tau$-hoz tartozó oszcillációs összege:\[\Omega(f,\tau):=S(f,\tau)-s(f,\tau)=\di\sum_{k=0}^{n-1}{(\sup{\{f(k)|_{[x_k,x_{k+1}]}\}}-\inf{\{f(k)|_{[x_k,x_{k+1}]}\}})(x_{k+1}-x_k)}\]
+  \end{de}
+  \begin{te}
+    $f\in{R(I)}\ek\inf{\{\Omega(f,\tau)|\tau\in{F(I)}\}}=0\\(\forall\epsilon>0,\exists\tau\in{F(I)}:\Omega(f,\tau)<\epsilon)$
+\end{te}
+  \begin{bi}
+    $\di\nb: \forall\tau\in{F(I)}:s(f,\tau)\le{I_*f}\le{I^*f}\le{S(f,\tau)}\\$
+    $\nn{I^*f-I_*f}\le\Omega(f,\tau)\ \nn\ 0\le{I^*f-I_*f}\le\inf{\{\Omega(f,\tau)|\tau \in{F(I)}\}}=0\nn{I*f=I_*f}\nn{f\in{R(I)}}\\
+    \nn: f\in{R(I)}\nn \epsilon>0:\exists\tau_1\in{F(I)}:s(f,\tau_1)\ge{I_*f}-\frac{\epsilon}{2}=\int_I{f}-\frac{\epsilon}{2},\\\exists\tau_2\in{F(I)}:S(f,\tau_2)\le{I^*f}+\frac{\epsilon}{2}=\int_I{f}+\frac{\epsilon}{2}, \\\tau:=\tau_1\cup\tau_2:\\
+    \begin{array}{l}
+      s(f,\tau)\ge{S(f,\tau_1)}\ge\int_I{f}-\frac{\epsilon}{2}\\
+      S(f,\tau)\le{S(f,\tau_2)}\le\int_I{f}-\frac{\epsilon}{2}
+    \end{array}\bigg\rbrace\nn\Omega(f,\tau)\le\epsilon$
+  \end{bi}
+  \newpage
+  \section{Az integrálhatóság vizsgálata olyan felosztássorozatokkal, amelyek finomsága 0-hoz tart.}
+  \begin{de}
+    $\tau\in{F(I)}, \tau=\{x_0,x_1,\ldots,x_n\};\\\tau$ finomsága: $||\tau||=\max{\{x_{i+1}-x_i|i=0,\ldots,n-1\}}$
+  \end{de}
+  \begin{te}
+    $f\in{R(I)}\ek\forall\epsilon>0\ \exists\delta>0\ \forall\tau\in{F(I)},||\tau||<\delta:\ \Omega(f,\tau)<\epsilon$
+  \end{te}
+  \begin{bi}
+    $\di\nb:$ Lásd előző tétel, ui:  $\forall\epsilon>0,\tau\in{F(I)}:\Omega(f,\tau)<\epsilon)\nn
+    f\in R(I)\\$
+    $\nn: f\in R(I)\nn \exists\sigma\in F(I):\Omega(f,\sigma)<\dfrac{\epsilon}{2};
+    \ \sigma=\lbrace t_0,t_1,\ldots t_N\rbrace \\$
+    Legyen $\delta>0, melyre:\\1.\delta<min\lbrace t_{k+1}-t_k\vert k=0,1\ldots N-1\rbrace\\
+    2.\ \delta<\dfrac{\epsilon}{16kN}\\$
+    $\tau\in F(I),\ \Vert\delta\Vert<\delta,\ \tau=\lbrace x_0,x_1,\ldots,x_n\rbrace$, ahol $x_0=t_0$ és $x_n=t_n$, továbbá\\
+    $i_k:=max\lbrace j\vert x_j\le t_k\rbrace.\\$
+    \[S(f,\sigma)=\sup f\vert_{[t_0,t_1]}(t_1-t_0)+\ldots+\sup f\vert_{[t_k,t_{k+1}]}(t_{k+1}-t_k)+\ldots+\sup f\vert_{[t_{N-1},t_N]}(t_N-t_{N-1})\]
+    \[S(f,\tau)=\sup f\vert_{[x_0,x_1]}(x_1-x_0)+\ldots+\ \sup f\vert_{[x_{i_k},x_{i_k+1}]}(x_{i_k+1}-x_{i_k})+\ldots+\sup f\vert_{[x_{n-1},x_n]}(x_n-x_{n-1})\]
+    \[1.)\ \sup f\vert_{[x_{i_k},x_{i_k+1}]}(x_{i_k}-x_{i_k})=\sup f\vert_{[x_{i_k},x_{i_k+1}]}(t_{k}-x_{i_k})+\sup f\vert_{[x_{i_k},x_{i_k+1}]}(x_{i_k+1}-t_{k})\]
+    \[2.)\ \sup f\vert_{[x_{i_{k+1}},x_{i_{k+1}+1}]}(x_{i_{k+1}+1}-x_{i_{k+1}})=\sup f\vert_{[x_{i_{k+1}},x_{i_{k+1}+1}]}(t_{k+1}-x_{i_{k+1}})+\]\[\sup f\vert_{[x_{i_{k+1}},x_{i_{k+1}+1}]}(x_{i_{k+1}+1}-t_{k+1})\]
+    \underline{Összehasonlítás:}
+    \[\sup f\vert_{[t_k,t_{k+1}]}(t_{k+1}-t_k)=\sup f\vert_{[t_k,t_{k+1}]}\big((x_{i_k+1}-t_k)+(x_{i_k+2}-x_{i_k+1})+\ldots+(t_{k+1}-x_{i_{k+1}})\big)\ge\]
+    \[\ge \sup f\vert_{[t_k,t_{k+1}]}(x_{i_k+1}-t_k)+\sum_{j=i_k+1}^{i_{k+1}-1}{\sup f\vert_{[x_j,x_{j+1}](x_{j+1}-x_j)}}+\sup f\vert_{[t_k,t_{k+1}]}(t_{k+1}-x_{i_{k+1}})=\]
+    \[= \sup f\vert_{[x_{i_k},x_{i_k+1}]}(x_{i_k+1}-t_k)+\sum_{j=i_k+1}^{i_{k+1}-1}{\sup f\vert_{[x_j,x_{j+1}](x_{j+1}-x_j)}}+\sup f\vert_{[x_{i_{k+1}},x_{i_{k+1}+1}]}(t_{k+1}-x_{i_{k+1}})+\]
+    \[+\underbrace{\big(\sup f\vert_{[t_k,t_{k+1}]}-\sup f\vert_{[x_{i_k},x_{i_k+1}]}\big)}_{>-2k}\underbrace{(x_{i_k+1}-t_k)}_{\le\delta}
+    +\underbrace{\big(\sup f\vert_{[t_k,t_{k+1}]}-\sup f\vert_{[x_{i_{k+1}},x_{i_{k+1}+1}]}\big)}_{>-2k}\underbrace{(t_{k+1}-x_{i_{k+1}})}_{\le\delta}\]
+    Legyen $k\in\R,\ \forall x\in D_f:\vert f(x)\vert<k$. Ekkor\\
+    $\begin{array}{rcl}
+      S(f,\sigma) & \ge & S(f,\tau)-4k\delta N\\
+      s(f,\sigma)& \le & s(f,\tau)+4k\delta N
+    \end{array}\bigg\}\nn\\
+    S(f,\sigma)\ge S(f,\tau)-4k\delta N\ge s(f,\tau)-4k\delta N\ge s(f,\tau)-8k\delta N\nn\\
+    S(f,\sigma)-s(f,\sigma)+8k\delta N\ge S(f,\tau)-\big(s(f,\sigma)-4k\delta N\big)\ge S(f,\tau)-s(f,\tau)
+    \nn\\\nn\Omega(f,\tau)\le\Omega(f,\sigma)+8k\delta N<\dfrac{\epsilon}{2}+\dfrac{\epsilon}{2}=\epsilon$
+    
+  \end{bi}
+  \begin{ko}
+    $1.)\ f\in R(I);\ \tau_n\in F(I)\ (n\in\N);\ \di\lim_{n\n +\infty}{\vert\tau_n\vert}=0\nn\lim_{n\n +\infty}\Omega(f,\tau_n)=0\nn\Bigg\{\begin{array}{l}\exists\di\lim_{n\n\infty}{S(f,\tau_n)}\\
+    \exists\di\lim_{n\n\infty}{s(f,\tau_n)}$ és$\\
+    \di\lim_{n\n\infty}{S(f,\tau_n)}=\di\lim_{n\n\infty}{s(f,\tau_n)}=\di\int_{I}{f}\end{array}\\$
+    Vagyis elég, ha a finomság tart nullához.\\
+    $2.)\ \tau_n\in F(I); \di\lim_{n\n\infty}{\Vert\tau_n\Vert}=0;$ de:\\
+    $\Bigg\{\begin{array}{l}\nexists\di\lim_{n\n\infty}{S(f,\tau_n)}$ vagy $\\$
+    $\nexists\di\lim_{n\n\infty}{s(f,\tau_n}$ vagy$\\$
+    $\exists\di\lim_{n\n\infty}{s(f,\tau_n)}$ és $\exists\di\lim_{n\n\infty}{S(f,\tau_n)}$, de nem egyenlőek
+    $\end{array}\Bigg\}\nn f\not\in R(I)$
+  \end{ko}
+  \begin{me}
+    Rövidített jelölés: $\di\int_{I}{f}=\di\lim_{\Vert\tau\Vert\n 0}{S(f,\tau)}\\
+    \forall\epsilon>0\ \exists\delta>0\ \forall\tau\in F(I),\Vert\tau\Vert<\delta:\ \vert S(f,\tau)-\int_If\vert<\epsilon$
+  \end{me}
+  \begin{me}
+    \underline{Riemann-féle közelítő összegek:}\\
+    $\di\fir,$ korlátos; $\tau\in F(I);\ \tau=\{x_0,x_1,\ldots,x_n\};\\
+    \xi=\{\xi_0,\xi_1,\ldots\xi_{n-1}\};\ \xi_k\in[x_k,x_{k+1}]\\
+    R(f,\tau,\xi)=\di\sum_{k=0}^{n-1}{f(\xi_k)(x_{k+1}-\xi_k)}\\$
+    Nyilván: $s(f,\tau)\le R(f,\tau,\xi)\le S(f,\tau)$
+    \begin{ko}
+      $f\in R(I),\ \tau_n\in F(I)\ (n\in\N),\ \xi^n,\ \di\lim_{n\n\infty}{\Vert\tau\Vert}=0\nn\\\nn$
+      $\exists\lim{R(f,\tau,\xi^n)}=\di\int_If.$ 
+    \end{ko}
+  \end{me}
+  \newpage
+  \section{Műveletek integrálható függvényekkel.}
+  \begin{te}
+    $f,g\in{R(I)}\nn{f+g}\in{R(I)}\land\la\in\R\nn\la{f}\in{R(I)}$ és\\
+    $\di\int_I{f+g}=\int_I{f}+\int_I{g}$ és $\di\int_I\la{f}=\la\int_I{f}$
+  \end{te}
+  \begin{bi}
+    $\di\epsilon>0.\\ f\in R(I)\nn\exists\tau_1\in F(I):\int_If-\frac{\epsilon}{2}\le s(f,\tau_1)\le S(f,\tau_1)\le\int_If+\frac{\epsilon}{2},\\g\in R(I)\nn\exists\tau_2\in F(I):\int_Ig-\frac{\epsilon}{2}\le s(g,\tau_2)\le S(g,\tau_2)\le\int_Ig+\frac{\epsilon}{2},
+    \\\tau:=\tau_1\cup\tau_2,\int_If-\frac{\epsilon}{2}\le s(f,\tau)\le S(f,\tau)\le\int_If+\frac{\epsilon}{2},\\\int_Ig-\frac{\epsilon}{2}\le s(g,\tau)\le S(g,\tau)\le\int_Ig+\frac{\epsilon}{2}
+    \\S(f+g,\tau)= \sum_{k=0}^{n-1}{(\sup(f+g)|_{[x_k,x_{k+1}]})(x_{k+1}-x_k)}\le\\
+    \le\sum_{k=0}^{n-1}{(\sup(f|_{[x_k,x_{k+1})]}+\sup(g|_{[x_k,x_{k+1}]}))(x_{k+1}-x_k)}= S(f,\tau) +S(g,\tau),
+    \\s(f+g,\tau)= \sum_{k=0}^{n-1}{(\inf(f+g)|_{[x_k,x_{k+1}]})(x_{k+1}-x_k)}\ge \sum_{k=0}^{n-1}{\Big(\inf(f|_{[x_k,x_{k+1}]})}+\\+{\inf(g|_{[x_k,x_{k+1}]})\Big)(x_{k+1}-x_k)}= s(f,\tau)+S(s,\tau)$, azaz\\
+    $\di\int_If+\int_Ig-\epsilon<s(f,\tau)+s(g,\tau)\le s(f+g,\tau)\le {S(f+g,\tau) }\le{ S(f,\tau)+S(g,\tau)}\le{\int_If+\int_Ig+\epsilon}$
+  \end{bi}
+  \begin{te}
+    $1. f,g\in R(I)\nn fg\ R(I)\\
+    2. f,g\in R(I) \land\exists m>0|g|>m\nn\frac{f}{g}\in R(I)$
+  \end{te}
+  \begin{bi}
+    $\di 1.)\ f(x)g(x)-f(y)g(y)=f(x)g(x)-f(x)g(y)+f(x)g(y)-f(y)g(y)\nn |f(x)g(x)-f(y)g(y)| \le |f(x)||(g(x)-g(y)|+|g(y)||f(x)-f(y)|\\
+    f\in R(I)\nn f$ korlátos $\exists M>0,\ |f(x)|<M\ (x\in I)\\
+    g\in R(I)\nn g$ korlátos $\exists N>0,\ |g(x)|<N\ (x\in I)\\
+    \di\tau\in F(I),\ \tau=\{x_0,x_1,\ldots,x_n\},\\
+    \begin{array}{rclcrcl}F_k&:=&\sup{\{f|_{[x_k,x_{k+1}]}\}}&~& G_k&:=&\sup{\{f|_{[x_k,x_{k+1}]}\}},\\
+      f_k&:=&\inf{\{f|_{[x_k,x_{k+1}]}\}},&~& g_k&:=&\inf{\{f|_{[x_k,x_{k+1}]}\}},\end{array}
+    \Big\}(k=0,1,..,n-1)\\
+    \di{\Omega(fg,\tau)}={\sum_{k=0}^{n-1}{\sup{\{f(x)g(x)-f(y)g(y)|x_k\le x,y\le x_{k+1}\}(x_{k+1}-x_k)}}}\le\\\le{ \sum_{k=0}^{n-1}{\big(M(G_k-g_k)+N(F_k-f_k)\big)(x_{k+1}-x_k)}} = {M\Omega(g,\tau)+N\Omega(f,\tau)},\\
+    \begin{array}{lclcl}f\in{R(I)}&\nn& \exists\tau_1\in{F(I)}:&~&\Omega(f,\tau_1)\le\frac{\epsilon}{2M}\\
+      g\in{R(I)}&\nn& \exists\tau_2\in{F(I)}:&~& \Omega(g,\tau_2)\le\frac{\epsilon}{2N}\end{array}\big\}\nn\\
+    \nn\tau=\tau_1\cup\tau_2; \Omega(fg,\tau)\le M\Omega(g,\tau)+N\Omega(f,\tau)\le  M\Omega(g,\tau_2)+N\Omega(f,\tau_1)<\epsilon\\
+    2.)$ Elég megmutatni, hogy $\di\frac1{g}\in{R(I)}$.\\ $\di\frac1{g(x)}-\frac1{g(y)}=\frac{g(y)-g(x)}{g(x)g(y)}\\
+    \frac1{g(x)}-\frac1{g(y)}\le\frac1{m^2}|g(y)-g(x)|$ korlátos a feltételek miatt.\\
+    $\di\tau\in{F(I)}:\Omega(\frac1{g},\tau)\le\Omega(g,\tau)\\
+    \Big(ui: G_k:=\sup{\{f|_{[x_k,x_{k+1}]}\}},\ g_k:=\inf{\{f|_{[x_k,x_{k+1}]}\}}\\
+    \sup{\{\frac1{g(x)}-\frac1{g(y)}\vert x_k\le x,y \le x_{k+1}\}}(G_k-g_k)\quad(k=0,1,\ldots,n)\Big)\\
+ g\in{R(I)}\nn \forall\epsilon>0\ \exists\tau\in{F(I)}:\Omega(g,\tau)<\epsilon\nn\Omega(\frac1{g},\tau)<\epsilon$
+  \end{bi}
+  \newpage
+  \section{Az integrál intervallum szerinti additivitása. Az integrál monotonitása. Középértéktételek.}
+  \begin{te}
+    $f:[a,b]\n\R, f$ korlátos. Ekkor:\\
+    $f\in{R([a,b])}\ek\forall{a<c<b}, f\in R([a,c]),f\in R([c,b]): \di\int_a^bf=\int_a^cf+\int_c^bf$
+  \end{te}
+  \begin{bi}
+  $\nn:f\in R[a,b],~\tau_n\in F([a,b]),~ \tau_n\subseteq\tau_{n+1},~c\in\tau_n(n\in\N),~ \lim_{n\n\infty}\Vert\tau_n\Vert=0\\$
+ Ekkor $s(f,\tau_n)\nearrow;~ S(f,\tau_n)\searrow $ (vagyis $\tau_n$ finomodik);\\
+$\di\lim_{n\n\infty}{s(f,\tau_n)}=\int_a^bf=\di\lim_{n\n\infty}{S(f,\tau_n)}$ ($\Vert\tau\Vert\n 0$ miatt)\\
+    $\begin{array}{rcl}\tau_n^1&:=&\{x\in\tau_n|a\le x\le c\}\\
+ \tau_n^2&:=&\{x\in\tau_n|c\le x\le b\}\end{array}\Big\}\nn \tau_n^i\subseteq\tau_{n+1}^i(n\in\N,i=1,2);\di\lim_{n\n\infty}{||\tau_n^i||}=0\\
+    s(f,\tau_n^i)\le S(f,\tau_n^i), s(f,\tau_n^i)\nearrow, S(f,\tau_n^i)\searrow(n\in\N,i=1,2)\nn \exists\lim_{n\n\infty}s(f,\tau_n^i),\lim_{n\n\infty}S(f,\tau_n^i)\\
+ s(f,\tau_n)=s(f,\tau_n^1)+s(f,\tau_n^2)\le S(f,\tau_n^1)+S(f,\tau_n^2)=S(f,\tau_n);$
+    határértékkel: \\$\di\int_a^bf=\lim_{n\n\infty}{s(f,\tau_n^1)}+\lim_{n\n\infty}{s(f,\tau_n^2)}\le \lim_{n\n\infty}{S(f,\tau_n^1)}+\lim_{n\n\infty}{S(f,\tau_n^2)}=\int_a^bf\\
+    $ Tehát: $\di\lim_{n\n\infty}{s(f,\tau_n^1)}+\lim_{n\n\infty}{s(f,\tau_n^2)}=\lim_{n\n\infty}{S(f,\tau_n^1)}+\lim_{n\n\infty}{S(f,\tau_n^2)}\\\nn \lim_{n\n\infty}{s(f,\tau_n^i)}=\lim_{n\n\infty}{S(f,\tau_n^i)}\nn\int_a^bf=\int_a^cf+\int_c^bf\\$
+    $\di\nb: f\in{R[a,c]}, f\in{R[c,b]}, \\
+    \tau_n^1\in{F([a,c])},\tau_n^2\in{F([c,b])};~ \tau_n:=\tau_n^1\cup\tau_n^2;~ \tau_n^i\subseteq\tau_{n+1}^i;\\
+ c\in\tau_n^i;~\lim_{n\n\infty}{\Vert\tau_n^i\Vert}=0~(n\in\N;~i=1,2)\\
+ s(f,\tau_n^1)+s(f,\tau_n^2)=s(f,\tau_n)\le S(f,\tau_n)=S(f,\tau_n^1)+S(f,\tau_n^2)\nn\\
+    \int_a^cf+\int_c^bf=\lim_{n\n\infty}{s(f,\tau_n)}\le \lim_{n\n\infty}{S(f,\tau_n)}=\int_a^cf+\int_c^bf\nn\\
+\int_a^cf+\int_c^bf=\lim_{n\n\infty}{s(f,\tau_n)}=\lim_{n\n\infty}{S(f,\tau_n)}=\int_a^bf$
+  \end{bi}
+  \begin{de}
+  $f\in R[a,b], c\in[a,b]: \di\int_a^bf:=-\int_b^af$ és $\di\int_c^cf:=0$
+  \end{de}
+  \begin{te}
+    $f\in R(I); a,b,c\in I:\di\int_a^bf=\int_a^cf+\int_c^bf\\$
+  \end{te}
+  \begin{te}
+    $f,g\in R(I),f\le g\nn\di\int_If\le\int_Ig$
+  \end{te}
+  \begin{bi}
+    $\di h:=g-f;~ h\in R(I),~ h\ge 0.\forall\tau\in F(I), s(h,\tau)\ge 0\nn\\\nn I_*h\ge 0\nn\di\int_Ih\ge 0\nn g=f+h:~\int_Ig=\int_If+\int_Ih\ge\int_If$
+  \end{bi}
+  \begin{te}
+    $f\in R(I),~\rho\in R(I),~\rho\ge0,~m:=\inf{f\vert_I},~M:=\sup{f\vert_I}\\$
+   	Ekkor: $m\di\int_I\rho\le\int_I{f\rho}\le M\int_I\rho$
+  \end{te}
+  \begin{bi}
+    $m\le f\le M ~~/*\rho\\ m\rho\ge f\rho\le M\rho $ (integrálhatók)\\$\di\int_I{m\rho}\le\int_I{f\rho}\le\int_I{M\rho} \ek m\int_I\rho\le\int_I{f\rho}\le M\int_I\rho$
+  \end{bi}
+  \begin{me}
+    $1.)~\di f\in C(I)\nn\xi\in I:~\int_If\rho=f(\xi)\int_I\rho.\\ m:=\min{f|_I},~ M:=\max{f|_I}:~
+\exists m\le\omega\le M,~ \int_I{(f\rho)}=\omega\int_I{\rho},\\ f\in C(I)\nn\exists\xi\in I, f(\xi)=\omega\\
+    2.)~\rho\equiv 1,~f\in C(I),~ I=[a,b],~ \exists\xi\in[a,b]:\\\int_a^bf=f(\xi)(b-a)\quad$és$\quad\di\int_a^b=b-a$
+  \end{me}
+\newpage
+\section{Integrálható függvények osztályai.}
+\begin{te}
+  $I$ kompakt (korlátos és zárt), $f\in C(I)\nn f\in R(I)$
+\end{te}
+\begin{bi}
+  $f$ egyenletesen folytonos az $I=[a,b]$ intervallumon. $\\
+\forall\epsilon>0, \exists\delta>0: x,y\in[a,b]:~|x-y|<\delta\nn |f(x)-f(y)|<\di\frac{\epsilon}{2(b-a)}$.\\
+ Legyen $\tau\in F([a,b]),~\Vert\tau\Vert<\delta~(\tau=\{x_0,\ldots,x_n\})\\
+  \sup{\{f(x)-f(y):x_k\le x,y\le x_{k+1}\}}\le\frac{\epsilon}{2(b-a)}\nn\\
+ \nn \Omega(f,\tau)\le\di\sum_{k=0}^{n-1}{\frac{\epsilon}{2(b-a)}(x_{k+1}-x_k)}=\frac{\epsilon}{2(b-a)}\sum_{k=0}^{n-1}{(x_{k+1}-x_k)}=\\=\frac{\epsilon}{2(b-a)}(b-a)=\frac{\epsilon}{2}<\epsilon$
+\end{bi}
+\begin{te}
+  $I$ korlátos és zárt,$f:I\n\R,~f$ monoton $\nn f\in R(I)$
+\end{te}
+\begin{bi}
+  $\di I=[a,b],~\tau\in{F([a,b])}\\
+  \Omega(f,\tau)=\sum_{k=0}^{n-1}{\sup{\{f(x)-f(y):x_k\le x,y\le x_{k+1}\}(x_{k+1}-x_k)} }$.\\
+   Tegyük fel,h.: $f\nearrow\nn f(x_{k+1}-f(x_k)>0.\\
+   \nn\Omega(f,\tau)=\di\sum_{k=0}^{n-1}{\big(f(x_{k+1}-f(x_k)\big)\underbrace{(x_{k+1}-x_k)}_{\le\Vert\tau\Vert}}\le{\Vert\tau\Vert\sum_{k=0}^{n-1}{\big(f(x_{k+1}-f(x_k)\big)}}=\\
+ =\big(f(b)-f(a)\big)\Vert\tau\Vert,\\
+ f(a)\neq f(b)\nn\Vert\tau\Vert<\frac{\epsilon}{f(b)-f(a)}\nn\Omega(f,\tau)<\epsilon$
+\end{bi}
+\begin{te}
+  $f\in R[a,b],~ g:[a,b]\n\R,~ \vert\{x\in[a,b]:f(x)\not=f(y)\}\vert<\infty\nn g\in R[a,b]\land\di\int_a^bg=\int_a^bf$
+\end{te}
+\begin{bi}
+  Elég megmutatni, hogy $\forall c\in[a,b]$ esetén $h_c:[a,b]\n\R,\\h_c(x):=\Big\{
+\begin{array}{lr}
+  1& (x=c)\\
+  0&(x\neq c)\\
+\end{array}\quad$ integrálható, és $\di\int_a^bh_c=0.\\ 
+  \tau\in{F(I)}:~ s(h_c,\tau)=0~$ és $\di~S(h_c,\tau)\le 2\Vert\tau\Vert,~\Vert\tau_n\Vert\n\infty
+ \nn \\\nn s(h_c,\tau_n)=0=\lim_{n\n\infty}{S(h_c,\tau_n)}\nn h_c\in R[a,b],~\int_a^bh_c=0\\
+  H:=\{x\in[a,b]:~ f(x)\not=f(y)\}$, tehát $H=\{x_1,x_2,\ldots,x_n\}),\\
+  \la_k:=g(x_k)-f(x_k);~ g=f+\di\sum_{k=1}^n{\la_k{h_{x_k}}}$
+\end{bi}
+\begin{de}
+  $f:I\n\R$ függvény szakaszonként folytonos függvény, ha \\$I=[a,b],~a=x_0<x_1<x_2<\ldots<x_n=b$ és ekkor $f\in C[x_k,x_{k+1}],\\
+ \di\lim_{x_k+0}{f}\in\R,~\lim_{x_{k+1}-0}{f}\in\R\quad(k=0,1,\ldots,n-1)$
+\end{de}
+\newpage
+\section{A Newton-Leibniz-tétel. Az integrálfüggvény.}
+\begin{te}[Newton-Leibniz]
+  $f\in R[a,b]$, létezik $f$-nek primitív fv-e $\nn\\\di\int_a^bf=F(b)-F(a),$ ahol az $F$ az $f$ tetszőleges primitív függvénye.
+\end{te}
+\begin{bi}
+  $\tau\in F[a,b], \tau=\{x_0,x_1,\ldots,x_n\}, F(b)-F(a)=\di\sum_{k=0}^{n-1}{(F(x_{k+1})-F(x_k))}$, Langrange$\nn\exists x_k<\xi_k<x_{k+1}:F(x_{k+1})-F(x_k)=F'(\xi_k)(x_{k+1}-x_k)\nn F(b)-F(a)=\di
+\sum_{n=0}^{n-1}f(\xi_k)(x_{k+1}-x_k)\nn s(f,\tau)\le\sum_{n=0}^{n-1}{f(\xi_k)(x_{k+1}-x_k)}\le S(f,\tau)\nn s(f,\tau)\le F(b)-F(a) \le S(f,\tau).~ De~ f\in R[a,b]\nn F(b)-F(a)=\int_a^bf$
+\end{bi}
+\begin{me}
+Jelőlés: $[f(x)]_a^k=f(k)-f(a)$
+\end{me}
+\begin{de}
+  $f\in R[a,b], x_0\in[a,b]:~I_{x_0}f(x):=\di\int_{x_0}^xf~(a\le x\le b)$ az $f$ függvény $x_0$ pontban eltünő integrálfüggvénye.
+\end{de}
+\begin{te}
+  $f\in R[a,b], x_0\in[a,b].$ Ekkor\\
+ 1.) $I_{x_0}f\in C[a,b]\\$
+ 2.) Ha $f\in C(\{x\})\nn I_{x_0}f\in D\{x\}$ és $(I_{x_0}f)'(x)=f(x)$
+\end{te}
+\begin{bi}
+  $1.f\in R[a,b]\nn\ f$ korlátos, azaz $\exists K>0:|f(x)|<K\\(\forall a\le x\le b)$. Legyen $x\in[a,b], h\in\R, (x+h)\in[a,b]$. Ekkor \\
+  $\di \Big\vert(\int_{x_0}f)(x+h)-(\int_{x_0}f)(x)\Big\vert=\Big\vert\int_{x_0}^{x+h}f-\int_{x_0}^xf\Big\vert=
+ \Big\vert\int_{x_0}^{x+h}f+\int_x^{x_0}f\Big\vert=\Big\vert\int_x^{x+h}f\Big\vert=|F(x+h)-F(x)|\le K|h|\nn \epsilon>0,\delta:=\frac{\epsilon}{K},|h|<\delta\nn \\\nn|(\int_{x_0}f)(x+h)-(\int_{x_0}f)(x)|<\epsilon\nn\int_{x_0}f\in C\{x\}\\
+  2.f\in C(\{x\}),~\epsilon>0,~\exists\delta>0,~|h|<\delta(x+h)\in[a,b]:|f(x+h)-f(x)|<\epsilon\nn f(x)-\epsilon<f(x+h)<f(x)+\epsilon,\quad x$-hez tartozó különbségi hányados fv:\\$\di k(s):=\frac{(\di\int_{x_0}f)(x+s)-(\int_{x_0}f)(x)}{s}=\frac{\int_x^{x+s}f}{s}~(0<s<\delta);\\
+  (f(x)-\epsilon)s\le\int_x^{x+s}\le(f(x)+\epsilon)s$ ekkor: $(f(x)-\epsilon)\le k(s)\le(f(x)+\epsilon)\nn\di\lim_{s\n0}k(s)=f(x) \quad($--$\delta<s<0$ esetén hasonlóan$)$
+\end{bi}
+\begin{ko}
+  $f\in C[a,b]\nn\di\int_{x_0}f$ az $f$ $x_0$-ban eltünő primitív függvénye.
+\end{ko}
+\newpage
+\section{Parciális integrálás határozott integrálra.}
+\begin{te}
+  $\di f,g\in D[a,b];~f',g'\in R[a,b].$\\
+ Ekkor $\di\int_a^b{fg'}=\big(f(b)g(b)-f(a)g(a)\big)-\int_a^b{f'g}$
+\end{te}
+\begin{bi}
+  Newton-Leibnitz alk. a következőre: $fg'+f'g\in R[a,b],$ melynek fg egy primitívfüggvénye.\\
+  Ekkor $\di\int_a^b(fg'+f'g)=fg(b)-fg(a)\nn\int_a^b{(fg')}=fg(b)-fg(a)-\int_a^b{f'g}$
+\end{bi}
+\newpage
+\section{Helyettesítéses integrálás határozott integrálra.}
+\begin{te}
+  $\varphi:[\alpha,\beta]\n\R,~f$ folytonosan differenciálható (végpontjaiban egyoldali derivált), $f\in C[a,b],~R_\varphi\subseteq[a,b]\nn~\di\int_a^b{f\circ\varphi*\varphi'}$
+\end{te}
+\begin{bi}
+  $F(x):=\di\int_{\varphi(\alpha)}^xf;G(t):=\int_\alpha^t{f\circ\varphi\varphi'}$\\ (az integrandusok folytonosak, tehát $F,G \in D$)\\ $
+  \begin{array}{rcl}
+ (F\circ\varphi)(\alpha)&=&F'\circ\varphi\varphi'=f\circ\varphi\varphi'\\
+ G'&=&f\circ\varphi\varphi
+\end{array}\Big\}\nn (F\circ\varphi-G)$ konstans és\\
+  $(F\circ\varphi)(\alpha)=F(\varphi(\alpha))=G(\alpha)\nn F\circ\varphi=G,~ G(\alpha)=0\\
+   (F\circ\varphi)(\beta)=G(\beta)\\$
+  Tehát $\di\int_{\varphi(\alpha)}^{\varphi(\beta)}=\int_\alpha^\beta{f\circ\varphi\varphi'}$
+\end{bi}
+\newpage
+\section{A Wallis- és a Stirling-formula.}
+\begin{te}[Wallis-formula]
+  $\di\lim_{n\n\infty}\prod_{k=1}^n{\frac{(2k)^2}{(2k+1)(2k-1)}}=\frac{\pi}{2}$
+\end{te}
+\begin{bi}
+  {\rm Keressünk rekurziós formulát:}\\$I_n=\di\int_0^{\frac{\pi}{2}}{\sin^n{x}\ dx}$. 
+  $\di I_n=\int_0^{\frac{\pi}{2}}{\sin^n{x}\ dx}=\int_0^{\frac{\pi}{2}}{\underbrace{\sin{x}}_{g'}
+ *\underbrace{\sin^{n-1}{x}}_{f}\ dx}=\\
+  =[-\cos{x}*\sin^{n-1}{x}]_0^{\frac{\pi}{2}}-\int_0^{\frac{\pi}{2}}{(-\cos{x})(n-1)\sin^{n-1}{x}\ dx}=\\
+ =(n-1)\int_0^{\frac{\pi}{2}}{\cos^2{x}*\sin^{n-2}{x}\ dx}=(n-1)\int_0^{\frac{\pi}{2}}{(\sin^{n-2}{x}-\sin^n{x})\ dx}=\\
+ =(n-1)I_{n-1}-(n-1)I_n=I_n\nn\quad
+ I_n=\frac{n-1}{n}I_{n-1}(n\ge2);\\
+ I_0=\frac{\pi}{2},~I_1=\int_0^{\frac{\pi}{2}}{\sin{x}\ dx}=\big[-\cos{x}\big]_0^{\frac{\pi}{2}}=1;\\
+  I_{2n}=\frac{2n-1}{2n}*I_{2n-2}=\frac{2n-1}{2n}*\frac{2n-3}{2n-2}*I_{2n-4}=\frac{2n-1}{2n}*\frac{2n-3}{2n-2}*\ldots*\frac{1}{2}*\frac{\pi}{2}\\
+  I_{2n+1}=\frac{2n}{2n+1}*I_{2n-1}=\frac{2n}{2n+1}*\frac{2n-2}{2n-1}*I_{2n-3}=\frac{2n}{2n+1}*\frac{2n-2}{2n-1}*\ldots*\frac{2}{3}*1\\
+  1.)~I_{2n}=\frac{(2n)!}{(2^n*n!)^2}*\frac{\pi}{2};\quad I_{2n+1}=\frac{(2^n*n!)^2}{(2n+1)!}\\
+  2.)~\sin^{n+1}x\le\sin^n{x}\quad(x\in[0,\frac{\pi}{2}]\\
+  I_{n+1}\le I_n \nn~(I_n)\sarrow$\\
+  {\rm ezek szerint} $I_{2n+2}\le I_{2n+1}\le I_{2n}\\
+  \di\frac{2n+1}{2n+2}*\frac{2n-1}{2n}*\ldots*\frac{1}{2}*\frac{\pi}2\le\frac{2n}{2n+1}*\frac{2n-2}{2n-1}*\ldots*\frac23\le\frac{2n-1}{2n}*\ldots*\frac12*\frac{\pi}{2}\\
+  \frac{2n+1}{2n+2}*\frac{\pi}2\le\frac{(2n)^2(2n-2)^2*\ldots*2^2}{\underbrace{(2n+1)}_{nincs~ negyzeten}(2n-1)^2(2n-3)^2*\ldots*1^2}\le\frac{\pi}2\\
+   \frac{2n+1}{2n+2}\frac{\pi}{2}\le\prod_{k=1}^n{\frac{(2k)^2}{(2k+1)(2k-1)}}\le\frac{\pi}2:$ {\rm közrefogási elv (tart $\frac{\pi}2$-höz.)}\ob
+\end{bi}
+\begin{te}[Stirling-formula]
+  $\di\lim_{n\n\infty}{\frac{n!e^n}{n^n\sqrt{n}}}=\sqrt{2\pi}$
+\end{te}
+Jelölés:$n!\sim n(\frac{n}{e})^n\sqrt{2\pi}$ Strirling-formula:$a_n\sim b_n(n\in\N)\ek\di\lim_{n\n\infty}\frac{a_n}{b_n}=1$: asszimetrikusan egyenlők.
+\begin{bi}
+  $\di a_n:=\frac{n!e^n}{n^n*\sqrt{n}}\\
+  \frac{a_{n+1}}{a_n}=\frac{(n+1)!e^{n+1}}{(n+1)^{n+1}\sqrt{n+1}}\frac{{n^n*\sqrt{n}}}{n!e^n}=\frac{e}{(\frac{n+1}{n})^n\sqrt{\frac{n+1}{n}}}=\frac{e}{(\frac{n+1}{n})^{n+\frac{1}{2}}}$\\
+  {\rm Tudjuk, hogy} $\di\lim\genfrac(){}{}{n+1}{n}^{n+\frac{1}{2}}=e$.{\rm~Kérdés a monotonitás.\\
+  Tekintsük az }$f(x):=(1+\frac1x)^{1+\frac12}~(x>0)${\rm  függvényt:}\\
+	\[\di f(x) = e^{(x+\frac12)ln(1+\frac1x)}\]
+  \[ f'(x)=e^{(x+\frac12)\ln{(1+\frac1x)}}\bigg({\ln(1+\frac1x)+\frac{x+\frac12}{1+\frac1x}
+  -\di\genfrac(){}{}{1}{x^2}}\bigg)=e^{(x+\frac12)\ln{(1+\frac1x)}}\bigg({\ln(1+\frac1x)
+ -\frac{x+\frac12}{x^2+x}}\bigg)\]
+  {\rm Kérdés a $\di\ln{(1+\frac1x)-\frac{x+\frac12}{x^2+x}}$ előjele:}$\\
+  \di g(x):=\di\ln{(1+\frac1x)-\frac{x+\frac12}{x^2+x}},\lim_{n\n\infty}g=0,\quad $
+  {\rm g monotonitása:}$\\
+  \di g'(x)=\frac1{1+\frac1x}\bigg(-\frac{1}{x^2}\bigg)-\frac{(x^2+x)-(x-\frac12)(2x+1)}{(x^2+x)^2}=\frac{\frac12}{(x^2+x)^2}>0\nn\\
+ \nn(g'>0,\lim_{+\infty}{g}=0)\nn g\narrow\nn g<0\nn(1+\frac1n)^{n+\frac12}\nn f'<0\nn f\sarrow${\rm, de }$\di\lim_{x\n\infty}f(x)=e\\$
+  {\rm Tehát: $\di\bigg(1+\frac1n\bigg)^{n+\frac12}\sarrow~$ és }$\di\bigg(1+\frac1n\bigg)^{n+\frac12}>e\nn\\\nn
+  \di\frac{e}{\bigg(1+\frac1n\bigg)^{n+\frac12}}\nn(a_n)\sarrow;\quad a_n:=\frac{n!e^n}{n^n\sqrt{n}},~ A:=\lim(a_n)\\
+  \frac{a_n^2}{a_{2n}}=\frac{(n!)^2e^{2n}}{n^{2n}n}\frac{(2n)^{2n}\sqrt{2n}}{(2n)!e^{2n}}=\frac{n!n!2^{2n}n^{2n}}{n^{2n}n(2n)!}\sqrt{2n}=\frac{(2n*(2n-1)*\ldots*2)^2}{(2n)!}\sqrt{2n}=\\
+=\frac{2n*(2n-2)*\ldots*2}{(2n-1)*(2n-3)*\ldots*3*1}*\sqrt{\dfrac{2}{n}}\\
+  ${\rm Wallis-fromulából gyököt vonva }$\nn\di A=\lim_{n\n\infty}\frac{a_n^2}{2_{2n}}\Big(=\frac{A^2}{A}\Big)=\sqrt{\frac{\pi}2}\sqrt{2}\sqrt{2}=\sqrt{2\pi}$\ob
+\end{bi}
+\newpage
+\section{Az ívhossz fogalma és kiszámítása.}
+\begin{de}
+  $f:[a,b]\n\R,~f\in C;\\
+   l(f,\tau)=\di\sum_{k=0}^{n-1}{\sqrt{(f(x_{k+1})-f(x_k))^2+(x_{k+1}-x_k)^2}}.\\
+ f$ rektifikálható ($\exists$ ívhossza), ha $~\sup{l(f,\tau)|\tau\in F(I)}<\infty.\\$
+ Ekkor $l(f):=\sup{\{l(f,\tau)|\tau\in F[a,b]\}}\ f$ grafikonjának ívhossza.
+\end{de}
+\begin{te}
+  $f\in D[a,b],~f'\in C[a,b].\\$
+   Ekkor $\exists l(f)=\di\int_a^b{\sqrt{1+(f')^2}}$
+\end{te}
+\begin{bi}
+  A háromszögegyenlőtlenségből következik, hogy ha $\tau$ finomodik, akkor 
+  $l(f,\tau)$ értéke nő.\\
+  $\tau:=\{x_0,x_1,\ldots,x_n\}\quad$ Lagrange-féle kpértéktétel miatt 
+  $\di\exists x_i\le\xi_i\le x_{i+1}~~(i=0,1,\ldots,n-1):~f(x_{i+1})-f(x_i)=f'(\xi)(x_{i+1}-x_i)\nn\\
+ \nn l(f,\tau)=\sum_{i=0}^{n-1}{\sqrt{f'(\xi_i)^2(x_{i+1}-x_i)^2+(x_{i+1}-x_i)^2}}=
+  \sum_{i=0}^{n-1}{{\sqrt{1+{f'(\xi_i)}^2}}(x_{i+1}-x_i)},\\
+   g(x):=\sqrt{1+f'(x)^2}~~(a<x<b)\nn l(f,\tau)=\sum_{i=0}^{n-1}{g(\xi_i)(x_{i+1}-x_i)}=R(g,\tau,\xi)\\$ $f'$ folytonos$\nn$ $g\in C\nn g$ korlátos $\nn\exists K>0: \vert g(x)\vert<K~(a<x<b)\nn
+ \\\nn R(g,\tau,\xi)<K(b-a)\nn l(f,\tau)<K(b-a)\nn\\
+ \nn \sup{\{l(f,\tau\vert\tau\in F[a,b]\}}<(b-a)<\infty\nn\exists l(f)\\$
+  Legyen $\di\tau_n\in F[a,b]~~(n\in\N),~~\di\lim_{n\n\infty}{l(f,\tau_n)}=l(f)=\sup{\{\ldots\}}$ \
+ \\(feltehető, hogy $\di\lim_{n\n\infty}{\Vert\tau_n\Vert}=0).\\
+  \tau_n^*=\tau_n\cup\{a+(b-a)\frac{k}{n}\vert k=0,1,\ldots,n\}\\ l(f,\tau_n^*)\ge l(f,\tau_n),\quad
+ \Vert\tau_n\Vert\n0~~(n\n\infty)\\$
+ Ekkor $\di\lim_{n\n\infty}l(f,\tau_n)=R(g,\tau_n)\nn l(f)=\int_a^bg\nn l(f)=\int_a^b{\sqrt{1+f'(x)^2}}$\ob
+\end{bi}
+\newpage
+\section{A Taylor-formula az integrál maradéktaggal.}
+\begin{te}
+  $I$ nyílt intervallum, $f\in D^{n+1}(I), f^{(n+1)}\in R[a,x], a,x\in I: f(x)-T_n(f,a,x)=\di\frac1{n!}\int_a^x{f^{(n+1)}(t)(x-t)^n\ dt}$
+\end{te}
+\begin{bi}
+  $f(x)-f(a)=\di\int_a^x{f'(x)dt}$(Newton-Leibniz):$\di\int_a^x{1*f'(t)dt}=[(t-x)f'(t)]_a^x-\int_a^x{(t-x)f''(t)dt}=-(a-x)f'(a)+\int_a^x{(x-t)f''(t)dt}$\\
+  KI KELLENE EGÉSZÍTENI!
+\end{bi}
+\newpage
+\section{A binomiális sor.}
+%\begin{de}
+$f:(-1,\infty)\n\R, f(x)=(a+x)^\alpha(\alpha\in\R),f\in D^\infty\\
+f'(x)=\alpha(1+x)^{\alpha-1}\\
+f''(x)=\alpha(\alpha-1)(1+x)^{\alpha-2}\\
+\ldots\\
+f^{(k)}(x)=\alpha(\alpha-1)\ldots(\alpha-k+1)(1+x)^{\alpha-k}\\
+T(f,0,x)=\sum_{k=0}^{\infty}{\frac1{k!}\alpha(\alpha-1)\ldots(\alpha-k+1)x^k}=\sum_{k=0}^{\infty}{\binom{\alpha}{k}x^k}$
+%\end{de}
+\begin{te}
+  $|x|<1,\alpha\in\R\setminus\{0\}: (1+x)^\alpha=\di\sum_{k=0}^\infty\binom{\alpha}{k}x^k$
+\end{te}
+\begin{bi}
+  $R_n(x):=(1+x)^\alpha-Tn(f,0,x)$, tudjuk: $\di R_n(x)=\frac1{n!}\int_a^x{\alpha(\alpha-1)\ldots(\alpha-n)(a+x)^{\alpha-n-1}dt}, R_n=\binom{\alpha}{n}(\alpha-n)\int_0^x{(1+x)^{\alpha-1}\frac{1}{(1+z)^n}(x-t)^n dt}=\binom{\alpha}{n}(\alpha-n)x^n\int_0^x{(1+x)^{\alpha-1}\frac1{(1+t)^n}\genfrac(){}{}{x-t}{x}^n dt}\\
+  0<t<x<1$, megmutatjuk, hogy:$\di\frac{x-t}{x}<1+t, x-t<x+tx, 0<t+tx, 0<t(1+x)\\
+  |R_n(x)|\le|\binom{\alpha}{n}||\alpha-n|x^n\int_0^y(a+t)^{\alpha-1}dt, \frac{x-t}{x}<1+t\nn\frac1{(1+t)^n}\genfrac(){}{}{x-t}{x}^n<1\\
+  -1<x<t<0: (x-t)<0,x<0\nn\frac{x-t}{x}>0:\frac{x-t}{x}<1+t(0>t(0+x):\\
+  R_n(x)\le|\binom{\alpha}{n}||\alpha-n||x|^n\int_0^x{(1+t)^{\alpha-1}dt}|\\
+  $Összefoglalva:$\di|x|<1:|R_n(x)|\le|\binom{\alpha}{n}||\alpha-n||x|^n|\int_0^x{(0+t)^{\alpha-1}dt}|\\
+  \omega_n:=|\binom{\alpha}{n}||\alpha-n||x|^n|\int_0^x{(1-t)^{\alpha-1}dt}, \frac{\omega_{n+1}}{\omega_n}=\frac{\binom{\alpha}{n+1}||\alpha-n-1||x|^{n+1}}{\binom{\alpha}{n}||\alpha-n||x|^n}=\genfrac||{}{}{\alpha-n-1}{n+1}|x|: \lim_{n\n\infty}{\frac{\omega_{n+1}}{\omega_n}}=|x|<1, \exists N\in\N, n>N: \omega_{n+1}<\omega_n\nn(\omega_n)$ kvázi monoton csökkem, $\di|omega_n\ge e\nn\exists\lim_\infty(\omega_n)=:A\\
+  \omega_{n+1}=\genfrac||{}{}{\alpha-n-1}{n+1}|x|\omega_n\nn\lim_{n\n\infty}(\omega_{n+1})=\lim_{n\n\infty}{\genfrac||{}{}{\alpha-n+1}{n+1}|x|}\lim_{n\n\infty}\omega_n,A=|x|A\nn A=0\nn\lim_\infty\omega_n=0\land(0<|R_n(x)|\le\omega_n)\nn\lim_{n\n\infty}|R_n(x)|=G$
+\end{bi}
+\newpage
+\section{Az improprius integrál.}
+Legyen $a\in\R$, $a<b\le+\infty$ ée tegyük fel, hogy az $f:[a,b)\rightarrow\R$
+minden $[a,\omega]\subset[a,b)$ interfallumon korlétos, integrálható függvény. 
+\begin{de}
+  Ha az $F(\omega):=\di\inf_1^\omega f\ (a\le\omega <b)$ függvénynek a b 
+  pontban van véges bal oldali határértéke, akkor azt mondjuk, hogy az 
+  $\di\int_a^b\ f$ improprius integrál konvergens. Ebben az esetben a 
+  $\di\lim_{x\n b-0} F$ függvény $[a,b]$ intervallumra vonatkozó improprius 
+  integráljának nevezzük és az $\di\int_a^bf$ vagy az $\di\int_a^b f(x)dx$ 
+  szimbólummal jelöljük. Ha az $F$-nek a $b$ pontban nincs véges jobb oldali 
+  hatásértéke, akkor azt monjuk, hogy az $\di\int_a^bf$ improprius integrál 
+  divergens. Jobb oldal hasonló.($\Phi=\di\int_c^af$)
+\end{de}
+\begin{te}
+  Az $\di\int_a^bf [\int_c^af]$ impropirus integrál akkor és csak akkor 
+  konvergens, ha\\
+  $\di\forall\epsilon>0 \exists k\in[a,b) \forall\omega_1,\omega_2\in(k,b): 
+  |F(\omega_1)-F(\omega_2)|=|\int_{\omega_1}^{\omega_2}f|<\epsilon$
+  $[\di\forall\epsilon>0 \exists K\in(c,a] \forall\omega_1,\omega_2\in(c,K): 
+  |F(\omega_1)-F(\omega_2)|=|\int_{\omega_1}^{\omega_2}f|<\epsilon]$
+\end{te}
+\begin{bi}
+  A Cauchy-féle kritérium alkalmazása alapján.
+\end{bi}
+\begin{de}
+  Akkor mondjuk, hogy az $\di\int_a^bf\ [\int_c^af]$ inproprius integrál
+  abszolut konvergens, ha a $\di\int_a^b|f|\ [\int_a^c|f|]$ konvergens.
+\end{de}
+\begin{ko}
+  Ha az $\di\int_a^b$ improprius integrál abszolút konvergens, akkor egyben 
+  konvergens is.
+\end{ko}
+\begin{ko}[majorans kritérium]
+  Ha $|f(x)|\le g(x)\ (x\in[a,b))$ és az $\di\int_a^bg$ improprius integrál 
+  konvergens, akkor $\di\int_a^bf$ abszolut konvergens. Ekkor ugyanis $\di\mid
+  \int_{\omega_1}^{\omega_2}\textstyle\mid f\mid\mid\le\mid\int_{\omega_1}^
+  {\omega_2}g|\ (\omega_1,\omega_2\in[a,b))$ s innen adódik a bizonyítás.
+\end{ko}
+\begin{ko}
+  Az $g\ge0$ esetben a az $\di\int_a^bf\ [\int_c^af]$ improprius integrál akkor
+  és csak akkor konvergens, ha $F[\Phi]$ korlátos.
+\end{ko}
+\begin{te}
+  Tegyük fel, hogy az $\di\int_a^bf,\int_a^bg$ improprius integrálok
+  konvergensek és legyen $\lambda_1,\lambda_2\in\R$. Ekkor az $\di\int_a^b
+  {\lambda_1f+\lambda_2g}$ improprius integrál is konvergens és $\di\int_a^b
+  {\lambda_1f+\lambda_2g}=\lambda_1\int_a^bf+\lambda_2\int_a^bg$
+\end{te}
+\begin{bi}
+  Legyen $a\le\omega<b$. Ekkor a Reimann-integrál ismert tulajdonsága alapján\\
+  \[ \di\int_a^\omega{\lambda_1f+\lambda_2g}=\lambda_1\int_a^\omega f+\lambda_2\int_a^\omega g \]
+  
+\end{bi}
+\newpage
+\section{A metrika fogalma. Példák. konvergens sorozatok metrikus térben.}
+\begin{de}
+$X\not=\emptyset,\varrho:X\times X\n\R_0^+,\varrho$ metrika $X$-en, ha$\\
+  1. \varrho(x,y)=0\ek x=y\\
+  2. \varrho(x,y)=\varrho(y,x), \forall x,y\in X\\
+  3. \varrho(x,y)\le\varrho(x,z)+\varrho(z,y), \forall x,y,z\in X$
+\end{de}
+Példák:\\
+$1. X=\R($ v $\C), \varrho(x,y)=|x-y|\\
+2. X=\R($ v $\C), \varrho(x,y)=\sqrt{(x_1+y_1)^2+(x_2-y_2)^2}\\
+3. X=\R($ v $\C), \varrho_1(x,y)=\di\sum_{i=1}^n|x_1-y_1|\\
+\varrho_2(x,y)=\di\sum_{i=1}^n{\sqrt{(x_i-y_i)^2}}\\
+\varrho_\infty(x,y)=\di\max{|x_i-y_i|}(i=1,2,\ldots,n)\\
+4. X=l^\infty \varrho(x,y)=\sup{|x_i-y_i|i\in\N}\\
+5. X=C[0,1], \varrho(f,g)=\max\{|f(x)-f(y)||x\in[0,1]\}\\
+6. X=C[0,1], \varrho(f,g)=\di\int_0^a{|f(x)-f(y)|}\\
+7. X\not=\emptyset, \varrho(x,y)=\{1,$ha $x\not=y,1,$ha $x=y\}$: dszikrét metrika
+\begin{de}
+  $X\not=\emptyset, \varrho$ metrika $X$-en:$(X,\varrho)$ rendezett pár metrikus tér.
+\end{de}
+\begin{de}
+  $(X,\varrho)$ metrikus tér, $a\in X,\delta>0:\K_\delta(a):=\{x\in X|\varrho(x,a)<\delta\}$
+\end{de}
+\begin{de}
+  $a:N\n X, (X,\varrho)$ metrikus tér. $a$ konvergens és határértéke $A\in X$, ha $\forall\epsilon>0:\exists N\in\N; \forall n\in\N:n>N:a_n\in K_\epsilon(A)$
+\end{de}
+\begin{al}
+  $A$ határérték egyértelmű.$(\epsilon<\di\frac{\varrho(A,B)}{2})$
+\end{al}
+\begin{de}
+  $a:\N\n X: (X,\varrho)$ metrikus tér, a Cauchy-sorozat, ha $\forall\epsilon>0: \exists N\in\N:\forall n1,n2>N(n1,n2\in\N):\varrho(a_{n_1},a_{n_2})<\epsilon$
+\end{de}
+\begin{al}
+  $(X,\varrho)$ metrikus tér, $a$ konvergens$\nn a$ Cauchy-sorozat.\\
+  $\epsilon>0,\exists N\in\N:n_1,n_2>N(n_1,n2\in\N):\varrho(a_{n_1},A)<\di\frac{\epsilon}{2},\varrho(a_{n_2},A)<\di\frac{\epsilon}{2}\nn\varrho(a_{n_1},a_{n_2})\le\varrho(a_{n_1},a_{n_2})+\varrho(a_{n_2},a_{n_2})<\epsilon$
+\end{al}
+\begin{me}
+  $(X,\varrho)$ metrikus tér, $x:\N\n X$, $x$ konvergens $\di\lim_{n\n\infty}x=A\ek\lim_{n\n\infty}{\varrho(x,A)}=0$
+\end{me}
+\newpage
+\section{A teljes metrikus tér fogalma. Példák.}
+\begin{de}
+  $(X,\varrho)$ teljes metrikus tér, ha minden $a:\N\n X$ Cauchy-sorozat konvergens.
+\end{de}
+Példák:\\
+1. $X=\R,\varrho(x,y)=|x-y|; $ teljes\\
+2. $X\not=\emptyset, \varrho(x,y)={1, x\not=y;0, x=y}$ teljes.\\
+3. $X=\Q,\varrho(x,y)=|x-y|;$ nem teljes, mert $x_n:=\di(1+\frac1{n})^n$ Cauchy, de nem konvergens.\\
+4. $X=C[0,1], \varrho(f,g)=\di\in_0^1{|f-g|}:$ nem teljes.
+\newpage
+\section{Ekvivalens metrikák. Az $R^n$-eset}
+\begin{de}
+  $X\not=\emptyset, (X,\varrho_1),(X,\varrho_2)$ merikus terek, $\varrho_1,\varrho_2$ ekvivalens metrikák $\varrho_1\sim\varrho_2)$, ha $\exists c_1,c_2\in\R>0$:$\di\frac1{c_2}\varrho_2(x,y)\le\varrho_1(x,y)\le\frac1{c_1}\varrho_2(x,y)(\forall x,y\in X)$
+\end{de}
+Példa:\\
+$X=\R^n,\varrho_1(x,y)=\di\sum_{i=1}^n|x_1-y_1|,\varrho_2(x,y)=\di\sum_{i=1}^n{\sqrt{(x_i-y_i)^2}},\varrho_\infty(x,y)=\di\max{|x_i-y_i|}, \varrho_1\sim\varrho_2\sim\varrho_3\\
+\varrho_2\sim\varrho_\infty:\varrho_2(x,y)=\sqrt{\sum_{i=1}^n{|x_i-y_i|^2}}\le\sqrt{n\varrho_\infty(x,y)^2}=\sqrt{n}\varrho_\infty(x,y)\\
+\varrho_\infty(x,y)=\sqrt{\max\{|x_i-y_i|^2\}}\le\sqrt{\sum_{i=1}^n{|x_i-y_i|^2}}=\varrho_2(x,y)\nn\\
+\varrho_\infty(x,y)\le\varrho_x(x,y)\le\sqrt{n}\varrho_\infty(x,y)
+\varrho_1\sim\varrho_\infty:\varrho_1(x,)\le\sum_{i=1}^n{|x_i-y_i}\le n\max\{|x_i-y_i|\}7\varrho_\infty(x,y)\\
+\varrho_\infty(x,y)=\max|x_i-y_i|\le\sum_{i=1}^n|x_i-y_i|=\varphi_1(x,y)\nn\\
+\varrho_\infty(x,y)\le\varrho_0(x,y)\le n\varrho_\infty(x,y)$
+végül:$\varphi_\infty(x,y)\le\varphi_1(x,y)\le n\varphi_\infty(x,y)\le n\varphi_2(x,y)$
+\begin{te}
+  $(X,\varrho_1),(X,\varrho_2)$ metrikus terek, $\varrho1\sim\varrho_2$, $x:\N\n X,a\in X, \di\lim_{n\n\infty}\varrho_1(x_n,a)=0\ek\lim_{n\n\infty}\varrho_2(x_n,a)=0$
+\end{te}
+\begin{bi}
+  $\nn:\exist c_1,c_2>0:c_1\varrho(x_n,a)\le\varrho_2(x_n,a)\le c_2\varrho_2(x,y)$ $(\varrho_2$-t közbezártuk két nullsorozat közé$)\\
+  \nb:$ hasonló
+\end{bi}
+\begin{te}
+  $x:\N\n\R^n(\R^n,\varrho_j)$ metrikus terek $(j=1,2,\infty)$\\
+  $\di\lim{x}=a\ek\lim_{k\n\infty}{({x_i}_k)}=a_i (a\in\R^n,i=1,2,\ldots,n)$
+\end{te}
+\begin{bi}
+  $\di\nn j=1: \forall\epsilon>0,\exist N\in\N:\forall k\in\N:k>N:\varrho_1(x_k,a_k)<\epsilon\nn\sum_{i=1}^b{|x_{i_k}-a_i|}<\epsilon\nn|x_{i_k}-a_i|<\epsilon(i=1,\ldots,n)\nn\lim_{k\n\infty}{({x_i}_k)}=a_i\\
+  \nb:\epsilon>0,\exists N_i\in\N,k>N_i:|x_{i_k}-a_i|<\frac{\epsilon}{n}(i=1,\ldots,n), N:=\max\{N_i|i=1,\ldots,n\},k>N\nn\sum_{i=1}^n{|x_{i_k}-a_i|}<\epsilon$
+\end{bi}
+\begin{te}
+  $(\R^n,\varrho_j)(j=1,2,\infty)$ teljes metrikus tér.
+\end{te}
+\begin{bi}
+  $x:\N\n\R^n$ Cauchy-sorozat, $j=\infty: \forall\epsilon>0 \exists n\in\N, \forall n,m\in\N:n,m>N:\varrho(x_n,x_m)<\epsilon$
+\end{bi}
+\newpage
+0\section{Korlátos halmazok. Korlátos sorozatok.}
+\begin{de}
+  $(X,\varrho)$ metrikus tér, $A\subseteq X,d:=\sup\{\varrho(x,y)|x,y\in A\}$ az $A$ átmérője.
+\end{de}
+\begin{de}
+  $(X,\varrho)$ metrikus tér, $A\subseteq X$. A korlátos, ha átmérője véges$(d<\infty)$.
+\end{de}
+\begin{me}
+  $(X,\varrho)$ metrikus tér, $A\subseteq X$, $A$ korlátos, $d<\infty$ átmérő:$\forall x\in A:A\subseteq\{y\in X| \varrho(x,y)\le d\}$ ($x$-nek $d$ sugarú "zárt" környezete).
+\end{me}
+\begin{de}
+  $(X,\varrho)$ metrikus tér, $x:\N\n X,x$ korlátos, ha $R_x$ korlátos halmaz.
+\end{de}
+\begin{te}
+  $(X,\varrho)$ metrikus tér, $x:N\n X,x$ konvergens$\nn x$ korlátos.
+\end{te}
+\begin{bi}
+  $\epsilon:=1, \lim{x}=a.\exists N\in\N, k>N(k\in\N):\varrho(x_k,a)<1, max\{\varrho(x_1,a),\ldots\varrho(x_N,a),1\}=:r\nn\forall k\in\N:\varrho(x_k,a)\le r\nn\varrho(x_k,x_j)(\forall k,j\in N)\le2r\nn R_x$ kortátos.
+  \end{bi}
+\section{Nyílt halmazok, zárt halmazok.}
+\begin{de}
+  $(X,\varrho)$ metrikus tér, $A\subset X$, $a\in A$ belső pontja $A$-nak, ha $\exists\delta>0:K_\delta(A)\subset A$. Jelölése:$a\in intA$
+\end{de}
+\begin{de}
+  $(X,\varrho)$ metrikus tér, $A\subset X$, $a\in X$ torlódási pontja $A$-nak, ha $\forall\delta>0:(K_\delta(a)\setminus\{a\})\cap A\not=\emptyset$
+\end{de}
+\begin{de}
+  $A$ nyílt valmaz, ha minden pontja belső pont.
+\end{de}
+Példák:\\
+1.$\emptyset,X$ nyílt halmazok\\
+2. $X$ diszkrét metrikus tér: minden halmaza nyílt:$\delta:=\di\frac{1}{2}:K_\delta(a)=\{a\}\subset A$
+\begin{te}
+  $(X,\varrho)$ metrikus tér, $\Gamma\not=\emptyset, A_\gamma\subset X(\gamma\in\Gamma)$ nyílt$\nn\cup_{\gamma\in\Gamma}A_\gamma$ nyílt halmaz.
+\end{te}
+\begin{bi}
+  $\di a\in\cup_{\gamma\in\Gamma}A_\gamma \nn\exists \gamma\in\Gamma:a\in A_\gamma, A_\gamma$ nyílt$\nn\exists\delta>0, K_\delta(a)\subset A_\gamma\nn K_\delta(a)\subset\cup_{\gamma\in\Gamma}A_\gamma\nn a\in int\cup_{\gamma\in\Gamma}A_\gamma\nn \cup_{\gamma\in\Gamma}A_\gamma$ nyílt.
+\end{bi}
+\begin{te}
+  $(X,\varrho)$ metrikus tér, $n\in\N, A_k\subset X(k=1,2,\ldots,n)$ nyílt$\nn\cap_{k=1}^{n}A_k$ nyílt  
+\end{te}
+\begin{bi}
+  $a\in\cap_{k=1}^{n}A_k\nn a\in A_k(k=1,\ldots,n), A_k$ nyílt
+  $\nn\exists\delta_k:A_{\delta_k}(a)\subset A_k: \delta:=\min\{\delta_k\}\nn K_\delta(a)\subset A_k(k=1,\ldots,n)\nn K_\delta(a)\subset\cap_{k=1}^{n}A_k$
+\end{bi}
+\begin{me}
+  Végtelen sok valmaz metszete nem feltétlen nyílt, pl.:$x\R,\varrho(x,y)=|x-y|, A_k=(-\di\frac1{k},\frac1{k}), \cap_{k=1}^\infty A_k=\{0\}\nn$ nem nyílt.
+\end{me}
+\begin{de}
+  $(X,\varrho)$ metrikus tér, $A\subset X$, $A$ zárt halmaz, ha $x\setminus A$ nyílt.
+\end{de}
+Például:\\
+$1. \emptyset, X$ mindig zárt.\\
+$2.$ Diszkrét metrikus térben minden halmaz zárt
+\begin{te}
+  $(X,\varrho)$ metrikus tér, $\Gamma\not=\emptyset$, $A_\gamma$ zárt $(\gamma\in\Gamma), A_\gamma\subset X\nn\cap_{\gamma\in\Gamma}A_\gamma$ zárt.
+\end{te}
+\begin{te}
+  $(X,\varrho)$ metrikus tér, $n\in\N$, $A_k\subset X$ zárt $(k=1,\ldots,n)\nn\cup_{k=1}^{n}A_k$ zárt.
+\end{te}
+\begin{bi}
+  Komplementerre való áttéréssel.
+\end{bi}
+\begin{te}
+  $(X,\varrho)$ metrikus tér, $A\subset X.A$ zárt$\ek A'\subset A$ 
+\end{te}
+\begin{bi}
+  $\nn A$ zárt $\nn\bar{A}$ nyílt, $b\in\bar{A}\nn\exists\delta>0:K_\delta(b)\in\bar(A)\nn K_\delta(b)\cap A=\emptyset\nn b\not\in A'\nn A'\subset A\nn$\\
+  $\nb:$indirekt, tfh.:$A$ nem zárt$\nn\bar{A}$ nem nyílt$\nn\exists b\in\bar{A}:b$ nem belső pont$\nn\forall\delta>0:K_\delta(b)\not\subset\bar{A}\nn K_\delta(b)\cap A\not=\emptyset,b\not\in A\nn(K_\delta(b)|{b})\not7\emptyset\nn b\in A'$
+\end{bi}
+\begin{te}
+  $(X,\varrho)$ metrikus tér, $A\subset X. A$ zárt$\ek\forall a:\N\n A, a$ konvergens$\nn\lim a\in A$
+\end{te}
+\begin{bi}
+  $\nn a:\N\n A$ konvergens, $x:=\lim a \forall\epsilon>0 \exists N\in\N:n>N(n\in\N):\varrho(a_n,x)<\epsilon\nn K_\epsilon(x)\cap A\not=\emptyset\\
+  1.$eset:$K_\epsilon(x)\cap A$ végtelen$\nn x\in A'\subset A
+  2.$eset:$\exists\epsilon>0, K_\epsilon(x)\cap A$ véges$\nn a$ kvázikonstans
+%Ł
+  $L\nn x\in A$
+  $\nb:$ indirekt. Tfh:$A$ nem zárt$\nn A'\not\subset A\nn\exists x\in A'\setminus A,\forall\delta>0:(K_\delta(x)\setminus\{x\})\cap A\not={\emptyset}\forall n\in\N:a_n\in(K_\frac1{n}(x)\setminus\{x\})\cap A, a:\N\n A, \lim{a}=x\not\in A
+  \di\lim_{n\n\infty}{\varrho(x,a_n)}\le \lim_{n\n\infty}{(\frac1{n})}=0$
+\end{bi}
+\newpage
+\section{Halmaz belseje, lezártja.}
+\begin{de}
+  $(X,\varrho)$ metrikus tér, $A\subset X$.Az $\di\cup_{B\subset A}=int A(B $ nyílt$)$ halmazt az $A$ halmaz belsejének nevezzük.
+\end{de}
+\begin{te}
+ $\di\cup_{B\subset A}=int A(B $ nyílt$)$, ahol $A\subset X,(X,\varrho)$ metrikus tér
+\end{te}
+\begin{bi}
+  $\subseteq:a\in\di\cup_{B\subset A}(B $ nyílt$)\nn\exists B\subset A(B$ nyílt$):a\in B\nn a\in int B\nn\exists\delta>0:K_\delta(a)\subset B\subset A\nn a\in int A\\
+  \supseteq:a\in int A\exists\delta>0:K_\delta(a)\subset A, K_\delta(a)$ nyílt halmaz$\di\nn K_\delta(a)\subset\cup_{B\subset A}B$($B$ nyílt)$\nn a\in\cup_{B\subset A}B$($B$ nyílt)
+\end{bi}
+\begin{de}
+  $(X,\varrho)$ metrikus tér, $A\subset X$, $\di A\cap_{A\subset C} C$($C$ zárt) halmazt az $A$ lezártjának nevezzük. 
+\end{de}
+\begin{te}
+  $\di A\cap_{A\subset C} C$($C$ zárt)$=A'\cup A$
+\end{te}
+\begin{bi}
+  Megmutatjuk, hogy $A\cup A'$ zárt. $a\in A\cup A'\nn \forall\delta>0:(K_\delta(a)\setminus\{a\})\cap(A\cup A')\not=\emptyset\nn(K_\delta(a)\setminus\{a\})\cap A\not=\emptyset \lor K_\delta(a)\setminus\{a\}\cap A'\not=\emptyset\nn\exists b\in A': b\in K_\delta(a), \min\{\varrho(b,a),\delta-\varrho(b,a)\}=:\delta', b\in A'\nn K_{\delta'}(b)\subset K_\delta(a) \land K_{\delta'}(b)\setminus\{b\}\not=\emptyset \land a\not\in K_{\delta'}(b)\nn(K_\delta(a)\setminus\{a\})\cap A\not=\emptyset\nn a\in a'\nn(A\cup A')\subset A'\subset (A\cup A')$ Tehát $A\cup A'$ zárt halmaz. $A\subset C\nn A'\subset C\nn C=C\cup C'\supset A\cup A'\nn\cap_{a\subset C}C(C$ zárt $)\supset A\cup A', C=A\cup A'\nn\cap_{a\subset C}C(C$ zárt $)=A\cup A'$
+\end{bi}
+
+\end{document}

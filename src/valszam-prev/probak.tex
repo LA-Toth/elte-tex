@@ -1,0 +1,184 @@
+\documentclass[a4paper,10pt,fleqn]{article}
+
+%\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[magyar]{babel}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+%\usepackage{amsthm}
+% \usepackage{theorem}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{booktabs}
+\usepackage{enumerate}
+%\usepackage{indentfirst}
+%
+% ------------  NEW PART DEFS -----------------
+%
+
+\renewcommand{\sectionmark}[1]
+{\markboth{\MakeUppercase{\thesection.\ #1}}{}}
+\renewcommand{\headrulewidth}{0.5pt}
+%\newenvironment{example}{}{}
+\newcommand{\N}[2]{\mathcal{N}\hspace{.1em}(#1,\,#2\hspace{.1em})}
+\newcommand{\nminta}[4]{#1_1,\,#1_2,\,\ldots,\, #1_{#2} \! \sim \! \N{#3}{#4}}
+\newcommand{\ter}[2]{$#1_1,\,#1_2,\,\ldots,\, #1_{#2}$\ \ teljes
+  eseményrendszer}
+\newcommand{\terp}[2]{\ter{#1}{#2}; \quad $P(#1_i) > 0$}
+\newcommand{\eloszlasa}{\enspace \sim \enspace}
+%
+% - - - -- - - S E T T I N G S ----------------
+%
+\setlength{\headheight}{23pt}
+\addtolength{\voffset}{-1cm}
+\addtolength{\textheight}{2cm}
+\addtolength{\hoffset}{-1cm}
+\addtolength{\textwidth}{2cm}
+
+%
+
+%opening
+\title{Matematikai Statisztika próbái}
+\author{Tóth László Attila}
+%
+% T H E    D O C U M E N T
+%
+
+\begin{document}
+  \section*{Próbák}
+  \subsection*{Egymintás U-próba}
+  $\nminta{X}{n}{m}{\sigma^2}$; $\sigma$ ismert; $m$ paraméter  
+  \begin{enumerate}[a)]
+    \item {$H_0\colon m \leqq m_1\\ H_1\colon m > m_1$\quad egyoldali
+    hipotézis\\
+    $X_k=\{x|U(x)>c_\alpha\}$;\quad
+    $P(x<c_\alpha)=\phi(c_\alpha)=1-\alpha$}
+    \item {$H_0\colon m = m_1\\ H_1\colon m  \ne m_1$ \quad kétoldali
+    hipotézis\\
+    $X_k=\{x|U(x)>c_\frac{\alpha}2\}$;\quad
+    $P(x<c_\frac{\alpha}2)=\phi(c_\frac{\alpha}2)=1-\frac{\alpha}2$}
+  \end{enumerate}
+  \[U(X) = \sqrt{n}\,\,\dfrac{\,\overline{\!X}-m_1}{\sigma}\eloszlasa \N01\]
+  
+  \subsection*{Kétmintás U-próba}
+  $\nminta{X}{n_1}{m_1}{\sigma^2}\\
+  \nminta{Y}{n_2}{m_1}{\sigma^2}$ \\
+  $\sigma$ ismert; $m_1,\,m_2$  paraméter; függetlenek
+  \begin{enumerate}[a)]
+  \item {$H_0\colon m_1 \leqq m_2\\ H_1\colon m_1 > m_2$\quad egyoldali
+    hipotézis\\
+    $X_k=\{x|U(x)>c_\alpha\}$;\quad
+    $P(x<c_\alpha)=\phi(c_\alpha)=1-\alpha$}
+  \item {$H_0\colon m_1 = m_2\\ H_1\colon m_1 \ne m_2$ \quad kétoldali
+    hipotézis\\
+    $X_k=\{x|U(x)>c_\frac{\alpha}2\}$;\quad
+    $P(x<c_\frac{\alpha}2)=\phi(c_\frac{\alpha}2)=1-\frac{\alpha}2$}
+  \end{enumerate}
+  \[U(X,Y) =
+  \dfrac{\overline{\!X}-\overline{Y}}{
+    \sqrt{
+      \dfrac{\sigma_1^2}{n_1}+\dfrac{\sigma_2^2}{n_2}
+    }
+  }\eloszlasa \N01\]
+  \textbf{Megj:} Ha a minták nem függetlenek, akkor a különbségükre
+  egymintás U-próba.
+  
+  \subsection*{Egymintás t-próba}
+  $\nminta{X}n{m}{\sigma^2}$ \quad $m,\,\sigma^2$ valós paraméter
+  \begin{enumerate}[a)]
+    \item {$H_0\colon m \leqq m_1\\ H_1\colon m > m_1$\quad egyoldali
+    hipotézis\\
+    $X_k=\{x|t(x)>c_\alpha\}$}
+    \item {$H_0\colon m =  m_1\\ H_1\colon m \ne m_1$ \quad kétoldali
+    hipotézis\\
+    $X_k=\{x|t(x)>c_\frac{\alpha}2\}$}
+  \end{enumerate}
+  A korrigált tapasztalati szórásnégyzet: $\displaystyle {S_n^*}^2 = 
+  \frac1{n-1}\ \sum_{i=1}^n{(X_i-\overline{\!X})^2}$
+  \[ \displaystyle t(X) =
+  \sqrt{n}\,\,\dfrac{\overline{\!X}-m_1}{S_n^*}
+  \eloszlasa t_{n-1}\]
+
+  \newpage
+  
+  \subsection*{Kétmintás t-próba}
+  $\nminta{X}n{m_1}{\sigma^2}$ \quad $m_1,m_2 ,\,\sigma^2$ valós paraméter\\
+  $\nminta{Y}n{m_2}{\sigma^2}$ \quad $X,\,Y$ függetlenek
+  \begin{enumerate}[a)]
+    \item {$H_0\colon m_1 \leqq \,  m_1\\ H_1\colon m_1 > m_2$\quad egyoldali
+    hipotézis\\
+    $X_k=\{x|t(x)>c_\alpha\}$}
+    \item {$H_0\colon m_1 =  m_2\\ H_1\colon m_1  \ne m_2$ \quad kétoldali
+    hipotézis\\
+    $X_k=\{x|t(x)>c_\frac{\alpha}2\}$}
+  \end{enumerate}
+  \[t(X) = \dfrac{\overline{\!X}-\overline{Y}}{\sqrt{(n_1-1) S_{n_1}^{*^2} + 
+      (n_2-1) S_{n_2}^{*^2}}}\,\,
+  \sqrt{ \dfrac{n _1 n_2 (n_1+n_2 - 2 )}{n_1 + n_2}} \eloszlasa
+  t_{n_1+n_2-2}\]
+  
+  
+    
+  \subsection*{F-próba}
+  $\nminta{X}{n_1}{m_1}{\sigma_1^2}$\\
+  $\nminta{Y}{n_2}{m_2}{\sigma_2^2}$\\
+  $H_0\colon \sigma_1 = \sigma_2$\\
+  $H_1\colon \sigma_1 \neq
+  \sigma_2$\\
+  \[F = \max\Big\{\, \dfrac{S_{n_1}^{*^2}}{S_{n_2}^{*^2}},\,
+  \dfrac{S_{n_2}^{*^2}}{S_{n_1}^{*^2}}\,\Big\}\]
+  Tegyük föl, hogy az első a nagyobb:
+  \[F \eloszlasa F_{n_1 - 1, n_2 - 1 }\]
+  vagyis a számláló mintanagysága szerepel elől.
+
+  \subsection*{Welch-próba}
+  Ha nem teljesül a szórások egyelősége ($H_0$ hipotézis)\\
+  $\nminta{X}{n_1}{m_1}{\sigma_1^2}$\\
+  $\nminta{Y}{n_2}{m_2}{\sigma_2^2}$\\
+  Ekkor:
+  \[t(X) = \dfrac{\overline{\!X}-\overline{Y}}{\sqrt{ \dfrac {
+	S_{n_1}^{*^2} }{n_1} + \dfrac{S_{n_2}^{*^2}}{n_2}}}
+    \eloszlasa  t_f\]
+  
+  ahol \[ f = \dfrac {c^2}{n_1 - 1}  + \dfrac{(1-c)^2}{n_2 - 1 }\quad;
+  \qquad
+  c = \dfrac{\dfrac{S_{n_1}^{*^2}}{n_1}}{\dfrac{S_{n_1}^{*^2}}{n_1} +
+    \dfrac{S_{n_2}^{*^2}}{n_2}} \]
+  \newpage
+  
+  \subsection*{Diszkrét illeszkedésvizsgálat}
+  \terp{A}r\\
+  $H_0\colon P(A_i) = p_i\ \ (i=1..r)$\quad adott (konkrét) értékek;\\
+  $\nu_i\colon$ gyakoriság: n független esetből  hányszor következik
+  be $A_i$\\
+  \[\displaystyle \chi^2 = \sum_{i=1}^r
+  \dfrac{(\nu_i-n\,p_i)^2}{n\,p_i} \sim \chi^2_{r-1}\]
+
+  \subsection*{Becsléses illeszkedésvizsgálat}
+  Konkrét értékek nem ismertek, csak az eloszlás. Pl $Pois(\lambda)
+  \Rightarrow$ a paraméter ML-becsléssel:
+  $\displaystyle \hat{\lambda}=\overline{\!X}$\\
+  Ekkor $\chi^2 \eloszlasa \chi^2_{r-s-1}$, ahol s a becsült paraméterek
+  száma (és lásd előző).
+  
+  \subsection*{Homogenitásvizsgálat}
+  Két minta azonos eloszlású ill azonos-e\\
+  \ter{A}r;\quad $\nu_i$ gyakoriság;\quad $n$ mintanagyság\\
+  \ter{B}r;\quad $\mu_i$ gyakoriság;\quad $m$ mintanagyság\\
+  \[\chi^2 = n\,m\,\sum_{i=1}^r
+  \dfrac{(\dfrac{\nu_i}n-\dfrac{\mu_i}m)^2}{\nu_i+\mu_i}
+  \eloszlasa \chi^2_{r-1}\]
+  
+  \subsection*{Függetlenségvizsgálat}
+  \ter{A}r\\
+  \ter{B}s\\
+  $\displaystyle \nu_{i.} = \sum_{j=1}^s \nu_{ij}\quad\quad
+  \nu_{.j} = \sum_{i=1}^r \nu_{ij}$
+  \[\displaystyle \chi^2= n\sum_{i=1}^r \, \sum_{j=1}^s
+  \dfrac{( \nu_{ij} - \dfrac{ \nu_{i.}\,\nu_{.j} }n )^2
+  }{ \nu_{i.}\,\nu_{.j}} \eloszlasa \chi^2_{(r-1)(s-1)}\]
+
+  
+  
+\end{document}

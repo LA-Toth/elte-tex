@@ -1,0 +1,421 @@
+\section{Paraméteres integrál}
+\begin{te}
+  $I=[a,\,b],\ U\subset \R^n$ nyílt és $f\colon U\times[a,b]\n\R$ folytonos,\\
+  $\vfi(x) := \di\Int_a^bf(x,t) \diff t\quad(x\in U)\quad$ az $f$ paraméteres integrálja.\\
+Ekkor:
+{\listazjbetu
+\begin{enumerate}
+\item  $\vfi\colon U\n\R$ is folytonos
+\item Ha $\exists \partial_if$ és $\partial_if\in \Folyt\quad (i=1,\dotsc,n)$, akkor $\vfi$ is deriválható és
+\begin{gather*} \di \partial_i\vfi(x) = \Int_a^b\partial_if(x,t)\diff t\quad x\in U\end{gather*}
+\end{enumerate}
+}
+\end{te}
+\begin{pl}
+  \begin{gather*}
+    \vfi(x) := \Int_0^1 ln(t^2+x^2) \diff t\quad(x>0).\\
+    \vfi \in\Der \text{ és } \vfi'(x) = \Int_0^1\dfrac{\partial}{\partial x} ln(t^2+x^2) \diff t =
+    \Int_0^1 \dfrac{2x}{x^2+t^2} \diff t= \dfrac{2x}{x^2}\Int_0^1 \dfrac1{1+\frac t x} \diff x = {}\\
+	{}=\dfrac2x[x \cdot \arctg\dfrac t x]^1_{t=0} = 2 \arctg \dfrac1x
+  \end{gather*}
+\end{pl}
+\newpage
+\section{Vonalintegrál ($\R^n\to\R^n$ függvényekre)}
+\subsection{Sima utak, görbék}
+\begin{de}[Sima út]$n\in\N\ \vfi\colon[a,\,b]\to\R^n$ folytonosan deriválható függvényt\\\emph{$\R^n$-beli sima út}nak
+    nevezzük.\\  Az $R_\vfi = \Gamma\subset\R^n$ halmaz \emph{sima görbe}, $\vfi$ a $\Gamma$ görbe egy paraméterezése.
+\end{de}
+
+\begin{de}[Szakaszonként sima út]$a,b\in\R;\ a\leq b$. A $\vfi\colon[a,b]\to \R^n$ függvény  \emph{$\R^n$-beli
+    szakaszonként sima út}, ha 
+{\listazjromai
+  \begin{enumerate}
+  \item $\vfi\in\Folyt$
+  \item $\exists a=t_0<t,\ 1<\dotsb<t_m=b$: $\vfi_{|[t_i,\,t_i+1]}\ \ i=1,\dotsc,m-1$ sima út.
+\end{enumerate}
+}
+\end{de}
+
+\begin{Pl}
+\item Szakasz: $a,b\in \R^n\ \vfi(t) := a+t(b-a)\quad(t\in[0,\,1])$
+\item Töröttvonal - szakaszonként sima út
+\item Kör: $\vfi(t) := (\sin t,\cos t)\quad t\in[0,2\pi]\\
+  R_\vfi=\Gamma$
+\end{Pl}
+
+
+\begin{de}[Szakaszonként sima utak egyesítése]
+  $\vfi\colon [a,a+h]\to\R^n$\\$\psi\colon[b,b+k]\to\R^n$ szakaszonként sima utak, és tfh: $\vfi(a+h)=\psi(b)$, azaz
+  $\vfi$ végpontja megegyezik $\psi$ kezdőpontjával. \\
+  A $\vfi$ és $\psi$ egyesítése $(\vfi\cup\psi)$:
+\[\Phi(t) = \begin{cases}\vfi(t) & t\in[a,a+h]\\\psi(t-a-h+b) & t\in[a+h,a+h+k]\end{cases}\]
+\end{de}
+
+\begin{de}[$\vfi$ ellentettje] $\widetilde{\vfi} := \vfi(2a+h-t)\qquad(t\in[a,\,a+h])$\\
+  az út $a+h\to a$ irányú lett.
+\end{de}
+
+\subsection{Vonalintegrál definíciója}
+\begin{te}Legyen $U\subset \R^n$ nyílt.\\
+  $U$ összegüggő $\ekviv \forall x,y\in  U$ összeköthető $U$-beli szakaszonként
+  sima úttal.
+\end{te}
+
+\begin{de}[Tartomány]Az $U\subset \R^n$ halmaz \emph{tartomány}, ha
+{\listazjromai
+  \begin{enumerate}
+    \item $U$ nyílt $\R^n$-ben
+    \item $U$ összefüggő
+  \end{enumerate}
+}
+\end{de}
+\begin{de}[Úton vett vonalintegrál]
+  Legyen $U\subset \R^n$ tartomány, $f\colon U\to\R^n$ \underline{folytonos}, $\vfi\colon [a,b]\to\R^n$ szakaszonként
+  sima. Ekkor
+\[\Int_a^b\skalar{f\circ\vfi}{\vfi'} = \Int_a^b\skalar{f(\vfi(t))}{\vfi'(t)\,}\diff t =: \Int_\vfi f\]
+szám az $f$ függvény $\vfi$ útra vett vonalintegrálja.
+\end{de}
+\newpage
+\begin{Megj}
+  \item $f$ folytonos $\nn$ az integrandus folytonos $\nn$ az integrál létezik.
+\item $n=1,\ \vfi(t) := t\quad t\in[a,b]$
+\[\Int_\vfi f \text{ az } \Int_a^bf(t)\diff t \text{ Riemann-integrálja}\]
+\end{Megj}
+
+\begin{te}[A vonalintegrál egyszerű tulajdonságai]
+  $U\subset \R^n$ tartomány,\\$\vfi\colon [a,a+h]\to\R^n$ és $\psi\colon [b,b+k]\to\R^n$ szakaszonként sima utak,
+  $\vfi(a+h) = \psi(b)$.\\$f,g\colon U\to\R^n$ folytonos. Ekkor
+  \begin{enumerate}
+  \item $\di\Int_\vfi(\lambda_1 f +\lambda_2g) = \lambda_1\Int_\vfi f+ \lambda_2\Int_\vfi g$
+  \item $\di\Int_\vfi f = -\Int_{\widetilde{\vfi}}$\qquad (ellentett út)
+  \item $\di\Int_{\vfi\cup\psi}\!\!\! f = \Int_\vfi f + \Int_\psi f$
+  \item $\di\Big\vert \Int_\vfi f\Big\vert \leqq M\cdot l(\vfi)$, ahol $l(\vfi)$ a $\vfi$ (vagy a $\Gamma$ görbe)
+  hossza és $M:= \max \{\,\norma{f(x)}_2:x\in R_\vfi\}$
+  \end{enumerate}
+\end{te}
+
+\subsection{Primitív függvények}
+\begin{de}[Primitív függvény]$U\subset\R^n$ tartomány, $f\colon U\to\R^n$.\\
+  Az $F\colon U\to\R^n$ függvény az $f$ primitív függvénye, ha
+  {\listazjromai
+    \begin{enumerate}
+    \item $F\in\Der$
+    \item $F'(x) = f(x)\quad (\forall x\in U)$
+    \end{enumerate}
+  }
+\end{de}
+
+\begin{megj}
+  Ha $F\in\Der$: $F'=(\partial_1F,\dotsc\partial_nF) =(f_1,\dotsc,f_n)=f$ 
+\end{megj}
+
+\begin{te}\ 
+  \begin{enumzjromai}
+  \item Ha $F\colon U\to\R$ az $f$ primitív függvénye $\nn \forall c\in\R\colon F+c$ is az
+  \item Ha $F_1,\,F_2\colon U\to\R$ az $f$ primitív függvényei $\nn \exists c\in\R\colon F_1(x)-F_2(x) = c \quad \forall
+  x\in U$
+  \end{enumzjromai}
+\end{te}
+\begin{te}[Newton-Leibniz]
+  Tfh:
+\begin{enumzjromai}
+  \item $U\subset \R^n$ tartomány
+  \item $f\colon U\to \R^n$ folytonos
+  \item $\vfi\colon [a,b]\to U$ szakaszonként sima út
+  \item $f$-nek $\exists F$: a primitív fv-e
+\end{enumzjromai}
+Ekkor $\di\Int_\vfi f = F(\vfi(b))-F(\vfi(a))$
+\end{te}
+\begin{biz}
+\begin{gather*}\text{(ii)}\nn a=t_0<t_1<\dotsb<t_m=b\ (m\in\N).\ \ F\circ\vfi\in\Der[t_{i-1},t_i]\ (i=1,\dotsc,m).\\
+  (F\circ\vfi)'(t)=\skalar{F'(\vfi(t))}{\vfi'(t)}=\skalar{(f\circ\vfi)(t)}{\vfi'(t)}\quad(t\in[t_{i-1},\,t_i],\ 
+  i=1,\dotsc,m)\\
+  \intertext{Ezekre az intervallumokra alaklmazva az egyváltozós Newton-Leibniz formulát}
+  \Int_\vfi f=\sum_{i=1}^m\Int_{t_{i-1}}^{t_i}\skalar{(f\circ\vfi)(t)}{\vfi'(t)}\diff t = \sum_{i=1}^m
+  \left(F(\vfi(t_i)-F(\vfi(t_{i-1}))\right) = F(\vfi(b))-F(\vfi(a))
+\end{gather*}
+\end{biz}
+
+\begin{pl}
+  Primitív fv. meghatározása\\
+  $f(x,y) = \left(\dfrac{y}{x^2},\,-\dfrac1x\right)\qquad(x>0,y>0)$\\
+  Létezik-e $F\colon \R^2\to\R$, hogy $F'=f$.\\
+  $\left.\!\begin{gathered}\partial_xF(x,y) = \dfrac{y}{x^2}\\\partial_yF(x,y)=-\dfrac1x+h'(y)\end{gathered}
+  \right\}\nn F(x,y) = -\dfrac y x+h(y)$\\
+  $h'(y) = 0\nn h\equiv$ állandó\\
+  így $F(x,y) = -\dfrac y x +c\quad (x,y)>0$
+\end{pl}
+
+\begin{te}
+  $U\subset \R^n$ taromány, $f\colon U\to\R$ folytonos.\\
+  $f$-nek létezik primitív függvénye $\ekviv \left\{\begin{array}{l}\forall U\text{-ban haladó szakaszonként sima és
+  zárt }\vfi\text{ útra:}\\\di\Int_\vfi f= 0\end{array}\right.$
+\end{te}
+
+\begin{megj}Jelölés: $\oint$: zárt útra vett integrál, körintegrál.
+\end{megj}
+
+\begin{biz}
+  $\underline{\Rightarrow:}$ trivi. Newton-Leibniz: $\di\oint f=F(\vfi(b)) - F(\vfi(a))$, de $\vfi$ zárt:
+  $\vfi(a)=\vfi(b)$
+  $\underline{\Leftarrow:}$ Több lépésben
+  \begin{enumzjbetu}
+    \item Ha $\di \Oint_\vfi f=0\nn \forall x,a\in U$ és $\forall \vfi_1,\vfi_2$, ami $x$-et, $a$-t összeköti:
+    $\di \Oint_{\vfi_1} f = \Oint_{\vfi_2} f$: a vonalintegrál független a két pontot összekötő útttól, ugyanis\\
+      $\vfi_1\cup\widetilde{\vfi}_2$ zárt görbe, $\di 0=\Int_{\vfi_1\cup\widetilde{\vfi}_2}\!\!\!\!f = \Int_{\vfi_1} f+
+    \Int_{\widetilde{\vfi}_2}\!f\quad\nn\quad \Int_{\vfi_1}\!f - \Int_{\vfi_2}\!f = 0$
+  \item Ha $\di\forall \Oint_\vfi f=0$, akkor definiálhatjuk a következő függvényt:
+    \[\di a\in U \text{ rögzített; }\Phi(x) := \Int_{\overline{ax}}f(x)\quad\forall x\in U\]
+    ahol $\overline{ax}$ az $a$-t $x$-szel összektő szakaszonként sima út. Ez a függvény az $f$-nek $a$-ban eltűnő
+    integrálfüggénye.
+  \item Ha $\di\forall\Oint_\vfi f=0\,\nn$ a fenti $\Phi$ integrálfüggvény deriválható és $\Phi'=f$, azaza a $\Phi$
+    integrálfüggvény az $f$ egy primitív függvénye (az integrálfüggvény deriválhatóságára vonatkozó tétel alapján)
+    \begin{gather*}
+       \Phi(x+h)-\Phi(x)=\Int_0^1\skalar{f(x+th}h\diff t
+       \intertext{$f$ folytonos, ezért}
+       \epsilon(h):=\sup{\norma{f(x+th)-f(x)}:0\leq t\leq 1}\to 0\quad(h\to0).
+       \intertext{Továbbá}
+       \left\vert\Phi(x+h)-\Phi(x)-\skalar{f(x)}h\right\vert = \left\vert\Int_0^1\skalar{f(x+th)-f(x)}h\diff t
+       \right\vert \leq\epsilon(h)\cdot\norma h.
+    \end{gather*}
+    Vagyis $\Phi$ differenciálható és $\Phi'=f$.
+  \end{enumzjbetu}
+\end{biz}
+\begin{te}[Szükéges feltétel a primitív függvény létezésére]
+  $U\subset\R^n$ tartomány,\\$f\colon U\to\R^n$
+  \begin{enumzjr}
+    \item $f$ \underline{deriválható}
+    \item $f$-nek létezik primitív függvénye
+  \end{enumzjr}
+  Ekkor $f'$ deriváltmátrix szimmetrikus, azaz $\partial_if_j=\partial_jf_i\ (\forall 1\leq i,j\leq n)$ és
+  $f=(f_1,\dotsc,f_n)$
+\end{te}
+
+\begin{biz}(ii) $\nn \exists F\colon U\to\R,\ F\in\Der$ és $F'=f$\\
+  (i)$\nn F\in\Der^2\overset{\text{Young-t.}}{\nn} \partial_i(\underbrace{\partial_jF}_{f_j}) =
+  \partial_j(\underbrace{\partial_iF}_{f_i})$\\
+$F'=(\partial_1,\dotsc,\partial_n)=(f_1,\dotsc,f_n)$
+\end{biz}
+
+\begin{Megj}
+\item $\R\to\R$ esetén $\forall$ folytonos függvénynek létezik primitív függvény\\
+  Ha $n\geq 2$, akkor $\exists f$ deriválható, melynek nincs primitív függvénye.
+\item Csillagtartományon ez a szükséges felétel elégséges is
+\end{Megj}
+\begin{de}[Csillagtartomány]
+  $U\subset \R^n$ az $a\in U$ pontra nézve csillagtartomány, ha $\forall x\in U: [a,x]\subset U$
+\end{de}
+
+\begin{te}[Elégséges feltétel a primitív függvény létezésére]
+  Tfh:
+  \begin{enumzjr}
+  \item $U\subset \R^n$ az $a\in U$-ra csillagtartomány
+  \item $f\colon U\to\R^n$ folytonosan deriválható
+  \item $f'$ deriváltmátrix szimmetrikus
+  \end{enumzjr}
+  Ekkor $F$-nek $\exists$ primitív függvénye, az
+  \[\di U\owns x\mapsto\!\!\Int_{[a,x]}\!\!\!f\]
+  az  $f$ egy $a$-ban eltűnő primitív függvénye
+\end{te}
+
+\begin{biz}
+  Megmutatjuk, hogy
+\begin{gather*}
+  U\owns x\mapsto F(x):=\Int_a^xf=\Int_0^1\skalar{f(a+t(x-a))}{x-a}\diff t
+  \intertext{függvény differenciálható és $F'=f$.}
+  \partial_iF(x) = \Int_0^1\left(\sum_{j=1}^nt\cdot\partial_if_j(a+t(x-a))\cdot (x_j-a_j)+f_i(a+t(x-a))\right)\diff t
+  \intertext{$f'$ szimmetrikus, így}
+  \partial_iF(x) = \Int_0^1\left(t\cdot \sum_{j=1}^n\partial_jf_i(a+t(x-a))(x_j-a_j)+f_i(a+t(x-a))\right)\diff t = \\
+  \hspace*{2em}= \Int_0^1\left(t\cdot\dfrac{\partial}{\partial t}f_i(a+t(x-a))+f_i(a+t(x-a))\right)\diff t =\\
+  \hspace*{2em}=f_i(x)-\Int_0^1f_i(a+t(x-a))\diff t + \Int_0^1f_i(a+t(x-a))\diff t =f_i
+\end{gather*}  
+\end{biz}
+
+\newpage
+\section{Többszörös integrál}
+\subsection{A többszörös integrál fogalma}
+Két lépésben: $N$-dimeziós intervallum, majd tetszőleges $H\subset\R^N$ korlátos halmaz
+
+\subsubsection{$N$-dimeziós intervallum és felosztása}
+\begin{de}
+  $I^j:=[a^j,\,b^j]\subset \R\quad \forall j=1,\dotsc,N$\\
+  $I := I^1\times I^2\times\dotsb\times I^N\quad\R^N$-beli kompakt intervallum\\
+  $\mu(I) := (b^1-a^1)\cdot (b^2-a^2)\dotsm(b^N-a^N)$ az $I$ mértéke.
+\end{de}
+\begin{de}[Felosztás - egydimenziós]
+  $[a,b]\subset \R,\\\tau := \{\,[x_{r-1},\,x_r]:r=1,2,\dotsc,m\}\in\mathcal{F}([a,b])$
+\end{de}
+\begin{de}[Felosztás]
+  Legyen $\tau_j\in\mathcal{F}(I^j)\quad (j=1,\dotsc,N)$.\\
+  $\tau := \tau_1\times\tau^2\times\dotsb\times\tau^N=\{I^1_{r_1}\times I_{r_2}^2\times I^N_{r_N}:1\leq r_j\leq m\}$ az
+  $I$ intervallum egy felosztása\\
+  Jel: $\mathcal{F}(I)$ a felosztás egy halmaza
+\end{de}
+
+\begin{de}
+  $f\colon I\to\R,\ I\subset \R^N$ kompakt intervallum, $f$ korlátos, $\tau\in\mathcal{F}(I)$.
+  \begin{gather*}
+    s(f,\tau):=\sum_{J\in\tau}(\inf f_{|J})\cdot \mu(J)\\
+    S(f,\tau) :=\sum_{J\in\tau}(\sup f_{|J})\cdot \mu(J)
+  \end{gather*}
+  az $f$ függvény $\tau$ felosztáshoz tartozó alsó- illetve felső közelítő összege.
+\end{de}
+\begin{megj}
+$\{\,s(f,\tau):\tau\in\mathcal{F}(I)\}$ és $\{\,S(f,\tau):\tau\in\mathcal{F}(I)\}$ korlátosak
+\end{megj}
+\begin{de}
+  $f\colon I,\to \R,\ I\subset \R^N$ kompakt intervallum, $f$ korlátos függvény.
+  \begin{gather*}
+    \sup\, \{\,s(f,\tau):\tau\in\mathcal{F}(I)\,\} =: I_*f\\
+    \inf\, \{\,S(f,\tau):\tau\in\mathcal{F}(I)\,\} =: I^*f
+  \end{gather*}
+  az $f$ Darboux-féle alsó-, ill felső integrálja.
+\end{de}
+
+\begin{de}Az $f$ Riemann-integrálható, jel: $f\in\Rint(I)$, ha $I_*f=I^*f=\Int_If$.\\
+  $\di\Int_If$ az $f$ Riemann integrálja $I$-n.
+\end{de}
+
+\begin{megj}$I_*f$, $I^*f$ létezik minden ilyen függvényre
+\[I_*f\leq I^*f,\text{ ui }\forall\tau,\sigma\in\mathcal{F}(I)\colon s(f,\tau)\leq S(f,\sigma)\]
+\end{megj}
+
+\subsection{A többszörös integrál alapvető tulajdonságai}
+\begin{te}
+  $I\subset\R^N$ kompakt, $f,g\colon I\to\R$ korlátos függvények, $f,g\in\Rint(I)$. Ekkor
+\begin{enumzjb}
+  \item $f+g\in\R(I)$, és $\di\Int_I (f+g) = \Int_I f + \Int_I g$
+  \item $\forall \lambda\in\R\colon \lambda f\in\Rint(I)$ és $\di\Int_I(\lambda f)=\lambda\Int_I f$
+\end{enumzjb}
+\end{te}
+
+\begin{pl}Nem integrálható a következő függvény, ahol $(x,y)\in [0,1]\times[0,1]=:I$.\\
+  $f(x,y):=\begin{cases}0 & x,y \text{ racionális }\\1 &\text{ különben}\end{cases}$\\
+  $f\not\in\Rint(I)$, ui $I_*f=0\neq I^*f=1$
+\end{pl}
+\begin{te}[Egyenlőtlenség]$I\subset\R^N$ kompakt intervallum, $f,g\colon I\to\R$ és tfh:\\$f,g\in\Rint(I)$. Ekkor
+  \begin{enumzjb}
+    \item $f\leq g\ I$-n $\di\nn \Int_If\leq \Int_Ig$
+    \item $\vert f\vert\in\Rint(I)$ és $\di\left\vert\Int_If\right\vert\leq\Int_I\vert f\vert$
+    \item \textbf{első középértéktétel} Ha $g\geq 0\ I$-n:
+      \begin{gather*}
+	m\Int_Ig\leq \Int_I(fg)\leq M\Int_Ig\\
+	M:=\sup_If\\
+	m:=\inf_If
+      \end{gather*}
+    \item \textbf{második középértéktétel} Ha  még $f\in\Folyt(I)$ is:
+      \[\exists \xi \in I\quad \Int_I fg = f(\xi)\Int_Ig\quad g\geq 0\ I\text{-n}\]
+  \end{enumzjb}
+\end{te}
+\begin{biz}Mint $\R\to\R$\end{biz}
+
+\begin{te}$f\colon I\to\R,\ I\subset\R^N$ kompakt intervallum\\
+  $f$ folytonos $\nn$ $f$ integrálható $I$-n.
+\end{te}
+\begin{biz}Lásd $\R\to\R$\end{biz}
+
+\subsection{Az integrál értelmezése tetszőleges $H\subset \R^N$ korlátos tartományon}
+\begin{de}Legyen $H\subset\R^N$ \underline{korlátos} halmaz, $f\colon H\to\R$. Ekkor $\exists I\subset\R^N$ kompakt
+  intervallum, hogy $H\subset I$. Az $f$ függvény Riemann-integrálható a $H$-n, ha az
+\[ \tilde{f}(x) := \begin{cases}f(x)& x\in H\\0& x\in I\setminus H \end{cases}\]
+függvény integrálható az $I$-n. Ekkor
+\[ \Int_Hf := \Int_I\tilde{f}\]
+\end{de}
+
+\begin{Megj}
+  \item A definíció nem függ az $I$ megválasztásától
+    \item A $H$-n vett integrálokra is érvényesek az alapvető tulajdonságokra kimondott állítások.
+\end{Megj}
+
+\subsection{Az integrál számítása}
+$N=2$-re, $N\geq 2$ esetén hasonlóan.\\
+Három eset:
+\begin{enumerate}
+\item $D_f$ kompakt intervallum (szukcesszív: egymás utáni integrálással)
+\item $D_f$ ún. normáltartomány (szukcesszív integrálással)
+\item $D_f$ egyéb tartomány (integrál-transzformációval)
+\end{enumerate}
+
+\subsubsection{Intervallumon}
+$N=2,\ D_f=[a,b]\times[c,d]=:I$, $f\colon I\to\R$ korlátos függvény. Vesszük a tengelyekkel párhuzamos megtszetgörbéket:
+$\forall x\in[a,b]\colon\vfi_x(y):=f(x,y)$, ahol $y\in[c,d]$. $\vfi_x\colon[c,d]\to\R$
+
+
+\begin{te}Ha $f\in\Rint(I)$, akkor az
+\[M(x):=I^*\vfi_x\text{ és }m(x):=I_*\vfi_x\quad x\in[a,b]\]
+függvények integrálhatók $[a,b]$-n és
+\[\Int_If=\Int_a^bM(x)\diff x=\Int_a^bm(x)\diff x\]
+\end{te}
+
+\begin{ko}
+  Ha $f\in\Rint(I)$ és még tfh: $\forall x\in[a,b]\colon \vfi_x\in\Rint[c,d]$, azaz $I^*\vfi_x=I_*\vfi_x$, akkor
+  \[\Int_If=\Int_a^b\left(\Int_c^df(x,y)\diff y\right)\diff x\]
+  Jel: $\di\Int_If=\Int_a^b\!\!\Int_c^df(x,y)\diff x\diff y$
+\end{ko}
+\begin{ko}  Ha
+  \begin{enumzjr}
+  \item $f\in\Rint(I)$
+  \item $\forall x\in[c,d]\ \vfi_x\in\Rint[c,d]$
+  \item $\forall y\in[c,d]\ \vfi_y(x):=f(x,y)\quad x\in[a,b]$ függvény integrálható $[a,b]$-n
+  \end{enumzjr} Ekkor
+  \[\Int_I f=\Int_a^b\left(\Int_c^df(x,y)\diff y\right)\diff x=\Int_c^d\left(\Int_a^bf(x,y)\diff x\right)\diff y\]
+  azaz a változók felcserélhetók
+\begin{pl}
+\begin{gather*}
+  f(x,y):= x^2y,\ (x,y)\in[0,1]\times[0,1]\\
+  \Int_0^1\!\!\Int_0^1f(x,y)\diff x\diff y=\Int_0^1\left(\Int_0^1f(x,y)\diff y\right)\diff x =\Int_0^1\left[
+    \dfrac{x^2y^2}2 \right]_{y=0}^{y=1}\diff x=\Int_0^1\dfrac{x^2}2\diff x=\\\hspace{1em}=
+  \left[\dfrac{x^3}6\right]_0^1=\dfrac16
+  \intertext{illetve}
+  \Int_0^1\!\!\Int_0^1f(x,y)\diff x\diff y=\Int_0^1\!\left(\Int_0^1f(x,y)\diff x\right)\diff y =\Int_0^1\left[
+    \dfrac{x^3y}3 \right]_{x=0}^{x=1}\diff y=\Int_0^1\dfrac{y}3\diff y=\left[\dfrac{y^2}6\right]_0^1=\dfrac16
+\end{gather*}
+\end{pl}
+\end{ko}
+
+\subsubsection{Normáltartományon}
+\begin{de}\ 
+  \begin{enumzjb}
+  \item $x$-re nézve normáltartomány: $\vfi_1(x)\leq\vfi_2(x)\quad(x\in[a,b])$
+    \[H:=\{(x,y)\in\R^2:a\leq x\leq b;\  \vfi_1(x)\leq y\leq\vfi_2(x)\}\]
+  \item $y$-ra nézve normáltartomány: $\psi_1(y)\leq\psi_2(y)\quad(y\in[c,d])$
+    \[K:=\{(x,y)\in\R^2:c\leq y\leq d;\  \psi_1(y)\leq x\leq\psi_2(y)\}\]
+  \end{enumzjb}
+\end{de}
+
+\begin{te}\ 
+  \begin{enumzjb}
+    \item $H\subset \R^2\ x$-re nézve normáltartomány, $f\colon H\to\R$  folytonos. Ekkor $f\in\Rint(H)$ és
+      \[\Int_Hf=\Int_a^b\left(\Int_{\vfi_1(x)}^{\vfi_2(x)}\!\!f(x,y)\diff y\right)\diff x\]
+    \item $K\subset \R^2\ y$-ra nézve normáltartomány, $f\colon K\to\R$  folytonos. Ekkor $f\in\Rint(K)$ és
+      \[\Int_Kf=\Int_c^d\left(\Int_{\psi_1(y)}^{\psi_2(y)}\!\!f(x,y)\diff x\right)\diff y\]
+  \end{enumzjb}
+\end{te}
+
+\subsection{Integrál-transzformációval}
+Bármilyen egyéb tartományon integrál-transzformációval téglalapra vett integrálásra vezetjük vissza a kiuszámítását
+(helyettesítéses integrálás).
+
+\begin{pl}
+\begin{gather*}
+  x=r\cos\vfi=\Phi_1(r,\vfi)\\
+  y=r\sin\vfi=\Phi_2(r,\vfi)\\
+  \R^2\to\R^2\owns\Phi:=(\Phi_1,\Phi_2)\colon U\to V\text{ folytonosan deriválható bijektív leképezés}\\
+  \det\Phi'(r,\vfi)=\det\begin{bmatrix}\cos\vfi & -r\sin\vfi\\\sin\vfi & r\cos\vfi\end{bmatrix} = r \ne 0\\
+  \intertext{Ezért $\exists\Phi^{-1}\nn \Phi$  bijektív}
+  \intertext{Igazolható:}
+  \iint\limits_Vf(x,y)\diff x\diff y=\Int_V f=\iint\limits_U f(r\cos\vfi,r\sin\vfi)\cdot\underbrace{
+  \vert\det\Phi'(r,\vfi)\vert }_{\underset{r}{\scriptsize{\Vert}}}\diff r\diff \vfi  
+\end{gather*}
+\end{pl}
+\begin{te}[Integrál-transzformáció]
+  Legyen $\Phi:=(\Phi_1,\,\Phi_2)\colon U\to V\quad (U,V\in\R^2)$ folytonosan deriválható és $\det\Phi' \ne0\ \,U$-n
+  (vagyis $\Phi$ bijekció).\\
+  Ha  $f\colon V\to\R$ folytonos $\nn f\in\Rint(V)$ és
+  \[\Int_Vf=\Int_Uf\circ\Phi\cdot\vert\det\Phi'\vert\]
+\end{te}
+
+% Local Variables:
+% fill-column: 120
+% TeX-master: t
+% End:

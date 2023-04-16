@@ -1,0 +1,801 @@
+\part{Komplex függvénytan}
+\section{Komplex függvénytan}
+
+\begin{megj}Az $\R\to\R$ és $\C\to\C$ függvények részben hasonlóak, részben különbözőek.\\
+  
+  \begin{tabular}{@{}lcl@{}}\toprule
+    \multicolumn{1}{c}{$\R\to\R$} & & \multicolumn{1}{c}{$\C\to\C$}\\\midrule
+    folytonosság & \emph{hasonló} & folytonosság\\
+    differenciálhatóság & \emph{lényeges} & differenciálhatóság \\
+    & \emph{különbségek} & \qquad(ha diffható, akárhányszor diffható)\\
+    \bottomrule    
+  \end{tabular}
+\end{megj}
+
+\subsection{Kapcsolat az $\R^2$ és a $\C$ között}
+\begin{itemize}
+  \item algebrai alak: $ z = x + iy$. Valós rész: $\re z = x$, képzetes rész: $\im z = y$
+  \item trigonometrikus alak: $z= r\cos\vfi + i\cos \vfi$, $r\geq 0$ , $0\leqq \vfi < 2\pi$
+  \item exponenciális alak: $z = r e^{i\vfi}$\quad (Euler-formulábólól)
+\end{itemize}
+
+\begin{te}[Metrika $\C$-n] A $\ro(z_1,\,z_2) := |z_1-z_2|,\quad (z_1,z_2\in\C)$ metrika \C-n és $(\C,\ro)$ \emph{teljes}
+  MT.
+\end{te}
+\begin{biz} Lásd $\R$ eset
+\end{biz}
+
+\begin{te}[$\C$ és $\R^2$ izometrikusan izomorfak] Legyen: $I\colon \C\owns z=x+iy\mapsto (x,y)\in\R^2$. Ekkor
+  \begin{enumerate}
+    \item $I\colon\C\to\R^2$ bijekció
+    \item művelettartó: $I(z_1 + z_2) = I(z_1) + I(z_2)$
+    \item izometrikus: $\norma{I(z_1)-I(z_2)}_2 = |z_1-z_2|$
+    \end{enumerate}
+\end{te}
+
+\subsection{$\C\to\C$ és $\R^2\to\R^2$ típusú függvények}
+\begin{gather*}
+  f\in\C\to\C,\ \forall z=x+iy\in \ERTT_f\colon f(z) = \re f(z) + i \im f(z)\\
+  f_1(x,y) := \re f(z),\quad f_2(x,y) := \im f(z)\\
+  f\in \C\to\C \iff \hat{f} := (f_1,f_2)\in \R^2\to \R^2\\
+  \hat{f} = I\circ f\circ I^{-1}
+\end{gather*}
+Itt $f_1$ az $f$ függvény \emph{valós} része, $f_2$ a \emph{képzetes} része
+\begin{Pl}
+  \item $f(z) := z^2 = (x+iy)^2 = (x^2-y^2)  + 2ixy$\\
+    $\hat{f}(x,y) = (x^2-y^2,\, 2xy)$
+  \item $f(z) := e^z = e^{x+iy}= e^x + e^{iy} = e^x(\cos y + i\sin y) = e^x \cos y + i e^x \sin y$\\
+    $\hat{f}(x,y) = (e^x\cos y,\, e^x \sin y)$
+\end{Pl}
+
+\subsubsection{$\C\to\C$ függvények szemléltetése}
+\begin{Pl}
+  \item $f(z) := z^2$\\
+    a) $ z=r(\cos t + i\sin t)$ $z^2=r^2(\cos2t + i\sin2t)$\\
+    b) $0\leq t < \infty,\quad z = \epsilon t $, $z^2=\epsilon^2t^2$
+  \item $f(z) = e^z\quad (z\in\C)$ igazolható...
+\end{Pl}
+Lásd a kiadott anyag - vizsgára kell
+\subsection{A $\C\to\C$ függvények folytonossága}
+$(\C,\ro),\ \ro(z_1,z_2) := |z_1 - z_2|$ teljes metrikus tér. Topológiai fogalmak
+
+\begin{enumzjb}
+  \item nyílt, zárt, kompakt halmaz, korlátosság. Az $A\subset \C$ halmaz kompakt $\iff$ $A$ korlátos és zárt.
+  \item folytonosság, haátérték - környezetek (a korábbiak speciális esete); folytonos függvények tulajdonságai
+\end{enumzjb}
+
+
+Persze közvetlenül is lehetne vizsgálni (MT nélkül):\\ 
+$f\in\folyt{a} \iff \forall \epsilon > 0\ \exists \delta>0\ \forall
+z\in K_\delta(a)\cap \ERTT_f\colon |f(z)-f(a)| < \epsilon$
+
+\begin{te}
+  $\C\to\C \owns f=f_1 + if_2\quad (f_1,f_2\in \R^2\to\R)$\\
+  \[f\in\folyt{a}\iff f_1,\,f_2\in\folyt{(a_1,\,a_2)} \iff \hat{f}=(f_1,\,f_2)\in\R^2\to\R^2 \in\folyt{(a_1,a_2)}\]
+\end{te}
+\begin{biz}trivi, def, alapján
+\end{biz}
+
+\subsection{Diferenciálható $\C\to\C$ függvények}
+\begin{de}[deriválhatóság] $f\in\C\to\C,\ a\in\intD_f$
+  \begin{gather*}
+    f\in\der{a} :\ekviv \exists \di\lim_{z\to a}\dfrac{f(z)-f(a)}{z-a} = A \in \C\\
+    A =: f'(a)
+  \end{gather*}  
+\end{de}
+\begin{megj} A definíció ugyanaz, mint $\R\to\R$ esetben. Azonban látni fogjuk, hogy ez jóval erősebb megkötés, mint
+    $\R\to\R$ esetben (pl. ha 1x diffható, bárhányszor deriválható).
+\end{megj}
+
+\begin{te}[lineáris közelítés] $f\in \C\to\C,\ a\in\intD_f$
+  \[ f\in\der{a} \iff \exists A \in \C \text{ és }\exists \epsilon\colon\C\to \C,\ \di\lim_a\epsilon = \colon
+  f(z)-f(a)=A(z-a) + \epsilon(z)\cdot(z-a)\quad z\in\ERTT_f\]
+\end{te}
+\begin{biz}
+  Mint $\R\to\R$ esetben.
+\end{biz}
+\begin{te}[Cauchy-Riemann-egyenletek]\ \\
+  \begin{enumzjb} 
+    \item $f\in\C\to\C,\ a=a_1+ia_2\in\intD_f,\ f=f_1+if_2,\ \hat{f}=(f_1,\,f_2)\in\R^2\to\R^2$
+      \begin{gather*}
+	f\in\der{a}\iff \begin{cases}
+	  \hat{f} \text{ deriválható }(a_1,\,a_2)\text{-ben és}\\
+	  (\partial_1f_1)(a_1,a_2) = (\partial_2f_2)(a_1,a_2)\\
+	  (\partial_2f_1)(a_1,a_2) = -(\partial_1f_2)(a_1,a_2)
+	\end{cases}
+      \end{gather*}
+    \item $f'(a) = A = A_1+iA_2 = (\partial_1f_1)(a_1,a_2) - i(\partial_2f_2)(a_1,a_2)$
+  \end{enumzjb}
+\end{te}
+
+\begin{biz}
+  \begin{gather*}
+    f\in\C\to\C,\ f=f_1+if_2,\ a\in\intD_f,\ a=a_1+ia_2,\ z=z_1+iz_2.\\
+    f\in\der a \iff \left\{\begin{array}{l}\exists A=A_1+iA_2\in \C,\ \exists \epsilon=\epsilon_1 + i\epsilon_2\in
+    \C\to\C, \ \di\lim_a\epsilon = 0\\f(z)=f(a)+A(z-a)+\epsilon(z)(z-a)\quad \forall z\in D_f\end{array}\right.
+    \intertext{Valós és képzetes részek}
+    f_1(x,y) = f_1(a_1,a_2) + (A_1(x-a_1)-A_2(y-A_2)) + \epsilon_1(x,y)(x-a_1) - \epsilon_2(x,y)(y-a_2)\\
+    f_2(x,y) = f_2(a_1,a_2) + A_2(x-a_1)-A_1(y-A_2)) + \epsilon_2(x,y)(x-a_1) - \epsilon_1(x,y)(y-a_2)\\
+    \lim_{a_1,a_2}\epsilon_i = 0\ (i=1,2)
+    \intertext{ami ekivalens a következőkkel:}
+    f_1,f_2\in  \der{(a_1,2_2)}, \quad\begin{array}{l}
+    A_1 =\partial_1f_1(a_1,a_2)\\
+    -A_2=\partial_2f_2(a_1a_2)\end{array},\quad\begin{array}{l}
+    A_1 =\partial_1f_2(a_1,a_2)\\
+    A_2=\partial_2f_2(a_1a_2)\end{array}
+    \intertext{Ebből megkapjuk a Cauchy-Riemann egyenleteket.\newline A \textit{b)} rész biztonyítása triviálisan adódik:}
+    f'(a)=A_1+iA_2 =  (\partial_1f_1)(a_1,a_2) - i(\partial_2f_2)(a_1,a_2)    
+  \end{gather*}
+\end{biz}
+\subsubsection{Invertálhatóság}
+eml: $\R\to\R$, $\R^n\to\R^n$
+\begin{te}
+  Ha $f\in\C\to\C$ differenciálható az $a\in\intD_f$ pontban és $f'(a) \neq 0$, akkor $\exists K_r(a)$, amelyben az $f$
+  invertálható.
+\end{te}
+
+\begin{biz}
+\begin{gather*}
+  f=f+if_2,\ \hat f = (f_1,f_2) \in \R^2\to\R^2\text{ (ha $f$ invertálható, $f$ is az)}\\
+  \det (\hat{f}'(a_1,a_2)) = \det \begin{bmatrix}\partial_1f_1(a_1,a_2) & \partial_2f_1(a_1,a_2) \\
+    \partial_1f_2(a_1,a_2) & \partial_2f_2(a_1,a_2)\end{bmatrix} \overset{\text{C-R}}{=}\\\overset{\text{C-R}}{=}
+  \det\begin{bmatrix} \partial_1f_1(a_1,a_2) & \partial_2f_1(a_1,a_2) \\  -\partial_2f_1(a_1,a_2) &
+  \partial_1f_1(a_1,a_2)\end{bmatrix} = (\partial_1f_1(a_1,a_2))^2 - (\partial_2f_1(a_1,a_2))^2 = \vert f'(a)\vert\neq 0  
+\end{gather*}
+Ekkor $\hat f$ nvertálható $K_r(a_1,a_2)$-ben  (inverz fv tétel) $\nn$ $f$ is invertálható $K_r(a)$-ban.
+\end{biz}
+
+\begin{te}[Deriválható függvények alaptulajdonságai] $\fcc,\ a\in\intD_f$
+  \begin{enumerate}
+    \item $f\in \der{a} \nn f\in \folyt{a}\qquad \not\Leftarrow$
+    \item Műveleti tételek: +, *, /, kompozíció lásd $\R\to\R$
+    \item Hatványsor deriválhatósága      
+  \end{enumerate}
+\end{te}
+
+\noindent \underline{Elemi függvények} def, elemi tul ($\exp,\ \sin,\ \cos,\ \sh,\ \ch$; addíciós tételek, négyzetes öf,
+Euler-formula...)
+
+\begin{kov}\begin{korlista}
+  \item polinomok, racionális $\C\to\C$ függvények deriválhatók
+  \item $\exp,\ \sin,\ \cos,\ \sh,\ \ch$ deriválhatóak, deriváltjaik...
+    \end{korlista}
+\end{kov}
+
+\begin{pl} Nem deriválható függvények, ezek egyetlen $a\in\C$ pontban sem deriválhatóak
+  \begin{enumzjb}
+  \item $f(z) := \re z\ (z\in\C)$, ui legyen $a\in \C$ rögzített,
+      \[\di\dfrac{f((a+h)-f(a)}h = \dfrac{\re(a+h) - \re(a)}h = \begin{cases}1& h\in\R \\
+	0 & h\text { tiszta képzetes} \end{cases}\]
+      Tehát nem létezik határérték $h\to 0$ esetén
+    \item $f(z) :=  \overline{z}\ (z\in\C)$, ui legyen $a\in \C$ rögzített,
+      \[\di\dfrac{f((a+h)-f(a)}h = \dfrac{\overline{a+h} - \overline{a}}h = \dfrac{\overline{h}}h = \begin{cases}1& h\in\R \\
+	-1 & h\text{ tiszta képzetes} \end{cases}\]      
+  \end{enumzjb}  
+\end{pl}
+
+\subsubsection{Elemi függvények vizsgálata}
+\begin{enumerate}
+\item Lineáris függvények
+\item $z\mapsto z^2$
+\item gyökfv
+\item $\exp$, infertálhatósága $\nn \log$ fv. Az $\exp$ periodikus!
+\item $\sin,\,cos$ + inverzeik
+\end{enumerate}
+
+\begin{de}[Analitikus fv]
+  Az $f$ fv. analitikus (v. holomorf v. reguláris) a $T\subset\C$ tartományon, ha $f$ deriválható a $T$ minden
+  pontjában.\\
+  Jel: $\mathcal A(T) \owns f$
+\end{de}
+\subsubsection{Az $\R^2\to\R$ harmonikus függvényei}
+
+Legyen $T \subset \C tartomány$, ez megfeleltethető egy $D\subset \R^2$ tartománynak, hogy
+$ z=x+iy\in T \iff (x,y) \in D$\\
+Tfh. $f=f_1+if_2) \in \mathcal A(T)$, így (Cauchy Riemann alapján)
+\begin{gather*}
+  \partial_1f1 = \partial_2f_2\\
+  \partial_2f1 = -\partial_2f_2
+  \intertext{Tovább deriválva (később látjuk, többször deriválhatóak) + Young tételből:}
+  \left\{\begin{array}{l}\partial_{11}f_1 + \partial_{22}f_2 =0\\
+  \dfrac{\partial^2f_1}{\partial x^2} +  \dfrac{\partial^2f_1}{\partial x^2} =0
+  \end{array}\right\} \text{ Laplace-egyenlet}
+\end{gather*}
+másodrendű dirrefenciál-egyenlet, ez igaz $f_2$-re is.
+
+\begin{de}[Harmonikus függvény]A $g\colon D\to\R\quad(D\subset\R^2$ tartomány $)$ kétszer folytonosan deriválható fv
+  \emph{harmonikus függvény} a $D$ tartományon, ha
+  \[ \di\dfrac{\partial^2g}{\partial x^2}(x,y) + \dfrac{\partial^2g}{\partial y^2}(x,y) = 0\quad(\forall (x,y)\in D) \]
+\end{de}
+
+\begin{te}Ha $f=f_1+if_2\in \mathcal A(T)\nn f_1,\,f_2$ harmonikus a $T$-nek megfelelő $D\subset \R^2$ tartományon
+\end{te}
+\begin{megj}Differenciálható komplex függvények valós, kézetes része harmonikus, ezért sok ilyen van\end{megj}
+
+\begin{de}[Harmonikus társak]$D\subset\R^2$ tartomány, $f_1,f_2\colon D\to\R$ egymás harmonikus társi, ha $\exists
+  f=f_1+if_2 \in \C\to\C$, ami deriválható.
+\end{de}
+
+\subsection{Komplex vonalintegrál}
+\subsubsection{Valós vonalintegrálok}
+\begin{de}[Sima út]$n\in\N\ \vfi\colon[a,\,b]\to\R^n$ folytonosan deriválható függvényt\\\emph{$\R^n$-beli sima út}nak
+    nevezzük.\\  Az $R_\vfi = \Gamma\subset\R^n$ halmaz \emph{sima görbe}, $\vfi$ a $\Gamma$ görbe egy paraméterezése.
+\end{de}
+
+\begin{de}[Szakaszonként sima út]$a,b\in\R;\ a\leq b$. A $\vfi\colon[a,b]\to \R^n$ függvény  \emph{$\R^n$-beli
+    szakaszonként sima út}, ha 
+{\listazjromai
+  \begin{enumerate}
+  \item $\vfi\in\Folyt$
+  \item $\exists a=t_0<t,\ 1<\dotsb<t_m=b$: $\vfi_{|[t_i,\,t_i+1]}\ \ i=1,\dotsc,m-1$ sima út.
+\end{enumerate}
+}
+\end{de}
+
+\begin{Pl}
+\item Szakasz: $a,b\in \R^n\ \vfi(t) := a+t(b-a)\quad(t\in[0,\,1])$
+\item Töröttvonal - szakaszonként sima út
+\item Kör: $\vfi(t) := (\sin t,\cos t)\quad t\in[0,2\pi]\\
+  R_\vfi=\Gamma$
+\end{Pl}
+
+
+\begin{de}[Szakaszonként sima utak egyesítése]
+  $\vfi\colon [a,a+h]\to\R^n$\\$\psi\colon[b,b+k]\to\R^n$ szakaszonként sima utak, és tfh: $\vfi(a+h)=\psi(b)$, azaz
+  $\vfi$ végpontja megegyezik $\psi$ kezdőpontjával. \\
+  A $\vfi$ és $\psi$ egyesítése $(\vfi\cup\psi)$:
+\[\Phi(t) = \begin{cases}\vfi(t) & t\in[a,a+h]\\\psi(t-a-h+b) & t\in[a+h,a+h+k]\end{cases}\]
+\end{de}
+
+\begin{de}[$\vfi$ ellentettje] $\widetilde{\vfi} := \vfi(2a+h-t)\qquad(t\in[a,\,a+h])$\\
+  az út $a+h\to a$ irányú lett.
+\end{de}
+
+\begin{te}Legyen $U\subset \R^n$ nyílt.\\
+  $U$ összegüggő $\ekviv \forall x,y\in  U$ összeköthető $U$-beli szakaszonként
+  sima úttal.
+\end{te}
+
+\begin{de}[Tartomány]Az $U\subset \R^n$ halmaz \emph{tartomány}, ha
+{\listazjromai
+  \begin{enumerate}
+    \item $U$ nyílt $\R^n$-ben
+    \item $U$ összefüggő
+  \end{enumerate}
+}
+\end{de}
+\begin{de}[Úton vett vonalintegrál]
+  Legyen $U\subset \R^n$ tartomány, $f\colon U\to\R^n$ \underline{folytonos}, $\vfi\colon [a,b]\to\R^n$ szakaszonként
+  sima. Ekkor
+\[\Int_a^b\skalar{f\circ\vfi}{\vfi'} = \Int_a^b\skalar{f(\vfi(t))}{\vfi'(t)\,}\diff t =: \Int_\vfi f\]
+szám az $f$ függvény $\vfi$ útra vett vonalintegrálja.
+\end{de}
+\begin{Megj}
+  \item $f$ folytonos $\nn$ az integrandus folytonos $\nn$ az integrál létezik.
+\item $n=1,\ \vfi(t) := t\quad t\in[a,b]$
+\[\Int_\vfi f \text{ az } \Int_a^bf(t)\diff t \text{ Riemann-integrálja}\]
+\end{Megj}
+
+\begin{te}[A vonalintegrál egyszerű tulajdonságai]
+  $U\subset \R^n$ tartomány,\\$\vfi\colon [a,a+h]\to\R^n$ és $\psi\colon [b,b+k]\to\R^n$ szakaszonként sima utak,
+  $\vfi(a+h) = \psi(b)$.\\$f,g\colon U\to\R^n$ folytonos. Ekkor
+  \begin{enumerate}
+  \item $\di\Int_\vfi(\lambda_1 f +\lambda_2g) = \lambda_1\Int_\vfi f+ \lambda_2\Int_\vfi g$
+  \item $\di\Int_\vfi f = -\Int_{\widetilde{\vfi}}$\qquad (ellentett út)
+  \item $\di\Int_{\vfi\cup\psi}\!\!\! f = \Int_\vfi f + \Int_\psi f$
+  \item $\di\Big\vert \Int_\vfi f\Big\vert \leqq M\cdot l(\vfi)$, ahol $l(\vfi)$ a $\vfi$ (vagy a $\Gamma$ görbe)
+  hossza és $M:= \max \{\,\norma{f(x)}_2:x\in R_\vfi\}$
+  \end{enumerate}
+\end{te}
+
+\begin{de}[Primitív függvény]$U\subset\R^n$ tartomány, $f\colon U\to\R^n$.\\
+  Az $F\colon U\to\R^n$ függvény az $f$ primitív függvénye, ha
+  {\listazjromai
+    \begin{enumerate}
+    \item $F\in\Der$
+    \item $F'(x) = f(x)\quad (\forall x\in U)$
+    \end{enumerate}
+  }
+\end{de}
+
+\begin{megj}
+  Ha $F\in\Der$: $F'=(\partial_1F,\dotsc\partial_nF) =(f_1,\dotsc,f_n)=f$ 
+\end{megj}
+
+\begin{te}\ 
+  \begin{enumzjromai}
+  \item Ha $F\colon U\to\R$ az $f$ primitív függvénye $\nn \forall c\in\R\colon F+c$ is az
+  \item Ha $F_1,\,F_2\colon U\to\R$ az $f$ primitív függvényei $\nn \exists c\in\R\colon F_1(x)-F_2(x) = c \quad \forall
+  x\in U$
+  \end{enumzjromai}
+\end{te}
+\begin{te}[Newton-Leibniz]
+  Tfh:
+\begin{enumzjromai}
+  \item $U\subset \R^n$ tartomány
+  \item $f\colon U\to \R^n$ folytonos
+  \item $\vfi\colon [a,b]\to U$ szakaszonként sima út
+  \item $f$-nek $\exists F$: a primitív fv-e
+\end{enumzjromai}
+Ekkor $\di\Int_\vfi f = F(\vfi(b))-F(\vfi(a))$
+\end{te}
+
+\begin{te}
+  $U\subset \R^n$ taromány, $f\colon U\to\R$ folytonos.\\
+  $f$-nek létezik primitív függvénye $\ekviv \left\{\begin{array}{l}\forall U\text{-ban haladó szakaszonként sima és
+  zárt }\vfi\text{ útra:}\\\di\Int_\vfi f= 0\end{array}\right.$
+\end{te}
+
+\begin{te}[Szükéges feltétel a primitív függvény létezésére]
+  $U\subset\R^n$ tartomány,\\$f\colon U\to\R^n$
+  \begin{enumzjr}
+    \item $f$ \underline{deriválható}
+    \item $f$-nek létezik primitív függvénye
+  \end{enumzjr}
+  Ekkor $f'$ deriváltmátrix szimmetrikus, azaz $\partial_if_j=\partial_jf_i\ (\forall 1\leq i,j\leq n)$ és
+  $f=(f_1,\dotsc,f_n)$
+\end{te}
+
+\begin{Megj}
+\item $\R\to\R$ esetén $\forall$ folytonos függvénynek létezik primitív függvény\\
+  Ha $n\geq 2$, akkor $\exists f$ deriválható, melynek nincs primitív függvénye.
+\item Csillagtartományon ez a szükséges felétel elégséges is
+\end{Megj}
+\begin{de}[Csillagtartomány]
+  $U\subset \R^n$ az $a\in U$ pontra nézve csillagtartomány, ha $\forall x\in U: [a,x]\subset U$
+\end{de}
+
+\begin{te}[Elégséges feltétel a primitív függvény létezésére]
+  Tfh:
+  \begin{enumzjr}
+  \item $U\subset \R^n$ az $a\in U$-ra csillagtartomány
+  \item $f\colon U\to\R^n$ folytonosan deriválható
+  \item $f'$ deriváltmátrix szimmetrikus
+  \end{enumzjr}
+  Ekkor $F$-nek $\exists$ primitív függvénye, az
+  \[\di U\owns x\mapsto\!\!\Int_{[a,x]}\!\!\!f\]
+  az  $f$ egy $a$-ban eltűnő primitív függvénye
+\end{te}
+
+\subsubsection{Komplex görbék, utak}
+$\vfi:=\vfi_1 + i\vfi_2\colon [\alpha,\beta]\to \C\quad(\vfi_i\colon[\alpha,\beta]\to\R)$\\
+\underline{egyszerű út}, ha $\vfi\in C$\\
+\underline{sima út}, ha $\vfi\in C^1$\\
+\underline{szakaszonként sima út}....\\
+\underline{görbe}:$\vfi\in\C$, $\Gamma=R_\vfi$, $\vfi$ szakaszonként sima út\\
+$\vfi \cup \psi$: utak v. görgék egyesítése\\
+$\widetilde{\vfi}$ a $\vfi$ ellentettje\\\\
+
+\begin{Pl}
+\item $[a, b]$ irányított szakasz: $a,b\in \C,\quad \vfi(t) := a + t(b-a)\quad t\in[0,1]$
+\item $a$ középpontú, $R$ sugarú kör: $\vfi(t) := a + Re^{it}\quad t\in[0,2\pi]$
+\end{Pl}
+
+\subsection{Komplex halmazok}
+$(C, \ro),\ \ro(z_1,\,z_2) := | z_1 - z_2 |$ teljes metrikus tér $\nn$ topológiai fogalmak
+\begin{enumzjb}
+  \item $A\subset C$ zárt, ha minden pontja belső pont; zárt, ha...
+  \item $A\subset C$ összefüggő $\iff$ bármely két pontja összeköthető az $A$-ban haladfó szakaszonként sima úttal
+  \item tartomány: nyílt, összefüggő halmaz
+  \item csillagtartomány: $T\subset \C$ csillagartomány, ha $\exists a\in T,\ \forall x\in T\colon [a,x]\subset T$
+\end{enumzjb}
+
+\subsubsection{Egyszeresen összefüggő halmazok értelmezése}
+\begin{de} $-\infty<\alpha < \beta < +\infty,\ \vfi\colon [\alpha,\beta] \to \C$ folytonos függvényt \emph{egyszerű,
+    zárt út}nak nevezzük, ha
+  \begin{enumzjr}
+    \item $\vfi(\alpha) = \vfi(beta)$
+    \item $\vfi_{|[\alpha,\beta]}$ injektív
+    \end{enumzjr}
+\end{de}
+
+\begin{te}[Jordan] Bármely $\vfi$ egyszerű, zárt út esetén $\exists A,B\subset\C$ tartomány:
+  \begin{enumzjr}
+    \item $A\cap B=\emptyset; \quad A\cup B=\C\setminus R_\vfi$
+    \item $\fr A = \fr B = R_\vfi$ (a határpontok halmaza)
+    \item Az $A$ korlátos, a $B$ nem korlátos
+  \end{enumzjr}
+\end{te}
+
+\begin{de}A $\vfi$ egyszerű, zárt görbe belseje: $\intG \vfi := A$ (az előző tételből)
+\end{de}
+\begin{de}
+  A $\emptyset \neq T\subset \C$ tartomány \emph{egyszeresen összefüggő}, ha $\forall$ olyan $\vfi$ egyszerű, zárt körbe
+  esetén, melyre teljesül, hogy $R_\vfi\subset T$, az is igaz, hogy $\intG \vfi \subset T$
+\end{de}
+
+\subsection{A komplex vonalintegrál értelmezése}
+\begin{de} $f\in\C\to\C,\ f$ folytonos, $\vfi=\vfi_1+\vfi_2\colon [\alpha,\beta]\to \C$ szakaszonként sima út,
+  $R_\vfi\subset D_\vfi$
+\[ \di \Int_\vfi f = \Int _\alpha^\beta f\circ \vfi \cdot \vfi' \in C\]
+\end{de}
+
+\noindent Elemi tulajdonságai:\\
+\begin{enumzjb}
+  \item lineáris: $\di\Int_\vfi (\lambda_1 f + \lambda_2 g) = \lambda_1 \Int_\vfi g + \lambda_2 \Int_\vfi g$
+  \item egyesítés: $\di\Int_{\vfi \cup \psi }f = \Int_\vfi f+ \Int_\psi f$
+  \item ellentett: $\di\Int_{\Tilde{\vfi}} f = - \Int_\vfi f$
+  \item $ \di\left\vert \int_\vfi f\right\vert = ML$, ahol $L$ a görbe hossza, $M := \max_{z\in R_\vfi |f(z)|}$
+\end{enumzjb}
+\begin{te}[Kapcsolat az $\R^2\to\R^2$ fv vonalintegráljával]
+  $f\colon \C\to\C,\ f\in\Folyt\\f=f_1 + if_2,\ f\colon \R^2\to\R,\ \vfi=\vfi_1 +i\vfi_2\colon [\alpha,\beta]\to\C$
+  szakaszonként sima út.\\
+  $\hat f = (f_1,f_2)\colon \R^2\to\R^2,\ \hat\vfi := (\vfi_1,\vfi_2)\colon[\alpha,\beta]\to\R$. Ekkor 
+  \[\di\Int_\vfi f = \Int_{\hat\vfi}\begin{bmatrix}f_1\\-f_2 \end{bmatrix} + i\Int_{\hat\vfi}\begin{bmatrix}f_2\\f_1
+  \end{bmatrix}\]
+\end{te}
+
+\begin{biz}
+  \begin{gather*}
+    \di\Int_\vfi f = \Int_\alpha^\beta  f\circ \vfi \cdot \vfi' =\Int_\alpha^\beta \re( f\circ \vfi \cdot \vfi') +
+    i \Int_\alpha^\beta  \im( f\circ \vfi \cdot \vfi') = \\=\Int_\alpha^\beta  \re[(f_1\circ \vfi + if_2\circ \vfi)
+      (\vfi_1'+i\vfi_2')] + i\Int_\alpha^\beta  \im[(f_1\circ \vfi + if_2\circ \vfi) (\vfi_1'+i\vfi_2')] =\\
+    =\Int_\alpha^\beta  (f_1\circ \vfi\cdot \vfi_1' - f_2\circ \vfi \cdot \vfi_2') 
+    + i\Int_\alpha^\beta  (f_2\circ \vfi\cdot \vfi_1' + f_1\circ \vfi\cdot \vfi_2') = \\
+    =  \Int_\alpha^\beta \skalar{ \begin{bmatrix} f_1\\-f_2\end{bmatrix} \circ  \hat\vfi}{\begin{bmatrix}
+    \vfi_1'\\\vfi_2'\end{bmatrix}} + i\Int_\alpha^\beta \skalar{ \begin{bmatrix} f_2\\f_1\end{bmatrix} \circ
+    \hat\vfi}{\hat\vfi'}    
+  \end{gather*}
+\end{biz}
+
+\begin{te}[Cauchy alaptétel speciális esete]
+  Ha $f\in\C\to\C$ és
+  \begin{enumzjr}
+    \item $D_f$ csillagtartomány
+    \item $f\in\Folyt^1$
+    \item $\vfi$ szakaszonként sima $D_f$-beli zárt út
+  \end{enumzjr}
+  Ekkor
+  \[ \di\Int_\vfi f = 0\]
+\end{te}
+
+\begin{biz}
+  $f=f_1 +if_2\ \nn\ \begin{bmatrix}f_1\\-f_2\end{bmatrix},\,\begin{bmatrix}f_2\\f_1\end{bmatrix}\in\R^2\to\R^2$
+  folytonosan deriválhatók.\\
+  Cauchy-Riemann egyenletek: $\left.\begin{array}{l}\partial_1f_1 =\partial_2f_2 \\ \partial_2f_1 = -\partial_1f_2
+  \end{array}\right\}\nn$ állítás ($\R^n\to\R^n$ eset alapján)\\
+  Ugyanis mindkét esetben a deriváltmátrix szimmetrikus.
+\end{biz}
+
+\begin{te}
+  $l(z) := a + bz\quad(z\in \C)\ (a,b\in\C)$\\
+  $\vfi$ szakaszonként sima zárt út
+  \[ \di\Int_\vfi l(z)dz = 0\]
+\end{te}
+\begin{biz} $l$-nek létezik primitív függvénye.
+\end{biz}
+
+\begin{te}[Cauchy-féle alaptétel]$f\in\C\to\C$, $f\in\Der$, $D_f$ \underline{egyszeresen öf} tartomány. Ekkor $\forall
+  \vfi$ $D_f$-beli szakaszonként sima zárt útra
+  \[\di\Int_\vfi f = 0\]
+\end{te}
+
+\begin{biz}
+  Elég igazolni, hogy $\forall\epsilon>0\colon \left|\di\Int_\vfi\!\! f\right| < \epsilon$\\
+  1 lépés: háromszögekre\\
+  (i) Trükk: lokalizáláshoz 4 részre osztani (mivel deriválhatóság lokális tulajdonság, csak lokálisan közelíthető). Az
+  oldalfelező pontjai mentén osztjuk fel, hogy azokat összekötjük.
+  \[\left|\Int_\vfi\!\! f \right| = \left|\sum_{i=1}^4 \Int_{\vfi_i}\!\!f\right| \leqq 4* \max_i
+  \left|\,\Int_{\vfi_i}\!\! f\right| =  4  \left|\,\Int_{\vfi_{i_1}}\!\! f\right|\]
+  Itt legyen a $\vfi_{i_1}$ az a görbe, amelynél az integrál a maximumot veszi fel. Ezt a görbét osztjuk tovább a
+  felezőpontjai mentén, stb, így kapjuk a  $\vfi_{i_2}$-t,  $\vfi_{i_n}$-et.\\
+  Egymásba skatulyázott hármoszögek.
+   \[\left|\Int_\vfi f \right| \leqq 4^n \left|\Int_{\vfi_{i_n}}f\right|\quad (n\in \N)\]
+   Cantor-típusú tétel metrikus terekre, így:
+   \[ \exists! a\in D_f\colon \forall n \in \N\ a\in\overline{\intG\vfi_{i_n}}\quad\text{(lezárás)}\]
+   (ii) $f\in \derivp{a} \nn f(z) = \underbrace{f(a) + f'(a)(z-a)}_{=:\,l(z)}+\eta(z)(z-a)\qquad \lim_a\eta=0$\\
+   (iii) $qlim_a\eta=0\nn \forall \epsilon > 0\  \exists K(a)\colon |\eta(z)|<\epsilon\ (\forall z \in K(a))$.\\
+   A háromszögek $a$-ra zsugorodnak $\nn \exists i_n\colon \overline{ \intG\vfi_{i_n}}\subset K(a)$\\
+   (iv) tehát lokalizáltuk a problémát: 
+   \begin{gather*}\di     
+     \left|\Int_\vfi\!f\right| \leqq 4^n\left|\,\Int_{\vfi_{i_n}}\!\!f\right| = 4^n \left|\,\Int_{\vfi_{i_n}}\! l(z)
+     +\eta(z) (z-a)\diff z\right| = \\
+     = 4^n  \left|\,\Int_{\vfi_{i_n}}\! l(z)\diff z +\Int_{\vfi_{i_n}}\!\eta(z) (z-a)\diff z\right| \leqq  4^n
+     \max_{z\in R_{\vfi_{i_n}}} |\eta(z) (z-a)| \Vert\vfi_{i_n}\Vert \leqq \\
+     \leqq 4^n \,\epsilon\, \Vert \vfi_{i_n}\Vert^2 = 4^n\, \epsilon
+     \left(\Vert\dfrac{ \vfi_{i_n}}{2^n}\Vert\right)^2 = \epsilon\, \Vert\vfi\Vert^2
+     \intertext{Ugyanis}
+     |z-a| \leqq \dfrac{\vfi_{i_n}}2 < \vfi_{i_n} \text{ háromszög-egyenlőtlenségek sorozata}\\
+     \text{a háromszög kerülete lépésenként feleződött: }\Vert\vfi_{i_n}\Vert = \dfrac{\Vert\vfi\Vert}2
+   \end{gather*}
+   \\2. lépés: sokszögekre\\
+   \\3. lépés: tetszőleges $\vfi-re$ - vázlat
+   Ötlet: közelítés sokszöggel, közeli pontokban (jó közelítés) a fv-értékek közel lesznek.
+   (i) $\vfi$ körül $\ro$ sugarú sáv, jel: $G_\ro(\vfi)$.\\
+   $\exists \ro > 0\colon \underbrace{G_\ro(\vfi)}_{\text{kompakt}}\subset D_f$\\
+   (ii) $f$ folytonos a kompakt $G_\ro(\vfi)$-n $\overset{\text{Heine}}{\nn}\ f$ egyenletesen folytonos, így\\
+   $\forall \epsilon > 0,\  \exists \delta > 0\  \forall z',\,z''\ |z'-z''|<\delta \nn |f(z')-f(z'')| < \epsilon$\\
+   (iii) $\vfi$-be alkalmas sokszöget írunk. $z_i$ osztópont, $\psi_i\colon [z_i,z_{i+1}]$ szakasz, $\vfi_i$: a
+   $z_i,\,z_{i+1}$ közti ív. Ezek ellenkező irányításúak. $\omega_i :=\vfi_i\cup \psi_i$.\\
+   Osztópontok megválasztásától függően a függvényértékek különbsége bármilyen kicsi lehet.
+   \begin{gather*}
+     \di\Int_\vfi\! f = \Int_\vfi\! f - \Int_\psi\!f = \sum_{i=0}^{n+1}\left(\Int_{\vfi_i}\!f - \Int_{\psi_i}\!f\right)
+     = \sum_{i=1}^n+1 \Int_{\omega_i}\!f.\\
+     \left|\Int_\vfi\!f\right| = ???
+   \end{gather*}
+\end{biz}
+
+\subsection{A Cauchy-féle alaptétel következményei}
+\subsubsection{Primitív függvény létezése}
+\begin{de}$f\in\C\to\C$, az $F\in\C\to\C$ az $f$ egy primitív függvénye, ha
+  \begin{enumzjr}
+  \item $f\in \Der$
+  \item $F'(z)=f(z) \quad \forall z\in D_f$
+  \end{enumzjr}
+\end{de} 
+
+\begin{te}
+  Ha $f\in \C\to\C$, $D_f$ tetszőleges tartomány, az $F$ az $f$ egy primitív függvénye, akkor 
+  \begin{enumzjr}
+  \item $\forall c\in\C\colon F+c$ is primitív föggvénye
+  \item $\forall G$ primitív függvényhez $\exists c\in\C\colon G = F+c$
+  \end{enumzjr}
+\end{te}
+
+\begin{te}
+  $f\in \C\to\C$, $f\in\Der$, $D_f$, tfh \underline{egyszeresen összefüggő}. Ekkor az $f$-nek létezik primitív függvénye.
+\end{te}
+
+\begin{te}[Newton-Leibniz]
+  $f\in \C\to\C$, tfh
+  \begin{enumzjr}
+  \item $f\in \Der$, $D_f$ tartomány
+  \item $f$-nek $\exists$ primitív függvénye.
+  \end{enumzjr}
+  Ekkor.  \begin{enumzjr}
+  \item $f\in \Der$
+  \item $F'(z)=f(z) \quad \forall z\in D_f$
+  \end{enumzjr}
+  Ekkor $\forall D_f$-beli szakaszonként sima $\vfi$ útra:
+  \[\di\Int_\vfi\!f = \Phi(b) - \Phi(a) \]
+  ahol a $\Phi$ az $f$ primitív függvénye és $a$ a $\vfi$ kezdőpontja, $b$ a $\vfi$ végpontja
+\end{te}
+
+\subsubsection{A Cauchy-féle integrálformula}
+Jel: $\vfi_{a,R}$ az $a\in\C$ közepű, $R>$ sugarú, pozitív irányítású körvonal
+  \[ \vfi_{a,R}(t) = a + Re^{it}\quad (t\in[0,2\pi])\]
+
+\begin{lemma}
+\begin{gather*}
+  f(z) := \dfrac1{z-a}\quad z\in \C\setminus\{a\}\\
+  \forall R>0\colon \di\Int_{\vfi_{a,R}}\!\!f = 2\pi i \quad R\text{-től függetlenül}
+\end{gather*}
+\end{lemma}
+
+\begin{lemma} $T\subset \C$ gyűrűszerű tartomány, $f\in\C\to\C$, $f\in\Der(T)$\\
+  $\vfi,\psi$ szakaszonként sima, zárt utak, $\subset T$
+  EKKOR
+  \[ \di\Int_\vfi\!f = \Int_\psi\!f\]
+\end{lemma}
+
+\begin{lemma}[Riemann]Ha
+  \begin{enumzjr}
+    \item $T\subset \C$ tetszőleges tartomány, $a\in T$
+    \item $f\in\C\to\C$, $f\in \Der(T\setminus \{a\})$, esetleg $a$-ban is
+    \item $\exists M>0\colon |f(z)| \leq M\quad \forall z\in T\setminus\{a\}$
+  \end{enumzjr}
+  akkor $\forall$ olyan $\vfi$ szakaszonként sima zárt útra, amely a belsejével együtt $T$-ben van:
+  \[ \Int_\vfi\!\! f = 0\]
+\end{lemma}
+
+
+\begin{te}[A Cauchy-féle integrálformula]
+  $f\in\C\to\C,\ f\in\Der,\ a\in D_f$ás legyen $R>0$, melyre
+  $\{z\in\C\colon |z-a|\leq R\}\subset D_f$\\
+  Ekkor
+  \begin{gather*}
+    \forall z_0\in \C\colon |z_0-a|<R\\
+    f(z_0) = \dfrac1{2\pi i}\Int_{\vfi_{a,R}} \dfrac{f(t)}{t-z_0} \diff t = \dfrac1{2\pi i}\Int_\vfi
+    \dfrac{f(t)}{t-z_0}\diff t
+  \end{gather*}
+\end{te}
+\subsubsection{Holomorf függvény Taylor-sorba fejthető}
+
+\begin{te} $f\in\C\to\C, f\in\Der$, legyen $a\in D_f$: $\exists R>0,\ \{z\in\C : |z-a| \leq R\}\subset D_f$.\\
+  Ekkor
+  \begin{enumzjr}
+    \item $f\in\Der^\infty\{a\}$
+    \item $\di f(z)= \sum_{k=0}^\infty \dfrac{f^{(k)}}{k!}(z-a)^k\qquad\forall |z-a|<R$
+  \end{enumzjr}  
+\end{te}
+
+\begin{kov}
+  $f\in\C\to\C,\ f\in\Der,\ D_f$ tartomány, $a\in D_f$, $\vfi$ az $a$-t pozitív irányban megkerülő szakaszonként sima
+  zárt út. Ekkor
+  \[ f^{(k)} (a) = \dfrac{k!}{2\pi i}\Int_\vfi \dfrac{f(t)}{(t-a)^{k+1}}\diff t\quad k=0,1,2\]
+\end{kov}
+
+\subsubsection{Holomor függvény zérushelyei}
+\begin{te}[A zérushelyek izoláltak]
+  $f\in\C\to\C$
+  \begin{enumzjr}
+  \item $D_f$ tetszőleges tartomány
+  \item $f\in\Der(D_f)$
+  \item $f(a)=0,\ a\in D_f$
+  \item $f\not\equiv 0$
+\end{enumzjr}
+EKKOR\\
+\[\exists K(a)\colon f(z) \neq 0\qquad \forall z\in K(a)\setminus\{a\}\]
+\end{te}
+
+\begin{te}
+  $f\in\C\to\C,\ f\in \Der,\ D_f$ tartomány.\\
+  Ha $f\not\equiv 0\ \nn$ az $f$ zérushelyei nem torlódhatnak.
+\end{te}
+\begin{megj}
+  Ha a zérushelyek torlódnak $\nn f \equiv 0$
+\end{megj}
+\begin{te} tfh.
+  \begin{enumzjr}
+  \item $T\subset \C$ tartomány
+  \item $f,g\colon T\to\C,\ f,g\in \Der$
+  \item $\exists (z_n), z\in T$\\
+    $f(z_n) = g(z_n)\qquad \forall n \in \N$\\
+    $z_n\xrightarrow[n\to+\infty]{} z,\ z_i\neq z_j$
+  \end{enumzjr}  
+  EKKOR
+  \[f\equiv g \qquad T\text{-n}\]
+\end{te}
+
+\begin{megj}
+  Azaz ha két analitikus füöggvény egy torlódó pontsorozat mentén azonos értéket vesz fel, akkor a két függvény
+  megegyezik. $\R\to\R$ esetén viszot más!
+\end{megj}
+
+
+
+\subsubsection{Az algebra alaptétele}
+
+\begin{lemma}[Cauchy-féle egyenlőtlenség]
+  $f\in\C\to\C,\ f\in\Der$ és $a\in D_f,\ r>0$\\
+  $K_r(a)= \{z\in\C : |z-a| \leq r \} \subset D_f $, EKKOR\\
+  $\left|f^{(k)}(a) \right| \leqq \dfrac{k!}{r^k} M_a(r)\quad k=0,1,...$\\
+  Ahol $\exists M_a(r) = \max \{\, |f(z)| : |z-a| = r \,\} < \infty$
+\end{lemma}
+
+\begin{lemma}[Louville]
+  tfh. $f\in\C\to\C$
+  \begin{enumzjr}
+  \item $D_f = \C$ (lényeges!!)
+  \item $f$ analitikus az egész $\C$-n
+  \item $\exists M>0\colon |f(z)|\leqq M\ (\forall z\in\C)$
+  \end{enumzjr}
+  $\nn f$ állandó az egész $C$-n.
+\end{lemma}
+
+\begin{te}[Algebra alaptétele] $n=1,2,\ldots;\quad a_0,a_1,\dotsc,a_n-1\in\C$. A
+  \[ \di P(z) := z^n + \sum_{k=0}^{n-1}a_k z^k \quad (z\in\C \]
+  polinomnak van (legalább egy) zérushelye.
+\end{te}
+
+
+\subsubsection{Maximumtétel}
+\begin{te}
+  Tfh. $f\in\C\to\C$
+  \begin{enumzjr}
+  \item $D_f$ tartomány, $f\in\Der(D_f)$
+  \item $a\in\intD_f\colon |f(a)| = \max \{\, |f(z)|: z\in D_f \,\}$
+  \end{enumzjr}
+  Ekkor $f \equiv$ állandó
+\end{te}
+\begin{megj}
+  Azaz ha $f$ nem azonosan állandó, akkor belső pontban nem veheti fel a maximumát.
+\end{megj}
+\begin{kov}
+  $f\colon T\to \C,\ T \subset \C,\ T$ tartomány, $f\in\Der(T)$ és $f\in \Folyt(\overline{T})$ (itt $\overline(T)$
+  kompakt!)\\
+  EKKOR $|f$ a maximumát a $T$ határán veszi fel, és ha $f\not\equiv$ áll, akkor a maximumot csakis a határon veheti fel.
+\end{kov}
+
+\subsection{A Cauchy-alaptétel megfordítása}
+\begin{te}[Morena-tétel]
+  Legyen $f\in\C\to\C$ és tfh
+  \begin{enumzjr}
+  \item $D_f$ tetszőleges tartomány
+  \item $f\in C(D_f)$
+  \item $\forall \vfi$egyszerű, zárt útra, melyre: $\int_\vfi\subset D_f$
+    \[\di\Int_\vfi\! f = 0 \]
+  \end{enumzjr}
+  Ekkor $f$ homomorf a $D_f$-en.
+\end{te}
+
+
+\subsection{Egyenletesen konvergens függvénysorozatok}
+\begin{te}[Weierstrass tétele föügvvénysorozatokra]
+  $T\subset \C$ tetszőleges tartomány, $f_n\colon T\to\C\ (n\in\N)$, $f_n\in \Der(T)$.
+  Tfh. $f_n$ egyenletesen konvergens $T-n$: $f_n \underset{n\to+\infty}{\hookrightarrow}f$.
+  Ekkor 
+  \begin{enumzjr}
+  \item $f\in\Der(T)$    
+  \item $\forall k\in\N\colon f_n^{(k)} \underset{n\to+\infty}{\hookrightarrow} f^{(k)}$ a  $T$-n
+  \end{enumzjr}
+\end{te}
+
+\begin{kov}[Wierstrass tétele függvénsorokra]
+  $T\subset \C$ tetszőleges tartomány, $f_n\colon T\to\C\ (n\in\N)$, $f_n\in \Der(T)$.
+  Tfh. $\Sigma f_n$ egyneletesen konvergens $T-n$: $f_n \underset{n\to+\infty}{\hookrightarrow}f$.
+  Ekkor 
+  \begin{enumzjr}
+  \item $f\in\Der(T)$    
+  \item $\forall k\in\N\colon f_n^{(k)} \underset{n\to+\infty}{\hookrightarrow} f^{(k)}$ a  $T$-n
+  \end{enumzjr}  
+\end{kov}
+
+
+\subsection{Laurent-sor}
+\begin{te}
+  Tfh. $f\in \C\to\C$,
+  \begin{enumzjr}
+  \item $0 \leq r < R < +\infty\colon\   T := \{\, z\in\C :r < |z-a| < R \,\}$
+  \item $f\in\Der(T)$    
+  \end{enumzjr}
+  EKKOR
+  \begin{gather*}
+    \exists c_k\in \C,\ k\in \Z
+    f(z) = \sum_{k=-\infty}^{+\infty}(z-a)^k
+    \intertext{ahol}
+    c_k=\dfrac{1}{2\pi i}\Int_\gamma\dfrac{f(t)}{(t-a)^{k+1}}\diff t\quad \forall k\in\Z
+  \end{gather*}
+  Ahol a $\gamma$ egyszerű, zárt görbe (poz. forgásirányú), $\gamma\in T$, az $a$-t megkerüli
+\end{te}
+
+\subsection{Izolált szingularitások}
+\begin{de}
+  Az $f\in \C\to\C$ fv-nek az $a\in\C$ izoltált szingularitása, ha $\exists \R>0\colon f$ analitikus a$K_R(a)\setminus\{a\}$-ban
+\end{de}
+
+\subsubsection{A szinguláris helyek osztályozása}
+\begin{enumerate}
+  \item \emph{1. eset:} (az $a\in\C$ megszüntethető, izolált szingularitás). Nincs negatív indeű tag:
+    \begin{gather*}
+      \forall c_k = 0\quad k=-1,-2,\ldots
+      f(z) = \sum_{k=0}^\infty c_k(z-a)^k\quad 0<|z-a|<R
+    \end{gather*}
+    \begin{te}
+      $f$-nek az $a$-ban megsz9ntethető izolált szingularitása van.\\
+      Megszüntethető $\iff \exists K_{r_1}(a)\colon\\f$ korlátos $K_{r_1}(a)-ban$
+    \end{te}
+  \item \emph{2. eset:} (az $a$ $n$-edrendű pólus)\\
+    Ha a Laurent-sorban $\exists n=1,2,\ldots\colon c_{-n} \neq 0$ és $\forall c_{-(n+1)}=c_{-(n+2)}=\dotsb=0$
+    \begin{gather*}
+      f(z) = \dfrac{c_{-n}}{(z-a)^n} + \dotsb + c_k + c_1(z-a) + \dotsb =\\= \dfrac1{(z-a)^n} \underbrace{(c_{-n} +
+      c_{-n+1}(z-a)+\dotsb )}_{{ }=:\ g(z)}= \dfrac{g(z)}{(z-a)^n}
+    \end{gather*}
+    Itt $g(z)$ analitikus a $K_R(a)$-n és $g(a) \neq 0$
+    \begin{te}
+      $f\in\C\to\C$, $a$ izolált szingularitás. EKKOR\\
+      az $a$ $n$-edrendű pólus $\iff\di f(z) = \dfrac{g(z)}{(z-a)^n},\quad 0<|z-a|<R$ \\
+      ahoil $g$ analitikus $K_R(a)$-n és $g(a) \neq 0$
+    \end{te}
+  \item \emph{3. eset:} (lényeges szingularitás)\\
+    Ha a Laurent-sorban végtelen sok nullától különböző negatív indexű tag van.\\
+    Megj: az $a$ közelében ``megvadul'' a függvény.\\
+    \begin{de}
+      A $H\subset \C$ halmaz mindenütt sűrű a $\C$-ben, ha $\overline{H}=\C$ azaz
+      \[\forall w \in \C,\ \forall \epsilon >0, \exists Z_0\in H\colon |w-z_0| < \epsilon\]
+    \end{de}
+
+    \begin{te}[Casatori-Weierstrass]
+      Ha az $a\in\C$ az $f$ lényeges szingularitása, AKKOR\
+      \[ \forall 0< r_1 < R\colon \{\, f(z) :  0 < |z-a| < r_1\,\} \]
+      halmaz mindenütt sűrű a $C$-ben.      
+    \end{te}
+    \begin{te}[Picard]
+      HA az $a\in\C$ az $f$ függvénynek lényeges szingularitása, akkor az $a\in\C$ pont $\forall$ környezetéven $f$
+      $\forall \C$-beli értéket fülvesz, legfeljebb egy pont kivételével.     
+    \end{te}
+
+    Itt $g(z)$ analitikus a $K_R(a)$-n és $g(a) \neq 0$
+    \begin{te}
+      $f\in\C\to\C$, $a$ izolált szingularitás. EKKOR\\
+      az $a$ $n$-edrendű pólus $\iff\di f(z) = \dfrac{g(z)}{(z-a)^n},\quad 0<|z-a|<R$ \\
+      ahol $g$ analitikus $K_R(a)$-n és $g(a) \neq 0$
+    \end{te}
+
+\end{enumerate}
+
+
+% Local Variables:
+% fill-column: 120
+% TeX-master: t
+% End:

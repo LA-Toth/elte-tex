@@ -1,0 +1,201 @@
+% Everything that is used in other repositories,
+% defined because of historical reasons,
+% kept here for future reference.
+%
+% If any of the following definitons is useful,
+% it's moved to its final location
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%
+% ------------  N E W  C O M M A N D S --------
+%
+%\newcommand{\ob}{\begin{flushright} \leavevmode\hbox to.77778em{\hfil\vrule
+%    \vbox to.675em{\hrule width.6em\vfil\hrule}\vrule}\hfil\end{flushright}}
+\newcommand{\ob}{\hfill$\square$}
+\newcommand{\ff}{f\in\mathbb{R}\rightarrow\mathbb{R}}
+\newcommand{\fab}{f\colon (a,b)\rightarrow\mathbb{R}}
+\newcommand{\fabk}{f\colon \left[a,b\right]\rightarrow\mathbb{R}}
+\newcommand{\fir}{f\colon I\rightarrow\mathbb{R}}
+\newcommand{\fdab}{f\in D(a,b)}
+\newcommand{\fcab}{f\in C[a,b]}
+\newcommand{\exist}{\exists}
+\newcommand{\ek}{\Longleftrightarrow}
+\newcommand{\la}{\lambda}
+\newcommand{\ro}{\varrho}
+\newcommand{\K}{\ensuremath{\mathbb{K}}}
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\Q}{\ensuremath{\mathbb{Q}}}
+\newcommand{\N}{\ensuremath{\mathbb{N}}}
+\newcommand{\C}{\ensuremath{\mathbb{C}}}
+\newcommand{\n}{\ensuremath{\to}} %azonos a rightarrow-val
+%duplanyil, szuksegesseg
+\newcommand{\nn}{\ensuremath{\Rightarrow}}
+%\newcommand{\Omage}{\Omega}
+%elegségesség, nem def :)
+%\newcommand{\nb}{\Leftarrow}
+\newcommand{\di}{\displaystyle}
+\newcommand{\sarrow}{\downarrow}
+\newcommand{\narrow}{\uparrow}
+\newcommand{\lt}{<}
+\newcommand{\gt}{>}
+\newcommand{\Int}{\intop\limits}
+\newcommand{\ures}{\varnothing}
+\newcommand{\ekv}{\iff}
+\newcommand{\ekviv}{\ekv}
+\renewcommand{\epsilon}{\varepsilon}
+\newcommand{\eps}{\varepsilon}
+%
+% ------------  NEW PART DEFS -----------------
+%
+\newcounter{Szaml}
+
+
+
+
+
+\newenvironment{korlista}{\begin{enumerate}[\quad1$^\circ$]}{\end{enumerate}}
+
+\newenvironment{biz}{\begin{trivlist}\item\relax\mbox{\textbf{Bizonyítás.\enskip}}\ignorespaces}{\ob\end{trivlist}}
+\newenvironment{Biz}{\begin{trivlist}\item\relax\mbox{\textbf{Bizonyítás.\enskip}}\ignorespaces\begin{korlista}}{\ob\end{korlista}\end{trivlist}}
+\newenvironment{kov}{\begin{trivlist}\item\relax\mbox{\textbf{Következmény.\enskip}}\ignorespaces}{\end{trivlist}}
+\newenvironment{megj}{\begin{trivlist}\item\relax\mbox{\textbf{Megjegyzés.\enskip}}\ignorespaces}{\end{trivlist}}
+\newenvironment{Megj}{\begin{megj}\begin{korlista}}{\end{korlista}\end{megj}}
+\newenvironment{pl}{\begin{trivlist}\item\relax\mbox{\textbf{Példa.\enskip}}\ignorespaces}{\end{trivlist}}
+\newenvironment{Pl}{\begin{pl}\begin{korlista}}{\end{korlista}\end{pl}}
+\DeclareMathOperator{\D}{D}
+\newenvironment{bizlist}{\setcounter{Szaml}{1}
+    \begin{list}{\alph{Szaml})\hfill}
+    {\usecounter{Szaml}\setlength{\itemsep}{0pt}
+    \setlength{\itemindent}{-\labelsep}
+    \setlength{\listparindent}{0pt}}}{\end{list}}
+
+
+
+
+%
+% - - - -- - - S E T T I N G S ----------------
+%
+%\setlength{\parindent}{0pt}
+%\setlength{\parskip}{\baselineskip}
+\addtolength{\voffset}{-1cm}
+\addtolength{\textheight}{2cm}
+%\addtolength{\marginparwidth}{-1cm}
+\addtolength{\hoffset}{-1cm}
+\addtolength{\textwidth}{2cm}
+\setlength{\headheight}{23pt}
+%
+\pagestyle{fancy}
+
+  \renewcommand{\sectionmark}[1]{\markboth{\Roman{section}. tétel\\#1}{}}
+
+
+
+
+
+% Not common, specific to analysis
+
+\newcommand{\eqrho}{\stackrel{\varrho}{=}}
+\newcommand{\eqrhon}[1]{\stackrel{\varrho_{#1}}{=}}
+\newcommand{\MT}{\ensuremath{(M,\varrho)}\,}
+\newcommand{\MTn}[1]{\ensuremath{(M,\varrho_{#1})}\,}
+\newcommand{\sorozat}{\ensuremath{(a_n)\colon \N\n M}\,}
+\newcommand{\sorozatn}[1]{\ensuremath{(a_{#1})\colon \N\n M}}
+
+\renewcommand{\sectionmark}[1]{\markboth{\Roman{section}. fejezet\\#1}{}}
+\newcommand{\hullam}{\widetilde}
+\newcommand{\mr}[1]{(M_{#1},\,\ro_{#1})}
+\newcommand{\fmm}{f\in M_1\n M_2}
+\newcommand{\X}{\ensuremath{\mathcal{X}}}
+\newcommand{\lp}{\ensuremath{l_p}}
+\newcommand{\norma}[1]{\ensuremath{\left\Vert #1\right\Vert}}
+\newcommand{\norman}[2]{\ensuremath{\norma{#1}^{(#2)}}}
+\newcommand{\Norma}{\norma{\cdot}}
+\newcommand{\Norman}[1]{\ensuremath{\Norma^{(#1)}}}
+\newcommand{\opnorma}[1]{\ensuremath{|||#1|||}}
+\newcommand{\NT}{\ensuremath{(\X,\,\Norma)}}
+\newcommand{\skalar}[2]{\ensuremath{\langle#1,\,#2\rangle}}
+\newcommand{\Skalar}{\skalar{.}{.}}
+\newcommand{\skalarsz}{\Skalar}
+\newcommand{\ET}{\ensuremath{(\X,\,\skalarsz)}}
+\newcommand{\nullelem}{\mathsf{0}}
+%\renewcommand{\square}{\blacksquare}
+\newcommand{\RnRm}{\R^n\n\R^m}
+\newcommand{\RnRn}{\R^n\n\R^n}
+\newcommand{\RnR}{\R^n\n\R}
+\newcommand{\RRm}{\R\n\R^m}
+\newcommand{\Rnrm}{\RnRm}
+\newcommand{\Rnrn}{\RnRn}
+\newcommand{\Linearis}{\ensuremath{\mathcal{L}(\R^n,\,\R^m)}}
+\DeclareMathOperator{\intD}{int\,D}
+\DeclareMathOperator{\Folyt}{C}
+\newcommand{\folyt}[1]{\Folyt\{#1\}}
+\newcommand{\derivp}[1]{\D\{#1\}}
+\newcommand{\dern}[2]{\D^{#1}\{#2\}}
+\newcommand{\der}[1]{\derivp{#1}}
+\newcommand{\vekt}[1]{\mathbf{#1}}
+\newcommand{\Rmn}{\ensuremath{\R^{m\times n}}}
+\DeclareMathOperator{\grad}{grad}
+\newcommand{\vfi}{\varphi}
+\newenvironment{spec}{\begin{trivlist}\item\relax\mbox{\textbf{Spec. esetek.\enskip}}\ignorespaces}{\end{trivlist}}
+\newtheorem{lemma}{lemma}[section]
+\newtheorem{PlSS}{PÉLDA}[subsubsection]
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\arctg}{arctg}
+\newcommand{\Der}{\D}
+\newcommand{\Oint}{\oint\limits}
+\DeclareMathOperator{\Rint}{R}
+\newcommand{\listazjbetu}{
+  \renewcommand{\theenumi}{\alph{enumi}}
+  \renewcommand{\labelenumi}{(\theenumi)}
+}
+\newcommand{\listazjromai}{
+  \renewcommand{\theenumi}{\alph{enumi}}
+  \renewcommand{\labelenumi}{(\theenumi)}
+}
+\newcommand{\listabetu}{
+  \renewcommand{\theenumi}{\alph{enumi}}
+  \renewcommand{\labelenumi}{\theenumi}
+}
+\newcommand{\listaszamkor}{
+  \renewcommand{\theenumi}{\alph{enumi}}
+  \renewcommand{\labelenumi}{\theenumi$^\circ$}
+}
+\newenvironment{enumzjromai}{\listazjromai\begin{enumerate}}{\end{enumerate}}
+\newenvironment{enumzjbetu}{\listazjbetu\begin{enumerate}}{\end{enumerate}}
+
+\newenvironment{enumzjr}{\begin{enumzjromai}}{\end{enumzjromai}}
+\newenvironment{enumzjb}{\begin{enumzjbetu}}{\end{enumzjbetu}}
+
+
+\DeclareRobustCommand{\tmspace}[3]{%
+  \ifmmode\mskip#1#2\else\kern#1#3\fi\relax}
+\providecommand*{\negmedspace}{\tmspace-\medmuskip{.2222em}}
+%
+% written by Claudio Beccari
+% published in TUGboat, Volume 18 (1997), No. 1, 39--48
+%
+% slightly modified by FW
+\makeatletter
+\providecommand*{\diff}%
+  {\@ifnextchar^{\DIfF}{\DIfF^{}}}
+\def\DIfF^#1{%
+  \mathop{\mathrm{d{}}}%%% original version: {\mathstrut d}}%
+    \nolimits^{#1}\gobblespace}
+\def\gobblespace{%
+  \futurelet\diffarg\opspace}
+\def\opspace{%
+  \let\DiffSpace\negmedspace%%% original version: \,
+  \ifx\diffarg(%
+    \let\DiffSpace\relax
+  \else
+    \ifx\diffarg[%
+      \let\DiffSpace\relax
+    \else
+      \ifx\diffarg\{%
+        \let\DiffSpace\relax
+      \fi\fi\fi\DiffSpace}
+\makeatother
+
+\providecommand*{\deriv}[3][]{%
+    \frac{\diff^{#1}#2}{\diff #3^{#1}}}

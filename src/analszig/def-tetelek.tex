@@ -1,0 +1,2098 @@
+\part{Összefoglaló tételek}
+\section{Halmazok, relációk és függvények}
+Csak lapon
+\section{Valós számok}
+Csak lapon
+\newpage
+\section{A metrikus terek topológiája}
+\subsection{Metrikus terek, példák, egyenlőtlenségek}
+\begin{de}[Metrika]
+$M\not=\emptyset,\ \varrho\colon M\times M\n\R,\varrho$ metrika $X$-en, ha
+  \begin{enumerate}
+\item $\varrho(x,y)\geq 0\ \forall x,\,y\in M$
+\item $\varrho(x,y)=0\ek x=y$
+\item $\varrho(x,y)=\varrho(y,x)\quad  \forall x,y\in M$
+  \item $\varrho(x,y)\leq\varrho(x,z)+\varrho(z,y)\quad\forall x,y,z\in M$
+\end{enumerate}
+\end{de}
+
+\begin{de}[Metrikus tér]
+  $M\ne\emptyset,\ \varrho$ metrika $M$-en: $\MT$ rendezett pár metrikus tér.
+\end{de}
+
+\begin{Pl}
+\item $M\ne \emptyset, \ro(x,y) := \begin{cases}1&x\ne y\\0& x=y\end{cases}$.\\ Ekkor $\MT$ MT.
+\item $(\R,\ro),\ \ro(x,y):=\vert x-y\vert\quad (\,(x,y)\in\R^2\,)$  MT
+\item $\Folyt[a,b]$  különböző metrikákkal, $\Folyt[a,b]:=\{f\colon[a,b]\to\R: f\text{ folytonos}\}$, $[a,b]$ kompakt.
+{\renewcommand{\labelenumii}{\theenumii$)$}\begin{enumerate}
+\item $(\Folyt[a,b],\,\ro_\infty)$; $\di\ro_\infty(f,g):=\max_{x\in[a,b]}\vert f(x)-g(x)\vert\quad \forall f,g\in\Folyt[a,b]$  MT
+\item $(\Folyt[a,b],\,\ro_1)$; $\di\ro_1(f,g):=\Int_a^b \vert f-g\vert\quad\forall f,g\in\Folyt[a,b]$   MT
+\item $(\Folyt[a,b],\,\ro_2)$; $\di\ro_2(f,g):=\sqrt{\Int_a^b\vert f-g\vert^2}\quad\forall f,g\in\Folyt[a,b]$  MT
+\end{enumerate}}
+\end{Pl}
+
+\begin{te}[Young-egyenlőtlenség]
+  $(p,q)$ konjugált kitevőpár: Legyen
+\begin{gather*}
+  p,q\in(1,+\infty),\quad\frac1p+ \frac1q=1\\
+  \intertext{Ekkor $a,b\geq0$}
+  ab\leq \frac{a^p}p+\frac{b^q}q\\
+  ab = \frac{a^p}p+\frac{b^q}q\iff a^p=b^q  
+\end{gather*}
+\end{te}
+
+\begin{te}[Első Hölder-egyenlőtlenség]
+  \begin{gather*}
+    p,q\in(1,+\infty),\quad\frac1p+ \frac1q=1\\
+    a_k,\,b_k\in\R\quad k=1,\dotsc,n\colon\\
+    \sum_{k=1}^n\vert a_kb_k\vert\leq\left(\sum_{k=1}^n\vert a_k\vert^p \right)^{\frac1p}\cdot \left(\sum_{k=1}^n\vert
+     b_k\vert^q\right)^{\frac1q}
+  \end{gather*}
+\end{te}
+
+\begin{megj} $p=q=2$ esetén Cauchy-Bunyakovszkij
+\end{megj}
+
+\begin{te}[Második Hölder-egyenlőtlenség]
+  \begin{gather*}
+    p,q\in(1,+\infty),\quad\frac1p+ \frac1q=1\\
+    f,g\in\Folyt[a,b]\
+    \Int_a^b\vert fg\vert\leq\left(\Int_a^b\vert f\vert^p\right)^{\frac1p}\cdot \left(\Int_a^b\vert
+    g\vert^q\right)^{\frac1q}
+  \end{gather*}
+\end{te}
+
+
+\begin{te}[Első Minkovszki-egyenlőtlenség]
+  \begin{gather*}
+    p,q\in[1,+\infty),\quad\frac1p+ \frac1q=1\\
+    a_k,\,b_k\in\R\quad k=1,\dotsc,n\colon\\
+    \left(\sum_{k=1}^n\vert a_k+b_k\vert^p \right)^{\frac1p} \leq
+    \left(\sum_{k=1}^n\vert a_k\vert^p \right)^{\frac1p} + \left(\sum_{k=1}^n\vert b_k\vert^q\right)^{\frac1q}
+  \end{gather*}
+\end{te}
+
+
+\begin{te}[Második Minkovszki-egyenlőtlenség]
+  \begin{gather*}
+    p,q\in[1,+\infty),\quad\frac1p+ \frac1q=1\\
+    f,g\in\Folyt[a,b]\
+    \left(\Int_a^b\vert f+g\vert^p\right)^{\frac1p}\leq
+    \left(\Int_a^b\vert f\vert^p\right)^{\frac1p} +\left(\Int_a^b\vert g\vert^q\right)^{\frac1q}
+  \end{gather*}
+\end{te}
+
+\subsection{Normált, euklideszi terek}
+1) Lineáris terek vagy vektorterek, ld. linalg.\\
+$(\X, +, \lambda\cdot,\R)$ valós  LT, ezek lesznek csak\\
+$(\X, +, \lambda\cdot,\C)$ komplex LT ($\C$ számtest)\\
+2) Lineáris függőség, lineáris függetlenség, altér.
+
+\begin{de}[Lineáris burok]
+  $H \subset \X$ halmaz \emph{lineáris burka} (altér, legszűkebb H-t
+  tartalmazó halmaz):
+  $\di L(H) := \bigcap_{\underset{H\subset X_0}{X_0 < \X \text{altér}}} X_0$
+\end{de}
+3) Dimenzió, bázis
+
+\begin{de}
+  \begin{enumzjb}
+  \item Az $\X$ LT véges dimenziós, ha $\exists  e_1,\ldots,e_n\in \X$
+    linárisan független és $L(\{e_1,\ldots,e_n\})=\X$; $\dim(\X) = n$, tehát
+    $\{e_1,\ldots,e_n\}$ bázis $\X$-en
+  \item Az $\X$ LT végtelen dimenziós, ha nem véges dimenziós: $\dim\X
+    = +\infty$
+  \end{enumzjb}
+\end{de}
+
+
+\begin{de}
+  Az $\NT$ normált tér (NT, ha)
+  \begin{enumerate}
+  \item $\X$ LT $\R$ felett
+  \item $\Vert.\Vert\colon \X\n\R$ olyan fv, melyre
+    \begin{enumerate}
+    \item $\Vert x \Vert \geq 0\quad \forall x\in\X$\\
+      $\Vert x \Vert = 0 \ekviv x = 0$ ($\X$ nulleleme)
+    \item $\Vert\lambda x\Vert = \vert\lambda\vert\cdot \Vert
+      x\Vert\quad \forall x\in \X,\,\forall \lambda\in\R$
+    \item $\Vert x+y\Vert\leq\Vert x\Vert+\Vert y\Vert \quad
+      \forall x,y\in \X$ (3szög-egyenlőtlenség)
+    \end{enumerate}
+  \end{enumerate}
+\end{de}
+\begin{te}
+  legyen $\NT$ NT. Ekkor a 
+  \[\ro(x,y) := \Vert x - y \Vert\qquad (x,y\in \X)\]
+  fv metrika az \X-en, ez a $\Vert.\Vert$ norma által indulkált
+  metrika,
+  azaz $\forall$NT egyúttal MT is
+\end{te}
+
+\begin{Pl}
+\item $(\R^n,\Vert.\Vert_p)\qquad n\in \N,\, 1\leq p \leq
+  +\infty$
+  \[\di\begin{array}{clc}
+  1\leq p < +\infty\colon & \Vert x \Vert_p := \left(\sum\limits_{i=1}^n
+  |x_k|^p\right)^\frac1{p} & x=(x_1,\ldots,x_n)\in \R^n\\
+  p=+\infty\colon &\Vert x \Vert_\infty := \max\limits_{1\leq
+    k\leq n} |x_k|& \text{maximum-norma}\end{array}\]
+  NT és $\Vert.\Vert_p$ a $\ro_p$ metrikát indukálja.
+
+\item  $(C[a,b],\, \Vert.\Vert_p)\qquad 1\leq p\leq+\infty$
+  \[\di\begin{array}{clc}
+  1\leq p < +\infty\colon & \Vert f \Vert_p := \left(\di\int\limits_a^b
+  \vert f\vert^p\right)^\frac1{p} & f \in C[a,b]\\
+  p=+\infty\colon &\Vert x \Vert_\infty := \max\limits_{x\in
+    [a,b]} \vert f(x)\vert & \end{array}\]
+  NT; $\Vert.\Vert_p$ a $\ro_p$ metrikát indukálja.
+
+\item $(l_p,\Vert.\Vert_p)\qquad 1\leq p \leq
+  +\infty$
+  \[\di\begin{array}{clc}
+  1\leq p < +\infty\colon & \Vert x \Vert_p := \left(\sum\limits_{i=1}^\infty
+  |x_k|^p\right)^\frac1{p} & x=(x_n)\in l_p\\
+  p=+\infty\colon &\Vert x \Vert_\infty := \sup\limits_{k\in\N} 
+  |x_k|& \end{array}\]
+  NT és $\Vert.\Vert_p$ a $\ro_p$ metrikát indukálja.
+\item Mátrixok: $\R^{n\times m}$ LT, különböző normák
+  értelmezhetőek, ld mátrixnormák (numanal)
+\end{Pl}
+
+
+
+\begin{de}
+  Az $\ET$ rendezett párt (valós) euklideszi térnek (ET) nevezzük, ha
+  \begin{enumerate}
+  \item $\X$ LT $\R$ felett
+  \item $\Skalar\colon\X\times\X\n\R$ olyan fv, melyre
+    \begin{enumerate}
+    \item $\skalar x y \,=\,\skalar y x\qquad \forall x,y\in\X$
+    \item $\skalar{\lambda x} y \,=\,\lambda\skalar x y\qquad \forall x\in\X,\ \forall\lambda\in\R$
+    \item $\skalar{x_1+x_2} y \,=\,\skalar{x_1} x + \skalar {x_2} y \qquad (x_1,x_2,y\in\X)$
+    \item $\forall x\in\X\ \skalar x x \geqq0 \text{ és } =0\ekviv x=0$
+    \end{enumerate}
+  \end{enumerate}
+\end{de}
+
+
+\begin{te}
+  $\ET$ ET, ekkor
+  \[ \Vert x\Vert := \sqrt{\skalar x x}\qquad(x\in\X)\]
+  norma az \X-en, ez a \Skalar\ skaláris szorzat által indukált norma. $\NT$ NT, azaz minden ET egyúttal NT is.
+\end{te}
+\begin{megj}
+  ET $\subsetneqq$ NT $\subsetneqq$ MT
+\end{megj}
+
+\begin{lemma}[Cauchy-Bunyakovszkij-egyenlőtlenség]\ \\
+  $\ET$ ET, \Norma\ indukált norma. Ekkor
+  \[\left|\skalar{x}{y}\right| \leq \norma{x}\cdot\norma{y}\qquad \forall x,y\in\X\] 
+\end{lemma}
+
+\begin{te}
+  Adott egy $\NT$ NT. Ekkor:
+  \begin{align*}
+    \exists \Skalar \text{ skaláris szorzat, ami a }\Norma \text{ normát induklálja}
+    \intertext{\quad akkor és csak akkor, ha a normára az alábbi feltétel teljesül:}
+    \norma{x+y}^2 + \norma{x-y}^2 = 2 (\norma{x}^2 + \norma{y}^2)\quad \forall x,y\in \X
+  \end{align*}
+\end{te}
+\begin{megj}
+  Ez a paralelogramma-szabály: $e^2 + f^2 = 2(a^2 + b^2)$
+\end{megj}
+
+\subsection{Alterek, környezetek, korlátos halmazok}
+
+
+\begin{de}[Környezet]
+  $(M,\varrho)$ MT, $a\in M,\ r>0$\\
+  $K_r(a) := K_r^\varrho (a) := \{x\in M: \varrho(a,x) < r\}$
+  az \emph{$a$ $r$ sugarú környezete} vagy \emph{$a$ középpontú
+    r-sugarú gömb}.
+\end{de}
+
+\noindent Példa:\\
+$M=\R^2,\ a=(0,0),\  r=1$.\\
+$\di K_r^{\varrho_1}(a) :=\{(x,y)\in\R^2 : |x| + |y| < 1\}$\\
+$K_r^{\varrho_2}(a) :=\{(x,y)\in\R^2 : \sqrt{x^2 + y^2} < 1\}$\\
+$K_r^{\varrho_\infty}(a) :=\big\{(x,y)\in\R^2 : \max\{ |x| + |y|\} < 1\big\}$\\
+
+
+\begin{de}
+  $(M, \varrho)$ MT, $A\subset M$: korlátos, ha
+  $\exists a \in M$ és $\exists r > 0: A\subset K_r^\varrho (a)$
+\end{de}
+
+\begin{te}
+  $(M, \varrho)$ MT; $A\subseteq M$ korlátos $\Leftrightarrow
+  \forall b \in M$-hez $\exists R>0\colon A\subseteq K_R^\varrho (b)
+  $
+\end{te}
+
+
+\subsection{Ekvivalens metrikák és normák}
+
+\begin{de}[Ekvivalens metrikák]
+  $(M,\varrho_1)$ és $(M,\varrho_2)$ MT.\\
+  A $\varrho_1$ és $\varrho_2$ metrikák ekvivalensek, ha
+  \[\exists c_1,c_2>0\colon
+  c_1\varrho_2(x,y)\leq \varrho_1(x,y)\leq c_2\varrho_2(x,y)\qquad\qquad(x,y\in M)\]
+  $Jel: \varrho_1\sim\varrho_2$\\Ill:
+  \[\dfrac1{c_2}\varrho_1(x,y)\leq\varrho_2(x,y)\leq \dfrac1{c_1}\varrho_1(x,y)\]
+\end{de}
+
+\begin{te}
+  A $\sim$ ekvivalenciareláció
+\end{te}
+
+\begin{te}
+  Ha $(M, \varrho_1),\,(M, \varrho_2)\ MT,\ \varrho_1\sim\varrho_2$
+  AKKOR:  \begin{enumerate}[i)]
+  \item $\forall a \in M\  \forall r_1>0\  \exists r_2>0\colon
+    K_{r_2}^{\varrho_2}\subset K_{r_1}^{\varrho_1}$
+  \item Ugyanez igaz fordítva is
+  \end{enumerate}
+\end{te}
+\begin{biz}
+  Legyen: $r_2:=\dfrac{r_1}{c_1}$
+\end{biz}
+
+\begin{te}
+  Az $\R^n\ \ (n\in\N)$ halmazon értelmezett $\varrho_p\ \ (1\leq
+  p\leq+\infty)$ metrikák ekvivalensek.
+\end{te}
+
+\begin{te}
+  A $C[a,b]$-ben a $\varrho_1$ és $\varrho_\infty$ metrikák
+  \emph{nem} ekvivalensek.   
+\end{te}
+
+\begin{de}
+  $(\X,\Norman1),\ (\X,\Norman2)$ NT. A két norma ekvivalens 
+  \[ \text{(jel:) } \Norman1\sim\Norman2\text{, ha }\exists m,M>0:m\Norman2\leq \Norman1\leq M\Norman2\]    
+\end{de}
+\begin{te}Az $\R^n$ téren bármely két norma ekvivalens.\end{te}
+
+\subsection{Torlódási, belső, izolált pontok; nyílt, zárt halmazok}
+
+\begin{de}[Torlódási pont]
+  \MT MT; $A\subset M$; az $a\in M$ az A torlódási pontja, ha
+  $\forall \epsilon >0\  \forall K(a)$-ra$\colon (K(a)\setminus\{a\})
+  \cap A \neq \ures$\\
+  Jel: $A'\colon$ torlódási pontok halmaza
+\end{de}
+
+\begin{te}
+  \MT MT, $A\subset M$,\\
+  $a\in A' \ekviv \forall K(a)$-ra: $K(a)\cap A$ végtelen
+  halmaz\\
+  $a\in A' \ekviv \exists (a_n)\colon \N\n A$ injektív sorozat, hogy
+  $\lim(a_n)=a$
+\end{te}
+\begin{de} \MT MT, $A\subset M$
+  \begin{enumerate}
+  \item $a\in A$ az $A$ \emph{belső pont}ja, ha $\exists K(a)\colon
+    K(a)\in A$
+  \item $a\in A$ az $A$ \emph{izolált pont}ja, ha $\exists
+    K(a)\colon  (K(A)\setminus\{a\}) \cap A = \ures$
+  \item $a\in M$ az $A$ \emph{határpont}ja, ha $\forall K(a)$
+    esetén $K(a)\cap A \neq \ures$ és $K(a)\cap (M\setminus
+    A) \neq \ures$
+  \end{enumerate}
+\end{de}
+
+\begin{de} \MT MT, az $A\subset M$ halmaz
+  \begin{enumerate}
+  \item \emph{nyílt halmaz} az \MT-ban,ha $\forall$ pontja
+    belső pont.
+  \item \emph{zárt halmaz} az \MT-ban,ha $M\setminus A$ nyílt
+  \item $\overline{\!A}=A\cap A'$ az \emph{$A$ lezárása}
+  \end{enumerate}
+\end{de}
+Például:
+\begin{itemize}
+\item $M,\ \ures$ nyílt és zárt
+\item $K(a)$ nyílt halmaz
+\item Véges sok pontból álló halmaz zárt
+\item \MT-ban $\exists A$: sem nem nyílt, sem nem zárt
+\end{itemize}
+
+\begin{te}[Zárt halmazok jellemzése]\MT MT; $A\subset M$\\
+  A következő állítások ekvivalensek:%
+  \begin{enumerate}
+  \item Az $A$ zárt \MT MT-ben
+  \item $A'\subset A$
+  \item $\forall (a_n):\N\n A$ konvergens sorozat esetén
+    $\lim(a_n)\in A$  
+  \end{enumerate}
+\end{te}
+\begin{biz} Mint \R-ben
+\end{biz}
+
+\begin{megj}
+  Zártság-nyíltság relatív fogalmak: függnek az \emph{altér}től
+  (részhalmaz\ldots), Pl\
+  $A := (0,1) \in \R$ nyílt halmaz\\
+  $A := (0,1) \in \R^2$ nem nyílt halmaz\\
+\end{megj}
+
+\begin{te}
+  \MT MT; $A_i\subset M\quad (i\in\Gamma)$ nyílt halmazok
+  \begin{enumerate}
+  \item $\di\bigcup_{i\in\Gamma} A_i$ nyílt halmaz
+  \item Ha $\Gamma_0$ véges $\nn \di\bigcap_{i\in\Gamma_0} A_i$ nyílt.
+  \end{enumerate}
+\end{te}
+
+\begin{te}
+  \MT MT; $A_i\subset M\quad (i\in\Gamma)$ zárt halmazok
+  \begin{enumerate}
+  \item $\di\bigcap_{i\in\Gamma} A_i$ zárt halmaz
+  \item Ha $\Gamma_0$ véges $\nn \di\bigcup_{i\in\Gamma_0} A_i$ is
+    zárt.
+  \end{enumerate}
+\end{te}
+
+\begin{megj}A végesség lényeges.
+\end{megj}
+\subsection{Kompaktság, zártság}
+
+\begin{de}\MT MT. Az $A\subset M$ kompakt, ha $\forall (a_n)\colon
+  \N\n A$ sorozathoz\\ $\exists (\nu_n)\colon \N\n\N\ \uparrow$
+  indexsorozat, hogy: $a_{\nu_n}$ részsorozat konvergens és
+  $\lim(a_{\nu_n})\in A$
+\end{de}
+
+\begin{megj}
+  vö zártsággal $\nn$ (trivi) $\forall$ kompakt halmaz zárt
+\end{megj}
+
+\begin{de}\MT MT. Az $A\subset M$ halmaz \emph{nyílt lefedése}:\\
+  $\{G_i\subset M\mid  i\in \Gamma ($tetsz. indexhalmaz$,\ \ G_i
+  \neq \ures\ G_i$ nyílt \}\\
+  amire: $\di A\subset \bigcap_{i\in\Gamma}G_i$
+\end{de}
+\begin{te}[A kompaktság ekvivalens jellemzései]\MT MT-ben a
+  következő állítások ekvivalensek:
+  \begin{enumerate}
+  \item $A\subset M$ kompakt
+  \item BOREL-féle lefedési tétel:\\
+    Az $A$ \underline{minden} nyílt lefedéséből kiválasztható
+    egy véges lefedőrendszer, azaz: $\forall{G_i : i\in \Gamma}$
+    nyílt lefedése esetén $\exists \Gamma_0\subset\Gamma$ véges:
+    $\di A\subset\bigcup_{i\in\Gamma_0}G_i$
+  \item Az $A$ minden  végtelen részhalmazának van torlódási pontja
+  \end{enumerate}
+\end{te}
+
+\begin{megj}
+  A kompaktság abszolút fogalom, nem függ az altértől. \MT MT,
+  $\hullam{M}\subset M$,
+  $(\hullam{M},\ro_{|\hullam{M}\times\hullam{M}})$ az \MT egy
+  \underline{altere}. $A\subset \hullam{M}$.\\
+  $A$ kompakt \MT-ban $\ekviv\ A$ kompakt
+  $(\hullam{M},\ro_{|\hullam{M}\times\hullam{M}})$-ban.
+\end{megj}
+
+\begin{te}[Kompakt halmazok tulajdonságai] \MT MT, az $A\subset M$
+  kompakt. Ekkor:
+  \begin{enumerate}
+  \item az $A$ zárt \MT-ban
+  \item az $A$ korlátos \MT-ban
+  \item Ha $A$ korlátos és zárt  $\not\nn$ $A$ kompakt
+  \end{enumerate}    
+\end{te}
+
+\subsubsection{$\R^n$ kompakt részhalmazai}
+$\R^n$-ben zártság és korlátosság a kompaktságnak nem csak
+szükséges, de elégséges feltétele is.
+
+\begin{te}
+  $n\in\N,\ 1\leq p\leq +\infty$. Ekkor\\
+  $A\in\R^n$ kompakt $\ekviv\ A$ korlátos és zárt
+\end{te}
+
+
+\newpage
+\section{Sorozatok}
+
+
+\subsection{Konvergens sorozatok MT-ekben. Teljes MT-ek}
+
+\begin{de}[Konvergens sorozat]
+  Az $(M, \varrho)$ MT egy $(a,n)\colon \N\n M$ sorozata konvergens,
+  ha $\exists \alpha \in M\!\colon \forall \epsilon>0$-hoz $\exists
+  n_0\in \N \ \forall n\geq n_0\colon\ a_n \in
+  K_\epsilon^\varrho(\alpha)$\\
+  Egy sorozat \emph{divergens}, ha nem konvegens.
+\end{de}
+
+\begin{Megj}
+\item $(\R,\varrho)$ a szokásos metrikával: a ``régi'' definíciót
+  kapjuk.
+\item A definíció igen általános.
+\item     $\alpha$ az $(a,n)$ \emph{határéréke}. Jel: $\lim (a_n)
+  \eqrho\alpha$; $\underset{(n\n\infty)}{a_n\xrightarrow{\varrho} \alpha}$
+\end{Megj}
+
+\begin{te}
+  Ha $\exists$ ilyen $\alpha\in M$, akkor az egyértelmű.
+\end{te}
+
+\begin{te}(A konvergencia átfogalmazása)
+  \MT MT.\\
+  $\alpha \eqrho \lim(a_n)$ ekvivalens a
+  következőkkel (bármelyikkel) :
+  \begin{enumerate}[\ i)]
+  \item $\forall \epsilon >0$-hoz $\exists n_0\in \N,\ \forall
+    n>n_0\colon \varrho(\alpha,a_n)<\epsilon$
+  \item $\forall \epsilon>0$ esetén $\{\,n\in\N\colon a_n\not\in
+    K_\epsilon(\alpha)\,\}$ véges halmaz.
+  \item $\di \lim_{n\n +\infty} \varrho(a_n,\alpha) = 0$
+  \end{enumerate}
+\end{te}
+
+\begin{te}(Konvergens sorozatok tulajdonságai) \MT MT\\
+  $(a_n)\colon \N\n M$ konvergens; $\alpha \eqrho \lim(a_n)$. EKKOR
+  \begin{korlista}
+  \item Az $(a_n)$ korlátos sorozat, azaz az $R_{(a_n)}$ halmaz
+    korlátos.
+  \item $\forall (\nu_n)\colon \N\n\N\ \uparrow$ (indexsorozat)
+    esetén az $(a_{\nu_n})$ részsorozat konvergens és $\alpha$ a
+    határértéke.
+  \item Ha $(a_n)$-nek van két különböző $M$-beli értékhez tartozó
+    résszorozata \nn $(a_n)$ divergens.
+  \end{korlista}
+\end{te}
+
+\begin{biz}Mint \R-ben,
+\end{biz}
+\begin{Megj}
+\item MT-ben nincsen rendezés, nincsen művelet, így nincs pl
+  közrefogási elv sem.
+\item A határérték, konvergencia metrikafüggő!
+\end{Megj}
+
+\begin{te}[Ekvivalens metrikák \nn konvergens sorozatok]\MTn1, \MTn2
+  MT, \\$\varrho_1\,\sim\,\varrho_2$. Ekkor\\
+  $\forall\,(a_n): \N\n M$ sorozatra: $\di\lim_{n\n+\infty}(a_n)
+  \stackrel{\varrho_1}{=} \alpha \Leftrightarrow
+  \di\lim_{n\n+\infty}(a_n) \stackrel{\varrho_2}{=} \alpha$\\
+  Azaz ekvivalens metrikákban ugyanazok a konvergens sorozatok   
+\end{te}
+
+
+Példa: Fordítva nem igaz:\\
+Ha \MTn1, \MTn2 MT-ben ugyanazok a konvergens sorozatok $\not\nn\,
+\ro_1\sim\ro_2$.\\
+Pl: $M:=\{\,(a_n):\N\n\N\,\}$; $\ro_1$ diszkrét, $\ro_\infty$ a max.\\
+
+%\underline{Teljesség}\\
+\subsubsection{Teljesség}
+Eml: \R-beli Cauchy-konvergencia-kritérium  
+\begin{de}[Cauchy-sorozat]
+  \MT MT; az $(a_n): \N\n M$ C-sorozat, ha 
+  \[\forall \epsilon >0\, \exists n_0\in \N\, \forall n,m\geq
+  n_0\colon \ro(a_n,a_m)<\epsilon\]
+\end{de}
+\begin{megj}
+  \R-ben mondtuk: a nagy indexű tagok közel vannak egymáshoz.
+\end{megj}
+
+\begin{te}
+  \MT MT, \sorozat
+  \begin{korlista}
+  \item Ha $(a_n)$ konvergens \nn\ $(a_n)$ Cauchy-sorozat
+  \item visszafele \underline{nem} igaz
+  \end{korlista}
+  (azaz  MT-ben a Cauchy-kritérium nem igaz)
+\end{te}
+
+\begin{de}[Teljesség]
+  Az \MT MT teljes, ha teljesül  a Cauchy konvergencia-kritérium
+\end{de}
+
+
+\begin{de}[Banach-tér]
+  Az $\NT$ NT Banach-tér (BT), ha ha norma által indukált metrikával nyert MT teljes.
+\end{de}
+
+\begin{Pl}
+\item $(\R^n,\,\Norma_p)$ BT $\quad(n\in\N; 1\leq p\leq \infty)$
+\item $(l_p,\,\Norma_p)$ BT $\quad(n\in\N; 1\leq p\leq \infty)$
+\item $(C[a_b],\,\Norma_\infty)$ BT 
+\item $(C[a_b],\,\Norma_p)$ NEM BT $\quad(n\in\N; 1\leq p< \infty)$
+\end{Pl}
+
+\begin{de}[Hilbert-tér]
+  Az $\ET$ ET Hilbert-tér (HT), ha a skaláris szorzat által indukált normával kapott NT teljes.     
+\end{de}
+
+
+\begin{Pl}
+\item $(\R^n,\,\Skalar)$ HT
+\item $(l_2,\,\Skalar)$ HT
+\item $(C[a,b],\,\Skalar)$ NEM Hilbert-tér
+\end{Pl}
+
+
+\begin{te}[Bolzano-Weiserstrass-féle kiválasztási tétel] (azaz
+  $\forall$ korlátos sorozatnak $\exists$ konvergens részsorozata)
+  \begin{enumerate}[\quad(a)]
+  \item $(\R^n,\ro_p)\ (n\in\N,\,1\leq p \leq +\infty)$ igaz
+  \item \MT tetszőleges MT-ben azonban nem igaz
+  \end{enumerate}
+\end{te}
+
+
+
+\subsubsection{Konvergencia a ``nevezetes'' MT-ekben.}
+
+1) Diszkrét MT: \MT\\
+\sorozat konv és $\lim(a_n)\eqrho\alpha \Leftrightarrow \exists
+N\in\N \ \forall n\geq N\colon a_n=\alpha $ (``kvázikonstans''
+sorozat)
+
+
+\begin{te}
+  A diszkrét metrikus tér teljes.
+\end{te}
+
+
+2) $(\R^n,\ro_p)\quad 1\leq p\leq+\infty$
+
+\begin{te}
+  $n\in\N,1\leq p\leq+\infty$. Tekintsük a $(\R^n,\ro_p)$ MT-ben az
+  \sorozatn{k}\ sorozatot, ahol
+  $a_k=(a_k^{(1)},a_k^{(2)},\ldots,a_k^{(n)})$. Ekkor:
+  \[(a_k) \text{ konvergens és}\]
+  \[\di\lim_{k\n+\infty}a_k\stackrel{\ro_p}{=}\alpha =
+  (\alpha^{(1)},\alpha^{(2)},\ldots,\alpha^{(n)})\in\R^n
+  \Longleftrightarrow\]
+  \[\forall i=1..n\ (a_k^{(i)})_{k\in\N}
+  \text{ valós sorozat (i. koordinátasorozat) konvergens és
+  } \lim_{k\n+\infty}a_k^{(i)}\stackrel{\ro_p}{=}\alpha^{(i)}\]
+\end{te}
+
+
+\begin{te}
+  $n\in\N;\ 1\leq p\leq +\infty$ esetén $(\R^n,\ro_p)$ MT teljes.
+\end{te}
+
+\subsubsection[Konvergens függvénysorozatok]{$(C[a,b],\ro_p)$ MT
+  konvergens  sorozatai\\ (Függvénysorozatok I.)}
+Megj: várható, hogy különböző metrikákban különböznek a konvergens
+sorozatok.
+\begin{de}\ 
+  \begin{enumerate}[\quad(a)]
+  \item Az $(f_n)\colon \N\n C[a,b]$ függvénysorozat konvergens a
+    $(C[a,b],\ro_p)\\(1\leq p\leq\infty)$ MT-ben, ha  $\exists f\in
+    \di C[a,b]\colon \lim_{n\n+\infty}\ro_p(f_n,f)=0$
+  \item $p=+\infty$ esetén azt mondjuk, hogy az $(f_n)$ a
+    \underline{maximum-metrikában} (v. \underline{egyenletesen az }
+    \underline{$[a,b]$-n tart} az $f\in C[a,b]$ fv-hez, azaz:\\
+    \[f_n \xrightarrow[n\n\infty]{\ro_p} f \ekv \forall\epsilon>0\
+    \exists n_0\in\N\colon \forall n>n_0\  \forall  x\in[a,b]\colon
+    |f_n(x)-f(x)| < \epsilon\]
+  \item $p=1$ esetén azt mondjuk, hogy az $(f_n)$ az (egyes)
+    \emph{integrál-metrikában} tart az $f$-hez, azaz:
+    \[f_n \xrightarrow[n\n\infty]{\ro_1} f \ekv \forall\epsilon>0\
+    \exists n_0\in\N\colon \forall n>n_0\ \colon \di\int\limits_a^b
+    |f_n-f| < \eps\]
+
+  \end{enumerate} 
+\end{de}
+
+\begin{megj}
+  Sejthető , hogy  a kettő különböző.
+\end{megj}
+\begin{te}
+  Ha  $(f_n)$ egyenletesen tart $f$-hez $[a,b]$-n, akkor $f_n$
+  pontonként is tart az \\$\fcab$ folytonos függvényhez.
+\end{te}
+\begin{pl}
+  $f_n(x) := x^n\quad x\in[0,1]\ n\in \N$
+  pontonként tart a konstans nulla fv-hez. $f\not\in C[0,1] \nn f$
+  nem egyenletesen konvergens azaz nem konvergens a
+  $(C[a,b],\ro_\infty)$-ben, DE! $(C[0,1],\ro_1)$-ben tart a 0-hoz.
+\end{pl}
+
+\begin{te}
+  Adott $(f_n)\colon \N\n C[a,b]$ sorozat:\\
+  $f_n\xrightarrow[n\n\infty]{\ro_\infty} f\nn\ f_n
+  \xrightarrow[n\n\infty]{\ro_1} f$\\
+  DE fordítva NEM igaz.
+\end{te}
+
+\begin{te}\ 
+  \begin{enumzjb}
+  \item $C([a,b],\ro_\infty)$ teljes MT\\
+  \item $C([a,b],\ro_1)$ nem teljes MT
+  \end{enumzjb}
+\end{te}
+
+\subsection{$\R$-beli sorozatok}
+\begin{de}[Sorozat] $x$, ha $D_x=\N$\\
+  Valós sorozat, ha $x\colon\N\to\R$
+\end{de}
+
+\begin{de}[Nullasorozat]$x\colon \N\to\R$ nullasorozat, ha $\lim x=0$
+\end{de}
+
+\begin{te}$x\colon \N\to\R$. Ekkor
+\[\begin{gathered}x\text{ konvergens}\\\lim x=\alpha\end{gathered}\ekviv
+\begin{gathered}\exists\alpha\in\R\colon\\x-\alpha:=(x_n-\alpha) \text{ nullasorozat}\end{gathered}\]
+\end{te}
+
+\begin{te}[Majoráns kritérium] $x,y\colon\N\to\R,\ x$ nullasorozat
+  és $\forall n\in\N\colon\vert y_n\vert\leq\vert x_n\vert$: becsülhető $x_n$-nel.
+  Azaz: $\vert y\vert leq x$: $x$ majorálja $y$-t\\
+Ekkor $y$ is nullasorozat.
+\end{te}
+
+\begin{te}Nullasorozatok össezege is nullasorozat, illetve\\
+  Nullasorozat $\cdot$ korlátos is  nullasorozat
+\end{te}
+\begin{te}
+  $\forall x,y$ konvergens sorozat, $\forall\lambda\in\R$
+\begin{enumzjr}
+\item $x+\lambda y$ konv. és $\lim(x+\lambda y)=\lim x+\lambda \lim y$
+\item $xy$ konv. és $\lim(xy)=(\lim x)\cdot(\lim y)$
+\item Ha még $\forall n\in\N\colon y_n\ne 0$  és $\lim y\ne 0$, akkor\\
+  $\di\dfrac{x}{y}=\left(\dfrac{x_n}{y_n}\right)$ is konvergens, és $\lim\dfrac x y = \dfrac{\lim x}{\lim y}$
+\end{enumzjr}
+\end{te}
+\begin{te}Monoton korlátos sorozat konvergens.\\
+sőt, elég, ha $\exists N\in\N\colon \forall n\in\N,\ n>N\colon x_n\leq x_{n+1}$
+\end{te}
+\begin{de}
+  $\nu\colon\N\to\N$ egy indexsorozat, ha $\forall n\in\N\colon \nu_n<\nu_{n+1}$
+\end{de}
+\begin{te}Minden számsorozatnak létezik monoton részsorozata
+\end{te}
+\begin{te}[Bolzano-Weisrstrass-féle kiválasztási tétel] Minden korlátos sorozatnak létezik konvergens részsorozata.
+\end{te}
+
+\begin{te}[Gyökvonás]$\forall 0\leq a\in\R, \forall 1\leq m\in \N$: $\exists!0\leq\alpha\in\R\colon \alpha^m=a$
+\end{te}
+\begin{te}[Közrefogási elv]$x,y,z\colon \N\to\R$, $x,z$ konvvergens és $x_n\leq y_n\leq z_n$ madjnem minden $n\in\N$ és 
+$\lim x= \lim z$. Ekkor $y$ is konvergens, és $\lim x=\lim y$.
+  \end{te}
+
+\subsubsection{Tágabb értelemben vett határérték}
+\begin{de}[Nem korlátos sorozatok határértéke] $x\colon\N\to\R$ nem korlátos
+\begin{enumzjb}
+\item $\forall p\in\R \exists N\in\N,\ p>N\colon x_N>p$, azaz $\forall n\in\N,\ n>N\colon x_n\geq x_N>p\ \nn\ \exists
+  \lim x=+\infty$
+\item hasonlóan: $x$  monoton fogy $\nn \exists \lim x=-\infty$ 
+\end{enumzjb}
+\end{de}
+\begin{te}
+  $x,y\in \N\to\R,\ \exists\lim x,\lim y,\ *\in\{+,\cdot,:\},\ \exists (\lim x)*(\lim y)$. Ekkor $\exists \lim x*y$
+\end{te}
+\begin{de}[limesz szuperior]$x\colon \N\to\R$ és
+\begin{gather*}
+  \lim\sup x := \limsup x := \begin{cases}+\infty & x \text{ felülről nem korlátos }\\
+    \lim(\alpha_n)\in\overline{\R}&x \text{ felülről korlátos}\end{cases},
+  \intertext{ahol - ha $x$ felülről korlátos:}
+  \alpha_n := \sup\{ x_k\in\R:k\in\N,\, k\geq n\}\quad n\in\N
+\end{gather*}
+\end{de}
+
+
+\begin{de}[limesz inferior]$x\colon \N\to\R$ és
+\begin{gather*}
+  \lim\inf x := \liminf x := \begin{cases}-\infty & x \text{ alulról nem korlátos }\\
+    \lim(\beta_n)\in\overline{\R}& x \text{ alulról korlátos}\end{cases},
+  \intertext{ahol - ha $x$ alulról korlátos:}
+  \beta_n := \inf\{ x_k\in\R:k\in\N,\, k\geq n\}\quad n\in\N
+\end{gather*}
+\end{de}
+
+\begin{te}$x\colon \N\to\R,\ \alpha\in\overline{\R}$: ekkor
+  \begin{gather*}
+    \limsup=\alpha\ekviv\begin{array}{l}\forall a,b\in\R,\ a<\alpha<b:\\
+    \{k\in\N:x_k>b\}\text{ legfeljebb véges és}
+    \{k\in\N:x_k>a\}\text{ végtelen}
+    \end{array}
+\end{gather*}
+\end{te}
+
+\begin{te} $x\colon\N\to\R$
+  \begin{enumerate}
+  \item   Ha $\nu$ indexsorozat, $\exists\lim x\circ \nu\nn \liminf x\leq \lim x\circ\nu\leq \limsup x$
+  \item   $\exists\nu,\mu$ indexsorozat, $\exists\lim x\circ \nu=\limsup x$ és $\lim x\circ\mu = \liminf x$
+  \item    $\exists \lim x\iff \liminf x= \limsup x$ (és ekkor $\lim x=\liminf x=\limsup x$)
+  \end{enumerate}
+\end{te}
+\subsection{Nevezetes sorozatok}
+\begin{de}[Geometriai sorozat]
+  $q\in\R$, $(q^n)$ geometriai sorozat.\\
+  $\di\lim_{n\to+\infty} (q^n)=\begin{cases}1& q=1\\0 & \vert q\vert < 1\\nincs & \text{ ui divergens minden egyéb esetben}
+  \end{cases}$
+\end{de}
+\begin{de}[$e$ bevezetése] Tekinsük a $\di\left(1+\dfrac1n\right)^n$ sorozatot. Ez monoton növő, felülről korlátos, így
+  konvergens.
+  \[e:=\lim_{n\to+\infty}\left(1+\dfrac1n\right)^n\]
+  Az $e$ irracionális szám.
+\end{de}
+\newpage
+\section{Végtelen sorok}
+\section{Függvények határértéke és folytonossága}
+\section{$\R\to\R$ típusú függvények differenciálhatósága}
+\section{Függvényvizsgálat}
+
+\newpage
+\section{$\R^n\to\R^m$ típusú függvények differenciálhatósága I.}
+
+\subsection{$\RnRm$ típusú leképezések}
+\begin{de}
+  $L: \RnRm$ lineáris, ha
+{\listazjromai
+\begin{enumerate}
+  \item $L(x + y) = L(x) + L(y)\qquad \forall x,y\in \R^n$ (additivitás)
+  \item $L(\lambda x) = \lambda L(x)\qquad \forall x\in\R^n,\ \lambda\in\R$ (homogenitás)  
+\end{enumerate}
+}
+\end{de}
+
+\begin{Megj}
+\item Ha $L$ lineáris, akkor $\di L\left(\sum_{i=1}^s \lambda_i y_i\right) = \sum_{i=1}^s\lambda_i L(y_i)$
+\item $L\in\R\to\R$ lineáris $\ekviv \exists!c\in \R\ L(x)\quad  x\in\R$\\
+  $L$ és $c$ azonosítható egymással.
+\item  Jelölés: $\Linearis :=  \{\,L\in R^n\to\R^m\,|\,L\text{ lineáris}\,\}$
+\item  Szokásos műveletek: $+$, $\lambda\cdot$ pontonként.
+\end{Megj}
+
+\begin{te}
+  \Linearis a szokásos műveletekkel LT az $\R$ felett
+\end{te}
+
+\subsubsection[Lineáris leképezés mátrix reprezentációja]{Lineáris leképezés mátrix reprezentációja (adott bázisban)}
+$\R^n$-ben $e_1,\,e_2,\dotsc,\,e_n$ egy bázis (pl a kanonikus bázis: $e_i=(0,\dotsc,0, \overset{i}{\breve{1}},
+0,\dotsc,0)$)\\
+$\R^m$-ben $f_1,\,f_2,\dotsc,\,f_n$ egy bázis (pl a kanonikus bázis)\\
+$L\in\Linearis,\ x\in \R^n,\di x = \sum_{j=1}^n x_j e_j\quad x_j$ az $x$ vektor $e$ bázisra vonatkozó
+koordinátája
+\begin{gather*}
+  \di  L(x) = L\left(\sum_{j=1}^n x_j e_j\right) = \sum_{j=1}^n x_j L(e_j)\\
+  \R^m \owns L(e_j) = \sum_{i=1}^m a_{ij} f_i\qquad\quad\text{$a_{ij}$ az $L(e_j)$ $i$. koordinátája az
+  $(f_1,\dotsc,f_n)$ bázisban}\\
+  A = \begin{pmatrix}
+    a_{11} & a_{12} & \dots & a_{1n}\\
+    a_{21} & a_{22} & \dots & a_{2n}\\
+    \vdots & \vdots & \ddots & \vdots\\
+    a_{m1} & a_{m2} & \dots & a_{mn}
+  \end{pmatrix}\in \R^{m\times n}\\
+  L(x) = \sum_{j=1}^n x_j L(e_j) = \sum_{j=1}^n x_j \left(\sum_{i=1}^m a_{ij} f_i\right) = \sum_{i=1}^n
+  \left(\sum_{j=1}^n a_{ij} x_j\right) f_i\\
+  \text{A } \sum_{j=1}^n a_{ij} x_j \text{ mátrixszorzással felírva:}\\
+  \begin{pmatrix}
+    a_{11} & \dots & a_{1n}\\
+    \vdots & \ddots & \vdots\\
+    \mathbf{a_{i1}} &  \dots & \mathbf{a_{in}}\\ 
+    \vdots & \ddots & \vdots\\
+    a_{m1}  & \dots & a_{mn}
+  \end{pmatrix}
+  \begin{pmatrix}x_1\\x_2\\\vdots\\x_n\end{pmatrix} = (Ax)_i
+\end{gather*}
+
+Tehát egyértelműen megfeleltethető e kettő egymásnak:\\
+$L\in \Linearis\leftrightarrow A\in \R^{m\times n}$
+
+\begin{te}
+  Az $\Linearis$ LT izomorf  az $\R^{m\times n}$ LT-rel, azaz: 
+  \begin{gather*}
+    \exists \varphi: \Linearis\n\R^{m\times n} \text{ bijekció, melyre}\\
+    \varphi(\lambda_1 L_1+\lambda_2 L_2) = \lambda_1\varphi(L_1) + \lambda_2 \varphi(L_2)
+    \qquad \forall L_1,\,L_2\in\Linearis;\ \forall \lambda_1,\,\lambda_2\in\R
+  \end{gather*}
+\end{te}
+
+\begin{megj}
+  Az $\RnRm$ leképezés azonosítható egy $A\ m\times n$-es mátrix-szal (egy adott bázisban).
+\end{megj}
+
+\subsubsection{Norma értelmezése az $\Linearis$ LT-n}
+
+\begin{te}
+  \begin{enumerate}
+    \item Ha $L\in\Linearis$, akkor 
+      \[\di \opnorma {L} := \sup_{h\in\R^n}\{\,\underbrace{\norman{L(h)}{1}}_{\text{$\R^m$-beli}} : h\in\R^n,
+      \underbrace{\norman{h}{2}}_{\text{$\R^n$-beli}}<1\} < \infty\]
+      ún. \emph{operátornorma} norma az \Linearis\ téren.
+      \item Ha $L\in\Linearis$, akkor
+	\[ \norman{L(h)}1 \leqq \opnorma{L}\cdot\norman{h}2\qquad\forall h\in\R^n 
+	\]
+  \end{enumerate}
+\end{te}
+
+\begin{megj}
+  $f\in\R\n\R,\  f\in\D\{a\},\ a\in\intD_f$
+  \begin{gather*}\di
+    f\in\D\{a\} \ \ekviv\  \exists \lim_{h\n0} \dfrac {f(a+h)-f(a)}{h} < \infty \overset{\text{lineáris}}{\underset
+      {\text{közelíés}}{\ekviv}}\\\ekviv \exists A\in \R \text{ és } \exists \epsilon \in \R\n\R,\, \lim_0\epsilon=0
+    \colon f(a+h) -f(a) = Ah + \epsilon(h)\cdot h \ \ekviv\\
+    \lim_{h\n0}\dfrac{|f(a+h)-f(a)-L(h)|}{|h|} = 0
+  \end{gather*}
+\end{megj}
+
+
+
+\subsection{Totális deriválhatóság}
+
+\begin{de}[Totális deriválhatóság]
+  $f\in\RnRm,\ a\in\intD_f$. Az $f$ fv totálisan deriválható az $a\in\intD_f$ pontban, ha
+  \[\exists L\in\Linearis\colon\quad \lim_{h\n\nullelem}\dfrac{\norman{f(a+h)-f(a)-L(h)}1}{\norman{h}2} = 0,\]
+  ahol \Norman1\ egy $R^m$-beli tetszőleges, \Norman2 egy $\R^n$-beli tetszőleges norma.\\
+  Az $f$ fv $a$-beli deriváltja: $f'(a) := L(a)$\\
+  Jel: $f\in\D\{a\}$
+\end{de}
+
+\begin{te}
+  Ha $f\in\derivp{a},\ f\in\RnRm$, akkor $f'(a)$ egyértelmű.
+\end{te}
+
+\begin{te}
+  A deriválhatóság ténye és a derivált független attól, hogy $\R^n$-ben és $\R^m$-ben melyik normát választjuk.
+\end{te}
+\begin{biz}
+  $\R^n$-ben a normák ekvivalensek.
+\end{biz}
+
+\begin{te}[Ekvivalens átfogalmazások]\ 
+  \begin{enumerate}
+    \item $\di f\in\der{a} \ekviv  \exists A\in\Rmn\colon  \lim_{h\n\nullelem} \dfrac{\norman{f(a+h) -f(a) -Ah}1}{
+    \norman{h}2} = 0$\\
+      Az $A$ az ún. \emph{deriváltmátrix}.
+    \item $f\in\der{a}  \ekviv \left\{\begin{array}{l}\exists A\in\Rmn \text{  és } \di\exists \epsilon \in\RnRm\
+    \lim_0\epsilon=\nullelem :\\f(a+h) -f(a)= Ah + \epsilon(h)\,\norman{h}2\qquad a,a+h\in \D_f\end{array}\right.$\\
+      (lineáris fv-nyel való jó közelítés)
+  \end{enumerate}
+\end{te}
+\begin{biz}Trivi\end{biz}
+  
+
+\textbf{Spec esetek:}
+\begin{enumerate}
+  \item $f\in\RnRm;\ f'(a)$ egy $m\times n$-es mátrix ($\in\Rmn)$
+  \item $f\in\RnR;\ f'(a)$ egy sorvektor  ($\in R^{1\times n})$
+  \item $f\in\RRm;\ f'(a)$ egy oszlopvektor ($\in R^{m\times1})$   
+\end{enumerate}
+
+
+\begin{Pl}
+\item $f(x):=c\quad(x\in\R^n);\ c\in\R^m$ rögzített $\nn \forall a\in\R^n:\ f\in\der{a};\ f'(a)=0\in\Rmn$
+\item $f=L\in\Linearis,\ \forall a\in\R^n\colon L\in\der a$ és $L'=L$
+\end{Pl}
+
+\begin{te}[Folytonosság-deriválhatóság]
+  $f\in\RnRm$, $a\in\intD_f$
+  \begin{enumerate}
+    \item Ha $f\in\der a\nn f\in\folyt a$
+    \item Visszafelé \emph{nem} igaz
+  \end{enumerate}
+\end{te}
+\begin{biz}
+  \[\nn: f(a+h) -f(a) = Ah + \epsilon(h)\,\norman{h}2\xrightarrow[h\n\nullelem]{}0 \nn f\in\folyt{a}\]
+  \[\not\Leftarrow: n=m=1 \text{ és pl } f := \mathrm{abs}\]
+\end{biz}
+
+\begin{te}
+  $f\in\RnRm, f=\begin{bmatrix}f_1\\\vdots\\f_m\end{bmatrix};\ f_i\in\RnR\ (i=1,\dotsc,m)$ az $f$
+  koordinátafüggvényei\\
+Ekkor
+\[f\in\der{a} \ekviv \forall i = 1,2,\dotsc,m\text{ és } f_i\in\der{a} \text{ és } f'(a)= \begin{bmatrix}f_1'(a) \\
+  f_2'(a) \\
+  \vdots\\ f_m'(a)\end{bmatrix} = \begin{bmatrix}\hspace{0.8em}\dots\hspace{0.8em}\\\dots\\\vdots\\\dots
+\end{bmatrix}\in\Rmn\]
+\end{te}
+
+\begin{megj} $f\in\RnRm\ \nn\ \RnR$ elég vizsgálni.
+\end{megj}
+\subsubsection{Műveletek}
+\begin{te}$f,g\in\RnRm,\ a\in(\intD_f)\cap(\intD_g),\ f,g\in\der a$\\
+  $\begin{array}{@{\quad}rcl}
+    1^\circ &  f+g\in\der a & (f+g)'(a) = f'(a) + g'(a)\\
+    2^\circ &  \lambda g\in\der a\quad \forall \lambda\in\R & (\lambda f)'(a) = \lambda f'(a)
+  \end{array}$
+\end{te}
+\begin{biz}
+  trivi
+\end{biz}
+
+\begin{te}[Kompozíció, láncszabály]
+  $g\in\RnRm,\ a\in\intD_g, g\in\der a$;\\ $f\in\R^m\n\R^r,\ R_g\subset D_f,\ f\in \der{g(a)}$.\\
+  Ekkor $f\circ g\in\R^n\n\R^r$ deriválható az $a$-ban és $(f\circ g)'(a) = f'(g(a) \circ f'(a)$
+\end{te}
+\begin{biz} nem kell (ld. $\R\n\R$ eset)
+\end{biz}
+
+\begin{megj}\ \\
+  \begin{tabular}{r@{$\,\in\,$}l@{$\ \nn\ $}l}
+    $f\circ g$ & $\R^n\n\R^r$ &  $C:=(f\circ g)'(a)\in\R^{r\times n}$\\
+    $g$ & $\R^n\n\R^m$ &  $A:=g'(a)\in\R^{m\times n}$\\
+    $f$ & $\R^m\n\R^r$ &  $B:=f'(a)\in\R^{r\times m}$\\
+  \end{tabular}$ C = BA$\\
+Lineáris leképezések kompozíciója $\equiv$ mátrixreprezentációk szorzata
+\end{megj}
+
+
+\subsection{Parciális deriválhatóság}
+
+\begin{de}[Parciális derivált]
+  $f\in\RnRm,\ a\in\intD_f,\ e_1,e_2,\dotsc,e_n\in\R^n$ kanonikus bázis, azaz $e_i = (0,\dotsc,0,
+  \overset{i}{\breve{1}}, 0,\dotsc,)0 $\\
+  \emph{Az $f$-nek $\exists$ az $i$. változó szerinti parciális deriváltja az $a\in\intD_f$ pontban}, ha az\\
+  $F: K(a)\owns t \mapsto f(a+t e_i)\quad (F: \R\n\R^m)$\\
+  fv deriválható a $0$ pontban.\\
+  Az $F'(0)$ oszlopvektor az $f$ $i$. változó szerinti parciális deriváltja az $a$-ban.\\
+  Jel: $\partial_i f(a) := F'(0);\quad \dfrac {\partial f}{\partial {x_i}}(a)$ 
+\end{de}
+
+\begin{Pl}
+  \item $f(x,\,y) = x^3 y^2\quad (x,y)\in\R^2$\\
+    $\di\partial_1 f(x_0,y_0) = (x\n f(x,y_0)'_{x=x_0} = 3{x_0}^2{y_0}^2$\\
+    $\di\partial_2 f(x_0,y_0) = (y\n f(x_0,y)'_{y=y_0} = 2{x_0}^3y_0$
+  \item $f(x,y,z) = x^3 y^2 z$\\
+    $\partial_2 f(x_0,\,y_0,\,z_0)= 2{x_0}^3y_0z_0$
+\end{Pl}
+
+
+\begin{te}
+  $f\in\RnRm,\ a\in\intD_f$\\
+  Ha $f\in\der{a}$, akkor $\forall i=1,2,\dotsc,n\colon  \partial_if(a)$ létezik
+\end{te}
+
+\begin{te}[A deriváltmátrix előállítása]
+  $f\in\RnRm,\ a\in\intD_f,\\ f=\begin{bmatrix}f_1\\\vdots\\f_n\end{bmatrix};\ f_i\in\RnR\ (i=1,\dotsc,m)$\\
+  \vspace{.1em}
+  Ha $f\in\der a\nn\\$
+  \[\Rmn\owns f'(a) = \begin{bmatrix}
+    \partial_1 f_1(a) & \partial_2 f_1(a) & \dots & \partial_n f_1(a)\\
+    \partial_1 f_2(a) & \partial_2 f_2(a) & \dots & \partial_n f_2(a)\\
+    \vdots & \vdots & \ddots & \vdots \\
+    \partial_1 f_1(a) & \partial_2 f_1(a) & \dots & \partial_n f_1(a)
+    \end{bmatrix}\]
+  deriváltmátrix vagy \emph{Jacobi-mátrix}
+\end{te}
+
+\begin{Megj}
+\item \underline{Spec. esetek}\\
+\begin{enumerate}
+  \item $f\in\RnR,\ f\in\der a\\ f'(a) = \begin{bmatrix}\partial_1 f(a) & \partial_2 f(a) & \dots & \partial_n
+    f(a)\end{bmatrix}$
+    az $f$ gradiens vektora, $\grad f(a)$
+  \item $f\in\RRm\quad f=\begin{pmatrix}f_1\\\vdots\\f_m\end{pmatrix}\quad f_i\in\R\n\R$\\
+    $f\in\der a\nn f'(a) = \begin{bmatrix}f_1'(a)\\\vdots\\f_m'(a)\end{bmatrix}$
+\end{enumerate}
+\item Totális és parciális derivált kapcsolata\\
+  Tudjuk: $f\in\der a \nn \forall $ parciális derivált létezik.\\
+  Várható: visszafele NEM igaz.\\
+  Pl: $f(x,y) := \sqrt{|xy|}\quad(x,y)\in\R^2$.\\
+  Ekkor $\partial_1 f(0,0) = 0 = \partial_2 f(0,0)$, de $f\not\in\der{(0,0)}$\\
+  Hf, gyak
+\item Meglepő: elégséges feltétel adható
+\item $f\in\RnRm\qquad f=\begin{bmatrix}f_1\\\vdots\\f_m\end{bmatrix}$\\
+  $f\in\der a \ekviv \forall i=1,\dotsc,m\ f_i\in\der a$\\
+  azaz: elég az $m=1$ esetet vizsgálni  
+\item Jelölés:\\
+  $\varphi\in\RnR\\
+  f\in\RnRm$
+\end{Megj}
+
+\begin{te}[Elégséges feltétel a deriválhatóságra]
+  Legyen $\varphi\in\RnR,\ a\in\intD_\varphi,\\\varphi\in K(a)\n\R$.
+  Tfh. $\forall i=1,\dotsc,n$-re
+  \begin{enumerate}
+    \item a $\partial_i\vfi$ parciális deriváltak léteznek $\forall x\in K(a)$-ra.
+    \item $\partial_i\vfi(x)\colon K(a)\n\R,\ x\n\partial_i \vfi(x)$ parciális derivált függvények
+    folytonosak az $a$-ban: $\partial_i \vfi\in\folyt a$
+  \end{enumerate}
+Ekkor  $\vfi\in\der a$ (totálisan deriválható)
+\end{te}
+
+\subsection{Iránymenti deriválhatóság}
+
+\begin{de}[$e$ irány szerinti iránymenti derivált]
+  $f\in\RnRm,\\a\in\intD_f,\ e\in\R^n $ egyésgvektor $(\norma{e}_2 = 1)$.\\
+  Az $f$ fv-nek az $a\in\intD_f$ pontban az $e$  irány szerinti iránymenti deriváltja létezik, ha az
+  \[F: K(a)\owns t \mapsto f(a+te) \in \R^n\]
+  fv a $0$ pontban deriválható. Az $F'(0)\in\R^n$ az $e$ irányban vett iránymenti deriváltja $a$-ban.\\
+  Jel: $\partial_ef(a) := F'(0)$
+\end{de}
+
+\begin{te}[Az iránymenti derivált kiszámolása]
+  Ha $f\in\RnRm,\ a\in\intD_f$,\\
+  Ekkor $\forall e\in\R^n$ egységvektor $(\norma{e}_2 = 1)$ esetén $\exists\partial_ef(a)$ és
+\[\partial_ef(a) = f'(a)\cdot e\]
+\end{te}
+\begin{megj} $\partial_ef(a)\in\R^m;\ f'(a) \in\RnRm;\ e\in\R^n$ - mátrixszorzás
+\end{megj}
+\underline{Spec. esetek:}
+\begin{enumerate}
+  \item Iránymenti derivált: parciális derivált általánosítása. Ha $e=e_i$, akkor $\partial_ef(a) = \partial_if(a)$
+  \item $m=1\colon \ \vfi\colon\RnR^1; e\in\R^n; \norma{e}_2=\di\sqrt{\sum_{k=1}^n{e_k}^n} = 1$
+    \[\di \partial_e\vfi(a) = \skalar{\grad f(a)}{e} = \sum_{k=1}^n \partial_kf(a)e_k\]
+\end{enumerate}
+\begin{Megj}
+\item Lényeges: $\norma{e}_2=1$
+\item Totális derivált és iránymenti derivált kapcsolata:\\
+  Tudjuk: $f\in\der{a}\nn\ \forall$ irányban deriválható\\
+  Visszafele NEM igaz!
+\end{Megj}
+
+
+\newpage
+\section{$\R^n\to\R^m$ típusú függvények differenciálhatósága II.}
+
+\begin{te}[Lagrange-középértéktétel]
+  $n\geq1,~U\subset\R^n$ nyílt és $\forall a\in U,\,a+h\in U$.\\
+  Szakasz: $[a,\,a+h] := \{\,a+th:t\in(0,1)\,\}\subset U$
+    \begin{enumzjb}
+    \item Ha $\vfi\colon U\n\R,\ \vfi\in\D(U)$: $U$ minden pontjában deriválható\\
+      akkor $\exists \nu\in(0,1):\vfi(a+h)-\vfi(a)=\vfi'(a+\nu h)\cdot h=\skalar{\grad\vfi(a+\nu h)}{h}$
+    \item Ha $f\colon U\n\R^m,\ m\geq2,\ f\in\der{x}\ (x\in U)$, akkor
+      \[ \norma{f(a+h)-f(a)}_\infty\leq \di\sup_{0\leq\nu\leq1} f'(a+\nu h)(h) \leq
+      \sup_{0\leq\nu\leq1}\opnorma{f'(a+\nu h)}\cdot \norma{h}_\infty\]
+    \end{enumzjb}  
+\end{te}
+
+\subsection{Többször deriválható függvények}
+\begin{de}
+  $\vfi\in\RnR,\ a\in\intD_f$. A $\vfi$ kétszer deriválható az $a\in\intD_f$, ha
+    \begin{enumzjr}
+    \item $\exists K(a)\colon \forall x\in K(a)$-ban $\vfi$ deriválható
+    \item $\forall i=1,\dotsc,n\ \partial_i\vfi$ parciális függvények deriválhatóak $a$-ban: $\partial_i\in\der{a}$
+    \end{enumzjr}
+  Jel: $\vfi \in\dern2a$
+\end{de}
+\begin{megj}
+  $(i) \ekviv \exists\vfi'=(\partial_1\vfi,\dotsc,\partial_n\vfi)\in\R^n\n\R^n$ függvény\\
+  $(ii)\ \partial_i\vfi\in\der{a}\ (i=1,2,\dotsc,n) \ekviv \vfi'\in\der{a}$\\\\
+  $\vfi'' = (\vfi')'$, de $\vfi'\in\R^n\n\R^n,\ \vfi''\in\R^n\n\R^{n\times n}$.\\
+  \[\vfi(a)'' = \begin{bmatrix}
+  \partial_1\partial_1\vfi &\partial_2\partial_1\vfi & \cdots & \partial_n\partial_1\vfi \\
+  \vdots & \vdots & \ddots & \vdots \\
+  \partial_1\partial_n\vfi &\partial_2\partial_n\vfi & \cdots & \partial_n\partial_n\vfi 
+  \end{bmatrix}\in\R^{n\times n}\]
+  az ún. \emph{Hesse-féle mátrix}  
+\end{megj}
+
+\begin{de}
+  $\vfi \in\RnR,\ a\in\intD_\vfi$. \\A $\vfi$ $s$-szer $(s\geq2)$ deriválható az $a$-ban $(\vfi \in\dern n a)$, ha
+    \begin{enumzjr}
+    \item $\exists K(a)\subset D_\vfi$, hogy $\vfi$ (s-1)-szer deriválható a $K(a)\ \forall$ pontjában.
+    \item Az összes $\partial_{i_1}\partial_{i_2}\ldots\partial_{i_{s-1}}\vfi\quad 1\leq i_1, i_2,\dotsc,i_{s-1} \leq n$
+      \quad (s-1)-edrendű parciális derivált függvény deriválható az $a$-ban.
+    \end{enumzjr}
+\end{de}
+\begin{te}[Young-tétel]$\vfi\in\RnR,\ a\in\intD_\vfi$
+  \[\vfi \in\dern2a\nn\forall i,j=1..n\quad \partial_j(\partial_i\vfi) = \partial_i(\partial_j\vfi) \]
+\end{te}
+\begin{te}\label{te:youngkov}(Következmény!!) $\vfi\in\RnR,\ a\in\intD_\vfi, \vfi\in\dern s a\ (s\geq2)$
+  \[ (\partial_{i_1}\partial_{i_2}\ldots\partial_{i_s}\vfi)(a) = 
+  (\partial_{\sigma_1}\partial_{\sigma_2}\ldots\partial_{\sigma_s}\vfi)(a)\]
+  ahol $1\leq i_1, i_2,\dotsc,i_s \leq n$ és a $\sigma_1, \sigma_2,\dotsc,\sigma_s$ az $i_1, i_2,\dotsc,i_s$ egy
+  permutációja  
+\end{te}
+
+\subsubsection{Taylor-formula}
+\begin{te}(Emlékeztető)
+  $f\in\R\n\R;\ m\in\N,\ f\in\D^{m+1}\left(K\left(a\right)\right);\ a,a+h\in\D_f;\\\exists \nu\in(0,1):$
+  \[\di f(a+h) = f(a) + \sum_{k=1}^m\dfrac{f^{(h)}(a)}{k!}h^k + \dfrac{f^{(m+1)}(a+\nu h)}{(m+1)!}h^{m+1}\]  
+\end{te}
+
+\begin{de}[Multiindex] $n\geq 1$ rögzített, $i$ multiindex, $i:=(i_1,\dotsc,i_n),\ i_k\geq 0$ egészek.\\
+  $|i| := i_1 + i_2 + \ldots + i_n$ a multiindex rendje\\
+  $i!~ := i_1! \cdot i_2! \dotsm i_n!$\\
+  $x=(x_1,\dotsc,x_n)\in\R^n\colon\quad x^i := x_1^{i_1}\cdot x_2^{i_2}\dotsm x_n^{i_n}$\\
+  $\partial^i\vfi := \partial_1^{i_1}\partial_2^{i_2}\dotsb\partial_n^{i_n}\vfi$ vagyis az első változó szerint
+  $i_1$-szer, stb.\\
+  $\partial^0\vfi :=  \vfi$
+\end{de}
+
+\begin{de}[Homogén $n$ változós $m$-edfokú polinom] \ \\$n=1,2,\dotsc$; $m=0,1,2,\dotsc$; $i$ multiindex: $|i|=m$
+  \[\R^n\owns x\mapsto \sum_{|i|=m}a_ix^i\quad \text{ahol }a_i\in\R\]  
+\end{de}
+
+\begin{spec}{\listazjromai\begin{enumerate}
+  \item $n=1;\ m=0,1,2,\dotsc\colon\quad \R\owns x\mapsto ax^m$
+  \item $n=2;\ m=1\colon\quad i\colon (0,1) \text { v. }(1,0)\colon\quad \R^2\owns(x_1,x_2)\mapsto a_1x_1+a_2x_2$
+  \item $n=2;\ m=2\colon\quad i\colon (2,0),\ (1,1),\ (0,2)\colon\quad \R^2\owns(x_1,x_2)\mapsto ax_1^2+bx_1x_2 +
+    cx_2^2$    
+  \end{enumerate} }
+\end{spec}
+
+\begin{te}[Taylor-formula a Lagrange-maradéktaggal]Tegyük fel, hogy
+  {\listazjbetu \begin{enumerate}
+    \item $\vfi\colon U\n\R,\ U\subset\R^n$ nyílt halmaz
+    \item $a\in U,\ h\in\R^n\colon\ [a,a+h] := \{a+th:t\in(0,1)\}\subset U$
+    \item $\vfi\in\D^{m+1}([a,a+h])\quad(m=0,1,2,\dotsc\text{rögzített})$
+  \end{enumerate} }
+  Ekkor $\exists \nu\in(0,1)$
+  \[ \di\vfi(a+h) = \vfi(a) + \underbrace{\sum_{k=1}^m\left(\sum_{|i|=k}\dfrac{\partial^i\vfi(a)}{i!}h^i\right)}
+  _{\text{Taylor-polinom}} + \underbrace{\sum_{|i|=m+1}\dfrac{\partial^i\vfi(a+\nu h)}{i!}h^i}
+  _{\text{Lagrange-féle maradéktag}}\]  
+\end{te}
+
+\begin{biz}Visszavezethető $\R\n\R$-re\\
+  \[ F(t) := \vfi(a+th)\qquad(t\in[0,1])\]
+  Az $F\in\R\n\R$ függvényre a Taylor-formula alkalmazható a $[0,1]$ intervallumon (a feltételek teljesülnek).\\
+  \[\di\exists \nu\in(0,1)\colon F(1) = F(0) + \sum_{k=1}^m \dfrac{F^{(k)}(0)}{k!} (1-0)^k + 
+  \dfrac{F^{(m+1)}(\nu)} {h+1}\]
+  
+  A tétel állítása a következő lemma felhasználásával adódik.
+  \begin{lemma} A fenti $F$ függvény esetén ($\vfi$ $s$-szer deriválható $[a,a+h]$-n)
+    \[\di\dfrac{F^{(k)}(t)}{k!}= \sum_{|i|=k}\dfrac{\partial^i\vfi(a+th)}{i!}h^i\qquad k=0,1,2,\dotsc,s\]
+  \end{lemma}
+  \textbf{A lemma bizonyítása} $k$-ra vonatkozó teljes indukcióval.\\
+  $k=1$ esetén $F$ definiciója és az összetett függvény deriválási szabálya alapján
+  \[ F'(t) = \skalar{\grad \vfi(a+th)}{h} = \sum_{|i|=1} \partial^i \vfi(a+th)\cdot h^i\qquad(t\in[0,1])\]
+  Tegyük fel, hogy $k\in\{1,\dotsc,s-1\}$ esetén igaz az állítás. Így $k+1$-re:
+  \begin{align*}
+    \dfrac1{(k+1)!}F^{(k+1)}(t) &= \dfrac1{(k+1)!}(F^{(k)})'(t)\\
+    &=\dfrac1{k+1}\sum_{|i|=k} \dfrac1{i!}
+    (\partial_1\partial^i\vfi(a+th)h^ih_1+\ldots + \partial_n\partial^i\vfi(a+th)h^ih_n) ={}\\
+    &\stackrel{\text{\ref{te:youngkov} alapján}}{=}
+    \sum_{|i|=k+1}\dfrac{\partial^i\vfi(a+th)}{i!}h^i\qquad(t\in[0,1])
+  \end{align*}
+\end{biz}
+
+\subsection{Inverz függvények ($\RnRn$)}
+\underline{Globális, $\R\n\R$-beli tétel:}\\
+\[f\colon (a,b)\n\R,\ f\in\D,\ f'>0\ (a,b)$-n, ekkor $\exists f^{-1}$ inverz, ui $f\uparrow\]
+Ez nem általánosítható, de a lokális változata igen.:\\\\
+\underline{Lokális, $\R\n\R$-beli tétel:}\\
+$f: I\n \R, I\subset\R$ intervallum\\
+$f$ folytonosan deriválható\\
+$a\in I$-ben $f'(a)\neq 0$\\
+EKKOR $\exists U := K(a)$ és $\exists V:= K(f(a))$: $f_{|U}\colon U\n V$ bijekció $\nn \exists$ inverz\\
+és az $f^{-1}$ inverz differincálható és $\left(f^{-1}\right)'(x) = \dfrac1{f'(f^{-1}(x))}\quad\forall x\in V$
+
+
+\begin{te}[Inverz függvény tétel] $\Omega \subset \R^n$ nyílt, $a\in\Omega,\ f:\Omega\n\R^n$. Tfh:
+  {\listazjromai \begin{enumerate}
+  \item $f$ folytonosan deriválható $\Omega$-n
+  \item $\det f'(a) \neq 0$
+  \end{enumerate} }
+  Ekkor
+  { \listazjbetu \begin{enumerate}
+  \item $\exists U := K(a)$ és $\exists V:= K(f(a))$ $f_{|U}\colon U\n V$ bijekció (azaz $\exists f^{-1}$ inverz)
+  \item $f^{-1}$ deriválható, $(f^{-1})'(x) = \begin{bmatrix} f'(f^{-1}(x))\end{bmatrix}^{-1}\quad (\forall x\in V)$
+  \end{enumerate}
+  }
+\end{te}
+\textbf{Alkalmazás.} Nemlineáris egyenletrendszerek megoldhatósága\\
+$\left.\!\begin{array}{rcl}
+f_1(x_1,\dotsc,x_n) & = & b_1\\
+\vdots & & \vdots\\
+f_n(x_1,\dotsc,x_n) & = & b_n\end{array}\right\}\qquad \begin{array}{cl} \left.\begin{array}{c}f_i\in\RnR\\b_i\end{array}
+\right\} &\text{adott}\\x_1,\dotsc,x_n&\text{ismeretlen}\end{array}$\\
+\vphantom{x}\\
+$f := \begin{pmatrix}f_1\\\vdots\\f_n\end{pmatrix}\quad b := \begin{pmatrix}b_1\\\vdots\\b_n\end{pmatrix}$.\\
+Legyen $a=\begin{pmatrix}a_1\\\vdots\\a_n\end{pmatrix}\in\R^n\colon f(a)=b$.\\
+Keresni kell egy ilyet. Ha $f'(a)$
+invertálható ($\ekviv \det f'(a)\neq 0$) $\overset{\text{Inverz fv}}{\underset{\text{tétel}}{\nn}}\\
+\exists K(b)\ \forall y=(y_1,\dotsc,y_n)\in K(b)\ f(x)=y$ egyenletrendszer $x$-re egyéretlműen megoldható.
+\begin{megj}Létezést biztosít.\\
+A fixpont-tétel segítségével közelítő megoldás adható\end{megj}
+
+
+\begin{de}$f\in\R^2\n\R$ adott. Ha $\exists I\subset \R$ intervallum és $\exists \vfi: I\n\R$, hogy $f(x,\vfi(x))=0
+  (x\in I)$, akkor a $\vfi$ az $f(x,y) =0$ \emph{implicit egyenlete megoldása}. (a $\vfi$ függvény az $f(x,y)=0$
+  implicit alakban van megadva)
+\end{de}
+
+\begin{te}[Implicit függvény-tétel, spec: 2 változós] $f\in\R^2\n\R^1,\\D_f=\Omega\subset\R^2$ nyílt. Tfh:
+  {\listazjromai \begin{enumerate}
+  \item $f$ folytonosan differenciálható $\Omega$-n
+  \item $\exists (a,b) \in \Omega:\ f(a,b)=0$ és $\partial_2f(a,b)\neq 0$
+  \end{enumerate}}
+  Ekkor
+  {\listazjbetu
+    \begin{enumerate}
+    \item $\exists K(a) =: U\colon\ \forall x\in K(a)$-hoz $\exists \vfi(x)\in \R$, melyre $f(x,\vfi(x)) = 0\quad(\forall
+      x\in U)$
+    \item A $\vfi\colon U\n\R$ fv folytonosan deriválható és
+      \[\vfi'(x) = - \dfrac{\partial_1f(x,\vfi(x))}{\partial_2f(x,\vfi(x))}\quad \forall x\in U \tag{$*$}\label{eq:*}\]
+    \end{enumerate}
+  }
+\end{te}
+
+\begin{Megj}
+\item $($\ref{eq:*}$)$-ról: Ha $\vfi$ deriválható: $f(x,\vfi(x))=0\quad(x\in I) \stackrel{\text{láncszabály}}{\nn}\\
+  \partial_1f(x,\vfi(x))\cdot1 + \partial_2f(x,\vfi(x))\cdot\vfi'(x) = 0$ 
+\item Általánosítás: $n_1,n_2\in\N;\ \Omega_1\subset\R^{n_1};\ \Omega_2\subset\R^{n_2}$ nyíltak. $a\in\Omega_1,\
+  b\in\Omega_2,\\ f\colon \Omega_1\times\Omega_2\n\R^{n_2}$, ahol $\Omega_1 \times \Omega_2$ az első, illetve a második
+  változócsoportot jelöli.\\
+  Legyen $\partial_1f(a,b) := (\Omega_1\owns x\mapsto f(x,b)\in\R^{n_2})'_{x=a}$ az első változócsoport szerinti
+  derivált, illetve\\$\partial_2f(a,b) := (\Omega_2\owns y\mapsto f(a,y)\in\R^{n_2})'_{y=b}$ az második
+  változócsoport szerinti derivált
+\end{Megj}
+
+\begin{te}[Implicit függvény-tétel, ált] \ldots $f\in\Omega_1\times \Omega_2\n\R^{n_2}$. Tfh:
+  \begin{enumerate}[\quad(i)]
+  \item $f$ folytonosan differenciálható
+  \item $\exists a \in \Omega_1,\ b\in\Omega_2:\ f(a,b)=0$ és $\det(\partial_2f(a,b))\neq 0$
+  \end{enumerate}
+  Ekkor
+  {\listazjbetu
+    \begin{enumerate}
+    \item $\exists U_1:= K(a)\subset R^{n_1}$ és $\exists U_2:=K(b)\subset \R^{n_2}$:\\
+      $\forall x\in U_1$-hoz $\exists! \vfi(x)\in U_2$, melyre $f(x,\vfi(x)) = 0$
+    \item A $\vfi\colon U_1\n U_2$ fv folytonosan deriválható és
+      \[\vfi'(x) = - [\partial_2f(x,\vfi(x))]^{-1}\cdot \partial_1f(x,\vfi(x))\quad\forall x\in U_1 \]
+    \end{enumerate}
+      }
+\end{te}
+
+\subsection{Szélsőértékek ($\R^n\n \R^1$)}
+\begin{te}[Elsőrendű szükséges feltétel lokális szélsőértékre]
+Tfh: \\$\vfi\in U\n\R,\ U\subset \R^n$ nyílt,
+\begin{enumerate}
+\item $\vfi \in \der a\quad a\in U$ (belső pont!!!)
+\item $\vfi$-nek lokális szélsőértéke van $a$-ban
+\end{enumerate}
+Ekkor  \[\vfi'(a) = (\partial_1\vfi(a),\dotsc,\partial_n\vfi(a))=0\tag{$**$}\label{eq:**}\]
+
+\end{te}
+\begin{biz}Trivi, ui: $t\mapsto f(a+te_i)\ (\in\R\n\R)$ parciális függvénynek is lokális szélsőértéke van $t=0$-ban.
+\end{biz}
+
+\begin{Megj}
+\item Szükséges, de nem elégséges: $(n=1\colon f(x) := x^3)$
+\item $($\ref{eq:**}$)\ekviv \left.\begin{array}{c}\partial_1\vfi(a)=0\\\partial_n\vfi(a)=0\end{array} \right\}$
+  n db egyenlet, n db ismeretlen: $(a_1,\dotsc,a_n)$\\
+  Itt lehet csak szélsőérték
+\end{Megj}
+
+\begin{de}
+  $\vfi: U\n\R,\ U\subset \R^n$ nyílt, $a\in U$. A $\vfi$-nek az $a$-ban lokális minimuma [maximuma] van, ha $\exists
+  K(a) (\subset U)\colon \vfi(a) \leqq \vfi(x) \ [\vfi(a) \geqq \vfi(x)]  \quad(x\in K(a))$
+\end{de}
+\begin{megj}
+  Lokális szélsőérték $\ekviv$ lokális minimum vagy lokális maximum
+\end{megj}
+
+\begin{de}[Kvadratikus alak]\ 
+  Az $A=[a_{ij}]\in\R^{n\times n}$ szimmetrikus mátrix,\\ $h=(h_1,h_2,\dotsc,h_n)\in\R^n$. A  $Q\colon \RnR$
+  \[ Q(h) := \skalar{Ah}h = \sum_{i=1}^n a_{ij}h_ih_j\]
+  fv-t az \emph{$A$ mátrix által meghatározott kvadratikus formának} nevezzük 
+\end{de}
+
+\begin{megj}
+  $\di Q(h) = \sum_{|i|=2}a_ih^i\quad i=(i_1,\dotsc,i_n)$ multiindex\\
+  Ez egy homogén n-változós másodfokú polinom.
+\end{megj}
+\begin{de}
+  $A=[a_{ij}]\in\R^{n\times n}$ szimmetrikus.\\
+  A $Q(h)$ kvadratikus forma (vagy az $A$ mátrix)
+  \begin{itemize}[\quad]
+  \item \underline{pozitív definit}, ha $Q(h)>0\quad\forall h\in\R^n\setminus\{0\}$
+  \item \underline{negatív definit}, ha $Q(h)<0\quad\forall h\in\R^n\setminus\{0\}$
+  \item \underline{pozitív szemidefinit}, ha $Q(h)\geq0\quad\forall h\in\R^n$
+  \item \underline{negatív szemidefinit}, ha $Q(h)\leq0\quad\forall h\in\R^n$
+  \end{itemize}
+\end{de}
+
+
+\begin{te}[Sylvester-kritérium]$Q(h) = \skalar{Ah}h$ kvadratikus alak,\\$A=[a_{ij}]\in\R^{n\times n}$ szimmetrikus
+  mátrix
+  
+  \[A=\begin{bmatrix}a_{11} & a_{12} & \cdots & a_{1n}\\
+  a_{21} & a_{22} & \cdots & a_{2n}\\ \vdots & \vdots & \ddots & \vdots \\
+  a_{n1} & a_{n2} & \cdots & a_{nn}\end{bmatrix};\qquad \Delta_k = \det\begin{bmatrix}a_{11}&\cdots&a_{1k}\\
+  \vdots &\ddots& \vdots\\a_{k_1} & \cdots & a_{kk}\end{bmatrix} \text{sarokaldeterminánsok}\]
+Ekkor
+\begin{enumerate}
+\item $Q$ pozitív definit $\ekviv\Delta_1>0,\,\Delta_2>0,\dotsc,$ azaz $\sgn\Delta_k=1\quad k=1,2,\dotsc,n$
+\item $Q$ negatív definit $\ekviv\Delta_1<0,\,\Delta_2>0,\dotsc,$ azaz $\sgn\Delta_k=(-1)^k \quad k=1,2,\dotsc,n$
+\end{enumerate}
+\end{te}
+
+\begin{te}
+  Ha $Q$ kvadratikus forma $\nn\\\exists m,M\in\R\colon m\norma{h}^2\leq Q(h)\leq M\norma{h}^2\quad(h\in\R^n)$
+\end{te}
+\begin{biz}
+  $Q\colon \RnR$ folytonos függvény, $H:=\{x\in\R^n,\norma x = 1\}$ kompakt $\stackrel{\text{Weierstrass}}{\nn}$\\
+  \[\exists M:=\max\{Q(h) : \norma h = 1\},\ \exists m:=\min\{Q(h) : \norma h = 1\}\]
+  DE!\\
+  \[Q(h) =  Q\left(\norma{h}\cdot\dfrac{h}{\norma{h}}\right) = \norma{h}^2Q\left(\dfrac{h}{\norma{h}}\right)\ \ \nn\ 
+  \ Q(h)\leq \norma{h}^2 M,\ Q(h)\geq m\norma{h}^2\]
+\end{biz}
+
+\begin{kov}
+  $Q(h)$ kvadratikus forma,\\
+  $Q$ pozitív definit $\ekviv \exists c_1>0\colon Q(h)\geq c_1\norma{h}^2$\\
+  $Q$ negatív definit $\ekviv \exists c_2<0\colon Q(h)\leq c_2\norma{h}^2$\\
+  Az előző tételből adódik
+\end{kov}
+
+\begin{te}[Másodrendű elégséges feltétel, lokális szélsőértékre]\ \\
+  Tfh $\vfi\colon U\n\R,\ U\n\R^n$ nyílt, $a\in U$ belső pont!!!
+    \begin{enumzjr}
+    \item $\vfi$ kétszer folytonosan deriválható
+    \item $\vfi'(a)=0$
+    \item $\vfi''(a)$ Hesse-féle mátrix által generált kvadratikus alak pozitív [negatív] definit.
+    \end{enumzjr}
+Ekkor $\vfi$-nek $a$-ban lokális minimuma [maximuma] van.
+\end{te}
+
+\begin{te}
+  $\vfi\colon U\n\R,\ U\subset \R^n$ nyílt, $a\in U$
+\begin{enumzjr}
+\item $\vfi$ kétszer folytonosan deriválható
+\item $\vfi'(a)=0$ és a $\vfi''(a)$ álatal generált kvadratikus forma indefinit
+\end{enumzjr}
+Ekkor $a$-ban $\vfi$-nek nincs lokális szélsőértéke
+\end{te}
+\begin{biz}
+  Ha indefinit: nem szemidefinit $\nn$ szügséges feltétel alapján nincs szélsőérték
+\end{biz}
+
+\subsubsection{Feltételes szélsőérték}
+\begin{PlSS}
+  Adott: $x+y-2=0$ egyenletű egyenes. Melyik rajta lévő $P$ pont esetén lesz $\overline{OP}$, azaz az origótól való
+  távolság minimális? Azaz:\\
+  $f(x,y) := x^2 + y^2\ (x,y)\in\R^2$\\
+  $H:=\{(x,y)\in\R^2| x+y-2=0\}$\\
+  $f_{|H}\n\min$
+\end{PlSS}
+\begin{PlSS}\label{plss:fsz2}
+  Adott körbe maximális területű téglalapot kell tenni.\\
+  Egyszerűsítés: elég az első síknegyed, mert szimmetrikus.
+  $T(x,y) := 4xy$\\
+  $H:=\{(x,y)\in\R^2| x^2 + y^2 - R^2 =0\}$\\
+  $f_{|H}\n\max$
+\end{PlSS}
+Adott $m,n\in\N,\ U\subset\R^n$ nyílt,\\
+$f\colon U\n\R$ és\\
+$g_i\colon U\n\R\quad i=1..m$\\
+$H:=\{ z\in\R^n\,|\,g_i(z)=0,\ i=1,\dotsc,m\}$ feltételek.\\
+Határozzuk meg $f_{|H}$ lokális szélsőértékeit.
+
+\begin{de}
+  Az $f\colon U\n\R$ fv-nek  a $c\in U$-ban a $g_i(z)=0\ \,(i=1..m)$ feltételekre vonatkozó \emph{lokális feltételes
+    minimuma van}, ha
+  \[\exists K(c): f(x) \geq f(c)\quad \forall x\in K(c)\cap H\]
+\end{de}
+
+\begin{te}[Lokális feltételre vonatkozó szükséges feltétel]
+  Tfh
+  \begin{enumzjb}
+  \item $n,m\in\N,\ U\in\R^n$ nyílt,\\$f\colon U\n\R,\ g_i: U\n\R\ \ (i=1,\dotsc,m)$ folytonosan deriválhatóak.
+  \item $f$-nek a $c\in U$-ban a $g_i(c)=0\ \,(i=1,\dotsc,m)$ feltételekre vonatkozó lokális szélső
+  \item $g_i'(c)\ (i=1,\dotsc,m)$ lineárisan független vektorok
+  \end{enumzjb}
+  Ekkor $\exists\lambda_1,\dotsc,\lambda_m\in\R\colon \di F:= f+\sum_{i=1}^m \lambda_ig_i$ fv-nek $c$-ben  $F'(c) = 0$
+\end{te}
+\begin{megj}Alkalmazáshoz:
+  \[ \left.\begin{array}{l}
+    \left.\begin{array}{c}\partial_1F(c)=0\\\partial_2F(c)=0\\\vdots\\\partial_nF(c)=0\end{array}\right\} \text{ n db}\\
+      \left.\begin{array}{c}g_1(c)=0\\\vdots\\g_m(c)=0\end{array}\right\} \text{ m db}\\
+  \end{array}\right\} \text{ n+m db egyenlet a $\lambda_1,\dotsc,\lambda_m$ és $c_1,\dotsc,c_n$ ismeretlenekre} 
+  \tag{$\sharp$}\label{eqs:lagrange-mult}
+  \]
+  Lokális szélsőérték csak ilyen $c$-ben lehet	
+\end{megj}
+
+
+\textbf{Alkalmazás}\\
+\Aref{plss:fsz2} példa:
+\begin{gather*}
+  f(x,y) := 4xy\quad (\,(x,y)\in\R^2\,)\\
+  g(x,y) := x^2 + y^2 -R^2\\
+  F(x,y) := 4xy + \lambda(x^2 + y^2 - R^2)\\
+  \left.
+  \begin{gathered}
+    \partial_1 F(x,y) = 4y + 2\lambda x = 0\\
+    \partial_2 F(x,y) = 4x + 2\lambda y = 0  
+  \end{gathered}\,
+  \right\}\quad \oplus\colon 2(x+y)(\lambda+2) = 0\\
+  x^2+y^2 - R^2 = 0 
+  \intertext{Innen:}
+  \lambda = -2\\
+  x=y=\dfrac{R}{\sqrt{2}}
+\end{gather*}
+Azaz $\left(\dfrac{R}{\sqrt{2}},\,\dfrac{R}{\sqrt{2}}\right)$-ben lehet szélsőérték.
+
+\begin{te}[Elégséges feltétel a lokális szélsőértékre]\ 
+  \begin{enumzjb}
+  \item $f,g_i\colon U\n\R$, $U\subset\R^n$ nyílt, $i=1,\dotsc,m$ kétszer folytonosan differenciálható
+  \item $c=(c1,\dotsc,c_n)$, $\lambda_1,\dotsc,\lambda_m$ kielégíti \aref{eqs:lagrange-mult}-t
+  \item $F:= f + \di\sum_{i=1}^m\lambda_i g_i$-nek $c$-ben lokális szélsőértéke van (feltétel nélküli: a teljes
+    értelemezési tartományt figyelembe véve).  
+  \end{enumzjb}
+  Ekkor $f$-nek $c$-ben a $g_1=\dotsb=g_m=0$ feltételekre vonatkozó feltételes lokális szélsőértéke van.
+\end{te}
+\ref{plss:fsz2}: $\lambda=2$; $F(x,y) = 4xy - 2(x^2 +y^2 - R^2) = 2R^2 - 2(x+y)^2$.
+
+
+
+\begin{te}[Paraméteres integrál]
+  $I=[a,\,b],\ U\subset \R^n$ nyílt és $f\colon U\times[a,b]\n\R$ folytonos,\\
+  $\vfi(x) := \di\Int_a^bf(x,t) \diff t\quad(x\in U)\quad$ az $f$ paraméteres integrálja.\\
+  Ekkor:
+  \begin{enumzjb}
+  \item  $\vfi\colon U\n\R$ is folytonos
+  \item Ha $\exists \partial_if$ és $\partial_if\in \Folyt\quad (i=1,\dotsc,n)$, akkor $\vfi$ is deriválható és
+    \begin{gather*} \di \partial_i\vfi(x) = \Int_a^b\partial_if(x,t)\diff t\quad x\in U\end{gather*}
+  \end{enumzjb}
+\end{te}
+
+\newpage
+\section{Egyváltozós Riemann-integrál}
+\subsection{A határozott integrál fogalma. Alsó, felső közelítő összegek. Oszcillációs összeg.}
+\begin{de}
+  A $\tau\subset[a,b]$ halmaz az $[a,b]$ egy felosztása, ha $\tau$ véges halmaz és $a,b\in\tau$\\
+  Jel.: $\tau=\{x_0,x_1,\ldots,x_n\}$, ahol $a=x_0<x_1<x_2<\ldots<x_n=b$, $\mathcal{F}([a,b])$ az $[a,b]$ felosztásainak halmaza.
+\end{de}
+\begin{de}
+  $I$ korlátos, zárt, $\tau_1,\tau_2\in\mathcal{F}(I)$, $\tau_2$ finomabb $\tau_1$-nél, ha $\tau_1\subset\tau_2$\\
+\end{de}
+\begin{de}
+  $f\colon I\to\R,\ \tau\in{\mathcal{F}(I)}$\\
+  \begin{enumzjr}
+  \item  Az $f$ fv. $\tau(\in{\mathcal{F}(I)})$-hoz tartozó alsó közelítő összege:
+  \[s(f,\tau):=\di\sum_{k=0}^{n-1}{\inf{\{f(x)|x_k\le{x}\le{x_{x+1}}\}}(x_{k+1}-x_k)}\]
+  \item  Az $f$ fv. $\tau(\in{\mathcal{F}(I)})$-hoz tartozó felső közelítő összege:
+    \[S(f,\tau):=\di\sum_{k=0}^{n-1}{\sup{\{f(x)|x_k\le{x}\le{x_{x+1}}\}}(x_{k+1}-x_k)}\]
+  \end{enumzjr}
+\end{de}
+\begin{megj}
+    $s(f,\tau)\le S(f,\tau)$
+\end{megj}
+\begin{te}
+  $\fir$ korlátos, zárt fv; $\tau_1,\tau_2\in \mathcal{F}(I)$, ekkor\\
+  \begin{enumzjr}
+  \item Ha $\tau_1\subseteq\tau_2\nn{s(f,\tau_1)}\le{s(f,\tau_2)},\quad{S(f,\tau_1)}\ge{S(f,\tau_2)}$\\
+  \item $s(f,\tau_1)\le{S(f,\tau_2)}$
+  \end{enumzjr}
+\end{te}
+
+\begin{de}(A tétel következménye)
+  Darboux-féle alsó integrál: $I_*:=\sup{S(f,\tau)|\tau\in{\mathcal{F}(I)}}$.\\
+  Darboux-féle felső integrál: $I^*:=\inf{S(f,\tau)|\tau\in{\mathcal{F}(I)}}$.
+\end{de}
+\begin{megj} $I_*f\leq I^f$
+\end{megj}
+\begin{de}[Riemann-integrálható fv]
+  Az $f\in [a,b]\to\R$ korlátos fv integrálható, ha $I_*f=I^*f$. \\
+  Jel: $\di\Int_I{f},\ \Int_a^b{f},\ \Int_a^b{f(x)},\ \Int_a^b{f(x)\diff x}$\\
+  Jel: $\Rint(I)$: az $I$ intervallumon integrálható fv.-ek halmaza
+\end{de}
+\begin{de}
+  $f\colon I\to\R$ korlátos fv, $\tau\in{\mathcal{F}(I)}$. Az $f$ fv $\tau$-hoz tartozó oszcillációs
+  összege:
+  \[\Omega(f,\tau):=S(f,\tau)-s(f,\tau)\geq 0\]
+\end{de}
+\begin{te}
+  $f\in{\Rint[a,b]}\ek\inf{\{\Omega(f,\tau)|\tau\in{\mathcal{F}([a,b])}\}}=0\\
+  (\forall\epsilon>0,\exists\tau\in{\mathcal{F}([a,b])}:\Omega(f,\tau)<\epsilon)$
+\end{te}
+
+\begin{de}
+  $\tau\in{\mathcal{F}[a,b]},\ \tau=\{x_0,x_1,\dotsc,x_n\}$;\\\
+  $\tau$ finomsága: $\Vert\tau\Vert=\max{\{x_{i+1}-x_i|i=0,\dotsc,n-1\}}$
+\end{de}
+\begin{te}
+  $f\in{\Rint[a,b]}\ek\forall\epsilon>0\ \exists\delta>0\ \forall\tau\in{\mathcal{F}[a,b]},\ ||\tau||<\delta:\
+  \Omega(f,\tau)<\epsilon$  
+\end{te}
+\begin{te}
+  $f\in{\Rint[a,b]}$ és $\di\Int_a^bf = I \ekviv\left\{\begin{array}{l}\exists\, \tau_n\text{ felosztás, hogy }\\
+  \lim\limits_{n\to+\infty}s(f,\tau_n)=I=\lim\limits_{n\to+\infty}S(f,\tau_n)\end{array}\right.$
+\end{te}
+\begin{te}
+  $f\in{\Rint[a,b]}$ és $\di\Int_a^bf = I \ekviv\left\{\begin{array}{l} \forall\, \tau_n\colon
+  \lim\Vert\tau_n\Vert=0\colon\\\lim\limits_{n\to+\infty}s(f,\tau_n)=I=
+  \lim\limits_{n\to+\infty}S(f,\tau_n)\end{array}\right.$
+\end{te}
+
+\subsection{Műveletek integrálható függvényekkel.}
+\begin{te}
+  $f,g\in{\Rint(I)}\nn{f+g}\in{\Rint(I)}\land\la\in\R\nn\la{f}\in{\Rint(I)}$ és\\
+  $\di\Int_I{f+g}=\Int_I{f}+\Int_I{g}$ és $\di\Int_I\la{f}=\la\Int_I{f}$
+\end{te}
+
+\begin{te}
+  \begin{enumerate}
+  \item $f,g\in \Rint(I)\nn fg\ \Rint(I)$
+  \item $f,g\in \Rint(I) \land\exists m>0|g|>m\nn\frac{f}{g}\in \Rint(I)$
+  \end{enumerate}
+\end{te}
+
+\subsection{Intervallum szerinti additivitás, monotonitás. Középértéktételek.}
+\begin{te}
+  $f\colon[a,b]\n\R,\ f$ korlátos. Ekkor:\\
+  $f\in{R([a,b])}\ek\forall{a<c<b}, f\in R([a,c]),f\in R([c,b]): \di\Int_a^bf=\Int_a^cf+\Int_c^bf$
+\end{te}
+
+\begin{de}
+  $f\in R[a,b], c\in[a,b]: \di\Int_a^bf:=-\Int_b^af$ és $\di\Int_c^cf:=0$
+\end{de}
+
+\begin{te}
+  $f\in \Rint(I); a,b,c\in I:\di\Int_a^bf=\Int_a^cf+\Int_c^bf\\$
+\end{te}
+\begin{te}
+  $f,g\in \Rint(I),f\le g\nn\di\Int_If\le\Int_Ig$
+\end{te}
+
+\begin{te}[Első középértéktétel]
+  $f\in \Rint(I),~g\in \Rint(I),~g\ge0,~m:=\inf{f\vert_I},~M:=\sup{f\vert_I}\\$
+  Ekkor: $m\di\Int_I g\le\Int_I{fg}\le M\Int_Ig$
+\end{te}
+
+\begin{Megj}
+\item \textbf{(2. középértéktétel)}
+  $\di f\in C(I)\nn\xi\in I:~\Int_Ifg=f(\xi)\Int_Ig.\\ m:=\min{f|_I},~ M:=\max{f|_I}:~
+  \exists m\le\omega\le M,~ \Int_I{(fg)}=\omega\Int_I{g},\\ f\in C(I)\nn\exists\xi\in I,\ f(\xi)=\omega\\$
+\item $\di g\equiv 1,~f\in \Folyt[a,b],~ \exists\xi\in[a,b]\colon\\\Int_a^bf=f(\xi)(b-a)\quad$ és $\quad\di\Int_a^b=b-a$
+\end{Megj}
+
+\subsection{Integrálható függvények osztályai.}
+\begin{te}
+  $I$ kompakt (korlátos és zárt), $f\in \Folyt(I)\nn f\in \Rint(I)$
+\end{te}
+
+\begin{te}
+  $I$ korlátos és zárt,$f:I\n\R,~f$ monoton $\nn f\in \Rint(I)$
+\end{te}
+
+\begin{te}
+  $f\in \Rint[a,b],~ g\colon[a,b]\n\R,~ \vert\{x\in[a,b]\colon f(x)\not=f(y)\}\vert<\infty\nn\\
+  g\in \Rint[a,b]\land\di\Int_a^bg=\Int_a^bf$
+\end{te}
+
+\begin{de}
+  $f:I\n\R$ függvény szakaszonként folytonos függvény, ha \\$I=[a,b],~a=x_0<x_1<x_2<\ldots<x_n=b$ és ekkor $f\in
+  C[x_k,x_{k+1}],\\
+  \di\lim_{x_k+0}{f}\in\R,~\lim_{x_{k+1}-0}{f}\in\R\quad(k=0,1,\ldots,n-1)$
+\end{de}
+\subsection{A Newton-Leibniz-tétel. Az integrálfüggvény.}
+\begin{te}[Newton-Leibniz]
+  $f\in \Rint[a,b]$, létezik $f$-nek primitív fv-e $\nn\\\di\Int_a^bf=F(b)-F(a),$ ahol az $F$ az $f$ tetszőleges primitív
+  függvénye.
+\end{te}
+\begin{megj}
+  Jelölés: $[f(x)]_a^k=f(k)-f(a)$
+\end{megj}
+\begin{de}
+  $f\in \Rint[a,b], x_0\in[a,b]:~I_{x_0}f(x):=\di\Int_{x_0}^xf~(a\le x\le b)$ az $f$ függvény $x_0$ pontban eltünő
+  integrálfüggvénye.
+\end{de}
+\begin{te}
+  $f\in R[a,b], x_0\in[a,b].$ Ekkor
+  \begin{enumerate}
+  \item $I_{x_0}f\in C[a,b]\\$
+  \item  Ha $f\in C(\{x\})\nn I_{x_0}f\in D\{x\}$ és $(I_{x_0}f)'(x)=f(x)$
+  \end{enumerate}
+\end{te}
+
+\begin{kov}
+  $f\in C[a,b]\nn\di\Int_{x_0}f$ az $f$ $x_0$-ban eltünő primitív függvénye.
+\end{kov}
+
+\subsection{Parciális és helyettesítéses integrálás határozott integrálra.}
+\begin{te}
+  $\di f,g\in \Der[a,b];~f',g'\in \Rint[a,b].$\\
+  Ekkor $\di\Int_a^b{fg'}=\left[fg\right]_a^b-\Int_a^b{f'g}$
+\end{te}
+\begin{te}
+  $\varphi:[\alpha,\beta]\n\R,~f$ folytonosan differenciálható (végpontjaiban egyoldali derivált), $f\in
+  C[a,b],~R_\varphi\subseteq[a,b]\nn~\di\Int_a^b{f\circ\varphi\cdot\varphi'}$  
+\end{te}
+
+
+\subsection{Az ívhossz fogalma és kiszámítása.}
+\begin{de}
+  $f\colon [a,b]\n\R,~f\in \Folyt;\\
+   l(f,\tau)=\di\sum_{k=0}^{n-1}{\sqrt{(f(x_{k+1})-f(x_k))^2+(x_{k+1}-x_k)^2}}.\\
+ f$ rektifikálható ($\exists$ ívhossza), ha $~\sup{l(f,\tau)|\tau\in \mathcal{F}(I)}<\infty.\\$
+ Ekkor $l(f):=\sup{\{l(f,\tau)|\tau\in \mathcal{F}[a,b]\}}\ f$ grafikonjának ívhossza.
+\end{de}
+\begin{te}
+  $f\in \Der[a,b],~f'\in \Folyt[a,b].\\$
+   Ekkor $\exists l(f)=\di\Int_a^b{\sqrt{1+(f')^2}}$
+\end{te}
+
+\subsection{Az improprius integrál.}
+Legyen $a\in\R$, $a<b\le+\infty$ ée tegyük fel, hogy az $f:[a,b)\rightarrow\R$
+minden $[a,\omega]\subset[a,b)$ intervallumon korlétos, integrálható függvény. 
+\begin{de}
+  Ha az $F(\omega):=\di\inf_1^\omega f\ (a\le\omega <b)$ függvénynek a b 
+  pontban van véges bal oldali határértéke, akkor azt mondjuk, hogy az 
+  $\di\Int_a^b\ f$ improprius integrál konvergens. Ebben az esetben a 
+  $\di\lim_{x\n b-0} F$ függvény $[a,b]$ intervallumra vonatkozó improprius 
+  integráljának nevezzük és az $\di\Int_a^bf$ vagy az $\di\Int_a^b f(x)dx$ 
+  szimbólummal jelöljük. Ha az $F$-nek a $b$ pontban nincs véges jobb oldali 
+  hatásértéke, akkor azt monjuk, hogy az $\di\Int_a^bf$ improprius integrál 
+  divergens. Jobb oldal hasonló.($\Phi=\di\Int_c^af$)
+\end{de}
+\begin{te}
+  Az $\di\Int_a^bf [\Int_c^af]$ improprius integrál akkor és csak akkor 
+  konvergens, ha\\
+  $\di\forall\epsilon>0 \exists k\in[a,b) \forall\omega_1,\omega_2\in(k,b): 
+  |F(\omega_1)-F(\omega_2)|=|\Int_{\omega_1}^{\omega_2}f|<\epsilon$
+  $[\di\forall\epsilon>0 \exists K\in(c,a] \forall\omega_1,\omega_2\in(c,K): 
+  |F(\omega_1)-F(\omega_2)|=|\Int_{\omega_1}^{\omega_2}f|<\epsilon]$
+\end{te}
+
+
+\begin{de}
+  Akkor mondjuk, hogy az $\di\Int_a^bf\ [\Int_c^af]$ improprius integrál
+  abszolút konvergens, ha a $\di\Int_a^b|f|\ [\Int_a^c|f|]$ konvergens.
+\end{de}
+\begin{kov}
+  Ha az $\di\Int_a^b$ improprius integrál abszolút konvergens, akkor egyben 
+  konvergens is.
+\end{kov}
+\begin{kov} (majoráns kritérium)
+  Ha $|f(x)|\le g(x)\ (x\in[a,b))$ és az $\di\Int_a^bg$ improprius integrál 
+  konvergens, akkor $\di\Int_a^bf$ abszolút konvergens. Ekkor ugyanis $\di\left\vert
+  \Int_{\omega_1}^{\omega_2}\textstyle\left\vert f\right\vert\right\vert \le\vert\di \Int_{\omega_1}^
+  {\omega_2}g\vert\\ (\omega_1,\omega_2\in[a,b))$ s innen adódik a bizonyítás.
+\end{kov}
+\begin{kov}
+  Az $g\ge0$ esetben a az $\di\Int_a^bf\ [\Int_c^af]$ improprius integrál akkor
+  és csak akkor konvergens, ha $F[\Phi]$ korlátos.
+\end{kov}
+
+\begin{te}
+  Tegyük fel, hogy az $\di\Int_a^bf,\Int_a^bg$ improprius integrálok
+  konvergensek és legyen $\lambda_1,\lambda_2\in\R$. Ekkor az $\di\Int_a^b
+  {\lambda_1f+\lambda_2g}$ improprius integrál is konvergens és $\di\Int_a^b
+  {\lambda_1f+\lambda_2g}=\lambda_1\Int_a^bf+\lambda_2\Int_a^bg$
+\end{te}
+
+
+\subsection{A határozatlan integrál fogalma. Alaptulajdonságok. Parciális és helyettesítéses integrálás.}
+\begin{de}
+  $I$ nyílt intervallum, $f,F:I\n\R$. $F$ az $f$ primitívfüggvénye, ha
+\begin{enumerate}
+\item $F\in\Der(I)$
+\item $F'=f$.
+\end{enumerate}
+\end{de}
+\begin{te}$I\subset\R$ intervallum, $f\colon I\to\R$
+  \begin{enumerate}
+  \item  Ha $F\colon I\to\R$ az $f$ függvény primitív függvénye, akkor $\forall c\in\R:F+c$ is primitívfüggvénye $f$-nek.
+  \item Ha $F_1,F_2\colon I\to\R$ az $f$ primitív függvényei, akkor $\exists c\colon F_1(x)-F_2(x)=c$
+  \end{enumerate}
+\end{te}
+
+\begin{te}[Szükséges és elégséges feltétel a primitív függvény létezésére]
+\begin{enumbz}
+\item (szükségesség): Ha $f$-nek létezi primitív függvénye $\nn$ f Darboux-tulajdonságú
+\item (elégségesség): $f\in\Folyt(I)\ \nn\ f$-nek létezik primitív függvénye
+\end{enumbz}
+\end{te}
+
+\begin{de}
+  $f\in I\to\R$ függvény primitívfüggvényeiből álló függvényosztály az f határozatlan
+  integrálja\\
+  Jel.:$\di\Int{f}:=\{F+c:F$ primitív $\land\ c\in\R\}$
+\end{de}
+
+\begin{de}
+  $F$ primitív fv-e az $\Int$ $x_0\in D_f$-ben eltünő primitív függvényének
+  nevezzük, ha $F(x_0)=0.$ Jel.:$\di\Int_{x_0}f$
+\end{de}
+
+\begin{te}
+  $I$ nyílt intervallum, $f,g:I\n\R, \la,\mu\in\R:\exists f,g$-nek primitív függvénye$\nn\di \exists\Int{(\la f+\mu g)}$
+  primitív fv. és \\
+  $\di 1.~\Int{(\la f+\mu g)}=\la\Int{f}+\mu\Int{g}\\2.~\Int_{x_0}{(\la f+\mu g)}=\la\Int_{x_0}{f}+\mu\Int_{x_0}{g}$
+\end{te}
+
+
+\begin{te}[Parciális integrálás]
+  $\di f,g\in D(I),\exists\Int{f'g}$. Ekkor\\
+\begin{gather*}
+  \Int fg'=fg-\Int f'g\text{ és}\\
+  \Int_{x_0}{fg'}=fg-f(x_0)g(x_0)-\Int_{x_0}{f'g}
+\end{gather*}
+\end{te}
+
+\begin{te}[Helyettesítéses integrál]
+$g\colon I\to\R,\ g\in\Der(I),\ J\subset\R,\R_g\subset J$ és $f\colon J\to\R$-nek $\exists$ primitív függvénye.
+  Ekkor léteznek és:
+\begin{gather*}
+  \Int{f\circ{g}}\cdot g'=(\Int{f})\circ{g}\text{ és}\\
+  \Int_{x_0}{f\circ{g}}\cdot g'=(\Int_{g(x_0)}{f})\circ{g}
+\end{gather*}
+\end{te}
+
+\begin{te}[2. helyetttesíési szabály] Tfh:
+\begin{enumzjr}
+\item $I,J\subset\R$ intervallum
+\item $g\colon I\to J$ bijekció és $g\in\Der(I)$
+\item $f\colon J\to \R$ és $\exists\di \int f\circ g\cdot g'$
+\end{enumzjr}
+Ekkor $f$-nek is létezik primitív függvénye és
+\[ \Int_{x_0}f=\left(\Int_{g^{-1}(x_0)}\!\!\! (f\circ g)\cdot g'\right)\cdot g^ {-1}\quad x_0\in J\]
+\end{te}
+
+Jelölések:
+\begin{enumerate}
+  \item $F(g(t))=F(x)|_{x=g(t)}$
+  \item $\di\Int{f(x)dx}|_{x=g(t)}=\Int{f(g(t))g'(t)dt}$
+  \item $g$ invertálható $\nn\Int{f}=(\Int{f\circ{g}g'})\circ{g^{-1}}\ \Int{f(x)dx}=\Int{f(g(t))g'(t)dt\{t=g^{-1}(x)}$
+\end{enumerate}
+
+\newpage
+\subsection{A binomiális sor.}
+\begin{de}
+  $\di f\colon (-1,\infty)\n\R,\ f(x)=(a+x)^\alpha\ \ (\alpha\in\R),\ f\in \Der^\infty\\
+  f'(x)=\alpha(1+x)^{\alpha-1}\\
+  f''(x)=\alpha(\alpha-1)(1+x)^{\alpha-2}\\
+  \ldots\\
+  f^{(k)}(x)=\alpha(\alpha-1)\ldots(\alpha-k+1)(1+x)^{\alpha-k}\\
+  T(f,0,x)=\sum_{k=0}^{\infty}{\frac1{k!}\alpha(\alpha-1)\ldots(\alpha-k+1)x^k}=\sum_{k=0}^{\infty}{\binom{\alpha}{k}x^k}$
+\end{de}
+\begin{te}
+  $|x|<1,\alpha\in\R\setminus\{0\}: (1+x)^\alpha=\di\sum_{k=0}^\infty\binom{\alpha}{k}x^k$
+\end{te}
+
+\newpage
+\section{Vonalintegrál}
+
+\subsection{Sima utak, görbék}
+\begin{de}[Sima út]$n\in\N\ \vfi\colon[a,\,b]\to\R^n$ folytonosan deriválható függvényt\\\emph{$\R^n$-beli sima út}nak
+  nevezzük.\\  Az $R_\vfi = \Gamma\subset\R^n$ halmaz \emph{sima görbe}, $\vfi$ a $\Gamma$ görbe egy paraméterezése.
+\end{de}
+
+\begin{de}[Szakaszonként sima út]$a,b\in\R;\ a\leq b$. A $\vfi\colon[a,b]\to \R^n$ függvény  \emph{$\R^n$-beli
+    szakaszonként sima út}, ha
+  \begin{enumzjr}
+  \item $\vfi\in\Folyt$
+  \item $\exists a=t_0<t1<\dotsb<t_m=b$: $\vfi_{[t_1,\,t_i+1]}\ \ i=1,\dotsc,m-1$ sima út.
+  \end{enumzjr}
+\end{de}
+
+\begin{Pl}
+\item Szakasz: $a,b\in \R^n\ \vfi(t) := a+t(b-a)\quad(t\in[0,\,1])$
+\item Töröttvonal - szakaszonként sima út
+\item Kör: $\vfi(t) := (\sin t,\cos t)\quad t\in[0,2\pi]\\
+  R_\vfi=\Gamma$
+\end{Pl}
+
+
+\begin{de}[Szakaszonként sima utak egyesítése]
+  $\vfi\colon [a,a+h]\to\R^n$\\$\psi\colon[b,b+k]\to\R^n$ szakaszonként sima utak, és tfh: $\vfi(a+h)=\psi(b)$, azaz
+  $\vfi$ végpontja megegyezik $\psi$ kezdőpontjával. \\
+  A $\vfi$ és $\psi$ egyesítése $(\vfi\cup\psi)$:
+\[\Phi(t) = \begin{cases}\vfi(t) & t\in[a,a+h]\\\psi(t-a-h+b) & t\in[a+h,a+h+k]\end{cases}\]
+\end{de}
+
+\begin{de}[$\vfi$ ellentettje] $\widetilde{\vfi} := \vfi(2a+h-t)\qquad(t\in[a+h])$\\
+  az út $a+h\to a$ irányú lett.
+\end{de}
+
+\begin{de}[Tartomány]Az $U\subset \R^n$ halmaz \emph{tartomány}, ha
+  \begin{enumzjr}
+  \item $U$ nyílt $\R^n$-ben
+  \item $U$ összefüggő
+  \end{enumzjr}
+\end{de}
+\begin{te}Legyen $U\subset \R^n$ nyílt.\\
+  $U$ összegüggő $\ekviv \forall x,y\in  U$ összeköthető $U$-beli szakaszonként
+  sima úttal.
+\end{te}
+
+\subsection{Vonalintegrál definíciója}
+\begin{de}[Úton vett vonalintegrál]
+  Legyen $U\subset \R^n$ tartomány, $f\colon U\to\R^n$ \underline{folytonos}, $\vfi\colon [a,b]\to\R^n$ szakaszonként
+  sima. Ekkor
+\[\Int_a^b\skalar{f\circ\vfi}{\vfi'} = \Int_a^b\skalar{f(\vfi(t))}{\vfi'(t)\,}\diff t =: \Int_\vfi f\]
+szám az $f$ függvény $\vfi$ útra vett vonalintegrálja.
+\end{de}
+
+\newpage
+\begin{te}[A vonalintegrál egyszerű tulajdonságai]
+  $U\subset \R^n$ tartomány,\\$\vfi\colon [a,a+h]\to\R^n$ és $\psi\colon [b,b+k]\to\R^n$ szakaszonként sima utak,
+  $\vfi(a+h) = \psi(b)$.\\$f,g\colon U\to\R^n$ folytonos. Ekkor
+  \begin{enumerate}
+  \item $\di\Int_\vfi(\lambda_1 f +\lambda_2g) = \lambda_1\Int_\vfi f+ \lambda_2\Int_\vfi g$
+  \item $\di\Int_\vfi f = -\Int_{\widetilde{\vfi}}$\qquad (ellentett út)
+  \item $\di\Int_{\vfi\cup\psi}\!\!\! f = \Int_\vfi f + \Int_\psi f$
+  \item $\di\Big\vert \Int_\vfi f\Big\vert \leqq M\cdot l(\vfi)$, ahol $l(\vfi)$ a $\vfi$ (vagy a $\Gamma$ görbe)
+  hossza és $M:= \max \{\,\norma{f(x)}_2:x\in R_\vfi\}$
+  \end{enumerate}
+\end{te}
+
+\subsection{Primitív függvények}
+\begin{de}[Primitív függvény]$U\subset\R^n$ tartomány, $f\colon U\to\R^n$.\\
+  Az $F\colon U\to\R^n$ függvény az $f$ primitív függvénye, ha
+  \begin{enumzjr}
+    \item $F\in\Der$
+    \item $F'(x) = f(x)\quad (\forall x\in U)$
+  \end{enumzjr}
+\end{de}
+
+\begin{megj}
+  Ha $F\in\Der$: $F'=(\partial_1F,\dotsc\partial_nF) =(f_1,\dotsc,f_n)=f$
+\end{megj}
+
+\begin{te}\
+  \begin{enumzjromai}
+  \item Ha $F\colon U\to\R$ az $f$ primitív függvénye $\nn \forall c\in\R\colon F+c$ is az
+  \item Ha $F_1,\,F_2\colon U\to\R$ az $f$ primitív függvényei $\nn \exists c\in\R\colon F_1(x)-F_2(x) = c \quad \forall
+  x\in U$
+  \end{enumzjromai}
+\end{te}
+
+\begin{te}[Newton-Leibniz]
+  Tfh:
+\begin{enumzjromai}
+  \item $U\subset \R^n$ tartomány
+  \item $f\colon U\to \R^n$ folytonos
+  \item $\vfi\colon [a,b]\to U$ szakaszonként sima út
+  \item $f$-nek $\exists F$: a primitív fv-e
+\end{enumzjromai}
+Ekkor $\di\Int_\vfi f = F(\vfi(b))-F(\vfi(a))$
+\end{te}
+
+\begin{pl}
+  Primitív fv. meghatározása\\
+  $f(x,y) = \left(\dfrac{y}{x^2},\,-\dfrac1x\right)\qquad(x>0,y>0)$\\
+  Létezik-e $F\colon \R^2\to\R$, hogy $F'=f$.\\
+  $\left.\!\begin{gathered}\partial_xF(x,y) = \dfrac{y}{x^2}\\\partial_yF(x,y)=-\dfrac1x+h'(y)\end{gathered}
+  \right\}\nn F(x,y) = -\dfrac y x+h(y)$\\
+  $h'(y) = 0\nn h\equiv$ állandó\\
+  így $F(x,y) = -\dfrac y x +c\quad (x,y)>0$
+\end{pl}
+
+\begin{te}
+  $U\subset \R^n$ taromány, $f\colon U\to\R$ folytonos.\\
+  $f$-nek létezik primitív függvénye $\ekviv \left\{\begin{array}{l}\forall U\text{-ban haladó szakaszonként sima és
+  zárt }\vfi\text{ útra:}\\\di\Int_\vfi f= 0\end{array}\right.$
+\end{te}
+
+\begin{megj}Jelölés: $\oint$: zárt útra vett integrál, körintegrál.
+\end{megj}
+
+\begin{te}[Szükéges feltétel a primitív függvény létezésére]
+  $U\subset\R^n$ tartomány,\\$f\colon U\to\R^n$
+  \begin{enumzjr}
+    \item $f$ \underline{deriválható}
+    \item $f$-nek létezik primitív függvénye
+  \end{enumzjr}
+  Ekkor $f'$ deriváltmátrix szimmetrikus, azaz $\partial_if_j=\partial_jf_i\ (\forall 1\leq i,j\leq n)$ és
+  $f=(f_1,\dotsc,f_n)$
+\end{te}
+
+\begin{Megj}
+\item $\R\to\R$ esetén $\forall$ folytonos függvénynek létezik primitív függvény\\
+  Ha $n\geq 2$, akkor $\exists f$ deriválható, melynek nincs primitív függvénye.
+\item Csillagtartományon ez a szükséges felétel elégséges is
+\end{Megj}
+
+\begin{de}[Csillagtartomány]
+  $U\subset \R^n$ az $a\in U$ pontra nézve csillagtartomány, ha $\forall x\in U: [a,x]\subset U$
+\end{de}
+
+\begin{te}[Elégséges feltétel a primitív függvény létezésére]
+  Tfh:
+  \begin{enumzjr}
+  \item $U\subset \R^n$ az $a\in U$-ra csillagtartomány
+  \item $f\colon U\to\R^n$ folytonosan deriválható
+  \item $f'$ deriváltmátrix szimmetrikus
+  \end{enumzjr}
+  Ekkor $F$-nek $\exists$ primitív függvénye, az
+  \[\di U\owns x\mapsto\!\!\Int_{[a,x]}\!\!\!f\]
+  az  $f$ egy $a$-ban eltűnő primitív függvénye
+\end{te}
+
+
+\newpage
+\section{Többszörös integrálok}
+\subsection{A többszörös integrál fogalma}
+Két lépésben: $N$-dimeziós intervallum, majd tetszőleges $H\subset\R^N$ korlátos halmaz
+
+\subsubsection{$N$-dimeziós intervallum és felosztása}
+\begin{de}
+  $I^j:=[a^j,\,b^j]\subset \R\quad \forall j=1,\dotsc,N$\\
+  $I := I^1\times I^2\times\dotsb\times I^N\quad\R^N$-beli kompakt intervallum\\
+  $\mu(I) := (b^1-a^1)\cdot (b^2-a^2)\dotsm(b^N-a^N)$ az $I$ mértéke.
+\end{de}
+\begin{de}[Felosztás - egydimenziós]
+  $[a,b]\subset \R,\\\tau := \{\,[x_{r-1},\,x_r]:r=1,2,\dotsc,m\}\in\mathcal{F}([a,b])$
+\end{de}
+\begin{de}[Felosztás]
+  Legyen $\tau_j\in\mathcal{F}(I^j)\quad (j=1,\dotsc,N)$.\\
+  $\tau := \tau_1\times\tau^2\times\dotsb\times\tau^N=\{I^1_{r_1}\times I_{r_2}^2\times I^N_{r_N}:1\leq r_j\leq m\}$ az
+  $I$ intervallum egy felosztása\\
+  Jel: $\mathcal{F}(I)$ a felosztás egy halmaza
+\end{de}
+
+\begin{de}
+  $f\colon I\to\R,\ I\subset \R^N$ kompakt intervallum, $f$ korlátos, $\tau\in\mathcal{F}(I)$.
+  \begin{gather*}
+    s(f,\tau):=\sum_{J\in\tau}(\inf f_{|J})\cdot \mu(J)\\
+    S(f,\tau) :=\sum_{J\in\tau}(\sup f_{|J})\cdot \mu(J)
+  \end{gather*}
+  az $f$ függvény $\tau$ felosztáshoz tartozó alsó- illetve felső közelítő összege.
+\end{de}
+\begin{megj}
+$\{\,s(f,\tau):\tau\in\mathcal{F}(I)\}$ és $\{\,S(f,\tau):\tau\in\mathcal{F}(I)\}$ korlátosak
+\end{megj}
+\begin{de}
+  $f\colon I,\to \R,\ I\subset \R^N$ kompakt intervallum, $f$ korlátos függvény.
+  \begin{gather*}
+    \sup\, \{\,s(f,\tau):\tau\in\mathcal{F}(I)\,\} =: I_*f\\
+    \inf\, \{\,S(f,\tau):\tau\in\mathcal{F}(I)\,\} =: I^*f
+  \end{gather*}
+  az $f$ Darboux-féle alsó-, ill felső integrálja.
+\end{de}
+
+\begin{de}Az $f$ Riemann-integrálható, jel: $f\in\Rint(I)$, ha $I_*f=I^*f=\Int_If$.\\
+  $\di\Int_If$ az $f$ Riemann integrálja $I$-n.
+\end{de}
+
+\begin{megj}$I_*f$, $I^*f$ létezik minden ilyen függvényre
+\[I_*f\leq I^*f,\text{ ui }\forall\tau,\sigma\in\mathcal{F}(I)\colon s(f,\tau)\leq S(f,\sigma)\]
+\end{megj}
+
+\subsection{A többszörös integrál alapvető tulajdonságai}
+\begin{te}
+  $I\subset\R^N$ kompakt, $f,g\colon I\to\R$ korlátos függvények, $f,g\in\Rint(I)$. Ekkor
+\begin{enumzjb}
+  \item $f+g\in\Rint(I)$, és $\di\Int_I (f+g) = \Int_I f + \Int_I g$
+  \item $\forall \lambda\in\R\colon \lambda f\in\Rint(I)$ és $\di\Int_I(\lambda f)=\lambda\Int_I f$
+\end{enumzjb}
+\end{te}
+
+\begin{pl}Nem integrálható a következő függvény, ahol $(x,y)\in [0,1]\times[0,1]=:I$.\\
+  $f(x,y):=\begin{cases}0 & x,y \text{ racionális }\\1 &\text{ különben}\end{cases}$\\
+  $f\not\in\Rint(I)$, ui $I_*f=0\neq I^*f=1$
+\end{pl}
+\begin{te}[Egyenlőtlenség]$I\subset\R^N$ kompakt intervallum, $f,g\colon I\to\R$ és tfh:\\$f,g\in\Rint(I)$. Ekkor
+  \begin{enumzjb}
+    \item $f\leq g\ I$-n $\di\nn \Int_If\leq \Int_Ig$
+    \item $\vert f\vert\in\Rint(I)$ és $\di\left\vert\Int_If\right\vert\leq\Int_I\vert f\vert$
+    \item \textbf{első középértéktétel} Ha $g\geq 0\ I$-n:
+      \begin{gather*}
+	m\Int_Ig\leq \Int_I(fg)\leq M\Int_Ig\\
+	M:=\sup_If\\
+	m:=\inf_If
+      \end{gather*}
+    \item \textbf{második középértéktétel} Ha  még $f\in\Folyt(I)$ is:
+      \[\exists \xi \in I\quad \Int_I fg = f(\xi)\Int_Ig\quad g\geq 0\ I\text{-n}\]
+  \end{enumzjb}
+\end{te}
+\begin{biz}Mint $\R\to\R$\end{biz}
+
+\begin{te}$f\colon I\to\R,\ I\subset\R^N$ kompakt intervallum\\
+  $f$ folytonos $\nn$ $f$ integrálható $I$-n.
+\end{te}
+
+\subsection{Az integrál értelmezése tetszőleges $H\subset \R^N$ korlátos tartományon}
+\begin{de}Legyen $H\subset\R^N$ \underline{korlátos} halmaz, $f\colon H\to\R$. Ekkor $\exists I\subset\R^N$ kompakt
+  intervallum, hogy $H\subset I$. Az $f$ függvény Riemann-integrálható a $H$-n, ha az
+\[ \tilde{f}(x) := \begin{cases}f(x)& x\in H\\0& x\in I\setminus H \end{cases}\]
+függvény integrálható az $I$-n. Ekkor
+\[ \Int_Hf := \Int_I\tilde{f}\]
+\end{de}
+
+\begin{Megj}
+  \item A definíció nem függ az $I$ megválasztásától
+    \item A $H$-n vett integrálokra is érvényesek az alapvető tulajdonságokra kimondott állítások.
+\end{Megj}
+
+\subsection{Az integrál számítása}
+$N=2$-re, $N\geq 2$ esetén hasonlóan.\\
+Három eset:
+\begin{enumerate}
+\item $D_f$ kompakt intervallum (szukcesszív: egymás utáni integrálással)
+\item $D_f$ ún. normáltartomány (szukcesszív integrálással)
+\item $D_f$ egyéb tartomány (integrál-transzformációval)
+\end{enumerate}
+
+\subsubsection{Intervallumon}
+$N=2,\ D_f=[a,b]\times[c,d]=:I$, $f\colon I\to\R$ korlátos függvény. Vesszük a tengelyekkel párhuzamos megtszetgörbéket:
+$\forall x\in[a,b]\colon\vfi_x(y):=f(x,y)$, ahol $y\in[c,d]$. $\vfi_x\colon[c,d]\to\R$
+
+
+\begin{te}Ha $f\in\Rint(I)$, akkor az
+\[M(x):=I^*\vfi_x\text{ és }m(x):=I_*\vfi_x\quad x\in[a,b]\]
+függvények integrálhatók $[a,b]$-n és
+\[\Int_If=\Int_a^bM(x)\diff x=\Int_a^bm(x)\diff x\]
+\end{te}
+
+\begin{ko}
+  Ha $f\in\Rint(I)$ és még tfh: $\forall x\in[a,b]\colon \vfi_x\in\Rint[c,d]$, azaz $I^*\vfi_x=I_*\vfi_x$, akkor
+  \[\Int_If=\Int_a^b\left(\Int_c^df(x,y)\diff y\right)\diff x\]
+  Jel: $\di\Int_If=\Int_a^b\!\!\Int_c^df(x,y)\diff x\diff y$
+\end{ko}
+\begin{ko}  Ha
+  \begin{enumzjr}
+  \item $f\in\Rint(I)$
+  \item $\forall x\in[c,d]\ \vfi_x\in\Rint[c,d]$
+  \item $\forall y\in[c,d]\ \vfi_y(x):=f(x,y)\quad x\in[a,b]$ függvény integrálható $[a,b]$-n
+  \end{enumzjr} Ekkor
+  \[\Int_I f=\Int_a^b\left(\Int_c^df(x,y)\diff y\right)\diff x=\Int_c^d\left(\Int_a^bf(x,y)\diff x\right)\diff y\]
+  azaz a változók felcserélhetók
+\begin{pl}
+\begin{gather*}
+  f(x,y):= x^2y,\ (x,y)\in[0,1]\times[0,1]\\
+  \Int_0^1\!\!\Int_0^1f(x,y)\diff x\diff y=\Int_0^1\left(\Int_0^1f(x,y)\diff y\right)\diff x =\Int_0^1\left[
+    \dfrac{x^2y^2}2 \right]_{y=0}^{y=1}\diff x=\Int_0^1\dfrac{x^2}2\diff x=\\\hspace{1em}=
+  \left[\dfrac{x^3}6\right]_0^1=\dfrac16
+  \intertext{illetve}
+  \Int_0^1\!\!\Int_0^1f(x,y)\diff x\diff y=\Int_0^1\!\left(\Int_0^1f(x,y)\diff x\right)\diff y =\Int_0^1\left[
+    \dfrac{x^3y}3 \right]_{x=0}^{x=1}\diff y=\Int_0^1\dfrac{y}3\diff y=\left[\dfrac{y^2}6\right]_0^1=\dfrac16
+\end{gather*}
+\end{pl}
+\end{ko}
+
+\subsubsection{Normáltartományon}
+\begin{de}\ 
+  \begin{enumzjb}
+  \item $x$-re nézve normáltartomány: $\vfi_1(x)\leq\vfi_2(x)\quad(x\in[a,b])$
+    \[H:=\{(x,y)\in\R^2:a\leq x\leq b;\  \vfi_1(x)\leq y\leq\vfi_2(x)\}\]
+  \item $y$-ra nézve normáltartomány: $\psi_1(y)\leq\psi_2(y)\quad(y\in[c,d])$
+    \[K:=\{(x,y)\in\R^2:c\leq y\leq d;\  \psi_1(y)\leq x\leq\psi_2(y)\}\]
+  \end{enumzjb}
+\end{de}
+
+\begin{te}\ 
+  \begin{enumzjb}
+    \item $H\subset \R^2\ x$-re nézve normáltartomány, $f\colon H\to\R$  folytonos. Ekkor $f\in\Rint(H)$ és
+      \[\Int_Hf=\Int_a^b\left(\Int_{\vfi_1(x)}^{\vfi_2(x)}\!\!f(x,y)\diff y\right)\diff x\]
+    \item $K\subset \R^2\ y$-ra nézve normáltartomány, $f\colon K\to\R$  folytonos. Ekkor $f\in\Rint(K)$ és
+      \[\Int_Kf=\Int_c^d\left(\Int_{\psi_1(y)}^{\psi_2(y)}\!\!f(x,y)\diff x\right)\diff y\]
+  \end{enumzjb}
+\end{te}
+
+\subsection{Integrál-transzformációval}
+Bármilyen egyéb tartományon integrál-transzformációval téglalapra vett integrálásra vezetjük vissza a kiuszámítását
+(helyettesítéses integrálás).
+
+\begin{pl}
+\begin{gather*}
+  x=r\cos\vfi=\Phi_1(r,\vfi)\\
+  y=r\sin\vfi=\Phi_2(r,\vfi)\\
+  \R^2\to\R^2\owns\Phi:=(\Phi_1,\Phi_2)\colon U\to V\text{ folytonosan deriválható bijektív leképezés}\\
+  \det\Phi'(r,\vfi)=\det\begin{bmatrix}\cos\vfi & -r\sin\vfi\\\sin\vfi & r\cos\vfi\end{bmatrix} = r \ne 0\\
+  \intertext{Ezért $\exists\Phi^{-1}\nn \Phi$  bijektív}
+  \intertext{Igazolható:}
+  \iint\limits_Vf(x,y)\diff x\diff y=\Int_V f=\iint\limits_U f(r\cos\vfi,r\sin\vfi)\cdot\underbrace{
+  \vert\det\Phi'(r,\vfi)\vert }_{\underset{r}{\scriptsize{\Vert}}}\diff r\diff \vfi  
+\end{gather*}
+\end{pl}
+\begin{te}[Integrál-transzformáció]
+  Legyen $\Phi:=(\Phi_1,\,\Phi_2)\colon U\to V\quad (U,V\in\R^2)$ folytonosan deriválható és $\det\Phi' \ne0\ U$-n
+  (vagyis $\Phi$ bijekció).\\
+  Ha  $f\colon V\to\R$ folytonos $\nn f\in\Rint(V)$ és
+  \[\Int_Vf=\Int_Uf\circ\Phi\cdot\vert\det\Phi'\vert\]
+\end{te}
+
+
+% Local Variables:
+% fill-column: 120
+% TeX-master: t
+% End:

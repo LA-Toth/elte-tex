@@ -1,0 +1,1137 @@
+\documentclass[fleqn,10pt,a4paper]{article}
+
+%
+% ---------- CODES --------------------------
+%
+\makeatletter
+\gdef\th@magyar{\normalfont\slshape
+  \def\@begintheorem##1##2{%
+  \item[\hskip\labelsep \theorem@headerfont ##2.\ ##1.]}%
+  \def\@opargbegintheorem##1##2##3{%
+  \item[\hskip\labelsep \theorem@headerfont ##2. ##1.\ (##3)]}}
+\makeatother
+
+%
+% - ---- -- PACKAGES--------------------------
+%
+\usepackage{amssymb}
+\usepackage{amsmath}
+%\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[magyar]{babel}
+%\usepackage{amsthm}
+\usepackage{theorem}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{paralist}
+
+%
+% ------------  N E W  C O M M A N D S --------
+%
+%\newcommand{\ob}{\begin{flushright} \leavevmode\hbox to.77778em{\hfil\vrule
+%    \vbox to.675em{\hrule width.6em\vfil\hrule}\vrule}\hfil\end{flushright}}
+\newcommand{\ob}{\hfill$\square$}
+\newcommand{\ff}{f\in\mathbb{R}\rightarrow\mathbb{R}}
+\newcommand{\fab}{f\colon (a,b)\rightarrow\mathbb{R}}
+\newcommand{\fabk}{f\colon \left[a,b\right]\rightarrow\mathbb{R}}
+\newcommand{\fir}{f\colon I\rightarrow\mathbb{R}}%\usepackage[pdfborder(0 0 0)]{hyperref}
+
+\newcommand{\fdab}{f\in D(a,b)}
+\newcommand{\exist}{\exists}
+\newcommand{\ek}{\Longleftrightarrow}
+\newcommand{\la}{\lambda}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\n}{\rightarrow}
+\newcommand{\nn}{\Rightarrow}
+\newcommand{\Omage}{\Omega}
+\newcommand{\nb}{\Leftarrow}
+\newcommand{\di}{\displaystyle}
+\newcommand{\sarrow}{\downarrow}
+\newcommand{\narrow}{\uparrow}
+\newcommand{\lt}{<}
+\newcommand{\gt}{>}
+\newcommand{\ut}[1]{\texttt{#1}}
+\newcommand{\utt}[1]{\\\ut{#1}}
+
+%
+% ------------  NEW PART DEFS -----------------
+%
+\newcounter{Szaml}
+
+
+\theoremstyle{magyar}
+\newtheorem{de}{definíció}[section]
+\newtheorem{te}{tétel}[section]
+\newtheorem{bi}{bizonyítás}[section]
+\newtheorem{ko}{következmények}[section]
+\newtheorem{me}{megjegyzés}[section]
+\newtheorem{al}{állítás}[section]
+
+\newenvironment{biz}{\begin{trivlist}\item\relax\mbox{\textbf{Bizonyítás.\enskip}}\ignorespaces}{\ob\end{trivlist}}
+\newenvironment{kov}{\begin{trivlist}\item\relax\mbox{\textbf{Következmény.\enskip}}\ignorespaces}{\end{trivlist}}
+\newenvironment{megj}{\begin{trivlist}\item\relax\mbox{\textbf{Megjegyzés.\enskip}}\ignorespaces}{\end{trivlist}}
+\DeclareMathOperator{\D}{D}
+\newenvironment{bizlist}{\setcounter{Szaml}{1}
+    \begin{list}{\alph{Szaml})\hfill}
+    {\usecounter{Szaml}\setlength{\itemsep}{0pt}
+    \setlength{\itemindent}{-\labelsep}
+    \setlength{\listparindent}{0pt}}}{\end{list}}
+
+
+%
+% - - - -- - - S E T T I N G S ----------------
+%
+
+\hyphenation{le-gyen %ki-ér-té-ke-lé-si
+%meg-ha-tá-ro-zott
+}
+%\setlength{\parindent}{0pt}
+%\setlength{\parskip}{\baselineskip}
+\addtolength{\voffset}{-1cm}
+\addtolength{\textheight}{2cm}
+%\addtolength{\marginparwidth}{-1cm}
+\addtolength{\hoffset}{-1cm}
+\addtolength{\textwidth}{2cm}
+\setlength{\headheight}{23pt}
+%
+\pagestyle{fancy}
+\renewcommand{\sectionmark}[1]{\markboth{\Roman{section}. tétel\\#1}{}}
+\lhead{\textbf{\thepage}/\pageref{LastPage}}
+
+\title {Szoftverszigorlat tételsor}
+
+\setcounter{section}{16}
+\setcounter{tocdepth}{4}
+
+
+\newcommand{\mktoc}{
+  \pagenumbering{roman}
+  \setcounter{page}{1}
+  \lhead{\textbf{\thepage}}
+  \tableofcontents
+  \newpage
+  \lhead{\textbf{\thepage}/\pageref{LastPage}} 
+  \pagenumbering{arabic}
+  \setcounter{page}{1}
+}
+
+
+%\hyphenation{ki-ér-té-ke-lé-si}
+%
+% T H E    D O C U M E N T
+%
+\begin{document}
+  \mktoc
+  \section{Programozási nyelvek alapfogalmai}
+  
+  \paragraph{Fordítás és interpretálás}
+  A programozási nyelvek alapvetően két csoportba oszthatóak. Az
+  egyikbe tartozókat egy fordítóprogrammal megfelelő (bináris, gépi kódú) alakra
+  kell hozni, ilyen a C/C++, Ada. Ezek forráskódja közvetlenül
+  nem futtatható, csak a lefordított kód A másik csoportba tartozóak az
+  interpretált nyelvek vagy scriptnyelvek, melyeknél magát a
+  forráskódot futtatja az interpreter (értelmező). Ilyen nyelv pl a
+  Perl, PHP, python. Végül kicsit mindkettő például a java. Egy köztes
+  bináris alak jön létre a fordítás során, amit a java
+  futtatókörnyezet értelmez és hajt végre.
+
+  \paragraph{Fordítás, szerkesztés, futtatás}
+  \textbf{\emph{Fordítás}} a forráskód átalakítása gépi kóddá. Ez még nem futtatható,
+  mert egy \emph{object file} jön létre (fordítási egységenként).\\
+  \textbf{\emph{Szerkesztés} vagy \emph{linkelés}}: a fordítás során
+  keletkezett gépi kódú  
+  (tárgykódú) fájlok futtathatóállománnyá szerkesztése. A forráskódban
+  ennek módját befolyásolhatjuk (főleg fordítás idején), pl C++ kódban
+  \texttt{extern~``C''~utasítás;}.\\
+  Az első kettőre példa a \ut{gcc -o runme main.c util.c};\\
+  csak az elsőre a \ut{gcc -o main.o -c main.c}\\
+  \textbf{\emph{Futtatás}}: a lefordított program végrehajtása.
+
+  \paragraph{Fordítási egység, könyvtár}
+  Egy-egy fordítási egység (\emph{modul}) logikailag összetartozó,
+  önállóan fordítható kódrészlet. Ebből egyetlen object file készül. A
+  kód viszont állhat több fájlból, ha a definíciókat el kell
+  választani a deklarációktól (adb és ads ill c, cpp, cc és h, hh
+  fájlok).
+
+  Az ada esetén egy fordítási egységet alkot egy-egy csomag illetve
+  egy-egy függvény vagy eljárás. Az egységet tartalmazó fájl neve
+  megegyezik a csomag, fv, vagy eljárás nevével.
+  
+  Könyvtárnak nevezzük azon függvények, eljárások és változók
+  csoportját, melyet több programból is el szeretnénk érni. Egy-egy
+  könyvtár is egy vagy több fordítási egységből áll. Ezek lehetnek
+  statikusan és dinamikusan linkeltek. A statikus linkelés során a
+  közös kód minden programba bekerül, és a könyvtár módosulása után
+  újra kell fordítani az összes programot. A dinamikus linkelés során
+  a kód egyszer van meg, és minden program betölti. Utóbbiak
+  elnevezése is és viselkedése is különböző, pl linuxon \emph{shared
+  object}, a közös kód egyszer van a memóriában, windowson
+  \emph{dynamic-link library} (DLL), a közös kód programonként egyszer
+  bent van a memóriában.
+
+  \paragraph{Előfordító és néhány nevezetes használata}
+  Több nyelvnél fontos szerepet tölt be az előfordító
+  (\emph{precompiler}). Viszonylag egyszerű makrófeldolgozó
+  rendszernek tekinthető, ugyanis nem csak makrókat bontja ki működése
+  során, hanem más forrásállományokat is be tud illeszteni a (végleges)
+  kódba. Ezek nem feltétlenül header (fejléc, .h) fájlok, hanem
+  bármilyen szövegfájl lehet. Szerepe a kód szétbontása, illetve
+  (fejlécfájlok esetén) a közös kód egyetlen fájlba helyezésének
+  elősegítése. C-ben \ut \#include előfordító utasítás ezt teszi.
+
+  C-ben makrókat lehet definiálni így, illetve felételes fordítást:
+  pl\\
+  \ut{\#ifdef LINUX\\
+    \hspace*{0.5em}utasítások;\\
+    \#else\\
+    \hspace*{0.5em}utasítások;\\
+    \#endif}\\
+  végül konstansokat (\ut{\#define PI 3.14}). C++ esetén ezt már
+  nem szokás használni, helyette \ut{const double PI=3.14;} a
+  használt alak.
+    
+  \paragraph{Fordítási egységek függései}
+  Mivel a legtöbb fordítási egység meghív olyan függvényeket,
+  eljárásokat, illetve használ olyan változókat, melyek más egységben
+  definiáltak, ezek között függőség alakul ki. Tehát le lehet
+  fordítani őket külön-külön (a fordító ezt teszi), de
+  összeszerkeszteni egy programot vagy egy könyvtárat csak akkor lehet
+  egy adott fordítási egységből, ha azon egységek is bekerülnek,
+  melyektől függ ez az adott egység.
+  
+  \paragraph{Operátorok, kifejezések}
+  \emph{Operátorok}: A (nyelvbe) beépített és bizonyos nyelvek esetén a
+  programozó által létrehozott új típusokon  használható
+  alapműveletek.\\
+  \emph{Kifejezések}: operátorok, függvények, eljárások és operandusok
+  szintaktikailag, szemantikailag helyes sorrendje. Továbbiakban lásd
+  \cite[1074.,~1078.~oldal]{c++book}.
+  
+  \subparagraph{operátorok definíciója, néhány példa}
+  Az operátorok egy vagy több operandusúak. A beépített típusokra
+  előre definiáltak, viszont egyes nyelveken (pl Ada, C++) felül lehet
+  definiálni őket, hogy felhasználói típusokra is működjenek
+  
+  Példák:\\
+  \ut{
+    function "+"(A, B: element) return element;\\
+    element operator+(const element\& a, const element\& b);\\
+    Bag\& operator+=(const Bag\& b);\\
+    const element\& Vector::operator[](const int index) const;}
+  
+  \subparagraph{Kifejezések kiértékelése, precedencia, kiértékelési
+    sorrend}
+  A kifejezések kiértékelési sorrendje adott. A fontosabbat előbb
+  értékeli ki. Egyes esetekben balról jobbra, máskor jobbról balra
+  történik a kiértékelés azonos precedenciaszinten. Például az
+  összeadás balról jobbra, de az értékadás jobbról balra történik. A C
+  nyelv megenged olyat, hogy: \ut{a=b=c;}, de az Ada már nem, ott
+  \ut{a:=c; b:= c} a megfelelő. Vagy C-ben: \ut{a + (b=c)} is
+  helyes.
+  
+  \subparagraph{Szekvenciapont}Az utasításokat elválasztó
+  karakter(sorozat). Ada, C, C++ esetén ez a pontos vessző. Továbbá az
+  C-ben a ``\&\&'' és ``$||$'' is. Bash-ben
+  ugyanez lehet az újsor vagy az ``és'' jel (\&) is
+  
+  \paragraph{Ada attribútumok}
+  Az Ada nyelvben a típusoknak vannak attribútumaik, ezek függvényként
+  viselkednek: valamilyen értékkel térnek vissza. Például diszkrét
+  típus esetén a \ut{típus'First}, \ut{típus'Last};
+  \ut{típus'Image(Típus\_Vagy\_Altípus\_Változó)}
+  
+  \paragraph{Túlterhelés, eltakarás, felülírás}
+  E három fogalom a függvények (eljárások) és a változók programon
+  belüli viselkedésére vonatkozik.
+  
+  \subparagraph{Túlterhelés, overloading}
+  Egy adott nevű függvény
+  túlterhelése azt jelenti, hogy ugyanazon néven szerepel még egy, más
+  szignatúrával (azaz más típusú paraméterlistával).
+  
+  \subparagraph{Eltakarás, hide}
+  Ha valahol definiált egy változó (blokkon belül, vagy globálisan),
+  akkor ezt eltakarhatja egy másik, amennyiben az egy belsőbb blokkban
+  definiált. Ugyanez vonatkozik a függvényekre is. Továbbá egy-egy
+  osztály is használhat ugyanolyan változó- és függvény-
+  (eljárás-)neveket, melyek globálisan léteznek. Pl C++-ban elfedett
+  globális nevekre a "::" operátorral lehet hivatkozni. Ugyanígy egy
+  adott névtér, osztály, struktúra (rekord) valamely elemére is a
+  "::"-tal lehet hivatkozni.
+  \utt{
+    int i = 0;\\\\
+    int main() \{\\
+    \hspace*{0.5em}int i = 2;\\
+    \hspace*{0.5em}printf("\%2d",i);\quad//lokális i\\
+    \hspace*{0.5em}printf("\%2d", ::i);\quad//globális i\\
+    \}
+  }
+  \subparagraph{Felülírás, override}
+  Ez a fogalom leginkább az öröklődéshez kapcsolódik, amikor egy-egy
+  osztály felüldefiniálja a szülője valamelyik függvényét (új törzset
+  ír, azaz új definíciót).
+  
+  \newpage
+  \section{Programozási nyelvek elemi típusai és típuskonstrukciói}\label{sec:elemitip}
+  \paragraph{Egész-, fix- és lebegőpontos, string ábrázolások}
+  Az alap típusok ábrázolása mindig egy vagy több bájton
+  történik. Fixpontos ábrázolás általában nincsen, csak az egészek
+  esetén, mert nem hatékony. Az egészeket 1, 2, 4 vagy 8 bájton szokás
+  ábrázolni. A bájtok logikai sorrendje adott, vízszintesen felírva a
+  jobb  szélső bit a legkisebb helyiértékű.
+  
+  A lebegőpontos ábrázolás esetén a szám áll egy addott számú bitből
+  álló  mantisszából ill karakterisztikából, valamint egy
+  előjelbitből. A  mantissza  értéke 0 és 1 között van. Tehát a szám
+  így néz ki:
+  \[\pm \, .u_1 u_2 u_3 \ldots u_t * 2^k \qquad (t\in \N, k \in  \Z,
+  u_i \in \{0,\,1\})\]
+  $t$ egy fix érték, mely a mantissza hossza. $k$ határai is
+  rögzítettek (negatív és pozitív határ: $k^-$ és $k^+$). 
+  A $\pm \frac12 * 2^{k^-}$ közti értékeket nullának tekintjük, a
+  $+\infty$ ábrázolása $.11\ldots1 * 2^{k^+}$
+  
+  A sztringek karaktersorozatok. Karakter jelölése pl 'a', 'b'. Ezeknek
+  megfeleltethető egy egész szám, ami a karakter kódja. A karakter
+  lehet egy, kettő, néha több (2 hatvány) bájton ábrázolt, az UTF-8
+  0-127 kódúakat egy, a legtöbbet 2 bájton, ám jó néhányat 4 bájton
+  ábrázol. A karakterekből álló tömböt nevezzük sztringnek. A hosszát
+  (indexhatárait) is el kell tárolni, vagy pedig a string végét kell
+  jelölni valahogy (utóbbi C-ben a 0-s kódú katakter).
+  
+  \paragraph{Felsorolási típus, tömb, rekord, unió}
+  A \textbf{felsorolási típus} a felhasználó által meghatározott értékeket
+  tartalmazza. Ha több ilyen típusban is szerepel ugyanaz a név, akkor
+  is egyértelmű, vagy egyértelművé tehető, melyik típusról van szó. Pl.\\
+  \utt{
+    type Napok is (Hétfö, Kedd, Szerda, Csütörtök, Péntek, Szombat,
+  Vasárnap);\\
+  type  Szigetlakó is (Robinson, Péntek);\\
+  }\\
+  A \textbf{tömb} azonos típusú elemekből épül fel. Egy- vagy többdimenziós lehet.\\
+  A \textbf{rekord}nak több különböző típusú tagja is lehet, Ada esetén
+  diszkriminánssal is rendelkezhet.\\
+  Az \textbf{unió} lehetőséget ad arra, hogy két vagy többféle adattípust
+  egyazon memóriaterületen ábrázoljunk. Adában ennek neve variáns
+  rekord, és a diszkriminánstól függ, hogy mi szerepel benne. C, C++
+  nyelvek esetén viszont nem egyértelmű, ezt ki lehet használni, pl:\\
+  \ut{ union n \{\\
+    \hspace*{.5em}int egesz; // egesz resz\\
+    \hspace*{.5em}struct \{\\
+    \hspace*{1em}short egyik, masik;\\
+    \hspace*{.5em}\}; // névtelen rekord\\
+    \};}\\\\
+  Itt egy 32 bites egészt szét lehet bontani két 16 bites egészre.
+
+  Adában az unió típus neve variáns rekord. A variáns részt kiválasztó
+  diszkruminánst a \ut{case} kulcsszó után írjuk, majd \ut{when} után
+  felsorolni a különböző eseteket. Az \ut{others} jelöli az ``összes
+  többit''. Pl:\\
+  \ut{\\ 
+    type Alakzat is (Négyszög, Kör);\\
+    type Geometriai\_Alakzat(S: Alakzat) is\\
+    \hspace*{1em}record\\
+    \hspace*{2em}Kerület: Float;\\
+    \hspace*{2em}case S in\\
+    \hspace*{3em}when Négyszög => A,B: Natural;\\
+    \hspace*{3em}when Kör => Sugár: Float := 1.0;\\
+    \hspace*{2em}end case;\\
+    \hspace*{1em}end record;\\
+    \\
+    function Terület (F: Geometriai\_Alakzat) return float is\\
+    \hspace*{1.5em}Pi: constant := 3.1416\\
+    begin\\
+    \hspace*{1.5em}case S in\\
+    \hspace*{2.5em}when Négyszög => return Float(F.A * F.B);\\
+    \hspace*{2.5em}when Kör => return Pi * F.Sugár ** 2;\\
+    \hspace*{1.5em}end case;\\
+    end Terület;
+  }
+  
+  \paragraph{Ada típusszármaztatás, altípusképzés}
+  Egy típus altípusa a típus értékkészletének részhalmazát
+  jelöli. A részhalmazt korlátozásokkal adjuk meg. Új típus nem jön
+  létre, így helyes a következő kód:\\
+  \utt{
+    subtype Napok is Integer range 1..31;\\
+    N: Napok;\\
+    I: Ingeter;\\
+    \vdots\\
+    N := I;\\}\\
+  Amennyiben I nem esik az 1..31 intervallumba, akkor
+  \ut{Constraint\_Error} kivétel lép fel.
+  
+  Új típus származtatással is megadható. Ez véd a különböző típusok
+  összekeverése ellen. Csak teljesen definiált típusbból lehet
+  származtatni.\\
+  \utt{
+    type Hosszúság is new Float;\\
+    type Terület is new Float;\\
+    H: Hosszúság;\\
+    T: Terület;}\\
+  Ekkor a  \ut{H := T} utasítás hibás, mert más típusú a két oldal.
+  
+  Altípusképzés és származtatás együttesen is megadható, például:\\
+  \ut{type Napok is new Integer range 1..31;}
+  
+  \paragraph{Typedef, statikus típusellenőrzés}
+  A \ut{typedef} utasítás (kulcsszó) a C nyelvben egy új nevet ad az
+  adott típusnak, valójában nem jön létre új típus. Például egy tömböt,
+  vagy akár egy függvénypointert argumentumainak megadásával is el
+  lehet nevezni, pl:\\
+  \utt{
+    typedef int tizelemutomb[10];\\
+    typedef void (*min)(const int\& a, const int\& b);\\
+  }\\
+  Statikus típusellenőrzés: fordítási időben, csak a deklarált típust
+  veszi figyelembe, nem a tényleges (dinamikus) típust - pointerek!!!
+  
+  \paragraph{Pointerek, pointerek és tömbök kapcsolata}
+  A pointerek egy-egy típusra mutatnak, vagyis azok címét
+  tartalmazzák. Ezért van olyan művelet is (Adában attribútum:
+  \ut{P'Access}), mely a mutatott értéket ``adja vissza''.
+  
+  Az adában a mutatók neve \emph{access} (típus). A \ut{null} egy
+  speciális érték, ez a mutatók alapértelmezett értéke. Dinamikusan
+  létrehozott egészekre mutathat a következő típus:
+  \utt{
+    type PInterger is access Integer;\\
+  }
+
+  Ha viszont nem csak dinamikusan létrehozott egészekre kell
+  állítani, akkor \ut{access all Integer} a vége, esetleg az all
+  helyett constant, hogy konstansra mutathasson. Ugyanakkor még
+  szükséges, hogy a \emph{aliased} kulcsszóval jelöljük, esetleg
+  mutatót kívánunk rá állítani.\\
+  \utt{
+    type P is access all Integer;\\
+    D1: P;\\
+    U: aliased Integer;\\
+    D1 := U'Access;\\
+  }
+  A többi típusnál (és
+  alprogramoknál) hasonlóan működik. 
+  
+  C++ esetén bár a tömböket dinamikusan is létre lehet hozni, a tömb
+  ``neve'' mindenképpen egy mutató lesz. 
+    
+  \paragraph{Pointer-aritmetika (C/C++)}
+  Ha van egy \ut{int t[10];} tömbünk,
+  akkor a következő kódok ekvivalensek:\\
+  \ut{
+    int i = t[2];\\
+    int i = 2[t];\\
+    int i = *(t+2);\\}\\
+  Az utolsó példából látszik, miért azonos az első kettő. Itt \ut{t}
+  egy pointer, amit kettővel megnövelve a második tömbelemre mutató
+  pointert kapunk. A megnövelés nem bájtonként értendő, hanem a
+  tömbelem méretével (pl \ut{sizeof(t[0])} ) történő megövelést
+  jelenti. Az elem értékét az \ut{operator*} meghívásával tehetjük
+  meg.
+
+  \paragraph{Pointerek és szemétgyűjtés kapcsolata (Ada)}
+  Adában a már nem elérhető objektumok felszabadulnak valamennyi idő
+  elteltével, amikor a szemétgyűjtő algoritmus ezt megteszi.
+  \paragraph{Bal- és jobbérték, referencia, alias}
+  Balérték az, ami az értékadás bármely oldalán állhat, jobbérték
+  pedig ami csak a jobb oldalon. Azonban nem minden balérték állhat
+  bal oldalon, ugyanis egy balérték hivatkozhat állandóra is.
+
+  \subparagraph{Refencia, alias} A referencia egy objektum álneve
+  (alias). \ut{X\&} jelentése ``referencia X\-re''. Ha a típus
+  referencia, kötelező a kezdőérték.\\
+  \begin{tabbing}
+      int i = 1;\\
+      int\& r1 = 1;\qquad\qquad\=//helyes\\
+      int\& r2;\>//helytelen: nincs kezdőérték\\
+      extern int\& r3;\>//rendben: r3 máshol kap kezdőértéket\\
+      ++r1;\>// r1 azaz i növelése eggyel\\
+      int* pp = \&i;\>//i-re pointer állítás\\
+      ++pp;\>//itt nem i, hanem a pointer változik:\\
+      \>//i utáni memóriacímre mutat
+    \end{tabbing} 
+  
+  
+  \newpage
+  \section{Vezérlési szerkezetek}
+  \paragraph[Vezérlési szerkezetek, struktúrált programozás]{Vezérlési
+    szerkezetek a tanult programozási nyelvekben, struktúrált
+    programozás}
+  Ciklus, elágazás, szekvencia is implementálható a tanult
+  nyelveken. Ugyanakkor lehetőség van a \ut{goto} utasítás
+  használatára is. További vezérlési lehetőséget biztosítanak a
+  kivételek. Függvényekbe, eljárásokba kiemelhetőek kódrészletek, hogy
+  átláthatóbb, struktúráltabb legyen a kód.
+  
+  \paragraph{A blokk szerepe}
+  Egy-egy blokkba utasításoka lehet összefogni. Például egy olyan ága
+  az elágazásnak, amiben több utasítás van, már blokknak számít. Míg
+  ada esetén csak declare blokkban lehet új változót, típust, stb
+  bevezetni illetve a kivételeket kezelni, addig C/C++ nyelveken
+  minden blokk elején lehet. C-ben és Adában csak ezen blokkok elején
+  lehet új változót deklarálni/definiálni, C++-ban a blokk bármely
+  sorában állhat (de a \ut{goto} utasítás nem ugorhat át
+  változó-deklarációkat).
+
+  \paragraph{Rekurzió; rekurzió és ciklus kapcsolata}
+  A rekurzió azt jelenit, hogy az adott függvény vagy eljárás bizonyos
+  feltételek teljesülése esetén meghívja önmagát. Akár többször
+  is. Ezekből egy hívást lehet helyettesíteni ciklussal, pl $n!$
+  kiszámításakor ez elég is, de a Fibonacci-sorozat esetén már
+  csak az egyik rekurzív hívás költségét lehet megtakarítani
+  ciklussal, a násik hívás elkerülhetetlen.
+  \paragraph{Closure}
+  Névtelen függvény, amiben szereplő változók nem változnak:\\
+  val x = 1;\\
+  fun f(y) = x + y;\\
+
+  the closure data structure representing f contains a pointer to the
+  enclosing environment, in which x is bound to 1. Therefore, f will
+  always return its argument plus 1, even if the environment in which
+  it is applied has a different value for x. Therefore, consider the
+  code fragment:\\
+  \ut{\\    
+    let\\
+    \hspace*{0.5em}val x = 1;\\
+    \hspace*{.5em}fun f(y) = x + y;\\
+    in\\
+    \hspace*{.5em}let\\
+    \hspace*{1em}val x = 2;\\
+    \hspace*{.5em}in\\
+    \hspace*{1em}f(3)\\
+    \hspace*{.5em}end\\
+    end\\\\
+  }
+  In this code, the call f(3) occurs in an environment (the inner let)
+  where x is bound to 2. However, the closure for f was constructed in
+  an environment (the outer let) where x is bound to 1. Therefore the
+  result of the call f(3) is 4, not 5. However, note that the function f
+  is not closed, because it has a free term in the argument; so f(3) is
+  a fully closed term.
+
+  A névtelen függvényt is closure-nak nevezik. Viszont C++-ban ez így
+  külön nem létezik.
+
+  \paragraph{Alprogramok: eljárás és függvény}
+  Alprogramok utasítássorozatokból állnak (utasítás,
+  változódeklaráció, típusdefiníció, Ada esetén újabb alprogram állhat
+  benne). Ezek az alprogramok hívhatóak a program olyan részeiből,
+  ahol látszanak. Kétféle típus van:
+  \begin{itemize}
+    \item \emph{Eljárás}: nem tér vissza semmilyen értékkel. Ada
+      esetén csak ilyen tudja megváltoztatni a paramétereinek értékét.
+    \item \emph{Függvény}: Ada esetén visszatér értékkel, de a
+      paramétereit nem tudja megváltoztatni. A visszatérési értéket
+      használni is kell egy feltételben, vagy értékül adni egy
+      változónak.
+
+      C/C++ esetén viszont az
+      összes alprogramot függvénynek nevezzük, akármivel is tér
+      vissza. Továbbá a paramáétereit is megváltoztathatja.
+  \end{itemize}
+
+  \paragraph{Kommunikáció az alprogramok között}
+  Az alprogramok kommunikációja valamilyen értékek átadásával
+  történik. Ez lehet paraméter, olyan változó, amit mindkettő lát,
+  vagy kivételkezelés. Ha a meghívott alprogram egy függvény, annak
+  visszatérési értéke is jelölhet valamilyen eseményt, pl
+  \emph{open(2)}
+  \paragraph[Paraméterátadási strarégiák]{Paraméterátadási strarégiák
+    (cím, érték, név, eredmény)}
+  A cím szerinti átadás a leghatékonyabb, mert sosem jön létre újabb
+  példány a változóból. Ilyet használ például a Java. Ugyanakkor a
+  gond ezzel az, hogy néha szükséges lenne a paraméter
+  megváltoztatása, anélkül, hogy az eredeti megváltozna. Erre alkalmas
+  az érték szerinti átadás (pl a paraméter egy int, s azt ciklusban
+  csökkentve az $n!$ kiszámítása).
+
+  A C és C++ nyelvek esetén nem fontos a paraméter neve, csak a
+  típusa, egyedül a függvény definíciójában kell  szerepelnie,
+  amennyiben történik rá hivatkozás. Az Adában el kell nevezni
+  őket. Sőt, az alprogramdeklarációnak és definíciónak teljesen meg
+  kell egyeznie, azaz a C nyelvvel ellentéttben nem lehet átnevezni a
+  paramétereket, továbbá ki kell írni a deklarációban megadott
+  alapértelemezett paraméterértéket is. Ez utóbbit C-ben nem szabad
+  megtenni.
+  
+  \paragraph{Név szerinti paraméter megfeleltetés} A
+  paramétermegfeleltetés azt jelenti, hogy a formális paraméterlista
+  helyére beírjuk az aktuális paramétereket az alprogram
+  hívásakor. Ekkor az aktuális paramétert feleltetjük meg a
+  formálisnak, az alprogram deklarációjában megadott
+  sorrendben. Ugyanakkor Adában lehetőség van arra, hogy más
+  sorrendben írjuk le a paramétereket, ekkor a fordítóprogram felé
+  jelezni kell, melyiket értjük alatta, pl \ut{Max => 4}.
+  
+  \paragraph{Default paraméterek}
+  A paraméterek kaphatnak alapértelmezett értéket, így nem kötelező
+  azokat megadni. Viszont egyértelműnek kell maradnia a hívásnak,
+  vagyis nem lehet egy másik olyan alprogram, aminek az
+  alapértelmezett értékkel rendelkező paramétereket nem számítva
+  ugyanaz a szignatúrája.
+
+  A C és C++ nyelvek esetén ezen paraméterek a formális paraméterlista
+  végén szerepelhetnek csak, ugyanis a hátrébb lévőkre nem lehet
+  hivatkozni név szerint. Továbbá ezen érték csak a függvény
+  deklarációjában lehet megadva.
+
+  Az Ada megengedi, hogy alapértelmezett értékkel rendelkező
+  paraméterek után is lehessen anélküli paraméter, mert a paraméterre
+  lehet névvel hivatkozni. 
+ 
+ \paragraph{Alprogramok, mint paraméterek}
+  Az alprogramok kaphatnak alprogram paramétereket, amelyeket
+  meghívhatnak. Pl C nyelven: \ut{typedef}-fel létrehozott
+  fv-mutató típusú lesz a paraméter, és akkor ugyanúgy lehet meghívni a
+  paraméter nevét, mint egy ``hagyományos'' függvényt. pl 
+  \aref{sec:elemitip}. pontban \ut{typedef}-fel létrehozott \ut{min}
+  függvény meghívása: \ut{min(3,4);}
+  
+  \newpage
+  \section{Láthatóság és hatókör}
+  \paragraph[Láthatósági/hatókör szabályok]{Láthatósági és hatóköri
+    szabályok a tanult programozási nyelvekben}
+  
+  \paragraph{Package, namespace}
+  A csomag és a namespace hasonló fogalmak: típusok, változók és
+  alprogramok összefogására szolgál. Átláthatóvá teszi a kódot,
+  a láthatóságot is szabályozza (adatrejtés). A namespace-eknek még egy
+  gyakorlati szerepük van, mégpedig hogyha többen dolgoznak a
+  projekten, akkor nem kell figyelniük az esetleges névütközésekre.
+
+  \paragraph{Programegységek (specifikáció és törzs)}
+  Egy programegységbe tartozó alprogramok, változók egy object fájlba
+  kerülnek. C/C++ esetén az \#include direktíva miatt nem feltételenül
+  egy fájlból áll.
+
+  A specifikáció C++ esetén a header fájlban, ada esetén .ads fájlban
+  található, ez a ``nyilvános felület''. Ugyanis a törzs részben
+  (pl. .cc, .adb fájlok) további alprogramok, változók is lehetnek. A
+  specifikáció csak deklarációkat tartalmaz.
+
+  \paragraph{Deklarációk, élettartam}
+  A deklaráció egy változó típusának, egy alprogram szignatúrájának,
+  vagy egy típus nevének megadását jelenti. A deklaráció párja a
+  definíció, ahol ezek már definiáltak: a változó értéke, az alprogram
+  törzse, valamint a típus adattagjai és műveletei. Ugyanakkor sok
+  deklaráció egyben definíció is egyben.\\
+  \begin{tabbing}
+    char ch;\\
+    int count = 1;\qquad\qquad\qquad\= // definíció is\\
+    int x, y;\\
+    struct Date \{int d; int m;\}\>// definíció is\\
+    struct User;\>// deklaráció\\
+    struct User \{ /* ... */ \}; \>// definíció\\\\
+  \end{tabbing}
+  A deklarációkhoz élettartam is társul, hogy mettől meddig élnek
+  ezek. Ugyanakkor az élettartamhoz szorosan kapcsolódik a hatókör fogalma.
+  \subparagraph{Statikus élettartam}
+  Statikus változók a program teljes futása alatt élnek, onnantól
+  kezdve, hogy a vezérlés eljutott a deklarációig (pl függvény
+  belsejében statikus változó a fv első meghívásakor jön létre).
+  \subparagraph{Automatikus élettartam}
+  Egy blokkon belül (alprogram is blokk!!!) deklarált változó
+  élettartama. Ez szigorúan a blokk végéig tart. Pointerek esetén is,
+  mert az nem a mutatott objektumot jelenti.
+  \subparagraph{Dinamikus élettartam}
+  Dinamikusan létrehozott objektumok élettartama. Adában ezek az objektumok
+  addig élnek, amíg van rájuk hivatkozás. C++-ban azonban akkor is
+  élhetnek, ha nincs rájuk közvetlen hivatkozás:\\
+  \ut{int a; float* f;\\
+    {\\
+      float * d = new float;\\
+      a = (int)d;\\
+    }\quad // itt d már megszűnik, az objektum címe viszont eltárolódik\\ 
+    \hspace*{.8em}\vdots\\
+    f = (float*)a;\\
+    // itt a float újra elérhetö\\
+  }   
+  
+  \paragraph{Konstruktor, destruktor, szemétgyűjtés}
+  A konstruktor feladata a típus adattagjainak inicializálása,
+  lényegében a típus létrehozásának befejezése. A destruktor ennek
+  párja, szerepe az adattagok megsemmisítése (ezen elsősorban a
+  dinamikusan lefoglalt memőriaterületek felszabadítását kell érteni).
+
+  A szemétgyűjtés szerepe az, hogy ne kelljen állandóan arra figyelni,
+  hogy a dinamikusan lefoglalt memóriaterületet
+  felszabadítottuk-e. Ezt egy szemétgyűjtő algoritmus végzi el, ami
+  bizonyos időnként lefut, s felszabadítja azokat a területeket, amit
+  már senki sem használ. C++ nyelv esetén a fentebbi kód alapján is
+  látszik, hogy  ennek működőképessége kérdéses. Az objektum címét
+  rejtetten is tárolhatjuk, anélkkül, hogy mutatna rá pointer. Ezért a
+  szemétgyűjtő algoritmus felszabadíthatja az objektumot, ami
+  megjósolhatatlan viselkedést eredményez.
+
+  \paragraph{Memória-elszivárgás}
+  Ha nem szabadítjuk fel a lefoglalt memóriát, akkor
+  memória-szivárgás történik. Olya területek maradnak fenn, amit már
+  senki sem használ, és nem is lehet hozzájuk férni (szemétgyűjtéssel
+  sem). Ezeket az  operációs rendszer szabadítja fel a program
+  lefutása után (kivéve a rosszul megírt ``oprendszerek'', példa
+  trivi).
+
+  \paragraph{A hatókör és az élettartam kapcsolata}
+  A deklaráció a nevet egy hzatókörbe (scope) vezeti be, s csak ezen
+  belül használható. Globális illetve lokális (blokkon, függvényen,
+  névtéren belüli) hatókörök léteznek. Mivel a nevek elfedhetik (erre
+  láttunk példát), a belsőbb blokkban az új név deklarációjának
+  helyétől a blokk végéig tartó utasítások az új hatókörébe esnek, ám
+  a régi is él (élettartam).
+  
+  \newpage
+  \section{Osztály a programozási nyelvekben}
+  \paragraph{Interfész és implementáció szétválasztása}
+  Az interfész vagy felület határozza meg a a típus műveleteit,
+  illetve néha még változók is vannak ott (publikus felület). Az
+  implementációt viszont el szokás választani a felülettől, mert akkor
+  a belső működés szabadon módosítható. Pl elsöbbségi sor ábrázolása
+  tömbbel vagy láncolt listával független a felülettől.
+  
+  \paragraph{Állapot és viselkedés (adattag és metódus)}
+  Az objektumok állapotát tárolják az adattagok. Az objektumon
+  végrehajtható műveleteket, vagyis a viselkedést határozzák meg a
+  metódusok. Ezek elérhetősége lehet korlátozott, illetve nem
+  feltétlenül objektumhoz kötöttek. Tehát C++ nyelven háromféle
+  láthatóság van ezekre: public (mindenki eléri), protected (csak a
+  típus és leszármazottjai) és a private (csak az adott típus éri el).
+  Egyetlen kivétel van, a friend, barát. A friend típusok és
+  alprogramok olyanok, mintha az adott típus részei lennének, ennek
+  megfelően a privát részeket is látják.
+  Adában azonban másképp van.
+  
+  \paragraph{Konstruktor (destruktor)}
+  A konstruktor és destruktor feladata a típus egy objektumának
+  létrehozása és megsemmisítése. Pontosabban ennek egy részét
+  teszik. A konstruktorban a nem automatikusan létrejövő adattagok
+  létrehozása (dinamikusan), illetve az automatikusan létrejövő
+  változók kezdőértékének át- ill beállítása. További szerepe lehet
+  például az objektum regisztálása (pl egy listában).
+
+  A destruktor szerepe a konstruktorénak fordítottja: a dinamikusan
+  létrehozott adattagok megszüntetése.
+
+  Adában ugyanez lásd a Controlled típus.
+
+  \paragraph{Osztályszintű tagok és metódusok}
+  Osztályszintű adattagok és metódusok nem köthetők
+  objektumhoz. C++-ban ezt a \emph{static} kulcsszó jelzi. Ezekre az
+  osztály nevével kell hivatkozni (osztály::tagfüggvény) formában.
+  
+  \paragraph{Objektumok másolása (Ada: limited type, C++: copy
+    constructor)}
+  Adában nem lehet korlátozott típust közvetlenül másolni (értékadás
+  egyik oldalán sem állhat). Például ha ez egy csomagban található
+  átlátszatlan típus is, akkor a csomag egy eljárása lemásolhatja ezt
+  az objektumot, figyelve a típusban előforduló pointerekre.
+
+  C++-ban a copy konstruktor szolgál arra, hogy egy, a paraméterben
+  megadott objektum dinamikusan létrehozott adattagjait átmásolja. Az
+  alapértelmezett copy constructor ezt nem teszi meg, hanem csak a
+  mutatókat másolja át. Vagyis két objektumból is el lehet érni
+  ugyanazt a memóriaterületet, ami határozatlan progrmműködéshez
+  vezet. A másolandót típusra refernciát kell állítani, különben még
+  mielőtt lefutna a copy constructor, elkezd futni a copy constructor,
+  ez végtelen rekurzióhoz vezet: \ut{complex::complex(comlex c):
+  re(c.re), im.re() \{\}}. A helyes:\\
+  \ut{complex::complex(comlex\& c): re(c.re), im.re() \{\}}\\
+  
+  A copy constructor szerepe a kezdeti értékadáséval egyezik meg. De
+  nem csak ekkor fut le, hanem paraméterüátadáskor (ha az nem
+  referencia vagy pointer), érték visszaadásakor, kivételkezeléskor is.
+  
+  Ugyanakkor C++-ban le lehet tiltani az értékadás minden formáját, ha
+  a copy constructor-t és az \ut{operator=}-t védettként vagy
+  privátként deklaráljuk. Ilyenkor nem kell nekik törzs sem (azaz a
+  definíció elmaradhat). Ha értékadás szerepel valahol, akkor a
+  fordító hibát jelez, hogy a meghívni kívánt tagfüggvény nem nyilvános.
+
+  \paragraph{Értékadás és egyenlőségvizsgálat; sekély és mély másolat}
+  Az értékadás során alapesetben mindkét nyelvben az adattagok
+  másolódnak le (egyszerű típusnál, pl int, vagy Integer maga a
+  típus). Ez gondot okozhat, ha pointerről van szó. Ilyenkor C++-ban
+  felül kell definiálni a másoló konstruktort és az értékadó
+  operátort.
+  Ugyanez igaz az egyenlőségvizsgálatra is. Alapesetben a pointerek
+  egyenlőségét figyeli, ami elvileg különbözik, bár a típusban tárolt
+  információ (az objektum állapota, értéke) teljesen azonos. Ezért az
+  \ut{operator==}-t és az \ut{operator!=}-t felül kell definiálni.
+  
+  Sekély másolat: ha a pointerek értéke másolódik az összes többi
+  adattaggal; mély másolat: a pointerek által mutatott objektumok
+  másolódnak a pointerek helyett.
+  
+  \paragraph{Az Ada95 Controlled típusai}
+  Összetett objektumok származtathatóak belőlük, ezek  \ut{Controlled}
+  és \ut{Limited\_Controlled} típusai. Műveletei: \ut{Initialize},
+  \ut{Finalize} ez lényegében a konstruktor és a destruktor szerepét
+  tölti be. Az \ut{Adjust} művelet lemásolja az objektumot.
+
+  A fenti két típusból objektum nem hozható létre közvetlenül, csak a
+  belőlük származtatott típusból.
+
+  Származtatás során a szülőben is van ez a három művelet, ezek
+  sorrendje \ut{Initialize} és \ut{Adjust} esetén gyerektől szülőig,
+  \ut{Finalize} esetén fordított: először a szülő művelete fut le.  
+
+  
+  \paragraph{Típusmegvalósítást támogató nyelvi elemek}
+  C-ben az egyetlen típuslétrehozási lehetőség a struct. Még egy
+  lehetőség van, a typedef, de ez nem hozz létre valódi típust, csak
+  átnevezi a típusokat. C++-ban viszont már az osztály szolgál típus
+  létrehozására. Ez lehet teljesen új típus, vagy származtatott. Az
+  ősosztály lehet egy struct vagy egy class. A struct C++-ban egy
+  teljesen publikus felületű class-nak felel meg.
+  További lehetőség a sablonok használata. Erre az adában is van
+  lehetőség. Mindkét nyelvben lehetnek típusok, értékek illetve
+  alprogramok a paraméterek. A sablon célja, hogy egy általánosan
+  megadott típusunk legyen, amit aszerint specializálhatunk, hogy mire
+  lehet őket használni.
+
+  \paragraph{Átlátszatlan típus}
+  Az átlátszatlan típus célja az implementáció elfedése. C++-ban
+  eztagonként beállítható, adában pedig a \ut{private} ``típus''
+  használatát jelenti. Ez a csomagoknál adható meg, a publikus
+  részben. A típus belső szerkeztete a csomag specifikációjának végén,
+  a \u{private} kulcsszó után definiált. Célja az implementáció
+  elválasztása a felülettől, pl egy elsőbbségi sor megvalósítható
+  tömbbel is meg láncolt listával is. A műveletei ugyanazok, a belső
+  szerkezet mégis más.
+
+  A típusnál megadható a \ut{limited} kulsszó is, ekkor a másolás és
+  az egyenlőségvizsgálatok tiltottak.
+
+  \paragraph{Adatabsztrakció}
+  ADT, ADS, stb ld. 9. tétel
+
+  \paragraph{Csomag, osztály}
+  Az ada csomag típusa talán inkább a C++ namespace-ének felel meg, mint a
+  class fogalmának. Általában van egy private típusunk, amihez
+  tartoznak műveletek. Ez majdnem olyan, mint az osztály, csak C++-ban
+  magának az osztálynak vannak metódusai. Valamint a csomag belseje a
+  függvényorientált progrmozásnak felel meg.
+  Ha a csomagból egyetlen ``objektum'' van (egyke, singleton), akkor
+  viszont a csomag és az osztály fogalma egybeesik.
+
+  \paragraph[Objektumelvű konstrukciók]{Objektumelvű kostruciók a
+    nyelvekben: öröklődés, alprogram polimorfizmus}
+  C++-ban a többszörös öröklődés megengedett.  Ennek célja az, hogy a
+  származtatással az általánosabb típusból egy konkrétabbat kapunk,
+  akár több típus összevonásával is. Ugyanakkor lehetnek ütköző nevek
+  is, ilyenkor a \emph{scope operátorral} (::) meg kell adnunk azt is,
+  hogy melyik \emph{eredeti} osztály tagjára gondolunk.
+  \subparagraph{Alprogram polimorfizmus}
+  Az alporgramokat a szignatúrájuk teszi egyesivé (paraméterlista). Ez
+  azt is jelenti, hogy lehet töb azonos nevű, de különböző
+  paraméterlistájú függvényünk. 
+  \paragraph{Dinamikus kötés, virtuális tagfüggvények}
+  C++-ban egy-egy adott típus \emph{virtuális} tagfüggvényeit
+  felüldefiniálhatja a származtatott osztály.
+  így az adott műveletet is specializálni kel a származtatott típusra.
+
+  Egy adott típusú pointer mutathat a típusból származtatott
+  típusú objektumra is. Ekkor a pointer dinamikus típusa a
+  származtatott lesz, statikus pedig az eredeti (amivel a mutatót
+  deklaráltuk). A dinamikus típus szerepe abban nyilvánul meg, hogy az
+  annak megfelelő virtuális tagfüggvények futnak le azok meghívásakor,
+  nem pedig a deklarált típus tagfüggvényei. Pontosabban csak akkor
+  nem azok, ha a származtatás során felüldefiniáltuk őket.
+
+  \paragraph{Aggregáció}
+  Lásd progtech.
+
+  \paragraph{Absztrakt osztály}
+  Sokszor egy-egy adott típusból nem hozható létre objektum, mert
+  logikailag értelmetlen (pl Alakzat típus). A típusnak vannak
+  műveletei, esetleg változói is, de néhány tagfüggvény törzsét csak a
+  származtatott osztályokban érdemes megírni. Erre szolgál az abszrrakt
+  osztály lehetősége, ahol bizonyos függvények még definiálatlanok
+  (\emph{pure virtual}, \emph{tisztán virtuális tagfüggvények}). Ezt
+  jelezhetjük:\\
+  \ut{class X \{ virtal void fuggveny() = 0; \};}\\
+  Ebből a típusból nem adható meg változó, mert van absztrakt függvénye.
+  
+  \newpage
+  \section{Generatív programozási technikák}
+  A sablonok általános fogalmak hasonló ábrázolását, illetve áltaános
+  műveletek hasonló megvalósítását teszik lehetővé. Például C++-ban az
+  STL-ben a keresés ugyanúgy történik a bejárók (iterátorok)
+  használatával vektoron, mint listán.
+
+
+  \paragraph[Sablon alprogramok, csomagok, osztályok és
+    paraméterek]{Generikus (template) alprogramok, csomagok illetve
+    osztályok; sablonparaméterek}
+  Sablon alprogramok szerepe lásd előbb. C++-beli példa:\\
+  template \textless class T\textgreater const T\& max(const T\& a, const T\& b)\\
+  \{\\
+  \hspace{.5em}return (a\textless b)?b:a;\\
+  \}\\
+  A típuson értelmezettnek kell lennie a < relációnak, semmi egyéb nem
+  kell hozzá. Mivel általános típus, bármilyen lehet a többi része.
+  
+  A csomagok, osztályok hasonlóan működnek.
+  
+  A sablonparaméterek sorrendje ada esetén tetszőleges
+  példányosításkor, mert lehet név szerint hivatkozni rájuk. C++-ban
+  viszont nem lehet. A paramétrek sorrendjében lehet rájuk csak
+  hivatkozni, mintha változókat és típusokat adnánk meg.
+  
+  \paragraph{A sablon-szerződés modell}
+
+  \paragraph{Az STL alapelve}
+  Az STL (Standard Template Library) a leggyakrabban használt
+  típusokat taralmazza (ld. lejjebb), továbbá az ezekhez tartozó
+  műveleteket (pl keresés, feltételes keresés) és a bejárókat is. Az
+  STL egy \emph{általános} könyvtár, ami erősen paraméterezett
+  sablonokat tartalmaz.
+  
+  Az STL támogatja a nyelv lehetőségeinek használatát, pl futás idejű
+  típusinformáció (RTTI). Információkat ad az adott nyelvi változat
+  egyedi tulajdonságairól (pl \emph{float} maximális
+  értéke). Általános algoritmusokat és típusokat ad, melyek átvihetőek
+  másik rendszerre, pl be/kimenet, listák, stb. Lehetőséget ad a
+  könyvtár további bővítésére.
+
+  A legfontosabb: mindez teljesen egységes, bárhol lefordítható kódot jelent.
+
+  \paragraph{Főbb STL komponensek}
+  \begin{itemize}
+  \item Tárolók: string, vector, list, queue (sor) és  deque
+    (kétirányú sor),set (halmaz) és bitset
+  \item általános eszközök: pl függvényobjektumok: \ut{operator()}
+  használata, memóriafoglalók
+  
+  \item bejárók
+  \item algoritmusok, pl \ut{find}
+  \item be- és kimenet
+  \item nemzetközi szolgáltatások
+    
+  \end{itemize}
+  
+  \newpage
+  \section{Kivételkezelés}
+  A kivételkezelés célja az, hogyha olyan helyen lépett fel hiba, ahol
+  az nem kezelhető (pl STL egyik algoritmusa), akkor a program egy
+  kivételt dob (throw), amit egyes föggvények elkaphatnak (catch).
+
+  \paragraph[Kivételes események és kivételkezelési
+    statégiák]{Kivételes események és kezelési stratégiáik:
+    visszatérő-érték, assert, longjump}
+  Ha egy helyben nem megoldható hiba keletkezik, amit a program
+  észrevesz, akkor befejezheti a program a futását vagy a függvény
+  egy ``hiba'' jelzésű éprtékkel tér vissza, vagy normális értéket
+  adhat vissza a programot ``szabálytalan'' állapotban hagyvam végül
+  meghívhat egy ``hiba'' esetén meghívandó függvényt.
+  Az első az alapértelmezett - el nem kapott kivételek esetén is.
+  
+  Kivételes esemény lehet pl a 0-val való osztás (nem normális viselkedés).
+  
+  A C könyvtár függvényei a hibákat a visszatérési értékkel jelzik, pl
+  \emph{open(2)}, $-1$-gyel tér vissza, ha nem nyitható meg a fájl. A
+  gond ezzel az, hogy a programozó elfelejtheti ellenőrizni, így a
+  program működése bizonytalan.
+
+  \subparagraph{Assert} Az \ut{assert()} egy olyan függvény, ami a
+  \textless  cassert\textgreater \textless assert.h\textgreater fejlécben
+  szerepel, kiértékeli a paraméterét, melynek hamis volta esetén
+  meghívja az \ut{abort()}-ot
+
+  A C++-beli megvalósítása ennek egy sablonnal történik: az\\
+  \ut{Assert\textless E\textgreater(a)}\\
+  megegyezik a következővel:\\
+  \ut{if (!a) throw E();}
+
+  \subparagraph{longjump}
+  A \emph{setjmp(3)}, \emph{longjmp(3)} a C nyelv kivételkezelő
+  eszköze, a setjmp elmenti a vermet és a környezetet a longjmp
+  későbbi használatához. Ez utóbbi visszaállítja a környzetet.
+
+  \paragraph{A kivételkezelés céljai és összetevői}
+  A kivételkezelés hibák és más kivételes jelenségek kezelését
+  támogatatja.
+  A kivételek csak szinkron hibák és események kezelését teszi
+  lehetővé, aszinkron hibákra (pl billentyűzetrőúl input) nem
+  alkalmas.
+  A kivételkezelés egy nem lokális, a végrehajtási verem
+  ``visszatekerésén'' (stack unwinding) alapuló vezérlési
+  szerkezet. Ezért alternatív visszatérési eljárás is, pl $n!$-t
+  rekurzívan kiszámító függvény terminálhat így is.
+  
+  \paragraph{Kivételek csoportosítása}
+  A kivételeket könyvtáranként vagy alrendszeenként célszerű
+  csoportosítani.
+  
+  C++-ban a kivételek csoportosítása származtatás szerint lehetséges:
+  közvetlenül az \emph{exception} osztályból származó, illetve a
+  \emph{logic\_error}ból vagy \emph{runtime\_error}-ból származó kivételek.
+  
+  \paragraph{Szabványos C++ és Ada kivételek}
+  Szabványos C++ kivételek: bad\_alloc, bad\_cast, bad\_exception,
+  bad\_typeid, ios\_base::failure; length\_error, domain\_error,
+  out\_of\_range, invalid\_argument; range\_error, overflow\_error,
+  underflow\_error.
+
+  Adában több van, így itt csak pár szerepel:
+  Ada.Numerics.Argument\_Error; Ada.Strings: Length\_Error, Index\_Error;
+  Ada.IO\_Exceptions: Status\_Error, Name\_Error, Device\_Error,
+  Data\_Error;
+  Ada.Text\_IO: Ada.IO\_Exceptions-beliek átnevezése
+
+  \paragraph{Kivételek és erőforráskezelés kapcsolata}
+  Kivétel váltódhat ki akkor, ha elfogy a memória, vagy épp a program
+  érvénytelen memóriacímre hivatkozik (pl segmentation fault). Ezek
+  egy része kezelhető úgy, hogy pl felszabadít a program valamennyi
+  memóriát (pl gyorstárból).
+  
+  \paragraph{Kivétel-biztos programozás}
+  Kivételbiztos, ha kivétel kiváltódása esetén is felszabadítja a
+  memóriát, stb, stb, illetve ha nem sikerül lefoglalni memóriát,
+  akkor is helyesn működik a program.
+  
+  \newpage
+  \section{Párhuzamos programozást támogató nyelvi eszkök (Ada)}
+  A mai operáciációs rendszereken több program is fut egymás mellett,
+  illetve ezeken belül futhat több szál is, mely közös
+  memóriaterülettel rendelkezik. A taszk a szálra hasonlít.
+  \paragraph{Ada taszkok és védett egységek}
+  A taszkok ``programok'', melyek csinálnak valamit, más taszkokkal,
+  vagy  védett egységekkel lépnek kapcsolatba (randevú). A védett
+  egység (protected típus) szerepe más, benne csak néhány művelet és
+  változó található. Pl szemafor megvalósítása!!!!
+
+  \paragraph{Randevú}
+  A taszkoknak és a protected-eknek belépési pontjaik vannak,
+  melyekhez bizonyos feltételek teljesülése esetén csatlakozhat egy
+  taszk. Ekkor jön létre a randevú. Amíg a belépési pontot nem hagyja
+  el az utóbbi taszk, addig más taszk nem tud oda belépni. 
+  \paragraph{A select utasítás}
+  Sokszor csak egy ideig várakozhat egy taszk a randevú létrejöttére,
+  esetleg terminálnia kell, ha nem jön létre. Ezt a \ut{select}
+  utasítással tehetjük meg. Kétféle van: ha a randevú nem jön létre
+  azonnal és van egy else ág, akkor az fut le. A másik az or (or
+  delay), itt a delay miatt vár valameddig a program, ha addig nem jön
+  létre a randevú, továbbfut a program.
+  \paragraph{Nevezetes szinkronizációs feladatok és eszközök}
+  Szemafor; monitor; kritikus szakasz.
+  
+  \subparagraph{Kölcsönös kizárás}
+  A kölcsönös kizárás biztosítja, hogy ha egy processz, taszk, stb
+  használ egy megosztott változót vagy más erőforrást, akkor más nem
+  használhatja. Ennek eszköze pl a szemafor, monitor. A változó írása
+  csak kritikus szakaszban lehetséges, amikor csak egy processz fér
+  hozzá. Ilyenkor nem írhatja vagy olvashatja más. Ha nincs írás
+  alatt, akkor viszont többen is olvashatják egyszerre, hiszen nem módosul.
+
+  \subparagraph{Kritikus szakasz}
+  A program(kód) egy olyan szakasza, ami egyszerre csak egy példányban
+  futhat. Ezt védi a szemafor a \ut{P} és \ut{V} műveleteivel.
+
+  A helyes működéshez négy feltételnek kell teljesülnei:
+  \begin{enumerate}[1.]
+  \item  Ne legyen két processzus egyszere a saját kritikus
+    szekciójában
+  \item Semmilyen előfeltétel ne legyen sebességről vagy CPU-k
+    számáról
+  \item Ne legyen olyan pricesszus, amelyik a kritikus szekcióján
+    kívül futva blokkolhat más processzusokat.
+  \item Egy processzusnak se kelljen örökké arra várni, hogy belépjen
+    a kritikus szekciójába.
+  \end{enumerate}
+
+  \subparagraph{Szemafor}
+  Dijkstra 1965-ben javasolta ezt a típust, 2 művelettel: P (vagy
+  DOWN) és V (vagy UP). Az előbbi van a kritikus szekció elején,
+  utóbbi a végén. A szemafor értéke 0 akkor, ha kritikus szekcióban
+  van egy process. Ha bent van egy, akkor a P műveletet a többi nem
+  tudja befejezni, így a többi alszik. Ha a V művelet lefut, akkor egy
+  másik process tud belépni, a többi még mindig áll, de már eggyel
+  kevesbb processz vár.
+
+  \subparagraph{Monitor}
+  A monitor a kritikus szakaszhoz kötődő változókat és az azokat
+  használó (változtató) eljárásokat fogja egymásba. Az eljárások
+  először  ellenőrzik, nincs-e másik processz (taszk) a monitoron
+  belül, s ha nincs, csak ezután futnak le.
+
+  \subparagraph{Termelő-fogyasztó}
+  Itt egy közös, rögzített, $N$ méretű tároló van, az egyik taszk
+  belepakol, a másik kivesz adatokat. Ha tele van a tároló, akkor a
+  termelőnek el kell menni aludni, amíg a fogyasztó nem vesz ki egy
+  elemet a tárolóból. Hasonlóan a fogyasztó is alszik, ha üres a
+  tároló. Valahogy ezt jelölni kell, erre szolgál egy $count$
+  változó.
+  
+  Alapból nem elég $N$-nel vagy $0$-val összehasonlítani $count$
+  értékét és annak megfelelően eljárni, mert versenyhelyzet áll elő,
+  ha $count$ szabad elérésű. Például a tároló üres és $count$ értéke
+  $0$. Ezt kiolvasa a fogyasztó. Az ütemező vált, és most a termelő
+  jön, aki berak egy elemet és $count$ értékét $1$-re nőveli, majd
+  felébreszti a fogyasztót. 
+
+  A fogyasztó még nem alszik, ezért az ébresztés elveszik. Amikor újra
+  a fogyasztó kerül sorra, továbbfut. Már korábban kiolvasta $count$
+  értékét, mely akkor még $0$ volt így elmegy aludni.
+
+  A kód a következő gyártó esetén:\\
+  \ut{while (true) \{\\
+    \hspace*{.5em}produce\_item();\\
+    \hspace*{.5em}if (count == N) sleep();\\
+    \hspace*{.5em}enter\_item();\\
+    \hspace*{.5em}++count;\\
+    \hspace*{.5em}if (count ==  1) wakeup(consumer);\\
+    \}\\
+  }\\
+  illetve fogyasztó esetén:\\
+  \ut{while (true) \{\\
+    \hspace*{.5em}if (count == 0) sleep();\\
+    \hspace*{.5em}remove\_item();\\
+    \hspace*{.5em}--count;\\
+    \hspace*{.5em} if (count ==  1) wakeup(producer);\\
+    \hspace*{.5em}consume\_item();\\
+    \}
+  }
+  
+  \subparagraph{Író-olvasó}
+  Adatbázis-elérési probléma. Egyszerre sok processzus olvashat az
+  adatbázisból, azonban az írás kizáró művelet, akkor más nem is
+  olvashat.
+  
+  Ez újabb problémát okoz. Tegyük fel, hogy olvasó jön, majd még egy,
+  és így tovább. Mivel az írónak kizárólagos hozzáférés kell, a
+  futását felfüggesztik. Mindaddig, amíg egy olvasó aktív, újabb
+  olvasók jöhetnek., és azok be lesznek bocsátva. Amíg van olvasó,
+  addig az író felfüggesztődik. Ha az olvasók mondjuk $2$
+  másodpercenként jönnek, és $5$ másodpercig dolgoznak, az író soha
+  nem fut tovább (ez is kiéheztetés, mint amikor a filozófus nem jut
+  hozzá hosszabb ideig a villához).
+
+  Ezért a programot úgy célszerű megírni, hogy a már bentlévő olvasók
+  dolgozhatnak, de ha van egy várakozó író, akkor a tovább olvasók az
+  író mögött várjanak. Így az írónak kevesebbet kell várnia, viszont
+  csökken az egyidejű műveletek száma, ezért csökken a hatékonyság.
+  
+  \subparagraph{Étkező filozófusok}
+  Öt filozófus ül egy asztalnál és spagettit eszik. Ez annyira
+  csúszós, hogy két villára van szükség ahhoz, hogy megegye. Minden
+  egymás melletti két tányér közt van egy villa. 
+
+  Egy filozófus élete egymást váltogató evésből és gondolkodásból
+  áll. Amikor éhes lesz, megpróbálja megszerezni a bal és jobb oldalán
+  lévő villát, egyszerre csak egyet, tetszőleges sorrendben. Ha
+  sikerült megszereznie, eszik egy ideig, majd leteszi a villákat és
+  gondolkodással folytatja.
+
+  A kulcskérdés: tudunk-e ilyen programot  írni, ami ráadásul sosem
+  akad el? Meg kell akadályozni, hogy egyszerre próbáljanak villát
+  szerezni, mert különben lehet $5$ filozófusunk egyetlen villával, és
+  onnan nincs tovább, a program holtpontra jutott.
+
+\end{document}
+
